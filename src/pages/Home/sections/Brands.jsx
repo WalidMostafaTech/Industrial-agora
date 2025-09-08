@@ -1,0 +1,37 @@
+import Marquee from "react-fast-marquee";
+import brandImg1 from "../../../assets/images/brand-img1.png";
+import brandImg2 from "../../../assets/images/brand-img2.png";
+import brandImg3 from "../../../assets/images/brand-img3.png";
+
+const Brands = () => {
+  const brandsList = [
+    { image_url: brandImg1 },
+    { image_url: brandImg2 },
+    { image_url: brandImg3 },
+    { image_url: brandImg1 },
+    { image_url: brandImg2 },
+    { image_url: brandImg3 },
+    { image_url: brandImg1 },
+    { image_url: brandImg2 },
+    { image_url: brandImg3 },
+    { image_url: brandImg1 },
+    { image_url: brandImg2 },
+    { image_url: brandImg3 },
+  ];
+  return (
+    <section className="sectionPadding my-8">
+      <Marquee speed={200} gradient={false}>
+        {brandsList.map((item, index) => (
+          <img
+            src={item.image_url}
+            alt={`brand-${index}`}
+            style={{ transform: "rotateY(6deg)" }}
+            className="w-52 mx-10"
+          />
+        ))}
+      </Marquee>
+    </section>
+  );
+};
+
+export default Brands;
