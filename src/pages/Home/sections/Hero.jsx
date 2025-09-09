@@ -50,14 +50,17 @@ export default function HeroSection() {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div
-              className="h-full content-end"
+              className="h-full relative content-end"
               style={{
                 backgroundImage: `url(${slide.img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              <div className="container px-6 flex">
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-black/30"></div>
+
+              <div className="container relative z-10 px-6 flex">
                 {/* Vertical Progress Line */}
                 <div className="relative min-w-1.5 h-[300px] lg:h-[400px] bg-white overflow-hidden">
                   <div
@@ -77,8 +80,12 @@ export default function HeroSection() {
                   </p>
 
                   <div className="flex gap-4 lg:gap-8">
-                    <button className="animationBtn !text-white">{slide.btn1}</button>
-                    <button className="animationBtn !text-white">{slide.btn2}</button>
+                    <button className="animationBtn !text-white">
+                      {slide.btn1}
+                    </button>
+                    <button className="animationBtn !text-white">
+                      {slide.btn2}
+                    </button>
                   </div>
                 </div>
               </div>

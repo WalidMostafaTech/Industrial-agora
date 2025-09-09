@@ -69,10 +69,10 @@ const Footer = () => {
           <input
             type="email"
             placeholder="email"
-            className="p-2 border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
+            className="p-2 lg:px-6 border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
           />
           <button className="mainBtn">
-            Join Us <TiArrowRight className="text-2xl" />
+            Join Us <TiArrowRight />
           </button>
         </div>
       </div>

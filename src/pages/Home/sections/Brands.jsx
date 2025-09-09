@@ -20,13 +20,16 @@ const Brands = () => {
   ];
   return (
     <section className="sectionPadding my-8">
+      <h2 className="text-4xl lg:text-5xl text-myBlue-1 text-center font-bold mb-10 lg:mb-14">
+        Our Brands
+      </h2>
       <Marquee speed={200} gradient={false}>
         {brandsList.map((item, index) => (
           <img
             src={item.image_url}
             alt={`brand-${index}`}
             style={{ transform: "rotateY(6deg)" }}
-            className="w-52 mx-10"
+            className="w-40 lg:w-52 mx-4 lg:mx-10"
           />
         ))}
       </Marquee>

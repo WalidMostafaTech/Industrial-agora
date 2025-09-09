@@ -45,7 +45,7 @@ const Section2 = () => {
         >
           {Section2List.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white p-4 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
+              <div className="bg-white p-4 lg:p-8 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
                 <div className="w-full h-52 lg:h-64 rounded-xl shadow-xl overflow-hidden">
                   <img
                     src={item.image}
@@ -54,7 +54,7 @@ const Section2 = () => {
                   />
                 </div>
                 <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <p className="text-gray-500">{item.description}</p>
+                <p className="text-gray-600 line-clamp-2 h-16">{item.description}</p>
                 <Link className="animationBtn">see more</Link>
               </div>
             </SwiperSlide>

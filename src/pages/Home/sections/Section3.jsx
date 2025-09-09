@@ -27,15 +27,18 @@ const Section3 = () => {
     <section className="sectionPadding container">
       <div className="flex flex-col xl:flex-row gap-6 lg:gap-8">
         <div className="flex flex-wrap justify-between items-center gap-4">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl lg:text-5xl font-bold mb-6">
             Why Choose Industrial Agora?
           </h2>
-          <Link className="animationBtn">see more</Link>
+          <Link className="animationBtn hidden lg:block">Get Started</Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {Section3List.map((item, index) => (
-            <div key={index} className="flex flex-col gap-4 group">
+            <div
+              key={index}
+              className="flex flex-col items-center lg:items-start gap-4 group"
+            >
               <span>
                 <img
                   src={item.icon}
@@ -48,6 +51,10 @@ const Section3 = () => {
             </div>
           ))}
         </div>
+
+        <Link className="animationBtn lg:hidden w-fit mx-auto mt-4">
+          Get Started
+        </Link>
       </div>
     </section>
   );

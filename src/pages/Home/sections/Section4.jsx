@@ -32,24 +32,24 @@ const Section4List = [
 const Section4 = () => {
   return (
     <section className="sectionPadding bg-myBlue-1">
-      <div className="container grid gap-6 lg:grid-cols-2 lg:grid-rows-2 max-w-7xl mx-auto">
+      <div className="container grid gap-6 lg:grid-cols-2 lg:grid-rows-2 max-w-6xl mx-auto">
         {Section4List.map((item, index) => (
           <div
             key={index}
             className={`flex flex-col items-center justify-center ${
               index === 1 ? "gap-4 lg:gap-12" : "gap-4"
-            } text-center group p-4`}
+            } text-center group p-6 lg:px-20`}
             style={{
               gridRow: index === 1 ? "span 2 / span 2" : undefined,
               backgroundColor: item.color,
-              color: item.color === "white" ? "black" : "white",
+              color: item.color === "white" ? "var(--color-myBlue-1)" : "white",
             }}
           >
             <div className="flex justify-center items-center gap-2">
               <img src={item.icon} alt={item.title} className="w-10" />
               <h3 className="text-2xl font-semibold">{item.title}</h3>
             </div>
-            <p>{item.description}</p>
+            <p className="text-lg">{item.description}</p>
             <Link
               className={`animationBtn ${
                 item.color === "white" ? "" : "light"

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoClose, IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
-import logoImg from "../../../assets/images/logo.png";
+import logoImg from "../../../assets/images/logo-white.png";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
@@ -34,7 +34,7 @@ const Header = () => {
       ref={headerRef}
     >
       <div
-        className={`flex flex-col xl:flex-row items-center justify-between gap-4 px-4 xl:px-6 py-3 xl:py-6 bg-[#000D1DC7] shadow-md rounded-3xl 
+        className={`flex flex-col xl:flex-row items-center justify-between gap-4 px-4 xl:px-6 py-3 xl:py-6 bg-myBlue-1/80 backdrop-blur shadow-md rounded-3xl 
       overflow-hidden transition-[max-height] duration-500 ease-in-out
       ${activeNav ? "max-h-[600px]" : "max-h-[60px]"} xl:max-h-[200px]`}
       >
@@ -44,7 +44,7 @@ const Header = () => {
               loading="lazy"
               src={logoImg}
               alt="Logo"
-              className="w-36 xl:w-40"
+              className="w-36 xl:w-48"
             />
           </Link>
           <span className="text-3xl text-white cursor-pointer xl:hidden">
