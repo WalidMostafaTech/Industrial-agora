@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useState } from "react";
 import PageTitle from "../../components/common/PageTitle";
 import FilterSide from "./FilterSide";
 import ProductsSide from "./ProductsSide";
@@ -7,62 +6,6 @@ import { RiMenu4Line } from "react-icons/ri";
 
 const Categories = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { categorySlug } = useParams();
-
-  // ✅ اجمع الفلاتر كلها في object واحد
-  const filters = {
-    category: categorySlug,
-    page: Number(searchParams.get("page")) || 1,
-    inStock: searchParams.get("in-stock") === "1",
-    subCategories: Array.from(searchParams.keys())
-      .filter((k) => k.startsWith("subcategory["))
-      .map((k) => searchParams.get(k)),
-    manufacturers: Array.from(searchParams.keys())
-      .filter((k) => k.startsWith("manufacturers["))
-      .map((k) => searchParams.get(k)),
-  };
-
-  // ✅ function لتحديث أي param بسهولة
-  const updateParam = (key, value) => {
-    const params = new URLSearchParams(searchParams);
-    if (value === null || value === undefined) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    setSearchParams(params);
-  };
-
-  // ✅ function لتحديث array params زي subcategory[], manufacturers[]
-  const updateArrayParam = (key, value) => {
-    const params = new URLSearchParams(searchParams);
-    const existing = Array.from(params.keys())
-      .filter((k) => k.startsWith(`${key}[`))
-      .map((k) => params.get(k));
-
-    const set = new Set(existing);
-    if (set.has(value)) set.delete(value);
-    else set.add(value);
-
-    Array.from(params.keys())
-      .filter((k) => k.startsWith(`${key}[`))
-      .forEach((k) => params.delete(k));
-
-    Array.from(set).forEach((v, i) => {
-      params.append(`${key}[${i}]`, v);
-    });
-
-    // كل ما اختار فلتر جديد نرجعه لأول صفحة
-    params.set("page", 1);
-
-    setSearchParams(params);
-  };
-
-  useEffect(() => {
-    console.log("🔗 Filters to send API:", filters);
-    // هنا تعمل Fetch API بناءً على filters
-  }, [filters]);
 
   return (
     <article className="container pagePadding">
@@ -77,14 +20,12 @@ const Categories = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 xl:gap-16">
         <div className="hidden lg:block">
-          <FilterSide
-            filters={filters}
-            updateParam={updateParam}
-            updateArrayParam={updateArrayParam}
-          />
+          <div className="lg:sticky lg:top-32">
+            <FilterSide />
+          </div>
         </div>
 
-        <ProductsSide filters={filters} updateParam={updateParam} />
+        <ProductsSide />
       </div>
 
       {/* فلتر كـ Drawer للشاشات الصغيرة */}
@@ -100,11 +41,7 @@ const Categories = () => {
                 ✕
               </button>
             </div>
-            <FilterSide
-              filters={filters}
-              updateParam={updateParam}
-              updateArrayParam={updateArrayParam}
-            />
+            <FilterSide />
           </div>
 
           {/* Overlay يضغط عليه يقفل الفلتر */}

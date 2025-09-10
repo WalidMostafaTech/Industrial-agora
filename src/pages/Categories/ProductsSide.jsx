@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import categoryImg from "../../assets/images/9f8ca255d19a4024444f6d08bbebff24f2a36a06.jpg";
 import productImg from "../../assets/images/product-img.png";
 import Pagination from "../../components/common/Pagination";
@@ -16,9 +16,21 @@ const ProductsList = [...Array(4).keys()].map((item) => ({
   image: productImg,
 }));
 
-const ProductsSide = ({ filters, updateParam }) => {
+const ProductsSide = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // ✅ اقرأ الصفحة من URL أو خليها 1 لو مش موجودة
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const handlePageChange = (newPage) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", newPage);
+    setSearchParams(newParams);
+  };
+
   return (
-    <section className="lg:col-span-3 space-y-4 lg:space-y-8">
+    <section className="lg:col-span-3 space-y-8 lg:space-y-12">
+      {/* صورة الكاتيجوري */}
       <div className="relative h-[250px] lg:h-[400px] overflow-hidden">
         <img
           src={categoryImg}
@@ -33,7 +45,9 @@ const ProductsSide = ({ filters, updateParam }) => {
           category
         </h3>
       </div>
-      <div className="space-y-4 lg:space-y-8">
+
+      {/* المنتجات */}
+      <div className="space-y-8 lg:space-y-12">
         {ProductsList.map((product) => (
           <div
             key={product.id}
@@ -73,10 +87,12 @@ const ProductsSide = ({ filters, updateParam }) => {
           </div>
         ))}
       </div>
+
+      {/* الباجنيشن */}
       <Pagination
-        totalPages={15}
-        currentPage={filters.page}
-        onChangePage={(p) => updateParam("page", p)}
+        totalPages={5}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
       />
     </section>
   );

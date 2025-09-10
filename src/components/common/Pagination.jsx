@@ -1,9 +1,9 @@
 import { TfiArrowCircleLeft, TfiArrowCircleRight } from "react-icons/tfi";
 
-const Pagination = ({ totalPages = 5, currentPage = 1, onChangePage }) => {
+const Pagination = ({ totalPages = 5, currentPage = 1, onPageChange }) => {
   const handlePageClick = (page) => {
     if (page >= 1 && page <= totalPages && page !== currentPage) {
-      onChangePage(page);
+      onPageChange(page);
     }
   };
 
@@ -33,7 +33,7 @@ const Pagination = ({ totalPages = 5, currentPage = 1, onChangePage }) => {
   const visiblePages = getVisiblePages();
 
   return (
-    <div className="flex items-center justify-end gap-2 mt-8">
+    <div className="flex items-center justify-end gap-2">
       {/* First Button */}
       <button
         onClick={() => handlePageClick(1)}
