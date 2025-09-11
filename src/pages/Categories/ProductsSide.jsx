@@ -82,7 +82,7 @@ const ProductsSide = () => {
                 </p>
               </div>
 
-              <Link className="animationBtn block w-fit ms-auto">see more</Link>
+              <Link to={`/product/${product.id}`} className="animationBtn block w-fit ms-auto">see more</Link>
             </div>
           </div>
         ))}
