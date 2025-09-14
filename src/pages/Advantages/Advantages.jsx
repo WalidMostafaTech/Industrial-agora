@@ -3,6 +3,7 @@ import PageBanner from "../../components/common/PageBanner";
 import PageTitle from "../../components/common/PageTitle";
 import bannerImg from "../../assets/images/slider-img.png";
 import cardImg from "../../assets/images/Agreement-amico 1.png";
+import IndexNumber from "../../components/common/IndexNumber";
 
 const data = [
   {
@@ -37,12 +38,40 @@ const data = [
   },
 ];
 
-const AboutUS = () => {
+const data2 = [
+  {
+    id: 1,
+    text: "We are a home-based physical therapy platform committed to making rehabilitation easier, more personal, and more effective.",
+  },
+  {
+    id: 2,
+    text: "Our mission is to empower individuals to recover in the comfort and safety of their own homes without the hassle of clinic visits or long waits.",
+  },
+  {
+    id: 3,
+    text: "Whether you’re healing from injury, surgery, chronic pain, or mobility issues, we tailor every session to your unique needs and goals.",
+  },
+  {
+    id: 4,
+    text: "We believe recovery should be convenient, compassionate, and close, that’s why we’re redefining physical therapy, one home visit at a time.",
+  },
+];
+
+const Advantages = () => {
   return (
     <section className="pagePadding">
-      <PageTitle title="About us" />
+      <PageTitle title="Advantages" />
 
       <PageBanner image={bannerImg} title="How to be a seller" />
+
+      <div className="container mt-8 lg:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
+        {data2.map((item, index) => (
+          <div key={item.id} className="bg-myBlue-2/30 rounded-xl p-4">
+            <IndexNumber index={index + 1} />
+            <p className="text-myBlue-1 text-center lg:text-lg lg:max-w-2/3 mx-auto my-8">{item.text}</p>
+          </div>
+        ))}
+      </div>
 
       <div className="container mt-8 lg:mt-12">
         <MainCardList data={data} border />
@@ -51,4 +80,4 @@ const AboutUS = () => {
   );
 };
 
-export default AboutUS;
+export default Advantages;

@@ -6,10 +6,12 @@
   --color-myBlue-2: #01377d;
 }
 
-/* html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 60px;
-} */
+/* remove input number arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .htmlContent {
   overflow-wrap: break-word;
@@ -128,7 +130,7 @@
   }
 
   .navLink {
-    @apply text-lg text-white duration-300 capitalize;
+    @apply text-lg text-white duration-300 capitalize cursor-pointer;
 
     &.active,
     &:hover {

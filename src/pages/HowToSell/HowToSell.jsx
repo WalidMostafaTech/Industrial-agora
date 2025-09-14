@@ -37,10 +37,10 @@ const data = [
   },
 ];
 
-const AboutUS = () => {
+const HowToSell = () => {
   return (
     <section className="pagePadding">
-      <PageTitle title="About us" />
+      <PageTitle title="How to sell" />
 
       <PageBanner image={bannerImg} title="How to be a seller" />
 
@@ -51,4 +51,4 @@ const AboutUS = () => {
   );
 };
 
-export default AboutUS;
+export default HowToSell;

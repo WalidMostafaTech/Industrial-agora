@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoClose, IoSearchOutline } from "react-icons/io5";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logoImg from "../../../assets/images/logo-white.png";
+import NavBar from "./NavBar";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
+
   const headerRef = useRef();
 
   useEffect(() => {
@@ -18,16 +20,6 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const linksList = [
-    { name: "home", path: "/" },
-    { name: "categories", path: "/categories" },
-    { name: "seller", path: "/seller" },
-    { name: "buyer", path: "/buyer" },
-    { name: "about us", path: "/about-us" },
-    { name: "contact us", path: "/contact-us" },
-    { name: "request", path: "/request" },
-  ];
-
   return (
     <header
       className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
@@ -36,7 +28,7 @@ const Header = () => {
       <div
         className={`flex flex-col xl:flex-row items-center justify-between gap-4 
         px-4 xl:px-6 py-3 xl:py-6 bg-myBlue-1/80 backdrop-blur shadow-md rounded-3xl 
-        overflow-hidden transition-[max-height] duration-500 ease-in-out
+        overflow-hidden xl:overflow-visible transition-[max-height] duration-500 ease-in-out
         ${activeNav ? "max-h-[600px]" : "max-h-[60px]"} xl:max-h-[200px]`}
       >
         <div className="flex items-center justify-between gap-2 w-full xl:w-auto">
@@ -57,18 +49,7 @@ const Header = () => {
           </span>
         </div>
 
-        <nav className="flex flex-col items-center xl:flex-row gap-4 xl:gap-8">
-          {linksList.map((link) => (
-            <NavLink
-              to={link.path}
-              key={link.name}
-              className="navLink capitalize"
-              onClick={() => setActiveNav(false)}
-            >
-              {link.name}
-            </NavLink>
-          ))}
-        </nav>
+        <NavBar setActiveNav={setActiveNav} />
 
         <div className="flex items-center justify-center flex-wrap gap-4">
           <span className="text-3xl text-white cursor-pointer pe-4 border-e">
