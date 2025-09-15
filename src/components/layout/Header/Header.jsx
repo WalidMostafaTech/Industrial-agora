@@ -29,7 +29,7 @@ const Header = () => {
         className={`flex flex-col xl:flex-row items-center justify-between gap-4 
         px-4 xl:px-6 py-3 xl:py-6 bg-myBlue-1/80 backdrop-blur shadow-md rounded-3xl 
         overflow-hidden xl:overflow-visible transition-[max-height] duration-500 ease-in-out
-        ${activeNav ? "max-h-[600px]" : "max-h-[60px]"} xl:max-h-[200px]`}
+        ${activeNav ? "max-h-screen" : "max-h-[60px]"} xl:max-h-[200px]`}
       >
         <div className="flex items-center justify-between gap-2 w-full xl:w-auto">
           <Link to="/" onClick={() => setActiveNav(false)}>

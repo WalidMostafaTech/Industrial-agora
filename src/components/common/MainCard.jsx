@@ -12,9 +12,7 @@ const MainCard = ({
 }) => {
   return (
     <div
-      className={`flex items-center flex-col md:flex-row even:md:flex-row-reverse gap-4 md:gap-8 ${
-        border ? "border-b border-myBlue-1 pb-4" : ""
-      }`}
+      className={`flex items-center flex-col md:flex-row even:md:flex-row-reverse gap-4 md:gap-8`}
     >
       <div className="md:w-1/3 overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
