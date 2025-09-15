@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
+  const [openLinks, setOpenLinks] = useState(null);
 
   const headerRef = useRef();
 
@@ -14,6 +15,7 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
         setActiveNav(false);
+        setOpenLinks(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -40,16 +42,22 @@ const Header = () => {
               className="w-36 xl:w-48"
             />
           </Link>
-          <span className="text-3xl text-white cursor-pointer xl:hidden">
-            {activeNav ? (
-              <IoClose onClick={() => setActiveNav(false)} />
-            ) : (
-              <HiMenu onClick={() => setActiveNav(true)} />
-            )}
+          <span
+            className="text-3xl text-white cursor-pointer xl:hidden"
+            onClick={() => {
+              setActiveNav(!activeNav);
+              setOpenLinks(null);
+            }}
+          >
+            {activeNav ? <IoClose /> : <HiMenu />}
           </span>
         </div>
 
-        <NavBar setActiveNav={setActiveNav} />
+        <NavBar
+          setActiveNav={setActiveNav}
+          openLinks={openLinks}
+          setOpenLinks={setOpenLinks}
+        />
 
         <div className="flex items-center justify-center flex-wrap gap-4">
           <span className="text-3xl text-white cursor-pointer pe-4 border-e">

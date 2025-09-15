@@ -8,17 +8,17 @@ const MainCard = ({
   description = { text: "", border: false },
   btn = { text: "", link: "", arrow: false },
   image,
-  border = false,
+  // border = false,
 }) => {
   return (
     <div
-      className={`flex items-center flex-col md:flex-row even:md:flex-row-reverse gap-4 md:gap-8`}
+      className={`flex items-center justify-between flex-col lg:flex-row even:lg:flex-row-reverse gap-4 lg:gap-8`}
     >
-      <div className="md:w-1/3 overflow-hidden">
+      <div className="lg:w-1/3 overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
 
-      <div className="flex-1 space-y-4">
+      <div className="lg:w-3/5 space-y-4">
         <div>
           {title.index && (
             <IndexNumber index={index} />

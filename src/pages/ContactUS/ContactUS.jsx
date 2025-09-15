@@ -52,10 +52,10 @@ const ContactUs = () => {
   ];
 
   return (
-    <article className="pagePadding">
+    <article className="container pagePadding">
       <PageTitle title="Contact Us" />
 
-      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <form className="space-y-6" onSubmit={formik.handleSubmit}>
           <MainInput
             label="full name"
@@ -100,7 +100,7 @@ const ContactUs = () => {
             className="w-2/3 mx-auto hidden lg:block"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="flex flex-wrap justify-between gap-4">
             {contactUsList.map((item, index) => (
               <div
                 key={index}

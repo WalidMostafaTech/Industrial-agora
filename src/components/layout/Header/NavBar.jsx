@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { NavLink } from "react-router-dom";
 
-const NavBar = ({ setActiveNav }) => {
-  const [openLinks, setOpenLinks] = useState(null);
-
+const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
   const handleOpenLinks = (name) => {
     if (openLinks === name) {
       setOpenLinks(null);
@@ -81,7 +78,7 @@ const NavBar = ({ setActiveNav }) => {
                     }}
                   >
                     {subLink.name}
-                    <FaArrowRightLong className="group-hover:translate-x-1 transition-all duration-300" />
+                    <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
                   </NavLink>
                 ))}
               </div>
@@ -102,24 +99,24 @@ const NavBar = ({ setActiveNav }) => {
         )}
       </nav>
 
-      <nav className="flex xl:hidden flex-col gap-4 w-full">
+      <nav className="flex xl:hidden flex-col w-full">
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
-              className="navLink border-b border-gray-100/50"
+              className="navLink py-2 not-last:border-b border-gray-100/50"
               key={link.name}
             >
               <button
                 type="button"
                 onClick={() => handleOpenLinks(link.name)}
-                className="capitalize flex justify-between w-full"
-                aria-expanded={openLinks === link.name}
+                className="capitalize flex items-center w-full gap-1"
               >
                 {link.name}
+                <TiArrowSortedDown className="text-xl" />
               </button>
 
               <div
-                className={`overflow-hidden transition-[max-height] duration-300 ease-in-out
+                className={`overflow-hidden transition-all duration-300 ease-in-out
                   flex flex-col gap-4 px-2 bg-white text-black z-50 cursor-pointer relative
                   ${openLinks === link.name ? "max-h-60 py-2" : "max-h-0"}`}
               >
@@ -138,7 +135,7 @@ const NavBar = ({ setActiveNav }) => {
                     }}
                   >
                     {subLink.name}
-                    <FaArrowRightLong className="group-hover:translate-x-1 transition-all duration-300" />
+                    <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
                   </NavLink>
                 ))}
               </div>
@@ -147,7 +144,7 @@ const NavBar = ({ setActiveNav }) => {
             <NavLink
               to={link.path}
               key={link.name}
-              className="navLink border-b border-gray-100/50"
+              className="navLink py-2 not-last:border-b border-gray-100/50"
               onClick={() => {
                 setActiveNav(false);
                 setOpenLinks(null);

@@ -6,7 +6,7 @@ import MainInput from "../../components/form/MainInput";
 import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [completeRegister, setCompleteRegister] = useState(true);
+  const [completeRegister, setCompleteRegister] = useState(false);
   return (
     <section className="container pagePadding">
       <PageTitle title="Register" />
@@ -83,7 +83,7 @@ const Register = () => {
             </label>
           </div>
 
-          <FormBtn title="Register" />
+          <FormBtn title="Register" onClick={() => setCompleteRegister(true)} />
         </form>
       )}
     </section>

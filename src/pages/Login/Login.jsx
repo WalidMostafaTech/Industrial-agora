@@ -67,7 +67,7 @@ const Login = () => {
             position="start"
           />
 
-          <Link className="animationBtn">Register</Link>
+          <Link to="/register" className="animationBtn">Register</Link>
         </div>
       </section>
     </section>

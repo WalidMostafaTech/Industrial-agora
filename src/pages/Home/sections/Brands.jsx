@@ -26,6 +26,7 @@ const Brands = () => {
       <Marquee speed={200} gradient={false}>
         {brandsList.map((item, index) => (
           <img
+            key={index}
             src={item.image_url}
             alt={`brand-${index}`}
             style={{ transform: "rotateY(6deg)" }}
