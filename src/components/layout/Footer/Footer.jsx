@@ -1,5 +1,5 @@
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import logoImg from "../../../assets/images/logo.png";
+import logoImg from "../../../assets/images/logo/logo-blue.png";
 import { Link } from "react-router-dom";
 import { IoLogoLinkedin } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";

@@ -134,7 +134,7 @@ input::-webkit-inner-spin-button {
 
     &.active,
     &:hover {
-      @apply text-myBlue-1;
+      @apply text-myBlue-2;
     }
   }
 }

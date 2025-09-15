@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoClose, IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import logoImg from "../../../assets/images/logo-white.png";
+import logoText from "../../../assets/images/logo/logo-text-blue.png";
+import logoMap from "../../../assets/images/logo/logo-map.png";
 import NavBar from "./NavBar";
 
 const Header = () => {
@@ -29,23 +30,33 @@ const Header = () => {
     >
       <div
         className={`flex flex-col xl:flex-row items-center justify-between gap-4 
-        px-4 xl:px-6 py-3 xl:py-6 bg-myBlue-1/80 backdrop-blur shadow-md rounded-3xl 
+        px-4 xl:px-6 py-3 xl:py-6 bg-[#000D1D] backdrop-blur shadow-md rounded-3xl 
         overflow-hidden xl:overflow-visible transition-[max-height] duration-500 ease-in-out
         ${activeNav ? "max-h-screen" : "max-h-[60px]"} xl:max-h-[200px]`}
       >
         <div className="flex items-center justify-between gap-2 w-full xl:w-auto">
-          <Link to="/" onClick={() => setActiveNav(false)}>
+          <Link
+            to="/"
+            onClick={() => setActiveNav(false)}
+            className="flex items-center gap-2 group"
+          >
             <img
               loading="lazy"
-              src={logoImg}
+              src={logoMap}
               alt="Logo"
-              className="w-36 xl:w-48"
+              className="w-10 xl:w-14 group-hover:scale-125 duration-300"
+            />
+            <img
+              loading="lazy"
+              src={logoText}
+              alt="Logo"
+              className="w-22 xl:w-28 group-hover:translate-x-2 duration-300"
             />
           </Link>
           <span
             className="text-3xl text-white cursor-pointer xl:hidden"
             onClick={() => {
-              setActiveNav(!activeNav);
+              setActiveNav(prev=>!prev);
               setOpenLinks(null);
             }}
           >
