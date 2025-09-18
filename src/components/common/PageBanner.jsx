@@ -1,7 +1,7 @@
 const PageBanner = ({ image, title }) => {
   return (
     <div
-      className="w-full h-[300px] overflow-hidden border-2 border-myBlue-2 rounded-xl"
+      className="w-full h-[200px] lg:h-[300px] overflow-hidden"
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",

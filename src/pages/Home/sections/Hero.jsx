@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import sliderImg from "../../../assets/images/slider-img.png";
+import sliderImg from "../../../assets/images/slider-img2.jpg";
 
 const slides = [
   {
@@ -35,7 +35,7 @@ export default function HeroSection() {
   const swiperRef = useRef(null);
 
   return (
-    <section className="relative w-full h-[90vh]">
+    <section className="relative w-full h-[80vh]">
       <Swiper
         slidesPerView={1}
         effect="fade"
@@ -58,7 +58,7 @@ export default function HeroSection() {
               }}
             >
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black/30"></div>
+              <div className="absolute inset-0 bg-black/50" />
 
               <div className="container relative z-10 px-6 flex">
                 {/* Vertical Progress Line */}
@@ -98,7 +98,7 @@ export default function HeroSection() {
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center bg-white/50
-      hover:bg-white/50 transition z-10 cursor-pointer"
+      rounded-xl hover:bg-white/70 transition z-10 cursor-pointer"
       >
         <LuChevronLeft className="text-myBlue-2 text-4xl" />
       </button>
@@ -107,7 +107,7 @@ export default function HeroSection() {
       <button
         onClick={() => swiperRef.current?.slideNext()}
         className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center bg-white/50
-      hover:bg-white/50 transition z-10 cursor-pointer"
+      rounded-xl hover:bg-white/70 transition z-10 cursor-pointer"
       >
         <LuChevronRight className="text-myBlue-2 text-4xl" />
       </button>

@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import PageTitle from "../../components/common/PageTitle";
-import contactUsImg from "../../assets/images/Contact us-rafiki 1.png";
+import contactUsImg from "../../assets/images/32bf46f5bdafd7f6d8d884b65fc96ab358e43f24.jpg";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import FormBtn from "../../components/form/FormBtn";
@@ -55,7 +55,7 @@ const ContactUs = () => {
     <article className="container pagePadding">
       <PageTitle title="Contact Us" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-16 whiteContainer">
         <form className="space-y-6" onSubmit={formik.handleSubmit}>
           <MainInput
             label="full name"
@@ -97,16 +97,18 @@ const ContactUs = () => {
           <img
             src={contactUsImg}
             alt="contact us"
-            className="w-2/3 mx-auto hidden lg:block"
+            className="w-2/3 mb-8 mx-auto hidden xl:block"
           />
 
           <div className="flex flex-wrap justify-between gap-4">
             {contactUsList.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 text-myBlue-1"
+                className="flex items-center gap-4 text-myBlue-1 group"
               >
-                <span className="text-5xl">{item.icon}</span>
+                <span className="text-5xl group-hover:scale-130 duration-300">
+                  {item.icon}
+                </span>
                 <div>
                   <p className="font-bold">{item.label}</p>
                   <p>{item.value}</p>

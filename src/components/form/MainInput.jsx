@@ -29,7 +29,7 @@ const MainInput = ({
       htmlFor={id}
       className="block w-fit font-semibold mb-2 text-sm lg:text-base capitalize"
     >
-      {label}
+      {label} :
     </label>
   );
 

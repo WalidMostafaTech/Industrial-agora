@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
+import FixedSection from "./components/sections/FixedSection";
 
 function App() {
   const { pathname } = useLocation();
@@ -17,6 +18,8 @@ function App() {
         <Outlet />
       </div>
       <Footer />
+
+      <FixedSection />
     </main>
   );
 }

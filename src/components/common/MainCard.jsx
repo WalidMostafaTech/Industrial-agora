@@ -1,55 +1,28 @@
-import { FaArrowRightLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import IndexNumber from "./IndexNumber";
-
 const MainCard = ({
-  index,
   title = { text: "", border: false, index: false },
   description = { text: "", border: false },
-  btn = { text: "", link: "", arrow: false },
   image,
-  // border = false,
 }) => {
   return (
     <div
-      className={`flex items-center justify-between flex-col lg:flex-row even:lg:flex-row-reverse gap-4 lg:gap-8`}
+      className={`flex items-center justify-between flex-col lg:flex-row even:lg:flex-row-reverse gap-4 lg:gap-12 not-last:border-b-2 border-myBlue-2 pb-4 lg:pb-12`}
     >
-      <div className="lg:w-1/3 overflow-hidden">
+      <div className="lg:w-2/5 max-h-72 overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
 
-      <div className="lg:w-3/5 space-y-4">
+      <div className="flex-1 space-y-2 lg:space-y-4">
         <div>
-          {title.index && (
-            <IndexNumber index={index} />
-          )}
-
           <h3
             className={`text-xl lg:text-3xl font-bold text-myBlue-1 inline-block mt-2 min-w-1/3 lg:min-w-1/4 ${
-              title.border ? "border-b-3 pb-2" : ""
+              title.border ? "border-b-3 pb-1 lg:pb-2" : ""
             }`}
           >
             {title.text}
           </h3>
         </div>
 
-        <p
-          className={`text-gray-600 lg:text-lg ${
-            description.border ? "border-b border-myBlue-2 pb-2" : ""
-          }`}
-        >
-          {description.text}
-        </p>
-
-        <Link
-          to={btn.link}
-          className={`text-lg lg:text-xl font-semibold text-myBlue-2 w-fit flex items-center gap-2 group`}
-        >
-          {btn.text}
-          {btn.arrow && (
-            <FaArrowRightLong className="group-hover:translate-x-2 transition-all duration-300" />
-          )}
-        </Link>
+        <p className="text-gray-600 lg:text-lg">{description.text}</p>
       </div>
     </div>
   );

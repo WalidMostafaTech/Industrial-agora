@@ -130,7 +130,7 @@ const FilterSide = () => {
   );
 
   return (
-    <aside className="space-y-6">
+    <aside className="space-y-6 w-72">
       {/* FILTERS */}
       {filterList.map((filter) => (
         <div key={filter.id}>

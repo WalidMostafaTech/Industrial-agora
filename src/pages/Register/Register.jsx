@@ -24,8 +24,8 @@ const Register = () => {
       ) : (
         <form className="whiteContainer space-y-6 max-w-3xl mx-auto">
           <FormTitle
-            title="Account Login"
-            subtitle="If you are already a member you can login with your email address and password."
+            title="Account sign up"
+            subtitle="Become a member and enjoy exclusive promotions."
           />
 
           <MainInput label="full name" id="full_name" />

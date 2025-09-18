@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import logoText from "../../../assets/images/logo/logo-text-blue.png";
 import logoMap from "../../../assets/images/logo/logo-map.png";
 import NavBar from "./NavBar";
+import SearchModal from "../../modals/SearchModal";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
   const [openLinks, setOpenLinks] = useState(null);
+  const [openSearch, setOpenSearch] = useState(false);
 
   const headerRef = useRef();
 
@@ -24,63 +26,77 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
-      ref={headerRef}
-    >
-      <div
-        className={`flex flex-col xl:flex-row items-center justify-between gap-4 
-        px-4 xl:px-6 py-3 xl:py-6 bg-[#000D1D] backdrop-blur shadow-md rounded-3xl 
-        overflow-hidden xl:overflow-visible transition-[max-height] duration-500 ease-in-out
-        ${activeNav ? "max-h-screen" : "max-h-[60px]"} xl:max-h-[200px]`}
+    <>
+      <header
+        className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
+        ref={headerRef}
       >
-        <div className="flex items-center justify-between gap-2 w-full xl:w-auto">
-          <Link
-            to="/"
-            onClick={() => setActiveNav(false)}
-            className="flex items-center gap-2 group"
-          >
-            <img
-              loading="lazy"
-              src={logoMap}
-              alt="Logo"
-              className="w-10 xl:w-14 group-hover:scale-125 duration-300"
-            />
-            <img
-              loading="lazy"
-              src={logoText}
-              alt="Logo"
-              className="w-22 xl:w-28 group-hover:translate-x-2 duration-300"
-            />
-          </Link>
-          <span
-            className="text-3xl text-white cursor-pointer xl:hidden"
-            onClick={() => {
-              setActiveNav(prev=>!prev);
-              setOpenLinks(null);
-            }}
-          >
-            {activeNav ? <IoClose /> : <HiMenu />}
-          </span>
+        <div
+          className={`flex flex-col xl:flex-row items-center justify-between gap-4 
+          px-4 xl:px-6 py-3 xl:py-6 bg-stone-300/70 backdrop-blur shadow-md rounded-3xl 
+          overflow-hidden xl:overflow-visible transition-[max-height] duration-500 ease-in-out
+          ${activeNav ? "max-h-screen" : "max-h-[60px]"} xl:max-h-[200px]`}
+        >
+          <div className="flex items-center justify-between gap-2 w-full xl:w-auto">
+            <Link
+              to="/"
+              onClick={() => setActiveNav(false)}
+              className="flex items-center gap-2 group"
+            >
+              <img
+                loading="lazy"
+                src={logoMap}
+                alt="Logo"
+                className="w-10 xl:w-14 group-hover:scale-125 duration-300"
+              />
+              <img
+                loading="lazy"
+                src={logoText}
+                alt="Logo"
+                className="w-22 xl:w-28 group-hover:translate-x-2 duration-300"
+              />
+            </Link>
+            <span
+              className="text-3xl text-myBlue-2 cursor-pointer xl:hidden"
+              onClick={() => {
+                setActiveNav((prev) => !prev);
+                setOpenLinks(null);
+              }}
+            >
+              {activeNav ? <IoClose /> : <HiMenu />}
+            </span>
+          </div>
+
+          <NavBar
+            setActiveNav={setActiveNav}
+            openLinks={openLinks}
+            setOpenLinks={setOpenLinks}
+          />
+
+          <div className="flex items-center justify-center flex-wrap gap-4">
+            <span
+              className="text-3xl text-myBlue-2 cursor-pointer pe-4 border-e"
+              onClick={() => {
+                setOpenSearch(true);
+                setActiveNav(false);
+                setOpenLinks(null);
+              }}
+            >
+              <IoSearchOutline />
+            </span>
+
+            <Link to="/contact-us" className="mainBtn !rounded-full">
+              Join us
+            </Link>
+          </div>
         </div>
+      </header>
 
-        <NavBar
-          setActiveNav={setActiveNav}
-          openLinks={openLinks}
-          setOpenLinks={setOpenLinks}
-        />
-
-        <div className="flex items-center justify-center flex-wrap gap-4">
-          <span className="text-3xl text-white cursor-pointer pe-4 border-e">
-            <IoSearchOutline />
-          </span>
-
-          <Link to="/contact-us" className="mainBtn !rounded-full">
-            Join us
-          </Link>
-        </div>
-      </div>
-    </header>
+      <SearchModal
+        openSearch={openSearch}
+        onClose={() => setOpenSearch(false)}
+      />
+    </>
   );
 };
 

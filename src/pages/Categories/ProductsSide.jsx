@@ -29,7 +29,7 @@ const ProductsSide = () => {
   };
 
   return (
-    <section className="lg:col-span-3 space-y-8 lg:space-y-12">
+    <section className="space-y-8 lg:space-y-12">
       {/* صورة الكاتيجوري */}
       <div className="relative h-[250px] lg:h-[400px] overflow-hidden">
         <img

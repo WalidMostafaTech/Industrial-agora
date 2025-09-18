@@ -130,11 +130,19 @@ input::-webkit-inner-spin-button {
   }
 
   .navLink {
-    @apply text-lg text-white duration-300 capitalize cursor-pointer;
+    @apply text-lg font-semibold text-myBlue-2 duration-300 uppercase cursor-pointer;
+
+    &::after {
+      @apply content-[''] block h-0.5 w-0 bg-myBlue-2 rounded-2xl transition-all duration-300;
+    }
 
     &.active,
     &:hover {
       @apply text-myBlue-2;
+
+      &::after {
+        @apply w-full;
+      }
     }
   }
 }

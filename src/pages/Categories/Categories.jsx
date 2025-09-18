@@ -6,32 +6,39 @@ import { RiMenu4Line } from "react-icons/ri";
 
 const Categories = () => {
   const [openFilter, setOpenFilter] = useState(false);
+  let showFilter = false;
 
   return (
     <article className="container pagePadding">
       <PageTitle title="Categories" />
 
-      <button
-        onClick={() => setOpenFilter(true)}
-        className="mainBtn lg:!hidden mb-4"
-      >
-        Filters <RiMenu4Line />
-      </button>
+      {showFilter && (
+        <button
+          onClick={() => setOpenFilter(true)}
+          className="mainBtn xl:!hidden mb-4"
+        >
+          Filters <RiMenu4Line />
+        </button>
+      )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 xl:gap-16">
-        <div className="hidden lg:block">
-          <div className="lg:sticky lg:top-32">
-            <FilterSide />
+      <div className="flex gap-12 justify-center">
+        {showFilter && (
+          <div className="hidden xl:block">
+            <div className="xl:sticky xl:top-32">
+              <FilterSide />
+            </div>
           </div>
-        </div>
+        )}
 
-        <ProductsSide />
+        <div className={`${!showFilter ? "max-w-6xl" : "w-full"}`}>
+          <ProductsSide />
+        </div>
       </div>
 
       {/* فلتر كـ Drawer للشاشات الصغيرة */}
-      {openFilter && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex lg:hidden">
-          <div className="bg-white w-72 p-4 overflow-y-auto">
+      {showFilter && openFilter && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex xl:hidden">
+          <div className="bg-white p-4 overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">Filters</h2>
               <button

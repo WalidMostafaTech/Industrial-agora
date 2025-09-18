@@ -4,6 +4,7 @@ import "swiper/css";
 import img1 from "../../../assets/images/9f8ca255d19a4024444f6d08bbebff24f2a36a06.jpg";
 import img2 from "../../../assets/images/d4c7a5f497685b7fcc68b1c084034c98eeabed42.jpg";
 import img3 from "../../../assets/images/Rectangle 3.png";
+import bgImg from "../../../assets/images/logo/logo-map.png";
 
 const Section2List = [
   {
@@ -32,7 +33,16 @@ const Section2List = [
 
 const Section2 = () => {
   return (
-    <section className="sectionPadding bg-myBlue-1">
+    <section
+      className="sectionPadding relative"
+      style={{
+        backgroundImage: `url(${bgImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-stone-500/70"></div>
       <div className="container">
         <Swiper
           spaceBetween={20}
@@ -54,7 +64,9 @@ const Section2 = () => {
                   />
                 </div>
                 <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <p className="text-gray-600 line-clamp-2 h-16">{item.description}</p>
+                <p className="text-gray-600 line-clamp-2 h-16">
+                  {item.description}
+                </p>
                 <Link className="animationBtn">see more</Link>
               </div>
             </SwiperSlide>

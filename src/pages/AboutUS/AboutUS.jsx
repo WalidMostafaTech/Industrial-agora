@@ -2,12 +2,12 @@ import MainCardList from "../../components/common/MainCardList";
 import PageBanner from "../../components/common/PageBanner";
 import PageTitle from "../../components/common/PageTitle";
 import bannerImg from "../../assets/images/slider-img.png";
-import cardImg from "../../assets/images/Agreement-amico 1.png";
+import cardImg from "../../assets/images/32bf46f5bdafd7f6d8d884b65fc96ab358e43f24.jpg";
 
 const data = [
   {
     id: "1",
-    title: { text: "Company", border: true, index: true },
+    title: { text: "Who We Are", border: true, index: true },
     image: cardImg,
     btn: { text: "register", link: "/register", arrow: true, border: true },
     description: {
@@ -17,7 +17,7 @@ const data = [
   },
   {
     id: "2",
-    title: { text: "Company", border: true, index: true },
+    title: { text: "Who We Are", border: true, index: true },
     image: cardImg,
     btn: { text: "register", link: "/register", arrow: true, border: true },
     description: {
@@ -27,7 +27,7 @@ const data = [
   },
   {
     id: "3",
-    title: { text: "Company", border: true, index: true },
+    title: { text: "Who We Are", border: true, index: true },
     image: cardImg,
     btn: { text: "register", link: "/register", arrow: true, border: true },
     description: {
@@ -42,7 +42,7 @@ const AboutUS = () => {
     <section className="pagePadding">
       <PageTitle title="About us" />
 
-      <PageBanner image={bannerImg} title="How to be a seller" />
+      <PageBanner image={bannerImg} />
 
       <div className="container mt-8 lg:mt-12">
         <MainCardList data={data} border />

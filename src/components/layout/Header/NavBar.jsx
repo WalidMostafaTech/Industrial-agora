@@ -1,6 +1,6 @@
 import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
   const handleOpenLinks = (name) => {
@@ -14,46 +14,55 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
   const linksList = [
     { name: "home", path: "/", list: [] },
     {
-      name: "categories",
-      path: "",
+      name: "exchange categories",
+      path: "/categories",
       list: [
         { name: "category 1", link: "/categories?category=category-1" },
         { name: "category 2", link: "/categories?category=category-2" },
       ],
     },
-    {
-      name: "seller",
-      path: "",
-      list: [
-        { name: "how to sell", link: "/how-to-sell" },
-        { name: "how to be a seller", link: "/how-to-be-a-seller" },
-        { name: "apply for vendor account", link: "/login" },
-        { name: "terms of use", link: "/terms" },
-      ],
-    },
-    {
-      name: "buyer",
-      path: "",
-      list: [
-        { name: "how does it work", link: "/how-does-it-work" },
-        { name: "advantages", link: "/advantages" },
-      ],
-    },
+    // {
+    //   name: "seller",
+    //   path: "/seller",
+    //   list: [
+    //     { name: "how to sell", link: "/how-to-sell" },
+    //     { name: "how to be a seller", link: "/how-to-be-a-seller" },
+    //     { name: "apply for vendor account", link: "/login" },
+    //     { name: "terms of use", link: "/terms" },
+    //   ],
+    // },
+    // {
+    //   name: "buyer",
+    //   path: "/buyer",
+    //   list: [
+    //     { name: "how does it work", link: "/how-does-it-work" },
+    //     { name: "advantages", link: "/advantages" },
+    //   ],
+    // },
     { name: "about us", path: "/about-us", list: [] },
     { name: "contact us", path: "/contact-us", list: [] },
-    { name: "request", path: "/request", list: [] },
+    { name: "request consultation", path: "/request", list: [] },
   ];
+
+  const { pathname } = useLocation();
 
   return (
     <>
       <nav className="hidden xl:flex items-center gap-8">
         {linksList.map((link) =>
           link.list.length > 0 ? (
-            <div className="navLink relative" key={link.name}>
+            <div
+              className={`navLink relative ${
+                pathname === link.path ? "active" : ""
+              }`}
+              key={link.name}
+            >
               <button
                 type="button"
                 onClick={() => handleOpenLinks(link.name)}
-                className="capitalize flex items-center gap-1"
+                className={`uppercase cursor-pointer flex items-center gap-1 ${
+                  pathname === link.path ? "active" : ""
+                }`}
               >
                 {link.name}
                 <TiArrowSortedDown className="text-xl" />
@@ -103,13 +112,15 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
-              className="navLink py-2 not-last:border-b border-gray-100/50"
+              className={`navLink py-2 ${
+                pathname === link.path ? "active" : ""
+              }`}
               key={link.name}
             >
               <button
                 type="button"
                 onClick={() => handleOpenLinks(link.name)}
-                className="capitalize flex items-center w-full gap-1"
+                className=" cursor-pointer flex items-center w-full gap-1"
               >
                 {link.name}
                 <TiArrowSortedDown className="text-xl" />
@@ -144,7 +155,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
             <NavLink
               to={link.path}
               key={link.name}
-              className="navLink py-2 not-last:border-b border-gray-100/50"
+              className="navLink py-2"
               onClick={() => {
                 setActiveNav(false);
                 setOpenLinks(null);

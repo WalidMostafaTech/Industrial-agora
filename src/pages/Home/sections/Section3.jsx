@@ -24,11 +24,11 @@ const Section3List = [
 
 const Section3 = () => {
   return (
-    <section className="sectionPadding container">
-      <div className="flex flex-col xl:flex-row gap-6 lg:gap-8">
-        <div className="flex flex-wrap justify-between items-center gap-4">
-          <h2 className="text-3xl lg:text-5xl font-bold mb-6">
-            Why Choose Industrial Agora?
+    <section className="sectionPadding my-8 container">
+      <div className="flex flex-col xl:flex-row gap-6 lg:gap-8 text-center lg:text-start">
+        <div className="flex flex-wrap justify-center lg:justify-between items-center gap-4">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-6 lg:max-w-lg">
+            Join us in reshaping the future of industrial collaboration.
           </h2>
           <Link className="animationBtn hidden lg:block">Get Started</Link>
         </div>
