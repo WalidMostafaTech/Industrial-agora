@@ -4,35 +4,28 @@ import { useState, useRef } from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import sliderImg from "../../../assets/images/slider-img2.jpg";
-
-const slides = [
-  {
-    title: "Your platform for easily buying and selling surplus inventory",
-    subtitle: "We connect you with trusted suppliers and buyers in one place.",
-    btn1: "Browse Products",
-    btn2: "Start selling",
-    img: sliderImg,
-  },
-  {
-    title: "Find the best deals on surplus products",
-    subtitle: "Save money and get quality items fast.",
-    btn1: "Explore Deals",
-    btn2: "Join Now",
-    img: sliderImg,
-  },
-  {
-    title: "Grow your business with our marketplace",
-    subtitle: "Reach thousands of verified buyers instantly.",
-    btn1: "Start Today",
-    btn2: "Contact Us",
-    img: sliderImg,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getSliders } from "../../../services/homeServices";
+import { Link } from "react-router-dom";
+import EmptySection from "../../../components/sections/EmptySection";
+import LoadingSection from "../../../components/Loading/LoadingSection";
 
 export default function HeroSection() {
   const [realIndex, setRealIndex] = useState(0);
   const swiperRef = useRef(null);
+
+  const {
+    data: sliders,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["sliders"],
+    queryFn: getSliders,
+  });
+
+  if (isLoading) return <LoadingSection />;
+
+  if (isError || !sliders) return <EmptySection />;
 
   return (
     <section className="relative w-full h-[80vh]">
@@ -42,21 +35,25 @@ export default function HeroSection() {
         fadeEffect={{ crossFade: true }}
         modules={[EffectFade, Autoplay]}
         loop={true}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => setRealIndex(swiper.realIndex)}
         className="h-full"
       >
-        {slides.map((slide, index) => (
+        {sliders?.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div
-              className="h-full relative content-end"
-              style={{
-                backgroundImage: `url(${slide.img})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
+            <div className="h-full relative content-end">
+              <picture className="absolute inset-0 z-[-1] w-full h-full">
+                <source
+                  media="(max-width: 767px)"
+                  srcSet={slide.mobile_image}
+                />
+                <img
+                  src={slide.desktop_image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+              </picture>
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/50" />
 
@@ -66,7 +63,7 @@ export default function HeroSection() {
                   <div
                     className="absolute top-0 left-0 w-full bg-myBlue-2 transition-all duration-500"
                     style={{
-                      height: `${((realIndex + 1) / slides.length) * 100}%`,
+                      height: `${((realIndex + 1) / sliders?.length) * 100}%`,
                     }}
                   />
                 </div>
@@ -76,16 +73,19 @@ export default function HeroSection() {
                     {slide.title}
                   </h1>
                   <p className="text-gray-200 text-xl max-w-2xl">
-                    {slide.subtitle}
+                    {slide.paragraph}
                   </p>
 
                   <div className="flex gap-4 lg:gap-8">
-                    <button className="animationBtn !text-white">
-                      {slide.btn1}
-                    </button>
-                    <button className="animationBtn !text-white">
-                      {slide.btn2}
-                    </button>
+                    {slide.buttons.map((btn, index) => (
+                      <Link
+                        to={btn.url}
+                        key={index}
+                        className="animationBtn !text-white"
+                      >
+                        {btn.text}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>

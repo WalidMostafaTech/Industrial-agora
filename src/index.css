@@ -14,8 +14,8 @@ input::-webkit-inner-spin-button {
 }
 
 .htmlContent {
-  overflow-wrap: break-word;
-  overflow-x: auto;
+  /* overflow-wrap: break-word;
+  overflow-x: auto; */
 
   iframe {
     max-width: 100%;
@@ -130,7 +130,7 @@ input::-webkit-inner-spin-button {
   }
 
   .navLink {
-    @apply text-lg font-semibold text-myBlue-2 duration-300 uppercase cursor-pointer;
+    @apply 2xl:text-lg font-bold text-myBlue-2 duration-300 uppercase cursor-pointer;
 
     &::after {
       @apply content-[''] block h-0.5 w-0 bg-myBlue-2 rounded-2xl transition-all duration-300;

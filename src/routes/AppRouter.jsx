@@ -11,11 +11,16 @@ const ContactUs = React.lazy(() => import("../pages/ContactUS/ContactUS"));
 const Request = React.lazy(() => import("../pages/Request/Request"));
 const Terms = React.lazy(() => import("../pages/Terms/Terms"));
 const HowToSell = React.lazy(() => import("../pages/HowToSell/HowToSell"));
-const HowToBeASeller = React.lazy(() => import("../pages/HowToBeASeller/HowToBeASeller"));
-const HowDoesItWork = React.lazy(() => import("../pages/HowDoesItWork/HowDoesItWork"));
+const HowToBeASeller = React.lazy(() =>
+  import("../pages/HowToBeASeller/HowToBeASeller")
+);
+const HowDoesItWork = React.lazy(() =>
+  import("../pages/HowDoesItWork/HowDoesItWork")
+);
 const Advantages = React.lazy(() => import("../pages/Advantages/Advantages"));
 const Register = React.lazy(() => import("../pages/Register/Register"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
+const AddProduct = React.lazy(() => import("../pages/AddProduct/AddProduct"));
 
 const router = createBrowserRouter([
   {
@@ -36,6 +41,7 @@ const router = createBrowserRouter([
       { path: "advantages", element: <Advantages /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      { path: "add-product", element: <AddProduct /> },
     ],
   },
 ]);

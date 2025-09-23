@@ -4,7 +4,7 @@ import RequestQuotation from "./RequestQuotation";
 import PurchaseOrder from "./PurchaseOrder";
 
 const ProductsForms = () => {
-  const [active, setActive] = useState("request");
+  const [active, setActive] = useState("purchase");
 
   const titles = [
     {

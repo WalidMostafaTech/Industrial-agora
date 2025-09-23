@@ -2,34 +2,46 @@ import missionIcon from "../../../assets/icons/mission 2.png";
 import ideaIcon from "../../../assets/icons/5ec9ae4de2827d68b80c82ee643d00e16871f1cd.png";
 import eyeIcon from "../../../assets/icons/193a563129355d056e72368071bf44766b45b1a7.png";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getMissionAndVisionAndSolution } from "../../../services/homeServices";
+import LoadingSection from "../../../components/Loading/LoadingSection";
+import EmptySection from "../../../components/sections/EmptySection";
 
-const Section4List = [
-  {
-    title: "Mission",
-    description:
-      "Our mission is to simplify trade by providing businesses with seamless access to reliable suppliers, competitive prices, and efficient logistics services.",
-    icon: missionIcon,
-    color: "var(--color-myBlue-2)",
-  },
-  {
-    title: "Our Solution",
-    description:
-      "We offer an all-in-one platform where businesses can discover products, connect with verified suppliers, and complete deals securely and transparently.",
-    icon: ideaIcon,
-    color: "var(--color-myGreen)",
-  },
-  {
-    title: "Vision",
-    description:
-      "To be the leading B2B platform that connects businesses with the best industrial products, raw materials, and equipment in one trusted marketplace.",
-    icon: eyeIcon,
-    color: "white",
-  },
-];
+const MissionVisionSolution = () => {
+  const {
+    data: missionAndVisionAndSolution,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["missionAndVisionAndSolution"],
+    queryFn: getMissionAndVisionAndSolution,
+  });
 
-// 🟢 مصفوفة ألوان للكروت
+  if (isLoading) return <LoadingSection />;
 
-const Section4 = () => {
+  if (isError || !missionAndVisionAndSolution) return <EmptySection />;
+
+  const MissionVisionSolutionList = [
+    {
+      title: "Mission",
+      paragraph: missionAndVisionAndSolution?.mission,
+      icon: missionIcon,
+      color: "var(--color-myBlue-2)",
+    },
+    {
+      title: "Our Solution",
+      paragraph: missionAndVisionAndSolution?.solution,
+      icon: ideaIcon,
+      color: "var(--color-myGreen)",
+    },
+    {
+      title: "Vision",
+      paragraph: missionAndVisionAndSolution?.vission,
+      icon: eyeIcon,
+      color: "white",
+    },
+  ];
+
   return (
     <section className="sectionPadding bg-myBlue-1">
       <div className="px-4 max-w-6xl mx-auto mb-8 lg:mb-12">
@@ -44,12 +56,12 @@ const Section4 = () => {
       </div>
 
       <div className="px-4 grid gap-6 lg:grid-cols-2 lg:grid-rows-2 max-w-6xl mx-auto">
-        {Section4List.map((item, index) => (
+        {MissionVisionSolutionList.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-col items-center justify-center ${
-              index === 1 ? "gap-4 lg:gap-12" : "gap-4"
-            } text-center group p-6 lg:px-20`}
+            className={`flex flex-col items-center justify-center gap-4 md:gap-8 ${
+              index === 1 && "lg:gap-12"
+            } text-center group p-6`}
             style={{
               gridRow: index === 1 ? "span 2 / span 2" : undefined,
               backgroundColor: item.color,
@@ -60,7 +72,10 @@ const Section4 = () => {
               <img src={item.icon} alt={item.title} className="w-10" />
               <h3 className="text-2xl font-semibold">{item.title}</h3>
             </div>
-            <p className="text-lg">{item.description}</p>
+            <div
+              className="htmlContent lg:w-2/3"
+              dangerouslySetInnerHTML={{ __html: item.paragraph }}
+            />
             <Link
               className={`animationBtn ${
                 item.color === "white" ? "" : "light"
@@ -75,4 +90,4 @@ const Section4 = () => {
   );
 };
 
-export default Section4;
+export default MissionVisionSolution;

@@ -4,16 +4,21 @@ import { Link } from "react-router-dom";
 import { IoLogoLinkedin } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
 import { TiArrowRight } from "react-icons/ti";
+import { useQuery } from "@tanstack/react-query";
+import { getFooter } from "../../../services/homeServices";
 
 const Footer = () => {
+  const { data: footer } = useQuery({
+    queryKey: ["footer"],
+    queryFn: getFooter,
+  });
+
   const footerLinks = [
     {
       title: "Our Company",
       links: [
         { name: "Home", url: "/" },
         { name: "Categories", url: "/categories" },
-        { name: "Seller", url: "/seller" },
-        { name: "Buyer", url: "/buyer" },
         { name: "About us", url: "/about" },
         { name: "Contact us", url: "/contact" },
         { name: "Request", url: "/request" },
@@ -79,12 +84,12 @@ const Footer = () => {
 
       <div className="container sectionPadding grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         <div>
-          <p className="mb-4 lg:mb-8">
-            Our platform connects businesses with the right suppliers, offering
-            heavy equipment, raw materials, spare parts, and electrical
-            products. We make trade simple, fast, and reliable — from browsing
-            products to secure shipping.
-          </p>
+          {footer?.footer && (
+            <div
+              className="htmlContent mb-4 lg:mb-8"
+              dangerouslySetInnerHTML={{ __html: footer?.footer }}
+            />
+          )}
 
           <div className="flex space-x-3">
             <a

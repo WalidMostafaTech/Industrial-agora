@@ -7,7 +7,7 @@ const FixedSection = () => {
       title: "whatsapp",
       link: `https://wa.me/${"20101010101"}`,
       icon: <FaWhatsapp />,
-      color: "green-500",
+      color: "#25D366",
     },
   ];
 
@@ -21,13 +21,13 @@ const FixedSection = () => {
             target="_blank"
             className="bg-white p-1 pe-2 lg:p-2 lg:pe-4 shadow-lg rounded-e-full flex items-center gap-1 lg:gap-2 group"
           >
-            <p className="lg:text-xl capitalize max-w-0 overflow-hidden group-hover:max-w-70 transition-all ease-in-out duration-500">
+            <p className="lg:text-xl capitalize max-w-0 overflow-hidden group-hover:max-w-32 transition-all ease-in-out duration-500">
               {item.title}
             </p>
 
             <span
-              className="text-2xl lg:text-4xl"
-              style={{ color: `var(--color-${item.color})` }}
+              className="text-3xl lg:text-4xl"
+              style={{ color: `${item.color}` }}
             >
               {item.icon}
             </span>

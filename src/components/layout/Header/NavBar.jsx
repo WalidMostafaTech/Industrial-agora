@@ -13,6 +13,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
 
   const linksList = [
     { name: "home", path: "/", list: [] },
+    { name: "about", path: "/about-us", list: [] },
     {
       name: "exchange categories",
       path: "/categories",
@@ -21,34 +22,16 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
         { name: "category 2", link: "/categories?category=category-2" },
       ],
     },
-    // {
-    //   name: "seller",
-    //   path: "/seller",
-    //   list: [
-    //     { name: "how to sell", link: "/how-to-sell" },
-    //     { name: "how to be a seller", link: "/how-to-be-a-seller" },
-    //     { name: "apply for vendor account", link: "/login" },
-    //     { name: "terms of use", link: "/terms" },
-    //   ],
-    // },
-    // {
-    //   name: "buyer",
-    //   path: "/buyer",
-    //   list: [
-    //     { name: "how does it work", link: "/how-does-it-work" },
-    //     { name: "advantages", link: "/advantages" },
-    //   ],
-    // },
-    { name: "about us", path: "/about-us", list: [] },
-    { name: "contact us", path: "/contact-us", list: [] },
+    { name: "Process OutSource", path: "/process", list: [] },
     { name: "request consultation", path: "/request", list: [] },
+    { name: "contact", path: "/contact-us", list: [] },
   ];
 
   const { pathname } = useLocation();
 
   return (
     <>
-      <nav className="hidden xl:flex items-center gap-8">
+      <nav className="hidden xl:flex items-center gap-4">
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
