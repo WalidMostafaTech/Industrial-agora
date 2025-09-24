@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import productImg from "../../assets/images/product-img.png";
 import ProductsForms from "./ProductsForms/ProductsForms";
+import { useState } from "react";
+import SendMsgModal from "../../components/modals/SendMsgModal";
 
 const Product = () => {
   const { id } = useParams();
+  const [openMsg, setOpenMsg] = useState(false);
+
   const product = {
     id,
     title:
@@ -21,51 +25,66 @@ const Product = () => {
 
   return (
     <article className="container pagePadding space-y-6 lg:space-y-12">
-      <section className="flex flex-col md:flex-row whiteContainer">
-        <div className="w-full md:w-1/3 h-[300px] overflow-hidden">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="flex-1 space-y-4">
-          <h2 className="text-lg lg:text-3xl font-bold">{product.title}</h2>
-
-          <div>
-            <p className="text-gray-600">Status : {product.details.status}</p>
-            <p className="text-gray-600">Type : {product.details.type}</p>
-            <p className="text-gray-600">
-              Condition : {product.details.condition}
-            </p>
-            <p className="text-gray-600">
-              Delivery : {product.details.delivery}
-            </p>
-            <p className="text-gray-600">Payment : {product.details.payment}</p>
+      <section className="whiteContainer">
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-1/3 h-[300px] overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <p className="text-myBlue-2 text-lg font-bold">$4,310.64 excl tax</p>
+          <div className="flex-1 space-y-4">
+            <h2 className="text-lg lg:text-3xl font-bold">{product.title}</h2>
 
-          <div>
-            <p className="text-gray-600">Status : {product.details.status}</p>
-            <p className="text-gray-600">Type : {product.details.type}</p>
-            <p className="text-gray-600">
-              Condition : {product.details.condition}
+            <div>
+              <p className="text-gray-600">Status : {product.details.status}</p>
+              <p className="text-gray-600">Type : {product.details.type}</p>
+              <p className="text-gray-600">
+                Condition : {product.details.condition}
+              </p>
+              <p className="text-gray-600">
+                Delivery : {product.details.delivery}
+              </p>
+              <p className="text-gray-600">
+                Payment : {product.details.payment}
+              </p>
+            </div>
+
+            <p className="text-myBlue-2 text-lg font-bold">
+              $4,310.64 excl tax
             </p>
-            <p className="text-gray-600">
-              Delivery : {product.details.delivery}
+
+            <div>
+              <p className="text-gray-600">Status : {product.details.status}</p>
+              <p className="text-gray-600">Type : {product.details.type}</p>
+              <p className="text-gray-600">
+                Condition : {product.details.condition}
+              </p>
+              <p className="text-gray-600">
+                Delivery : {product.details.delivery}
+              </p>
+              <p className="text-gray-600">
+                Payment : {product.details.payment}
+              </p>
+            </div>
+
+            <p className="border-b border-gray-300 flex justify-end">
+              <span className="bg-gray-200 py-1 px-2">1 IN STOCK</span>
             </p>
-            <p className="text-gray-600">Payment : {product.details.payment}</p>
           </div>
-
-          <p className="border-b border-gray-300 flex justify-end">
-            <span className="bg-gray-200 py-1 px-2">1 IN STOCK</span>
-          </p>
         </div>
+
+        <button
+          onClick={() => setOpenMsg(true)}
+          className="animationBtn block mx-auto mt-8"
+        >
+          contact with seller
+        </button>
       </section>
 
-      <ProductsForms />
+      {/* <ProductsForms /> */}
 
       <div className="whiteContainer relative max-w-3xl mx-auto mt-16 flex flex-wrap justify-center gap-1">
         <h3
@@ -82,6 +101,8 @@ const Product = () => {
           </span>
         ))}
       </div>
+
+      <SendMsgModal openModal={openMsg} onClose={() => setOpenMsg(false)} />
     </article>
   );
 };

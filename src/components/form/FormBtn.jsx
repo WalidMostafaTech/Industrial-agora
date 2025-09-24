@@ -1,10 +1,11 @@
 const FormBtn = ({
-  title="Submit",
+  title = "Submit",
   disabled,
   loading,
   onClick = () => {},
   type = "submit",
   variant = "primary",
+  margin = true,
 }) => {
   const isDisabled = disabled || loading;
   return (
@@ -12,9 +13,9 @@ const FormBtn = ({
       type={type}
       onClick={onClick}
       disabled={isDisabled}
-      className={`animationBtn block mx-auto ${variant === "light" ? "light" : ""} ${
-        loading ? "!cursor-wait contrast-50" : ""
-      }`}
+      className={`animationBtn ${margin && "block mx-auto"} ${
+        variant === "light" ? "light" : ""
+      } ${loading ? "!cursor-wait contrast-50" : ""}`}
     >
       {loading ? (
         <>

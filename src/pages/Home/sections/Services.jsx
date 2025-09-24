@@ -58,7 +58,7 @@ const Services = () => {
       </Swiper>
       <div className="flex justify-center mt-10 lg:mt-14">
         <Link className="animationBtn">get started</Link>
-      </div>{" "}
+      </div>
     </section>
   );
 };

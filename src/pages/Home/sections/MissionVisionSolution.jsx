@@ -2,41 +2,33 @@ import missionIcon from "../../../assets/icons/mission 2.png";
 import ideaIcon from "../../../assets/icons/5ec9ae4de2827d68b80c82ee643d00e16871f1cd.png";
 import eyeIcon from "../../../assets/icons/193a563129355d056e72368071bf44766b45b1a7.png";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getMissionAndVisionAndSolution } from "../../../services/homeServices";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import EmptySection from "../../../components/sections/EmptySection";
+import { useSelector } from "react-redux";
 
 const MissionVisionSolution = () => {
-  const {
-    data: missionAndVisionAndSolution,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["missionAndVisionAndSolution"],
-    queryFn: getMissionAndVisionAndSolution,
-  });
+  const { setting, loading, error } = useSelector((state) => state.setting);
 
-  if (isLoading) return <LoadingSection />;
+  if (loading) return <LoadingSection />;
 
-  if (isError || !missionAndVisionAndSolution) return <EmptySection />;
+  if (error || !setting) return <EmptySection />;
 
   const MissionVisionSolutionList = [
     {
       title: "Mission",
-      paragraph: missionAndVisionAndSolution?.mission,
+      paragraph: setting?.mission,
       icon: missionIcon,
       color: "var(--color-myBlue-2)",
     },
     {
       title: "Our Solution",
-      paragraph: missionAndVisionAndSolution?.solution,
+      paragraph: setting?.solution,
       icon: ideaIcon,
       color: "var(--color-myGreen)",
     },
     {
       title: "Vision",
-      paragraph: missionAndVisionAndSolution?.vission,
+      paragraph: setting?.vission,
       icon: eyeIcon,
       color: "white",
     },

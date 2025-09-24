@@ -4,14 +4,10 @@ import { Link } from "react-router-dom";
 import { IoLogoLinkedin } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
 import { TiArrowRight } from "react-icons/ti";
-import { useQuery } from "@tanstack/react-query";
-import { getFooter } from "../../../services/homeServices";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
-  const { data: footer } = useQuery({
-    queryKey: ["footer"],
-    queryFn: getFooter,
-  });
+  const { setting } = useSelector((state) => state.setting);
 
   const footerLinks = [
     {
@@ -70,7 +66,7 @@ const Footer = () => {
       <div className="container flex justify-between items-center flex-wrap gap-4 pt-8">
         <img src={logoImg} alt="Logo" className="w-48 lg:w-56" />
 
-        <div className="flex gap-2 w-full max-w-lg">
+        <div className="flex gap-2 lg:gap-4 w-full max-w-lg">
           <input
             type="email"
             placeholder="email"
@@ -84,10 +80,10 @@ const Footer = () => {
 
       <div className="container sectionPadding grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         <div>
-          {footer?.footer && (
+          {setting?.footer && (
             <div
               className="htmlContent mb-4 lg:mb-8"
-              dangerouslySetInnerHTML={{ __html: footer?.footer }}
+              dangerouslySetInnerHTML={{ __html: setting?.footer }}
             />
           )}
 

@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import LoadingPage from "../components/Loading/LoadingPage";
+import SettingRoute from "../components/ProtectedRoute/SettingRoute";
 
 const Home = React.lazy(() => import("../pages/Home/Home"));
 const Categories = React.lazy(() => import("../pages/Categories/Categories"));
@@ -21,6 +22,7 @@ const Advantages = React.lazy(() => import("../pages/Advantages/Advantages"));
 const Register = React.lazy(() => import("../pages/Register/Register"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
 const AddProduct = React.lazy(() => import("../pages/AddProduct/AddProduct"));
+const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "add-product", element: <AddProduct /> },
+      { path: "chat", element: <ChatPage /> },
     ],
   },
 ]);
@@ -49,7 +52,9 @@ const router = createBrowserRouter([
 const AppRouter = () => {
   return (
     <Suspense fallback={<LoadingPage />}>
-      <RouterProvider router={router} />
+      <SettingRoute>
+        <RouterProvider router={router} />
+      </SettingRoute>
     </Suspense>
   );
 };

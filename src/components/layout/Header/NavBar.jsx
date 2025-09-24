@@ -22,7 +22,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
         { name: "category 2", link: "/categories?category=category-2" },
       ],
     },
-    { name: "Process OutSource", path: "/process", list: [] },
+    { name: "Process OutSource", path: "/request", list: [] },
     { name: "request consultation", path: "/request", list: [] },
     { name: "contact", path: "/contact-us", list: [] },
   ];
@@ -103,7 +103,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
               <button
                 type="button"
                 onClick={() => handleOpenLinks(link.name)}
-                className=" cursor-pointer flex items-center w-full gap-1"
+                className="uppercase cursor-pointer flex items-center w-full gap-1"
               >
                 {link.name}
                 <TiArrowSortedDown className="text-xl" />

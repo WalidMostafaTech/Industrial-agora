@@ -34,3 +34,8 @@ export const getFooter = async () => {
   const { data } = await api.get("/footer");
   return data?.data || [];
 };
+
+export const getSettings = async () => {
+  const { data } = await api.get("/all-settings");
+  return data?.data || [];
+};

@@ -1,11 +1,14 @@
 import { FaWhatsapp } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const FixedSection = () => {
+  const { setting } = useSelector((state) => state.setting);
+
   const list = [
     {
       id: 1,
       title: "whatsapp",
-      link: `https://wa.me/${"20101010101"}`,
+      link: `https://wa.me/${setting?.whatsapp}`,
       icon: <FaWhatsapp />,
       color: "#25D366",
     },
