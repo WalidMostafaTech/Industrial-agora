@@ -1,4 +1,4 @@
-const Avatar = ({ name, image, size = "lg" }) => {
+const Avatar = ({ name, image, size = "lg", active = false }) => {
   const getInitials = (fullName) => {
     if (!fullName) return "";
     const parts = fullName.trim().split(" ");
@@ -20,7 +20,9 @@ const Avatar = ({ name, image, size = "lg" }) => {
       dir="ltr"
       className={`${
         sizeClasses[size] || sizeClasses.lg
-      } font-bold rounded-full flex items-center justify-center border border-neutral-300 overflow-hidden bg-myBlue-1/70 text-white`}
+      } font-bold rounded-full flex items-center justify-center overflow-hidden duration-300 ${
+        active ? "bg-white text-myBlue-1" : "bg-myBlue-1 text-white"
+      }`}
     >
       {image ? (
         <img

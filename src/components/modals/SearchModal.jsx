@@ -46,7 +46,7 @@ const SearchModal = ({ openSearch, onClose }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="container max-h-full overflow-y-auto p-4 bg-stone-300/70 backdrop-blur rounded-3xl space-y-4 border-3 border-white"
+            className="container max-h-full overflow-y-auto p-4 bg-gray-400/70 backdrop-blur rounded-3xl space-y-4 border-3 border-white"
             onClick={(e) => e.stopPropagation()}
           >
             {/* <div className="flex items-center justify-between gap-4">

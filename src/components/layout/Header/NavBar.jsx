@@ -1,8 +1,10 @@
 import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { NavLink, useLocation } from "react-router-dom";
+import DropDown from "../../common/DropDown";
+import { useRef } from "react";
 
-const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
+const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
   const handleOpenLinks = (name) => {
     if (openLinks === name) {
       setOpenLinks(null);
@@ -10,6 +12,8 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
       setOpenLinks(name);
     }
   };
+
+   const exchangeBtnRef = useRef();
 
   const linksList = [
     { name: "home", path: "/", list: [] },
@@ -31,7 +35,11 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
 
   return (
     <>
-      <nav className="hidden xl:flex items-center gap-4">
+      {/* ✅ Desktop Nav */}
+      <nav
+        className="hidden w-max mx-auto xl:flex items-center justify-center gap-4 
+        absolute top-1/2 left-1/2 -translate-1/2"
+      >
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
@@ -39,6 +47,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
                 pathname === link.path ? "active" : ""
               }`}
               key={link.name}
+              ref={exchangeBtnRef}
             >
               <button
                 type="button"
@@ -51,29 +60,28 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
                 <TiArrowSortedDown className="text-xl" />
               </button>
 
-              <div
-                className={`absolute min-w-xs top-[calc(100%+1rem)] start-0 shadow-md rounded-xl overflow-visible
-                flex flex-col gap-4 p-4 bg-white text-black z-50 cursor-pointer ${
-                  openLinks === link.name ? "block" : "hidden"
-                }`}
+              <DropDown
+                onClose={() => setOpenLinks(null)}
+                openDropdown={openLinks === link.name}
+                buttonRef={exchangeBtnRef} 
               >
-                <TiArrowSortedUp className="absolute -top-5 start-4 text-white text-4xl z-50" />
-
-                {link.list.map((subLink) => (
-                  <NavLink
-                    to={subLink.link}
-                    key={subLink.name}
-                    className="group flex items-center justify-between gap-2 font-semibold"
-                    onClick={() => {
-                      setActiveNav(false);
-                      setOpenLinks(null);
-                    }}
-                  >
-                    {subLink.name}
-                    <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
-                  </NavLink>
-                ))}
-              </div>
+                <div className="bg-white min-w-56 p-4 flex flex-col gap-4 relative">
+                  {link.list.map((subLink) => (
+                    <NavLink
+                      to={subLink.link}
+                      key={subLink.name}
+                      className="group flex items-center justify-between gap-2 font-semibold"
+                      onClick={() => {
+                        setActiveNav(false);
+                        setOpenLinks(null);
+                      }}
+                    >
+                      {subLink.name}
+                      <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
+                    </NavLink>
+                  ))}
+                </div>
+              </DropDown>
             </div>
           ) : (
             <NavLink
@@ -91,11 +99,15 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
         )}
       </nav>
 
-      <nav className="flex xl:hidden flex-col w-full">
+      <nav
+        className={`flex xl:hidden flex-col w-full overflow-hidden transition-all duration-500 ease-in-out ${
+          activeNav ? "max-h-screen pt-2" : "max-h-0"
+        }`}
+      >
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
-              className={`navLink py-2 ${
+              className={`navLink py-1 ${
                 pathname === link.path ? "active" : ""
               }`}
               key={link.name}
@@ -138,7 +150,7 @@ const NavBar = ({ setActiveNav, openLinks, setOpenLinks }) => {
             <NavLink
               to={link.path}
               key={link.name}
-              className="navLink py-2"
+              className="navLink py-1"
               onClick={() => {
                 setActiveNav(false);
                 setOpenLinks(null);

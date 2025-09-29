@@ -16,6 +16,9 @@ const Features = () => {
     queryFn: getFeatures,
   });
 
+  console.log(features);
+  
+
 
   if (isLoading) return <LoadingSection />;
 

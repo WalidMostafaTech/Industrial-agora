@@ -1,4 +1,4 @@
-const MainCard = ({
+const AboutCard = ({
   title = { text: "", border: false, index: false },
   description = { text: "", border: false },
   image,
@@ -28,4 +28,4 @@ const MainCard = ({
   );
 };
 
-export default MainCard;
+export default AboutCard;

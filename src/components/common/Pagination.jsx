@@ -38,7 +38,7 @@ const Pagination = ({ totalPages = 5, currentPage = 1, onPageChange }) => {
       <button
         onClick={() => handlePageClick(1)}
         disabled={currentPage === 1}
-        className={`px-3 h-8 flex items-center justify-center border font-medium ${
+        className={`px-1 lg:px-3 h-8 text-sm lg:text-base flex items-center justify-center border font-medium ${
           currentPage === 1
             ? "border-transparent bg-stone-200 text-stone-400 cursor-not-allowed"
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"
@@ -92,7 +92,7 @@ const Pagination = ({ totalPages = 5, currentPage = 1, onPageChange }) => {
       <button
         onClick={() => handlePageClick(totalPages)}
         disabled={currentPage === totalPages}
-        className={`px-3 h-8 flex items-center justify-center border font-medium ${
+        className={`px-1 lg:px-3 h-8 text-sm lg:text-base flex items-center justify-center border font-medium ${
           currentPage === totalPages
             ? "border-transparent bg-stone-200 text-stone-400 cursor-not-allowed"
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"

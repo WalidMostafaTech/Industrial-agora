@@ -1,4 +1,4 @@
-import MainCardList from "../../components/common/MainCardList";
+import AboutCardList from "../../components/common/AboutCardList";
 import PageBanner from "../../components/common/PageBanner";
 import PageTitle from "../../components/common/PageTitle";
 import bannerImg from "../../assets/images/slider-img.png";
@@ -68,13 +68,15 @@ const Advantages = () => {
         {data2.map((item, index) => (
           <div key={item.id} className="bg-myBlue-2/30 rounded-xl p-4">
             <IndexNumber index={index + 1} />
-            <p className="text-myBlue-1 text-center lg:text-lg lg:max-w-2/3 mx-auto my-8">{item.text}</p>
+            <p className="text-myBlue-1 text-center lg:text-lg lg:max-w-2/3 mx-auto my-8">
+              {item.text}
+            </p>
           </div>
         ))}
       </div>
 
       <div className="container mt-8 lg:mt-12">
-        <MainCardList data={data} border />
+        <AboutCardList data={data} border />
       </div>
     </section>
   );

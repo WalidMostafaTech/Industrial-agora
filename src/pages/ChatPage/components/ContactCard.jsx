@@ -10,7 +10,7 @@ const ContactCard = ({ contact, activeChat, handleClick }) => {
           : "bg-gray-100 hover:bg-gray-300"
       }`}
     >
-      <Avatar name={contact.name} />
+      <Avatar name={contact.name} active={activeChat === contact.id} />
       <div className="flex-1">
         <div className="w-full flex justify-between gap-2">
           <h4 className="text-lg lg:text-2xl font-bold capitalize line-clamp-1 flex-1 break-all">

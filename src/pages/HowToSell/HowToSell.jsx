@@ -1,4 +1,4 @@
-import MainCardList from "../../components/common/MainCardList";
+import AboutCardList from "../../components/common/AboutCardList";
 import PageBanner from "../../components/common/PageBanner";
 import PageTitle from "../../components/common/PageTitle";
 import bannerImg from "../../assets/images/slider-img.png";
@@ -45,7 +45,7 @@ const HowToSell = () => {
       <PageBanner image={bannerImg} title="How to be a seller" />
 
       <div className="container mt-8 lg:mt-12">
-        <MainCardList data={data} border />
+        <AboutCardList data={data} border />
       </div>
     </section>
   );
