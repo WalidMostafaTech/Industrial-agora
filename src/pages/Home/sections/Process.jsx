@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import bgImg from "../../../assets/images/logo/logo-map.png";
 import { useQuery } from "@tanstack/react-query";
 import { getMainCategories } from "../../../services/homeServices";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { Link } from "react-router-dom";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import EmptySection from "../../../components/sections/EmptySection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState } from "react"; // ✅ ضفناها هنا
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
 
-const MainCategories = () => {
+const Process = () => {
   const {
     data: categories,
     isLoading,
@@ -21,27 +20,21 @@ const MainCategories = () => {
     queryFn: getMainCategories,
   });
 
-  // ✅ الحالة اللي بتتحكم في تعطيل الأزرار
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   if (isLoading) return <LoadingSection />;
+
   if (isError || !categories) return <EmptySection />;
 
   return (
-    <section
-      className="sectionPadding relative"
-      style={{
-        backgroundImage: `url(${bgImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-stone-500/70"></div>
+    <section className="sectionPadding bg-myBlue-1">
+      <h2 className="text-white text-3xl lg:text-5xl font-bold text-center mb-6 lg:mb-10">
+        Why Join Industrial Agora
+      </h2>
 
-      <div className="container relative z-10">
-        {/* أزرار التقليب */}
+      <div className="container relative">
+        {/* ✅ أزرار التقليب */}
         <div className="flex justify-end mb-4 gap-3">
           <button
             className={`swiper-button-prev-custom bg-white p-4 rounded-full shadow transition cursor-pointer ${
@@ -65,6 +58,7 @@ const MainCategories = () => {
           </button>
         </div>
 
+        {/* ✅ السلايدر */}
         <Swiper
           modules={[Navigation]}
           spaceBetween={20}
@@ -77,7 +71,6 @@ const MainCategories = () => {
             1024: { slidesPerView: 2 },
             1280: { slidesPerView: 3 },
           }}
-          // ✅ هنا التحديث
           onInit={(swiper) => {
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
@@ -111,4 +104,4 @@ const MainCategories = () => {
   );
 };
 
-export default MainCategories;
+export default Process;

@@ -8,8 +8,12 @@ const PageBanner = ({ image, title }) => {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full h-full bg-gray-300/30 content-center">
-        {title && <h2 className="container lg:text-lg text-white">{title}</h2>}
+      <div className="w-full h-full bg-black/50 content-center">
+        {title && (
+          <div className="container">
+            <h2 className="text-2xl lg:text-4xl text-white font-bold max-w-md">{title}</h2>
+          </div>
+        )}
       </div>
     </div>
   );

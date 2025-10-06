@@ -9,7 +9,15 @@ const Categories = React.lazy(() => import("../pages/Categories/Categories"));
 const Product = React.lazy(() => import("../pages/Product/Product"));
 const AboutUS = React.lazy(() => import("../pages/AboutUS/AboutUS"));
 const ContactUs = React.lazy(() => import("../pages/ContactUS/ContactUS"));
-const Request = React.lazy(() => import("../pages/Request/Request"));
+const RequestConsultation = React.lazy(() =>
+  import("../pages/RequestConsultation/RequestConsultation")
+);
+const ProcessOutSource = React.lazy(() =>
+  import("../pages/ProcessOutSource/ProcessOutSource")
+);
+const ProcessOutsourceService = React.lazy(() =>
+  import("../pages/ProcessOutsourceService/ProcessOutsourceService")
+);
 const Terms = React.lazy(() => import("../pages/Terms/Terms"));
 const HowToSell = React.lazy(() => import("../pages/HowToSell/HowToSell"));
 const HowToBeASeller = React.lazy(() =>
@@ -23,6 +31,10 @@ const Register = React.lazy(() => import("../pages/Register/Register"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
 const AddProduct = React.lazy(() => import("../pages/AddProduct/AddProduct"));
 const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
+const PaymentPage = React.lazy(() =>
+  import("../pages/PaymentPage/PaymentPage")
+);
+const Profile = React.lazy(() => import("../pages/Profile/Profile"));
 
 const router = createBrowserRouter([
   {
@@ -35,7 +47,12 @@ const router = createBrowserRouter([
       { path: "product/:id", element: <Product /> },
       { path: "about-us", element: <AboutUS /> },
       { path: "contact-us", element: <ContactUs /> },
-      { path: "request", element: <Request /> },
+      { path: "request", element: <RequestConsultation /> },
+      { path: "process-outsource", element: <ProcessOutSource /> },
+      {
+        path: "process-outsource/service",
+        element: <ProcessOutsourceService />,
+      },
       { path: "terms", element: <Terms /> },
       { path: "how-to-sell", element: <HowToSell /> },
       { path: "how-to-be-a-seller", element: <HowToBeASeller /> },
@@ -45,6 +62,8 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "add-product", element: <AddProduct /> },
       { path: "chat", element: <ChatPage /> },
+      { path: "payment", element: <PaymentPage /> },
+      { path: "profile/:id", element: <Profile /> },
     ],
   },
 ]);

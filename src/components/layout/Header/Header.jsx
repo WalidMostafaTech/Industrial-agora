@@ -32,7 +32,7 @@ const Header = () => {
         className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
         ref={headerRef}
       >
-        <div className="flex flex-col p-4 xl:py-6 bg-gray-400/70 backdrop-blur shadow-md rounded-3xl">
+        <div className="flex flex-col p-4 xl:py-6 bg-white/70 backdrop-blur shadow-md rounded-3xl">
           <div className="flex items-center justify-between gap-2 w-full">
             <div className="flex items-center gap-1">
               <span

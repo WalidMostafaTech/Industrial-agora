@@ -60,7 +60,7 @@ export default function HeroSection() {
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/50" />
 
-              <div className="container relative z-10 px-6 flex">
+              <div className="container relative z-10 flex">
                 {/* Vertical Progress Line */}
                 <div className="relative min-w-1.5 h-[300px] lg:h-[400px] bg-white overflow-hidden">
                   <div

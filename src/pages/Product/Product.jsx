@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import productImg from "../../assets/images/product-img.png";
-import ProductsForms from "./ProductsForms/ProductsForms";
 import { useState } from "react";
 import SendMsgModal from "../../components/modals/SendMsgModal";
 

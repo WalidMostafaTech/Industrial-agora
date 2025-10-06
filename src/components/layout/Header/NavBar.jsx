@@ -1,7 +1,6 @@
 import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { NavLink, useLocation } from "react-router-dom";
-import DropDown from "../../common/DropDown";
 import { useRef } from "react";
 
 const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
@@ -13,7 +12,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     }
   };
 
-   const exchangeBtnRef = useRef();
+  const exchangeBtnRef = useRef();
 
   const linksList = [
     { name: "home", path: "/", list: [] },
@@ -26,7 +25,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
         { name: "category 2", link: "/categories?category=category-2" },
       ],
     },
-    { name: "Process OutSource", path: "/request", list: [] },
+    { name: "Process OutSource", path: "/process-outsource", list: [] },
     { name: "request consultation", path: "/request", list: [] },
     { name: "contact", path: "/contact-us", list: [] },
   ];
@@ -49,28 +48,29 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
               key={link.name}
               ref={exchangeBtnRef}
             >
-              <button
-                type="button"
-                onClick={() => handleOpenLinks(link.name)}
-                className={`uppercase cursor-pointer flex items-center gap-1 ${
-                  pathname === link.path ? "active" : ""
-                }`}
-              >
-                {link.name}
-                <TiArrowSortedDown className="text-xl" />
-              </button>
+              <div className="dropdown dropdown-start">
+                <div tabIndex={0}>
+                  <button
+                    type="button"
+                    onClick={() => handleOpenLinks(link.name)}
+                    className={`uppercase cursor-pointer flex items-center gap-1 ${
+                      pathname === link.path ? "active" : ""
+                    }`}
+                  >
+                    {link.name}
+                    <TiArrowSortedDown className="text-xl" />
+                  </button>
+                </div>
 
-              <DropDown
-                onClose={() => setOpenLinks(null)}
-                openDropdown={openLinks === link.name}
-                buttonRef={exchangeBtnRef} 
-              >
-                <div className="bg-white min-w-56 p-4 flex flex-col gap-4 relative">
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu menu-lg bg-base-100 rounded-box z-1 min-w-52 p-2 shadow-sm text-lg"
+                >
                   {link.list.map((subLink) => (
                     <NavLink
                       to={subLink.link}
                       key={subLink.name}
-                      className="group flex items-center justify-between gap-2 font-semibold"
+                      className="group flex items-center justify-between gap-2 font-semibold p-2"
                       onClick={() => {
                         setActiveNav(false);
                         setOpenLinks(null);
@@ -80,8 +80,8 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                       <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
                     </NavLink>
                   ))}
-                </div>
-              </DropDown>
+                </ul>
+              </div>
             </div>
           ) : (
             <NavLink

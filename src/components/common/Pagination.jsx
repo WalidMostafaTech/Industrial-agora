@@ -33,7 +33,7 @@ const Pagination = ({ totalPages = 5, currentPage = 1, onPageChange }) => {
   const visiblePages = getVisiblePages();
 
   return (
-    <div className="flex items-center justify-end gap-2">
+    <div className="flex items-center justify-center lg:justify-end gap-2">
       {/* First Button */}
       <button
         onClick={() => handlePageClick(1)}

@@ -1,17 +1,16 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Avatar from "../../common/Avatar";
-import { useRef, useState } from "react";
-import DropDown from "../../common/DropDown";
+import { HiOutlineLogout } from "react-icons/hi";
+import { FaRegUserCircle } from "react-icons/fa";
+import { TbShoppingBagPlus } from "react-icons/tb";
+import { BsChatSquareText } from "react-icons/bs";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const user = {
+    id: 1,
     name: "John Doe",
   };
-
-  const profileBtnRef = useRef();
-
-  const [openProfile, setOpenProfile] = useState(false);
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
@@ -27,22 +26,49 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
       </span>
 
       {user ? (
-        <div
-          ref={profileBtnRef}
-          onClick={() => setOpenProfile((prev) => !prev)}
-          className="flex items-center gap-2 relative cursor-pointer"
-        >
-          <Avatar name={user.name} size="md" active={openProfile} />
-
-          <DropDown
-            onClose={() => setOpenProfile(false)}
-            buttonRef={profileBtnRef}
-            openDropdown={openProfile}
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0}>
+            <Avatar name={user.name} size="md" />
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu lg:menu-lg bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
           >
-            <div className="bg-white min-w-32 lg:min-w-52 p-2">
-              <p>{user.name}</p>
-            </div>
-          </DropDown>
+            <li>
+              <Link
+                to={`/profile/${user.id}`}
+                className="flex gap-4 items-center"
+              >
+                <FaRegUserCircle className="text-2xl" />
+                <p>Profile</p>
+              </Link>
+            </li>
+
+            <hr className="my-2 border-gray-300" />
+
+            <li>
+              <Link to={`/chat`} className="flex gap-4 items-center">
+                <BsChatSquareText className="text-2xl" />
+                <p>Chat</p>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={`/chat`} className="flex gap-4 items-center">
+                <TbShoppingBagPlus className="text-2xl" />
+                <p>Subscribe</p>
+              </Link>
+            </li>
+
+            <hr className="my-2 border-gray-300" />
+
+            <li className="hover:bg-red-100 rounded">
+              <button className="flex gap-4 items-center text-red-600">
+                <HiOutlineLogout className="text-2xl" />
+                <p>Log Out</p>
+              </button>
+            </li>
+          </ul>
         </div>
       ) : (
         <Link to="/contact-us" className="mainBtn !rounded-full">
