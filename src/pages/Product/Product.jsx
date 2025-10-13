@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import productImg from "../../assets/images/product-img.png";
 import { useState } from "react";
-import SendMsgModal from "../../components/modals/SendMsgModal";
+import SendMsgModal from "./sections/SendMsgModal";
 
 const Product = () => {
   const { id } = useParams();

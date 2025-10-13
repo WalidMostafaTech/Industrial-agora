@@ -68,8 +68,10 @@ const RequestConsultation = () => {
 
           <MainInput
             label="Type of consultation required"
+
             id="consultation_type"
             type="select"
+            placeholder={"Select consultation type"}
             options={[
               { value: "1", label: "1" },
               { value: "2", label: "2" },
@@ -96,5 +98,5 @@ const RequestConsultation = () => {
     </section>
   );
 };
-
+ 
 export default RequestConsultation;

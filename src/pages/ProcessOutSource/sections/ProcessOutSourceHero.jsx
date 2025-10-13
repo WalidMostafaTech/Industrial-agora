@@ -12,7 +12,7 @@ const ProcessOutSourceHero = () => {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
       <div className="relative z-10 max-w-3xl pt-32 pb-8 space-y-4 lg:space-y-8">
@@ -45,7 +45,7 @@ const ProcessOutSourceHero = () => {
           solutions.
         </p>
 
-        <Link to="/process-outsource/service" className="mainBtn mx-auto">
+        <Link to="/process-outsource/service" className="mainBtn w-fit mx-auto">
           Start your journey with your service now
         </Link>
       </div>

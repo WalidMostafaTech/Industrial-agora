@@ -38,7 +38,7 @@ const Features = () => {
         <div className="xl:col-span-3 relative">
           {/* أزرار التنقل */}
           <button
-            className={`swiper-button-prev-custom absolute left-0 xl:-left-20 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
+            className={`swiper-button-prev-custom absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
             hover:bg-myGreen hover:text-white transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"
@@ -48,7 +48,7 @@ const Features = () => {
             <FaChevronLeft />
           </button>
           <button
-            className={`swiper-button-next-custom absolute right-0 xl:-right-20 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
+            className={`swiper-button-next-custom absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
             hover:bg-myGreen hover:text-white transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"

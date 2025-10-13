@@ -6,8 +6,6 @@ const ProcessOutSource = () => {
     <article>
       <ProcessOutSourceHero />
       <ProcessOutSourceSlider />
-
-
     </article>
   );
 };

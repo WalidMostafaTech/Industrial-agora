@@ -13,8 +13,7 @@ const STATIC_WORD = import.meta.env.VITE_SIGNATURE_STATIC_WORD || "AGORA_2025";
 const SECRET_KEY =
   import.meta.env.VITE_SIGNATURE_SECRET || "D9CCAC38146C5B89A32D7C2671EEA";
 const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  "https://agora-admins.technomasrsystems.com/api";
+  import.meta.env.VITE_API_BASE_URL || "https://backend.indusagora.com/api";
 const BASE_URL_LOCAL = BASE_URL;
 
 // ✅ توليد nonce فريد

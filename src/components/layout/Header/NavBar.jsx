@@ -64,19 +64,19 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu menu-lg bg-base-100 rounded-box z-1 min-w-52 p-2 shadow-sm text-lg"
+                  className="dropdown-content menu menu-lg bg-base-100 rounded-box z-1 min-w-60 p-2 shadow-sm text-lg"
                 >
                   {link.list.map((subLink) => (
                     <NavLink
                       to={subLink.link}
                       key={subLink.name}
-                      className="group flex items-center justify-between gap-2 font-semibold p-2"
+                      className="group flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
                       onClick={() => {
                         setActiveNav(false);
                         setOpenLinks(null);
                       }}
                     >
-                      {subLink.name}
+                      <p className="flex-1 line-clamp-2">{subLink.name}</p>
                       <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
                     </NavLink>
                   ))}
@@ -99,6 +99,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
         )}
       </nav>
 
+      {/* ✅ Mobile Nav */}
       <nav
         className={`flex xl:hidden flex-col w-full overflow-hidden transition-all duration-500 ease-in-out ${
           activeNav ? "max-h-screen pt-2" : "max-h-0"

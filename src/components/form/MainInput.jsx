@@ -56,32 +56,58 @@ const MainInput = ({
     );
   }
 
+  // if (type === "select") {
+  //   return (
+  //     <div>
+  //       {commonLabel}
+  //       <div className="relative">
+  //         {icon && (
+  //           <span className="text-neutral-500 absolute top-1/2 -translate-y-1/2 start-2 pointer-events-none text-2xl">
+  //             {icon}
+  //           </span>
+  //         )}
+  //         <select
+  //           id={id}
+  //           name={id}
+  //           value={value}
+  //           onChange={onChange}
+  //           onBlur={onBlur}
+  //           disabled={disabled}
+  //           className={commonInputClasses}
+  //         >
+  //           {options.map((option, idx) => (
+  //             <option key={`${option.value}-${idx}`} value={option.value}>
+  //               {option.label}
+  //             </option>
+  //           ))}
+  //         </select>
+  //       </div>
+  //       {commonError}
+  //     </div>
+  //   );
+  // }
+
   if (type === "select") {
     return (
       <div>
         {commonLabel}
-        <div className="relative">
-          {icon && (
-            <span className="text-neutral-500 absolute top-1/2 -translate-y-1/2 start-2 pointer-events-none text-2xl">
-              {icon}
-            </span>
-          )}
-          <select
-            id={id}
-            name={id}
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            disabled={disabled}
-            className={commonInputClasses}
-          >
-            {options.map((option, idx) => (
-              <option key={`${option.value}-${idx}`} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          defaultValue="Pick a font"
+          id={id}
+          name={id}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          disabled={disabled}
+          className={`select select-ghost ${commonInputClasses}`}
+        >
+          <option value="">{placeholder}</option>
+          {options.map((option, idx) => (
+            <option key={`${option.value}-${idx}`} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
         {commonError}
       </div>
     );

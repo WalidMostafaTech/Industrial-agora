@@ -3,8 +3,6 @@ import { useState } from "react";
 import MainInput from "../../components/form/MainInput";
 import FormBtn from "../../components/form/FormBtn";
 import FormError from "../../components/form/FormError";
-import { number } from "framer-motion";
-import Avatar from "../../components/common/Avatar";
 
 const Profile = () => {
   const { id } = useParams();
