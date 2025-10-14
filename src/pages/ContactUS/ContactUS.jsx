@@ -1,37 +1,58 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useMutation } from "@tanstack/react-query";
+
 import PageTitle from "../../components/common/PageTitle";
 import contactUsImg from "../../assets/images/32bf46f5bdafd7f6d8d884b65fc96ab358e43f24.jpg";
 import MainInput from "../../components/form/MainInput";
-import FormError from "../../components/form/FormError";
 import FormBtn from "../../components/form/FormBtn";
 import { LiaFaxSolid } from "react-icons/lia";
 import { TbPhoneCall } from "react-icons/tb";
 import { HiOutlineMailOpen } from "react-icons/hi";
+import FormError from "../../components/form/FormError";
+import { sendContact } from "../../services/mainServices";
 
 const ContactUs = () => {
-  const validationSchema = Yup.object({
-    fullName: Yup.string()
+  // ✅ Validation Schema
+  const schema = yup.object({
+    name: yup
+      .string()
       .required("Full name is required")
       .min(3, "Must be at least 3 characters"),
-    email: Yup.string()
+    email: yup
+      .string()
       .required("Email is required")
       .email("Invalid email address"),
-    enquiry: Yup.string().required("Enquiry is required"),
+    message: yup.string().required("Enquiry is required"),
   });
 
-  const formik = useFormik({
-    initialValues: {
-      fullName: "",
-      email: "",
-      enquiry: "",
+  // ✅ useForm hook
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // ✅ React Query Mutation
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: sendContact,
+    onSuccess: () => {
+      console.log("Message sent successfully!");
+      reset();
     },
-    validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log("Form Data:", values);
-      resetForm();
+    onError: (error) => {
+      console.error(error.response?.data?.message || "Something went wrong");
     },
   });
+
+  // ✅ Submit handler
+  const onSubmit = (data) => {
+    mutate(data);
+  };
 
   const contactUsList = [
     {
@@ -41,7 +62,7 @@ const ContactUs = () => {
     },
     {
       label: "Email",
-      value: "examble6@example.com",
+      value: "example6@example.com",
       icon: <HiOutlineMailOpen />,
     },
     {
@@ -56,43 +77,36 @@ const ContactUs = () => {
       <PageTitle title="Contact Us" />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-16 whiteContainer">
-        <form className="space-y-6" onSubmit={formik.handleSubmit}>
+        {/* ✅ Contact Form */}
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <MainInput
-            label="full name"
-            id="fullName"
-            name="fullName"
-            value={formik.values.fullName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.fullName && formik.errors.fullName}
+            label="Full Name"
+            id="name"
+            {...register("name")}
+            error={errors.name?.message}
           />
 
           <MainInput
-            label="email address"
-            type="email"
+            label="Email Address"
             id="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && formik.errors.email}
+            type="email"
+            {...register("email")}
+            error={errors.email?.message}
           />
 
           <MainInput
-            label="enquiry"
-            id="enquiry"
-            name="enquiry"
-            value={formik.values.enquiry}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.enquiry && formik.errors.enquiry}
+            label="Enquiry"
+            id="message"
+            type="textarea"
+            {...register("message")}
+            error={errors.message?.message}
           />
 
-          <FormError />
-
-          <FormBtn title="Submit" />
+          <FormError errorMsg={error?.response?.data?.message} />
+          <FormBtn title="Submit" loading={isPending} />
         </form>
 
+        {/* ✅ Contact Info Section */}
         <div>
           <img
             src={contactUsImg}

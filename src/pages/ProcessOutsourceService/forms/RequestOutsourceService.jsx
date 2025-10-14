@@ -1,95 +1,191 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
+import * as yup from "yup";
+
+import PageTitle from "../../../components/common/PageTitle";
 import FormBtn from "../../../components/form/FormBtn";
-import FormError from "../../../components/form/FormError";
+import FormTitle from "../../../components/form/FormTitle";
 import MainInput from "../../../components/form/MainInput";
-import { FiCamera, FiX } from "react-icons/fi";
+import FormError from "../../../components/form/FormError";
+import ImageUploader from "../../../components/form/ImageUploader";
+import { addProductApi } from "../../../services/productServices"; // نفس الـ API المستخدمة
+
+// ✅ Validation Schema
+const schema = yup.object({
+  company_name: yup.string().required("Company name is required"),
+  location: yup.string().required("Location is required"),
+  material_specification_1: yup
+    .string()
+    .required("Material Specification 1 is required"),
+  material_specification_2: yup.string().nullable(),
+  material_specification_3: yup.string().nullable(),
+  process_description: yup.string().required("Process description is required"),
+  preferred_expected_machine_or_technology: yup
+    .string()
+    .required("Preferred Machine or Technology is required"),
+  quality_standard_tolerance: yup.string().nullable(),
+  quantity: yup
+    .number()
+    .typeError("Quantity must be a number")
+    .positive("Quantity must be positive")
+    .integer("Quantity must be an integer")
+    .required("Quantity is required"),
+  special_instructions: yup.string().nullable(),
+  description: yup.string().required("Note/Description is required"),
+});
 
 const RequestOutsourceService = () => {
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
+  const [imageError, setImageError] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // ✅ Mutation using React Query
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: addProductApi, // نفس الـ API
+    onSuccess: () => {
+      alert("✅ Request submitted successfully!");
+      setImages([]);
+      reset();
+    },
+    onError: (error) => {
+      console.error("❌ Failed to submit request: " + error.message);
+    },
+  });
+
+  // ✅ onSubmit Handler
+  const onSubmit = (data) => {
+    if (images.length === 0) {
+      setImageError("Please upload at least one image.");
+      return;
     }
-  };
+    setImageError("");
 
-  const handleRemoveImage = () => {
-    setImage(null);
+    const formData = new FormData();
+
+    // 🟢 إضافة باقي الحقول
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
+
+    // 🟢 type = outsource
+    formData.append("type", "outsource");
+
+    // 🟢 إضافة الصور بالشكل المطلوب (images[0], images[1], ...)
+    images.forEach((img, index) => {
+      formData.append(`images[${index}]`, img.file);
+    });
+
+    mutate(formData);
   };
 
   return (
-    <form className="space-y-6">
-      <MainInput label="Company name" id="companyName" />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6"
+    >
+      <MainInput
+        label="Company name"
+        id="company_name"
+        {...register("company_name")}
+        error={errors.company_name?.message}
+      />
 
-      <MainInput label="location" id="location" />
+      <MainInput
+        label="Location"
+        id="location"
+        {...register("location")}
+        error={errors.location?.message}
+      />
 
-      <MainInput label="Material Specifications 1" id="materialSpecs1" />
-      <MainInput label="Material Specifications 2" id="materialSpecs2" />
-      <MainInput label="Material Specifications 3" id="materialSpecs3" />
+      <MainInput
+        label="Material Specifications 1"
+        id="material_specification_1"
+        {...register("material_specification_1")}
+        error={errors.material_specification_1?.message}
+      />
+
+      <MainInput
+        label="Material Specifications 2"
+        id="material_specification_2"
+        {...register("material_specification_2")}
+        error={errors.material_specification_2?.message}
+      />
+
+      <MainInput
+        label="Material Specifications 3"
+        id="material_specification_3"
+        {...register("material_specification_3")}
+        error={errors.material_specification_3?.message}
+      />
 
       <MainInput
         label="Process Description"
-        id="processDescription"
+        id="process_description"
         type="textarea"
+        {...register("process_description")}
+        error={errors.process_description?.message}
       />
 
       <MainInput
         label="Preferred / Expected Machine or Technology"
-        id="preferredMachineOrTechnology"
+        id="preferred_expected_machine_or_technology"
+        {...register("preferred_expected_machine_or_technology")}
+        error={errors.preferred_expected_machine_or_technology?.message}
       />
 
       <MainInput
         label="Quality Standard / Tolerance (if any)"
-        id="qualityStandardOrTolerance"
+        id="quality_standard_tolerance"
+        {...register("quality_standard_tolerance")}
+        error={errors.quality_standard_tolerance?.message}
       />
 
-      <MainInput label="QTY" id="qty" />
+      <MainInput
+        label="QTY"
+        id="quantity"
+        type="number"
+        {...register("quantity")}
+        error={errors.quantity?.message}
+      />
 
-      <MainInput label="Special Instructions" id="specialInstructions" />
+      <MainInput
+        label="Special Instructions"
+        id="special_instructions"
+        {...register("special_instructions")}
+        error={errors.special_instructions?.message}
+      />
 
-      <MainInput label="Note" id="note" type="textarea" />
+      <MainInput
+        label="Note"
+        id="description"
+        type="textarea"
+        {...register("description")}
+        error={errors.description?.message}
+      />
 
-      <div>
-        <p className="font-medium text-gray-900 mb-2">
-          Attach file or pictures
-        </p>
+      {/* ✅ Image Upload */}
+      <ImageUploader
+        label="Attach file or pictures"
+        onChange={setImages}
+        error={imageError}
+      />
 
-        {!image ? (
-          <label
-            htmlFor="image"
-            className="w-40 h-40 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
-          >
-            <FiCamera className="text-3xl text-gray-500" />
-            <span className="text-gray-500 text-sm">Upload Image</span>
-            <input
-              id="image"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageChange}
-            />
-          </label>
-        ) : (
-          <div className="relative w-40 h-40">
-            <img
-              src={image}
-              alt="Product preview"
-              className="w-full h-full object-cover rounded-xl border border-myBlue-2"
-            />
-            <button
-              type="button"
-              onClick={handleRemoveImage}
-              className="absolute -top-2 -right-2 bg-red-600 text-white p-1 rounded-full shadow hover:bg-red-500 cursor-pointer"
-            >
-              <FiX className="text-lg" />
-            </button>
-          </div>
-        )}
-      </div>
+      {/* ✅ Server Error */}
+      <FormError errorMsg={error?.response?.data?.message} />
 
-      <FormError />
-      <FormBtn title="Continue" />
+      <FormBtn title="Submit" loading={isPending} disabled={isPending} />
     </form>
   );
 };

@@ -23,7 +23,6 @@ export default function HeroSection() {
     queryFn: getSliders,
   });
 
-  console.log("sliders", sliders);
   
 
   if (isLoading) return <LoadingSection />;

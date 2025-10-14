@@ -1,151 +1,274 @@
 import { useState } from "react";
-import { FiCamera, FiX } from "react-icons/fi";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
+import * as yup from "yup";
+
 import PageTitle from "../../components/common/PageTitle";
 import FormBtn from "../../components/form/FormBtn";
 import FormTitle from "../../components/form/FormTitle";
 import MainInput from "../../components/form/MainInput";
+import FormError from "../../components/form/FormError";
+import ImageUploader from "../../components/form/ImageUploader";
+import { addProductApi } from "../../services/productServices";
+
+// ✅ Validation Schema
+const schema = yup.object({
+  name: yup.string().required("Product name is required"),
+  category_id: yup.string().required("Category is required"),
+  price: yup
+    .number()
+    .typeError("Price must be a number")
+    .positive("Price must be positive")
+    .required("Price is required"),
+  quantity: yup
+    .number()
+    .typeError("Quantity must be a number")
+    .positive("Quantity must be positive")
+    .integer("Quantity must be an integer")
+    .required("Quantity is required"),
+  description: yup.string().required("Description is required"),
+  // ✅ Optional fields but must be valid if entered
+  length: yup
+    .number()
+    .typeError("Length must be a number")
+    .positive("Length must be positive")
+    .nullable()
+    .transform((v, o) => (o === "" ? null : v)),
+  width: yup
+    .number()
+    .typeError("Width must be a number")
+    .positive("Width must be positive")
+    .nullable()
+    .transform((v, o) => (o === "" ? null : v)),
+  height: yup
+    .number()
+    .typeError("Height must be a number")
+    .positive("Height must be positive")
+    .nullable()
+    .transform((v, o) => (o === "" ? null : v)),
+  weight: yup
+    .number()
+    .typeError("Weight must be a number")
+    .positive("Weight must be positive")
+    .nullable()
+    .transform((v, o) => (o === "" ? null : v)),
+  accept_privacy_policy: yup
+    .bool()
+    .oneOf([true], "You must accept the privacy policy"),
+});
 
 const AddProduct = () => {
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
+  const [imageError, setImageError] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: addProductApi,
+    onSuccess: () => {
+      alert("✅ Product added successfully!");
+      setImages([]);
+      reset();
+    },
+    onError: (error) => {
+      console.error("❌ Failed to add product: " + error.message);
+    },
+  });
+
+  const onSubmit = (data) => {
+    if (images.length === 0) {
+      setImageError("Please upload at least one product image.");
+      return;
     }
-  };
+    setImageError("");
 
-  const handleRemoveImage = () => {
-    setImage(null);
+    const formData = new FormData();
+
+    // 🟢 تحويل boolean إلى 1 أو 0
+    const formattedData = {
+      ...data,
+      accept_privacy_policy: data.accept_privacy_policy ? 1 : 0,
+    };
+
+    // 🟢 إضافة باقي الحقول
+    Object.entries(formattedData).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
+
+    // 🟢 إضافة نوع المنتج
+    formData.append("type", "product");
+
+    // 🟢 الصور بالشكل المطلوب (images[0], images[1], ...)
+    images.forEach((img, index) => {
+      formData.append(`images[${index}]`, img.file);
+    });
+
+    mutate(formData);
   };
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="start selling" />
+      <PageTitle title="Start Selling" />
 
-      <form className="whiteContainer space-y-6 max-w-3xl mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="whiteContainer space-y-6 max-w-3xl mx-auto"
+      >
         <FormTitle
           title="Add a Product"
           subtitle="Product Data - Please fill in the details accurately"
         />
 
-        <MainInput label="product name" id="product_name" />
-
+        {/* Product Name */}
         <MainInput
-          label="Category/Classification"
-          id="category_classification"
-          type="select"
-          options={[
-            { value: "1", label: "1" },
-            { value: "2", label: "2" },
-          ]}
+          label="Product name"
+          id="name"
+          {...register("name")}
+          error={errors.name?.message}
         />
 
-        <MainInput label="the price" id="price" type="number" />
+        {/* Category */}
+        <MainInput
+          label="Category/Classification"
+          id="category_id"
+          type="select"
+          options={[
+            { value: "", label: "Select Category" },
+            { value: "1", label: "Category 1" },
+            { value: "2", label: "Category 2" },
+          ]}
+          {...register("category_id")}
+          error={errors.category_id?.message}
+        />
 
+        {/* Price */}
+        <MainInput
+          label="Price"
+          id="price"
+          type="number"
+          {...register("price")}
+          error={errors.price?.message}
+        />
+
+        {/* Quantity */}
         <MainInput
           label="Available quantity (stock)"
           id="quantity"
           type="number"
+          {...register("quantity")}
+          error={errors.quantity?.message}
         />
 
+        {/* Dimensions */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <p className="font-medium text-gray-900 col-span-2 lg:col-span-3">
             Product Dimensions (if required):
           </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-1">
             <label htmlFor="length" className="font-medium text-gray-900">
               Length:
             </label>
             <input
               type="number"
               id="length"
-              className="w-full lg:text-lg bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              {...register("length")}
+              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
+            {errors.length && (
+              <p className="text-red-500 text-sm">{errors.length.message}</p>
+            )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-1">
             <label htmlFor="width" className="font-medium text-gray-900">
               Width:
             </label>
             <input
               type="number"
               id="width"
-              className="w-full lg:text-lg bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              {...register("width")}
+              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
+            {errors.width && (
+              <p className="text-red-500 text-sm">{errors.width.message}</p>
+            )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-1">
             <label htmlFor="height" className="font-medium text-gray-900">
               Height:
             </label>
             <input
               type="number"
               id="height"
-              className="w-full lg:text-lg bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              {...register("height")}
+              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
+            {errors.height && (
+              <p className="text-red-500 text-sm">{errors.height.message}</p>
+            )}
           </div>
         </div>
 
-        <MainInput label="Weight (if required)" id="weight" type="number" />
+        {/* Weight */}
+        <MainInput
+          label="Weight (if required)"
+          id="weight"
+          type="number"
+          {...register("weight")}
+          error={errors.weight?.message}
+        />
 
-        {/* Product Image Field */}
-        <div>
-          <p className="font-medium text-gray-900 mb-2">Product Image:</p>
+        {/* Product Images */}
+        <ImageUploader
+          label="Product Images"
+          onChange={setImages}
+          error={imageError}
+        />
 
-          {!image ? (
-            <label
-              htmlFor="product_image"
-              className="w-40 h-40 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
-            >
-              <FiCamera className="text-3xl text-gray-500" />
-              <span className="text-gray-500 text-sm">Upload Image</span>
-              <input
-                id="product_image"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-            </label>
-          ) : (
-            <div className="relative w-40 h-40">
-              <img
-                src={image}
-                alt="Product preview"
-                className="w-full h-full object-cover rounded-xl border border-myBlue-2"
-              />
-              <button
-                type="button"
-                onClick={handleRemoveImage}
-                className="absolute -top-2 -right-2 bg-red-600 text-white p-1 rounded-full shadow hover:bg-red-500 cursor-pointer"
-              >
-                <FiX className="text-lg" />
-              </button>
-            </div>
+        {/* Description */}
+        <MainInput
+          label="Product Description"
+          id="description"
+          type="textarea"
+          {...register("description")}
+          error={errors.description?.message}
+        />
+
+        {/* Privacy Policy */}
+        <div className="form-control">
+          <label className="label cursor-pointer justify-start gap-3">
+            <input
+              type="checkbox"
+              className="checkbox checkbox-neutral"
+              {...register("accept_privacy_policy")}
+            />
+            <span className="label-text text-gray-700">
+              Accept privacy policy
+            </span>
+          </label>
+          {errors.accept_privacy_policy && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.accept_privacy_policy.message}
+            </p>
           )}
         </div>
 
-        <MainInput
-          label="Product Description"
-          id="product_description"
-          type="textarea"
-        />
+        {/* Server Error */}
+        <FormError errorMsg={error?.response?.data?.message} />
 
-        <div className="flex items-center">
-          <input
-            id="privacy_policy"
-            name="privacy_policy"
-            type="checkbox"
-            className="h-4 w-4 text-myBlue-1 focus:ring-myBlue-1 border-gray-300 rounded"
-          />
-          <label htmlFor="privacy_policy" className="ms-2 block text-gray-600">
-            accept privacy policy
-          </label>
-        </div>
-
-        <FormBtn title="Submit" />
+        <FormBtn title="Submit" loading={isPending} disabled={isPending} />
       </form>
     </section>
   );

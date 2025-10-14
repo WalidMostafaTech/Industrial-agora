@@ -20,7 +20,7 @@ const FormBtn = ({
       {loading ? (
         <>
           Loading ...
-          <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin ms-2"></span>
+          <span className="inline-block w-4 h-4 border-2 border-myBlue-2 border-t-transparent rounded-full animate-spin ms-2"></span>
         </>
       ) : (
         title

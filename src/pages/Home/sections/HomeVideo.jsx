@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+import EmptySection from "../../../components/sections/EmptySection";
+import LoadingSection from "../../../components/loading/LoadingSection";
 
 const HomeVideo = () => {
   const { setting, loading, error } = useSelector((state) => state.setting);
@@ -7,7 +9,6 @@ const HomeVideo = () => {
   if (error || !setting) return <EmptySection />;
   const embedUrl = setting?.video_url?.replace("watch?v=", "embed/");
 
-  console.log("setting " + setting);
 
   return (
     <section className="sectionPadding bg-myBlue-1">

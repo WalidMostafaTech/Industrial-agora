@@ -1,16 +1,32 @@
 import { IoSearchOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../common/Avatar";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { TbShoppingBagPlus } from "react-icons/tb";
 import { BsChatSquareText } from "react-icons/bs";
+import { useMutation } from "@tanstack/react-query";
+import { logoutUser } from "../../../services/authServices";
+import Cookies from "js-cookie";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const user = {
     id: 1,
     name: "John Doe",
   };
+
+  const navigate = useNavigate();
+
+  const { mutate: handleLogout, isPending } = useMutation({
+    mutationFn: logoutUser,
+    onSuccess: () => {
+      Cookies.remove("tokenAG");
+      navigate("/login");
+    },
+    onError: (err) => {
+      console.error("❌ Logout failed:", err);
+    },
+  });
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
@@ -63,9 +79,13 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             <hr className="my-2 border-gray-300" />
 
             <li className="hover:bg-red-100 rounded">
-              <button className="flex gap-4 items-center text-red-600">
+              <button
+                onClick={() => handleLogout()}
+                disabled={isPending}
+                className="flex gap-4 items-center text-red-600"
+              >
                 <HiOutlineLogout className="text-2xl" />
-                <p>Log Out</p>
+                <p>{isPending ? "Logging out..." : "Log Out"}</p>
               </button>
             </li>
           </ul>

@@ -1,10 +1,10 @@
 import AboutCard from "./AboutCard";
 
-const AboutCardList = ({ data, border = false }) => {
+const AboutCardList = ({ data }) => {
   return (
     <div className="space-y-8 lg:space-y-12 max-w-6xl mx-auto">
-      {data.map((item, index) => (
-        <AboutCard key={item.id} {...item} border={border} index={index + 1} />
+      {data.map((item) => (
+        <AboutCard key={item.id} {...item}  />
       ))}
     </div>
   );

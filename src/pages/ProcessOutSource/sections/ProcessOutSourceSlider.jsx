@@ -31,7 +31,7 @@ const ProcessOutSourceSlider = () => {
         {/* ✅ أزرار التقليب */}
         <div className="flex justify-end mb-4 gap-3">
           <button
-            className={`swiper-button-prev-custom bg-white p-4 rounded-full shadow transition cursor-pointer ${
+            className={`swiper-button-prev-custom-outsource bg-white p-4 rounded-full shadow transition cursor-pointer ${
               isBeginning
                 ? "opacity-40 cursor-not-allowed"
                 : "hover:bg-myGreen hover:text-white"
@@ -41,7 +41,7 @@ const ProcessOutSourceSlider = () => {
             <FaChevronLeft />
           </button>
           <button
-            className={`swiper-button-next-custom bg-white p-4 rounded-full shadow transition cursor-pointer ${
+            className={`swiper-button-next-custom-outsource bg-white p-4 rounded-full shadow transition cursor-pointer ${
               isEnd
                 ? "opacity-40 cursor-not-allowed"
                 : "hover:bg-myGreen hover:text-white"
@@ -59,8 +59,8 @@ const ProcessOutSourceSlider = () => {
           spaceBetween={20}
           slidesPerView={1}
           navigation={{
-            nextEl: ".swiper-button-next-custom",
-            prevEl: ".swiper-button-prev-custom",
+            nextEl: ".swiper-button-next-custom-outsource",
+            prevEl: ".swiper-button-prev-custom-outsource",
           }}
           breakpoints={{
             1024: { slidesPerView: 2 },

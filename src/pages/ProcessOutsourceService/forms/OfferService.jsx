@@ -1,79 +1,153 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
+import * as yup from "yup";
+
+import PageTitle from "../../../components/common/PageTitle";
 import FormBtn from "../../../components/form/FormBtn";
-import FormError from "../../../components/form/FormError";
+import FormTitle from "../../../components/form/FormTitle";
 import MainInput from "../../../components/form/MainInput";
-import { FiCamera, FiX } from "react-icons/fi";
+import FormError from "../../../components/form/FormError";
+import ImageUploader from "../../../components/form/ImageUploader";
+import { addProductApi } from "../../../services/productServices"; // نفس API المنتج
+
+// ✅ Validation Schema
+const schema = yup.object({
+  machine_name: yup.string().required("Machine name is required"),
+  machine_specification: yup
+    .string()
+    .required("Machine specification is required"),
+  material_types_compatible: yup
+    .string()
+    .required("Material types compatible is required"),
+  material_specifications_accepted: yup
+    .string()
+    .required("Material specifications accepted is required"),
+  main_applications_processes: yup
+    .string()
+    .required("Main applications/processes is required"),
+  input_output: yup.string().required("Input / Output is required"),
+  description: yup.string().required("Description is required"),
+});
 
 const OfferService = () => {
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
+  const [imageError, setImageError] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // ✅ Mutation for API
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: addProductApi,
+    onSuccess: () => {
+      alert("✅ Offer submitted successfully!");
+      setImages([]);
+      reset();
+    },
+    onError: (error) => {
+      console.error("❌ Failed to submit offer: " + error.message);
+    },
+  });
+
+  // ✅ onSubmit Handler
+  const onSubmit = (data) => {
+    if (images.length === 0) {
+      setImageError("Please upload at least one image.");
+      return;
     }
-  };
+    setImageError("");
 
-  const handleRemoveImage = () => {
-    setImage(null);
+    const formData = new FormData();
+
+    // 🟢 إضافة كل الحقول
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
+
+    // 🟢 تحديد النوع type = offer
+    formData.append("type", "offer_service");
+
+    // 🟢 الصور بالشكل المطلوب (images[0], images[1], ...)
+    images.forEach((img, index) => {
+      formData.append(`images[${index}]`, img.file);
+    });
+
+    mutate(formData);
   };
 
   return (
-    <form className="space-y-6">
-      <MainInput label="machine name" id="machineName" />
-      <MainInput label="machine specifications" id="machineSpecs" />
-      <MainInput label="machine types compatible" id="machineTypesCompatible" />
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <MainInput
-        label="machine specifications accepted"
-        id="machineSpecsAccepted"
+        label="Machine name"
+        id="machine_name"
+        {...register("machine_name")}
+        error={errors.machine_name?.message}
       />
 
-      <div>
-        <p className="font-medium text-gray-900 mb-2">
-          Pictures / Technical Datasheet Attach
-        </p>
+      <MainInput
+        label="Machine specifications"
+        id="machine_specification"
+        {...register("machine_specification")}
+        error={errors.machine_specification?.message}
+      />
 
-        {!image ? (
-          <label
-            htmlFor="product_image"
-            className="w-40 h-40 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
-          >
-            <FiCamera className="text-3xl text-gray-500" />
-            <span className="text-gray-500 text-sm">Upload Image</span>
-            <input
-              id="product_image"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageChange}
-            />
-          </label>
-        ) : (
-          <div className="relative w-40 h-40">
-            <img
-              src={image}
-              alt="Product preview"
-              className="w-full h-full object-cover rounded-xl border border-myBlue-2"
-            />
-            <button
-              type="button"
-              onClick={handleRemoveImage}
-              className="absolute -top-2 -right-2 bg-red-600 text-white p-1 rounded-full shadow hover:bg-red-500 cursor-pointer"
-            >
-              <FiX className="text-lg" />
-            </button>
-          </div>
-        )}
-      </div>
+      <MainInput
+        label="Machine types compatible"
+        id="material_types_compatible"
+        {...register("material_types_compatible")}
+        error={errors.material_types_compatible?.message}
+      />
 
-      <MainInput label="Main applications / Process" id="mainApplications" />
+      <MainInput
+        label="Machine specifications accepted"
+        id="material_specifications_accepted"
+        {...register("material_specifications_accepted")}
+        error={errors.material_specifications_accepted?.message}
+      />
 
-      <MainInput label="input / output" id="inputOutput" />
+      {/* ✅ Image Uploader */}
+      <ImageUploader
+        label="Pictures / Technical Datasheet Attach"
+        onChange={setImages}
+        error={imageError}
+      />
 
-      <MainInput label="Note" id="note" type="textarea" />
+      <MainInput
+        label="Main applications / Process"
+        id="main_applications_processes"
+        {...register("main_applications_processes")}
+        error={errors.main_applications_processes?.message}
+      />
 
-      <FormError />
-      <FormBtn title="Continue" />
+      <MainInput
+        label="Input / Output"
+        id="input_output"
+        {...register("input_output")}
+        error={errors.input_output?.message}
+      />
+
+      <MainInput
+        label="Note"
+        id="description"
+        type="textarea"
+        {...register("description")}
+        error={errors.description?.message}
+      />
+
+      {/* ✅ Server Error */}
+      <FormError errorMsg={error?.response?.data?.message} />
+
+      <FormBtn title="Submit" loading={isPending} disabled={isPending} />
     </form>
   );
 };

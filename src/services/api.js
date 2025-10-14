@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -32,17 +33,12 @@ const computeSignature = (config, nonce) => {
     signature: CryptoJS.HmacSHA256(dataToSign, SECRET_KEY).toString(
       CryptoJS.enc.Hex
     ),
-    dataToSign,
-    date,
-    urlWithoutProtocol,
-    method,
   };
 };
 
 // ✅ إنشاء instance
 const api = axios.create({
   baseURL: BASE_URL_LOCAL,
-
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -56,15 +52,22 @@ api.interceptors.request.use(
     const nonce = generateNonce();
     const { signature } = computeSignature(config, nonce);
 
+    // ✅ إضافة التوقيع
     config.headers["X-Nonce"] = nonce;
     config.headers["X-Signature"] = signature;
+
+    // ✅ إضافة التوكن لو موجود
+    const token = Cookies.get("tokenAG");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// ✅ دالة للتحقق من توقيع الاستجابة
+// ✅ التحقق من توقيع الاستجابة
 const verifyResponseSignature = (response) => {
   const responseNonce = response.headers["x-nonce"];
   const responseSignature = response.headers["x-signature"];
@@ -87,7 +90,6 @@ const verifyResponseSignature = (response) => {
     throw new Error("Response signature verification failed");
   }
 
-  console.log("✅ Response signature verified successfully");
   return response;
 };
 
@@ -98,18 +100,21 @@ api.interceptors.response.use(
       verifyResponseSignature(response);
     }
     return response;
-  },
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      window.location.href = "/login";
-    }
-    if (error.response?.data?.error_msg) {
-      toast.error(error.response.data.error_msg);
-    } else {
-      toast.error(error.message || "حدث خطأ في الاتصال");
-    }
-    return Promise.reject(error);
   }
+  // (error) => {
+  //   if (error.response && error.response.status === 401) {
+  //     Cookies.remove("tokenAG");
+  //     window.location.href = "/login";
+  //   }
+
+  //   if (error.response?.data?.error_msg) {
+  //     toast.error(error.response.data.error_msg);
+  //   } else {
+  //     toast.error(error.message || "حدث خطأ في الاتصال");
+  //   }
+
+  //   return Promise.reject(error);
+  // }
 );
 
 export default api;

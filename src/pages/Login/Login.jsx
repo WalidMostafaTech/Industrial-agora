@@ -1,16 +1,63 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useMutation } from "@tanstack/react-query";
 import PageTitle from "../../components/common/PageTitle";
 import FormTitle from "../../components/form/FormTitle";
 import FormBtn from "../../components/form/FormBtn";
 import MainInput from "../../components/form/MainInput";
+import { loginUser } from "../../services/authServices";
+import FormError from "../../components/form/FormError";
+
+// ✅ Validation Schema
+const schema = yup.object({
+  email: yup
+    .string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // ✅ Mutation: تنفيذ login API
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      alert("✅ Login Success:", data);
+    },
+    onError: (err) => {
+      console.error("❌ Login Failed:", err);
+    },
+  });
+
+  const onSubmit = (formData) => {
+    console.log("Form submitted:", formData);
+
+    mutate(formData);
+  };
+
   return (
     <section className="container pagePadding">
       <PageTitle title="Welcome, Please Sign In!" />
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <form className="whiteContainer space-y-6">
+        {/* ✅ Login Form */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="whiteContainer space-y-6"
+        >
           <FormTitle
             title="Account Login"
             subtitle="If you are already a member you can login with your email address and password."
@@ -20,15 +67,16 @@ const Login = () => {
           <MainInput
             label="Email Address"
             id="email"
-            name="email"
-            type="email"
+            {...register("email")}
+            error={errors.email?.message}
           />
 
           <MainInput
             label="Password"
             id="password"
-            name="password"
             type="password"
+            {...register("password")}
+            error={errors.password?.message}
           />
 
           <div className="flex items-center justify-between">
@@ -39,27 +87,24 @@ const Login = () => {
                 type="checkbox"
                 className="h-4 w-4 text-myBlue-1 focus:ring-myBlue-1 border-gray-300 rounded"
               />
-              <label
-                htmlFor="remember_me"
-                className="ms-2 block text-gray-600"
-              >
+              <label htmlFor="remember_me" className="ms-2 block text-gray-600">
                 Remember me
               </label>
             </div>
 
             <div>
-              <a
-                href="#"
-                className="font-medium text-red-600 hover:brightness-75"
-              >
+              <Link className="font-medium text-red-600 hover:brightness-75">
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 
-          <FormBtn title="Login" />
+          <FormError errorMsg={error?.response?.data?.message} />
+
+          <FormBtn loading={isPending} title={"Login"} />
         </form>
 
+        {/* ✅ Register Section */}
         <div className="whiteContainer flex flex-col items-center justify-between">
           <FormTitle
             title="New Customer"
@@ -67,7 +112,9 @@ const Login = () => {
             position="start"
           />
 
-          <Link to="/register" className="animationBtn">Register</Link>
+          <Link to="/register" className="animationBtn">
+            Register
+          </Link>
         </div>
       </section>
     </section>

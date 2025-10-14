@@ -118,7 +118,6 @@ const FilterSide = () => {
     }
   }
 
-  console.log("filtersArray to send to API:", filtersArray);
 
   const FilterTitle = ({ title }) => (
     <h3

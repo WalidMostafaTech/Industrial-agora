@@ -13,6 +13,7 @@ const MainInput = ({
   onBlur,
   placeholder,
   disabled = false,
+  ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
@@ -50,6 +51,7 @@ const MainInput = ({
           placeholder={placeholder}
           disabled={disabled}
           className={`${commonInputClasses} h-32 resize-none`}
+          {...rest}
         />
         {commonError}
       </div>
@@ -99,7 +101,8 @@ const MainInput = ({
           onChange={onChange}
           onBlur={onBlur}
           disabled={disabled}
-          className={`select select-ghost ${commonInputClasses}`}
+          className={`select select-ghost select-lg ${commonInputClasses}`}
+          {...rest}
         >
           <option value="">{placeholder}</option>
           {options.map((option, idx) => (
@@ -133,6 +136,7 @@ const MainInput = ({
           placeholder={placeholder}
           disabled={disabled}
           className={commonInputClasses}
+          {...rest}
         />
 
         {isPassword && (
