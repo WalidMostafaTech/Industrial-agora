@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiCamera, FiX } from "react-icons/fi";
 
 const ImageUploader = ({
@@ -8,6 +8,18 @@ const ImageUploader = ({
   initialImages = [],
 }) => {
   const [images, setImages] = useState(initialImages);
+
+  // ✅ التحديث بس لما initialImages فعلاً تختلف عن images
+  useEffect(() => {
+    const areEqual =
+      images.length === initialImages.length &&
+      images.every((img, i) => img.preview === initialImages[i]?.preview);
+
+    if (!areEqual) {
+      setImages(initialImages);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialImages]);
 
   const handleImagesChange = (e) => {
     const files = Array.from(e.target.files);

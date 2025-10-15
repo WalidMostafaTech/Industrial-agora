@@ -1,31 +1,102 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
 import MainInput from "../../components/form/MainInput";
 import FormBtn from "../../components/form/FormBtn";
 import FormError from "../../components/form/FormError";
+import { updateProfile } from "../../services/authServices";
 
 const Profile = () => {
-  const { id } = useParams();
+  const { profile } = useSelector((state) => state.profile);
   const [isEditing, setIsEditing] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const [user, setUser] = useState({
-    id: 1,
-    name: "walid mostafa",
-    email: "walid@example.com",
-    number: "0123456789",
+  // ✅ البيانات المبدئية
+  const [formData, setFormData] = useState({
+    name: profile?.name || "",
+    email: profile?.email || "",
+    phone: profile?.phone || "",
+    company_name: profile?.company_name || "",
+    city: profile?.city || "",
+    tax_number: profile?.tax_number || "",
+    password: "",
+    password_confirmation: "",
   });
 
-  const handleEditToggle = () => {
-    setIsEditing((prev) => !prev);
-  };
+  // ✅ نحتفظ بالنسخة الأصلية للمقارنة
+  const [initialData, setInitialData] = useState(formData);
 
+  useEffect(() => {
+    if (profile) {
+      const newData = {
+        name: profile?.name || "",
+        email: profile?.email || "",
+        phone: profile?.phone || "",
+        company_name: profile?.company_name || "",
+        city: profile?.city || "",
+        tax_number: profile?.tax_number || "",
+        password: "",
+        password_confirmation: "",
+      };
+      setFormData(newData);
+      setInitialData(newData);
+    }
+  }, [profile]);
+
+  // ✅ دالة التغيير في الحقول
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setUser((prev) => ({ ...prev, [id]: value }));
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // أول حرفين من الاسم (كابيتال)
-  const initials = user.name
+  // ✅ التحقق من وجود تغييرات
+  const hasChanges = JSON.stringify(formData) !== JSON.stringify(initialData);
+
+  // ✅ التحقق من الباسورد
+  useEffect(() => {
+    if (formData.password && !formData.password_confirmation) {
+      setErrorMsg("يرجى تأكيد كلمة المرور.");
+    } else if (
+      formData.password &&
+      formData.password_confirmation &&
+      formData.password !== formData.password_confirmation
+    ) {
+      setErrorMsg("كلمة المرور غير متطابقة.");
+    } else {
+      setErrorMsg("");
+    }
+  }, [formData.password, formData.password_confirmation]);
+
+  // ✅ React Query Mutation
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateProfile,
+    onSuccess: () => {
+      setInitialData(formData);
+      setIsEditing(false);
+      alert("تم تحديث الملف الشخصي بنجاح ✅");
+    },
+    onError: () => {
+      setErrorMsg("حدث خطأ أثناء التحديث، حاول مرة أخرى.");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (errorMsg) return; // لو فيه خطأ في الباسورد
+    if (!hasChanges) return; // لو مفيش تغييرات
+
+    const payload = { ...formData };
+    if (!formData.password) {
+      delete payload.password;
+      delete payload.password_confirmation;
+    }
+
+    mutate(payload);
+  };
+
+  // ✅ أول حرفين من الاسم
+  const initials = formData.name
     .split(" ")
     .slice(0, 2)
     .map((n) => n[0]?.toUpperCase())
@@ -35,50 +106,105 @@ const Profile = () => {
     <article className="container pagePadding">
       <section className="w-full max-w-3xl mx-auto flex flex-col items-center gap-6">
         {/* Avatar Section */}
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-3">
           <div className="w-28 h-28 rounded-full bg-myBlue-1 text-white flex items-center justify-center text-4xl font-semibold shadow-lg">
             {initials}
           </div>
           <h2 className="text-3xl font-bold text-gray-800 capitalize">
-            {user.name}
+            {formData.name}
           </h2>
-          <button onClick={handleEditToggle} className="mainBtn">
-            {isEditing ? "cancel" : "Edit"}
+          <button
+            onClick={() => setIsEditing((prev) => !prev)}
+            className="mainBtn"
+          >
+            {isEditing ? "Cancel" : "Edit"}
           </button>
         </div>
 
         {/* Form Section */}
         <form
           className="whiteContainer space-y-4 w-full"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
-          <MainInput
-            label="full name"
-            id="name"
-            value={user.name}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <MainInput
+              label="Full Name"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
 
-          <MainInput
-            label="email"
-            id="email"
-            value={user.email}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+            <MainInput
+              label="Email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
 
-          <MainInput
-            label="number"
-            id="number"
-            value={user.number}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+            <MainInput
+              label="Phone"
+              id="phone"
+              type="number"
+              value={formData.phone}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
 
-          <FormError errorMsg="" />
+            <MainInput
+              label="Company Name"
+              id="company_name"
+              value={formData.company_name}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
 
-          {isEditing && <FormBtn type="save" />}
+            <MainInput
+              label="City"
+              id="city"
+              value={formData.city}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+
+            <MainInput
+              label="Tax Number"
+              id="tax_number"
+              type="number"
+              value={formData.tax_number}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+
+            <MainInput
+              label="Password"
+              id="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+
+            <MainInput
+              label="Confirm Password"
+              id="password_confirmation"
+              type="password"
+              value={formData.password_confirmation}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+          </div>
+
+          <FormError errorMsg={errorMsg} />
+
+          {isEditing && (
+            <FormBtn
+              title="Save"
+              disabled={!hasChanges || !!errorMsg}
+              loading={isPending}
+            />
+          )}
         </form>
       </section>
     </article>

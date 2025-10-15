@@ -2,6 +2,7 @@ import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
   const handleOpenLinks = (name) => {
@@ -12,6 +13,16 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     }
   };
 
+  const { categories } = useSelector((state) => state.categories);
+
+  // const categoriesLinks = categories?.map((cat) => {
+  //   return { name: cat.title, link: `/categories?category=${cat.id}` };
+  // });
+
+  const categoriesLinks = categories?.map((cat) => {
+    return { name: cat.title, link: `/categories/${cat.id}` };
+  });
+
   const exchangeBtnRef = useRef();
 
   const linksList = [
@@ -20,10 +31,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     {
       name: "exchange categories",
       path: "/categories",
-      list: [
-        { name: "category 1", link: "/categories?category=category-1" },
-        { name: "category 2", link: "/categories?category=category-2" },
-      ],
+      list: categoriesLinks,
     },
     { name: "Process OutSource", path: "/process-outsource", list: [] },
     { name: "request consultation", path: "/request", list: [] },

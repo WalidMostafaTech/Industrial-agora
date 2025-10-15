@@ -15,7 +15,7 @@ const FormBtn = ({
       disabled={isDisabled}
       className={`animationBtn ${margin && "block mx-auto"} ${
         variant === "light" ? "light" : ""
-      } ${loading ? "!cursor-wait contrast-50" : ""}`}
+      } ${isDisabled ? "!cursor-not-allowed contrast-50" : ""}`}
     >
       {loading ? (
         <>

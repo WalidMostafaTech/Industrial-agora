@@ -4,13 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
 
-import PageTitle from "../../../components/common/PageTitle";
 import FormBtn from "../../../components/form/FormBtn";
-import FormTitle from "../../../components/form/FormTitle";
 import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
-import { addProductApi } from "../../../services/productServices"; // نفس الـ API المستخدمة
+import { addProductApi } from "../../../services/productServices"; 
 
 // ✅ Validation Schema
 const schema = yup.object({

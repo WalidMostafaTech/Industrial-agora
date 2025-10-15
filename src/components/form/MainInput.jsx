@@ -104,7 +104,7 @@ const MainInput = ({
           className={`select select-ghost select-lg ${commonInputClasses}`}
           {...rest}
         >
-          <option value="">{placeholder}</option>
+          {placeholder && <option value="">{placeholder}</option>}
           {options.map((option, idx) => (
             <option key={`${option.value}-${idx}`} value={option.value}>
               {option.label}

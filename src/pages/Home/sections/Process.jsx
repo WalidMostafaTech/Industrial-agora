@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMainCategories } from "../../../services/homeServices";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
@@ -9,15 +8,16 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { getProductsByType } from "../../../services/productServices";
 
 const Process = () => {
   const {
-    data: categories,
+    data: products,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getMainCategories,
+    queryKey: ["products", "process"],
+    queryFn: getProductsByType({ type: "offer_service" }),
   });
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -25,7 +25,7 @@ const Process = () => {
 
   if (isLoading) return <LoadingSection />;
 
-  if (isError || !categories) return <EmptySection />;
+  if (isError || !products) return <EmptySection />;
 
   return (
     <section className="sectionPadding bg-myBlue-1">
@@ -80,7 +80,7 @@ const Process = () => {
             setIsEnd(swiper.isEnd);
           }}
         >
-          {categories?.map((item) => (
+          {products?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="bg-white p-4 lg:p-8 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
                 <div className="w-full h-52 lg:h-64 rounded-xl shadow-xl overflow-hidden">

@@ -11,6 +11,7 @@ import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import ImageUploader from "../../components/form/ImageUploader";
 import { addProductApi } from "../../services/productServices";
+import { useSelector } from "react-redux";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -116,6 +117,12 @@ const AddProduct = () => {
     mutate(formData);
   };
 
+  const { categories } = useSelector((state) => state.categories);
+  const categoriesOptions = categories?.map((category) => ({
+    value: category.id,
+    label: category.title,
+  }));
+
   return (
     <section className="container pagePadding">
       <PageTitle title="Start Selling" />
@@ -139,13 +146,12 @@ const AddProduct = () => {
 
         {/* Category */}
         <MainInput
-          label="Category/Classification"
+          // label="Category/Classification"
           id="category_id"
           type="select"
           options={[
             { value: "", label: "Select Category" },
-            { value: "1", label: "Category 1" },
-            { value: "2", label: "Category 2" },
+            ...categoriesOptions,
           ]}
           {...register("category_id")}
           error={errors.category_id?.message}

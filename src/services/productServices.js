@@ -9,3 +9,13 @@ export const addProductApi = async (formData) => {
 
   return data;
 };
+
+export const getProductsByCategory = async (categoryID) => {
+  const { data } = await api.get(`products-by-category/${categoryID}`);
+  return data?.data || [];
+};
+
+export const getProductsByType = async (payload) => {
+  const { data } = await api.get(`get-products`, { params: payload });
+  return data?.data || [];
+};

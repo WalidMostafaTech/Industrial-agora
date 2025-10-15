@@ -1,7 +1,7 @@
 export default function Avatar({ name, img, size = "md", active = false }) {
   const sizes = {
     sm: "w-6 h-6 lg:w-8 lg:h-8 text-sm", // 32px
-    md: "w-10 h-10 lg:w-12 lg:h-12 text-base", // 48px
+    md: "w-10 h-10 lg:w-12 lg:h-12 text-lg", // 48px
     lg: "w-12 h-12 lg:w-16 lg:h-16 text-xl", // 64px
   };
 

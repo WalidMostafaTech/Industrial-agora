@@ -21,3 +21,23 @@ export const logoutUser = async () => {
   Cookies.remove("tokenAG");
   return data;
 };
+
+export const getProfile = async () => {
+  const { data } = await api.get("/profile");
+
+  if (data?.data?.token) {
+    Cookies.set("token", data?.data?.token);
+  }
+
+  return data?.data || null;
+};
+
+export const updateProfile = async (formData) => {
+  const { data } = await api.post("/profile", formData);
+
+  if (data?.data?.token) {
+    Cookies.set("token", data?.data?.token);
+  }
+
+  return data;
+};

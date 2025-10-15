@@ -66,11 +66,11 @@ const Footer = () => {
       <div className="container flex justify-between items-center flex-wrap gap-4 pt-8">
         <img src={logoImg} alt="Logo" className="w-48 lg:w-56" />
 
-        <div className="flex gap-2 lg:gap-4 w-full max-w-lg">
+        <div className="flex gap-2 lg:gap-4 w-full lg:max-w-lg">
           <input
             type="email"
             placeholder="email"
-            className="p-2 lg:px-6 border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
+            className="p-2 border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
           />
           <button className="mainBtn">
             Join Us <TiArrowRight />

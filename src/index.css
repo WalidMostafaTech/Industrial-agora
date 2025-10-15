@@ -93,6 +93,24 @@ input::-webkit-inner-spin-button {
         @apply translate-x-2;
       }
     }
+
+    &.danger {
+      @apply bg-red-700 border-red-700;
+
+      &:hover,
+      &.active {
+        @apply bg-white text-red-700;
+      }
+    }
+
+    &.success {
+      @apply bg-green-700 border-green-700;
+
+      &:hover,
+      &.active {
+        @apply bg-white text-green-700;
+      }
+    }
   }
 
   .animationBtn {

@@ -3,10 +3,29 @@ import PageTitle from "../../components/common/PageTitle";
 import FilterSide from "./FilterSide";
 import ProductsSide from "./ProductsSide";
 import { RiMenu4Line } from "react-icons/ri";
+import { useParams } from "react-router-dom";
+import { getProductsByCategory } from "../../services/productServices";
+import { useQuery } from "@tanstack/react-query";
 
 const Categories = () => {
   const [openFilter, setOpenFilter] = useState(false);
   let showFilter = false;
+
+  const { id } = useParams();
+
+  const {
+    data: products,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["products-by-category", id],
+    queryFn: () => getProductsByCategory(id),
+    enabled: !!id, // يتفعل فقط لما يكون في id
+  });
+
+  // 🟣 Log البيانات
+  console.log("Products by category:", products);
 
   return (
     <article className="container pagePadding">
