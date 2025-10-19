@@ -4,12 +4,12 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="flex flex-col md:flex-row items-center bg-stone-200 shadow-md"
+      className="flex flex-col md:flex-row bg-stone-200 shadowlg"
     >
-      <div className="w-full md:w-1/3 h-[300px] overflow-hidden bg-white relative">
+      <div className="w-full md:w-[300px] aspect-square md:aspect-auto overflow-hidden bg-white relative">
         <img
-          src={product.image}
-          alt={product.title}
+          src={product.first_image}
+          alt={product.name}
           className="w-full h-full object-cover"
         />
 
@@ -24,10 +24,10 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      <div className="flex-1 space-y-4 p-4">
-        <h4 className="text-lg font-bold line-clamp-2">{product.title}</h4>
+      <div className="flex-1 flex flex-col justify-between gap-4 p-4">
+        <h4 className="text-lg font-bold line-clamp-2">{product.name}</h4>
 
-        <div>
+        {/* <div>
           <p className="text-gray-600">Status : {product.details.status}</p>
           <p className="text-gray-600">Type : {product.details.type}</p>
           <p className="text-gray-600">
@@ -35,7 +35,9 @@ const ProductCard = ({ product }) => {
           </p>
           <p className="text-gray-600">Delivery : {product.details.delivery}</p>
           <p className="text-gray-600">Payment : {product.details.payment}</p>
-        </div>
+        </div> */}
+
+        <p className="text-gray-600 line-clamp-3">{product.description}</p>
 
         <Link
           to={`/product/${product.id}`}

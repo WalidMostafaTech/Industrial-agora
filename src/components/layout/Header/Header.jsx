@@ -7,6 +7,9 @@ import logoMap from "../../../assets/images/logo/logo-map.png";
 import NavBar from "./NavBar";
 import SearchModal from "../../modals/SearchModal";
 import HeaderAction from "./HeaderAction";
+import { useDispatch } from "react-redux";
+import { getProfileAct } from "../../../store/profile/profileSlice";
+import { getMainCategoriesAct } from "../../../store/categories/categories";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
@@ -25,6 +28,13 @@ const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(getProfileAct());
+      dispatch(getMainCategoriesAct());
+    }, [dispatch]);
 
   return (
     <>

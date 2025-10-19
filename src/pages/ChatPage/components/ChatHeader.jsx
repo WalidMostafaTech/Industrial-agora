@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import Avatar from "../../../components/common/Avatar";
 import { ImArrowRight2 } from "react-icons/im";
+import ChatExternallyModal from "../../../components/modals/ChatExternallyModal";
+import ChatLocalModal from "../../../components/modals/ChatLocalModal";
+import { useState } from "react";
 
 const ChatHeader = ({ contact, setShowChat }) => {
+  const [openLocalModal, setOpenLocalModal] = useState(false);
+  const [openExternallyModal, setOpenExternallyModal] = useState(false);
+
   return (
     <div className="flex items-center gap-4 p-4 border-b border-gray-300">
       <div className="flex-1 flex items-center gap-2">
@@ -22,11 +28,17 @@ const ChatHeader = ({ contact, setShowChat }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <button className="bg-red-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition">
+        <button
+          onClick={() => setOpenExternallyModal(true)}
+          className="bg-red-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition"
+        >
           Externally
         </button>
 
-        <button className="bg-green-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition">
+        <button
+          onClick={() => setOpenLocalModal(true)}
+          className="bg-green-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition"
+        >
           Locally
         </button>
 
@@ -37,6 +49,15 @@ const ChatHeader = ({ contact, setShowChat }) => {
           <ImArrowRight2 />
         </span>
       </div>
+
+      <ChatExternallyModal
+        openModal={openExternallyModal}
+        onClose={() => setOpenExternallyModal(false)}
+      />
+      <ChatLocalModal
+        openModal={openLocalModal}
+        onClose={() => setOpenLocalModal(false)}
+      />
     </div>
   );
 };

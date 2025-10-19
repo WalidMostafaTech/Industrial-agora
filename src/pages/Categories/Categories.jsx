@@ -3,8 +3,11 @@ import PageTitle from "../../components/common/PageTitle";
 import FilterSide from "./FilterSide";
 import ProductsSide from "./ProductsSide";
 import { RiMenu4Line } from "react-icons/ri";
-import { useParams } from "react-router-dom";
-import { getProductsByCategory } from "../../services/productServices";
+import { useParams, useSearchParams } from "react-router-dom";
+import {
+  getCategoryDetails,
+  getProductsByCategory,
+} from "../../services/productServices";
 import { useQuery } from "@tanstack/react-query";
 
 const Categories = () => {
@@ -14,18 +17,33 @@ const Categories = () => {
   const { id } = useParams();
 
   const {
+    data: category,
+    isLoading: categoryLoading,
+    isError: categoryError,
+    error: categoryFetchError,
+  } = useQuery({
+    queryKey: ["category", id],
+    queryFn: () => getCategoryDetails(id),
+    enabled: !!id, // يتفعل فقط لما يكون في id
+  });
+
+  const [searchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const {
     data: products,
     isLoading,
     isError,
     error,
   } = useQuery({
-    queryKey: ["products-by-category", id],
-    queryFn: () => getProductsByCategory(id),
+    queryKey: ["products-by-category", id, currentPage],
+    queryFn: () => getProductsByCategory(id, currentPage),
     enabled: !!id, // يتفعل فقط لما يكون في id
   });
 
   // 🟣 Log البيانات
   console.log("Products by category:", products);
+  console.log("Category details:", category);
 
   return (
     <article className="container pagePadding">
@@ -49,8 +67,8 @@ const Categories = () => {
           </div>
         )}
 
-        <div className={`${!showFilter ? "max-w-6xl" : "w-full"}`}>
-          <ProductsSide />
+        <div className={`w-full ${!showFilter ? "max-w-5xl" : ""}`}>
+          <ProductsSide products={products} category={category} />
         </div>
       </div>
 

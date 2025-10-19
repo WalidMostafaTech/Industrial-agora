@@ -10,12 +10,24 @@ export const addProductApi = async (formData) => {
   return data;
 };
 
-export const getProductsByCategory = async (categoryID) => {
-  const { data } = await api.get(`products-by-category/${categoryID}`);
+export const getProductsByCategory = async (categoryID, page = 1) => {
+  const { data } = await api.get(`/products-by-category/${categoryID}`, {
+    params: { page },
+  });
   return data?.data || [];
 };
 
 export const getProductsByType = async (payload) => {
-  const { data } = await api.get(`get-products`, { params: payload });
+  const { data } = await api.get(`/get-products`, { params: payload });
+  return data?.data || [];
+};
+
+export const getProductDetails = async (id) => {
+  const { data } = await api.get(`/product/${id}`);
+  return data?.data || [];
+};
+
+export const getCategoryDetails = async (id) => {
+  const { data } = await api.get(`/categories/${id}`);
   return data?.data || [];
 };

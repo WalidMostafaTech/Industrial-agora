@@ -78,7 +78,7 @@ input::-webkit-inner-spin-button {
   }
 
   .mainBtn {
-    @apply bg-myBlue-2 text-white font-bold lg:text-xl capitalize py-1 px-3 lg:py-2 lg:px-6 rounded-lg cursor-pointer
+    @apply bg-myBlue-2 text-white font-bold lg:text-lg capitalize py-1 px-3 lg:py-2 lg:px-6 rounded-lg cursor-pointer
     flex items-center justify-center gap-1 border border-myBlue-2 transition-all duration-300;
 
     & svg {

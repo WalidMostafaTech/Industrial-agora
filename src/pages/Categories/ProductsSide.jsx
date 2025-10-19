@@ -19,11 +19,12 @@ const ProductsList = [...Array(4).keys()].map((item) => ({
   image: productImg,
 }));
 
-const ProductsSide = () => {
+const ProductsSide = ({ products = {}, category = {} }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // ✅ اقرأ الصفحة من URL أو خليها 1 لو مش موجودة
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const currentPage =
+    Number(searchParams.get("page")) || products?.meta?.current_page || 1;
 
   const handlePageChange = (newPage) => {
     const newParams = new URLSearchParams(searchParams);
@@ -34,14 +35,14 @@ const ProductsSide = () => {
   return (
     <section className="space-y-8 lg:space-y-12 w-full">
       {/* صورة الكاتيجوري */}
-      <CategoryBanner image={categoryImg} title="Category" />
+      <CategoryBanner image={category?.image} title={category?.title} />
 
       {/* المنتجات */}
-      <ProductCardList ProductsList={ProductsList} />
+      <ProductCardList ProductsList={products?.items} />
 
       {/* الباجنيشن */}
       <Pagination
-        totalPages={5}
+        totalPages={products?.meta?.total}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
