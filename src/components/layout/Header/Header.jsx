@@ -10,6 +10,8 @@ import HeaderAction from "./HeaderAction";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../../store/profile/profileSlice";
 import { getMainCategoriesAct } from "../../../store/categories/categories";
+import { fetchSetting } from "../../../store/setting/setting";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
@@ -29,12 +31,15 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
+  useEffect(() => {
+    if (Cookies.get("tokenAG")) {
       dispatch(getProfileAct());
-      dispatch(getMainCategoriesAct());
-    }, [dispatch]);
+    }
+    dispatch(getMainCategoriesAct());
+    dispatch(fetchSetting());
+  }, [dispatch]);
 
   return (
     <>

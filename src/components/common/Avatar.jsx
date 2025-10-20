@@ -16,7 +16,7 @@ export default function Avatar({ name, img, size = "md", active = false }) {
     <div
       className={`flex items-center justify-center rounded-full ${
         active ? "bg-white text-myBlue-2" : "bg-myBlue-2 text-white"
-      } overflow-hidden cursor-pointer ${sizes[size]}`}
+      } overflow-hidden ${sizes[size]}`}
     >
       {img ? (
         <img src={img} alt={name} className="w-full h-full object-cover" />

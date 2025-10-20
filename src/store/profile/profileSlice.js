@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getProfile, logoutUser, updateProfile } from "../../services/authServices";
+import { getProfile, logoutUser } from "../../services/authServices";
 
 const initialState = {
   profile: null,
-  loading: true,
+  loading: false,
   error: null,
 };
 
@@ -18,18 +18,6 @@ export const getProfileAct = createAsyncThunk(
       return rejectWithValue(
         error?.response?.data?.message || "Failed to load profile"
       );
-    }
-  }
-);
-
-export const updateProfileAct = createAsyncThunk(
-  "profile/updateProfileAct",
-  async (formData, { rejectWithValue }) => {
-    try {
-      const data = await updateProfile(formData);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error?.response?.data?.message || "Failed to update");
     }
   }
 );
@@ -71,12 +59,12 @@ const profileSlice = createSlice({
         state.loading = false;
         state.error = action.payload || "فشل في جلب البيانات";
       })
-    
-    // log out
-    .addCase(logoutAct.fulfilled, (state) => {
-      state.loading = false;
-      state.profile = null;
-    });
+
+      // log out
+      .addCase(logoutAct.fulfilled, (state) => {
+        state.loading = false;
+        state.profile = null;
+      });
   },
 });
 

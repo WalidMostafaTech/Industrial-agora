@@ -5,8 +5,8 @@ const LoadingPage = ({ overlay = false }) => {
     <article
       className={`h-screen flex items-center justify-center ${
         overlay
-          ? "w-screen fixed inset-0 z-50 bg-dark-gray/80"
-          : "bg-dark-gray"
+          ? "w-screen fixed inset-0 z-50 bg-black/80"
+          : "bg-gray-100 w-full"
       }`}
     >
       <Loader />

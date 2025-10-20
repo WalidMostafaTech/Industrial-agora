@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import MainInput from "../../../components/form/MainInput";
-import FormError from "../../../components/form/FormError";
+import MainInput from "../form/MainInput";
+import FormError from "../form/FormError";
 import { useSelector } from "react-redux";
 
 const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {

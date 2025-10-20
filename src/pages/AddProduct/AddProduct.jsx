@@ -135,7 +135,6 @@ const AddProduct = () => {
           title="Add a Product"
           subtitle="Product Data - Please fill in the details accurately"
         />
-
         {/* Product Name */}
         <MainInput
           label="Product name"
@@ -143,7 +142,6 @@ const AddProduct = () => {
           {...register("name")}
           error={errors.name?.message}
         />
-
         {/* Category */}
         <MainInput
           // label="Category/Classification"
@@ -156,7 +154,6 @@ const AddProduct = () => {
           {...register("category_id")}
           error={errors.category_id?.message}
         />
-
         {/* Price */}
         <MainInput
           label="Price"
@@ -165,7 +162,6 @@ const AddProduct = () => {
           {...register("price")}
           error={errors.price?.message}
         />
-
         {/* Quantity */}
         <MainInput
           label="Available quantity (stock)"
@@ -174,7 +170,6 @@ const AddProduct = () => {
           {...register("quantity")}
           error={errors.quantity?.message}
         />
-
         {/* Dimensions */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <p className="font-medium text-gray-900 col-span-2 lg:col-span-3">
@@ -226,7 +221,6 @@ const AddProduct = () => {
             )}
           </div>
         </div>
-
         {/* Weight */}
         <MainInput
           label="Weight (if required)"
@@ -235,14 +229,14 @@ const AddProduct = () => {
           {...register("weight")}
           error={errors.weight?.message}
         />
-
         {/* Product Images */}
+
         <ImageUploader
           label="Product Images"
           onChange={setImages}
           error={imageError}
+          initialImages={images}
         />
-
         {/* Description */}
         <MainInput
           label="Product Description"
@@ -251,7 +245,6 @@ const AddProduct = () => {
           {...register("description")}
           error={errors.description?.message}
         />
-
         {/* Privacy Policy */}
         <div className="form-control">
           <label className="label cursor-pointer justify-start gap-3">
@@ -270,10 +263,8 @@ const AddProduct = () => {
             </p>
           )}
         </div>
-
         {/* Server Error */}
         <FormError errorMsg={error?.response?.data?.message} />
-
         <FormBtn title="Submit" loading={isPending} disabled={isPending} />
       </form>
     </section>

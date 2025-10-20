@@ -43,26 +43,27 @@ const ImageUploader = ({
       <p className="font-medium text-gray-900 mb-2">{label}</p>
 
       {/* Upload Button */}
-      <label
-        htmlFor="product_images"
-        className="w-40 h-40 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
-      >
-        <FiCamera className="text-3xl text-gray-500" />
-        <span className="text-gray-500 text-sm">Upload Images</span>
-        <input
-          id="product_images"
-          type="file"
-          multiple
-          accept="image/*"
-          className="hidden"
-          onChange={handleImagesChange}
-        />
-      </label>
+      <div className="mt-4 grid grid-cols-3 md:grid-cols-5 gap-2">
+        <label
+          htmlFor="product_images"
+          className="w-full aspect-square flex flex-col items-center justify-center gap-2
+          border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
+        >
+          <FiCamera className="text-3xl text-gray-500" />
+          <span className="text-gray-500 text-sm">Upload Images</span>
+          <input
+            id="product_images"
+            type="file"
+            multiple
+            accept="image/*"
+            className="hidden"
+            onChange={handleImagesChange}
+          />
+        </label>
 
-      {/* Preview Images */}
-      {images.length > 0 && (
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {images.map((img, index) => (
+        {/* Preview Images */}
+        {images.length > 0 &&
+          images.map((img, index) => (
             <div key={index} className="relative group w-full aspect-square">
               <img
                 src={img.preview}
@@ -78,8 +79,7 @@ const ImageUploader = ({
               </button>
             </div>
           ))}
-        </div>
-      )}
+      </div>
 
       {/* Error Message */}
       {error && <p className="text-red-600 text-sm mt-2">{error}</p>}

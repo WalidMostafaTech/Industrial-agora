@@ -27,7 +27,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
       {profile ? (
         <div className="dropdown dropdown-end">
-          <div tabIndex={0}>
+          <div tabIndex={0} className="cursor-pointer">
             <Avatar name={profile?.name} size="md" />
           </div>
           <ul

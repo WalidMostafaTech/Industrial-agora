@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import MainInput from "../../components/form/MainInput";
 import FormBtn from "../../components/form/FormBtn";
 import FormError from "../../components/form/FormError";
 import { updateProfile } from "../../services/authServices";
+import { getProfileAct } from "../../store/profile/profileSlice";
 
 const Profile = () => {
   const { profile } = useSelector((state) => state.profile);
@@ -67,13 +68,16 @@ const Profile = () => {
     }
   }, [formData.password, formData.password_confirmation]);
 
+  const dispatch = useDispatch();
+
   // ✅ React Query Mutation
   const { mutate, isPending } = useMutation({
     mutationFn: updateProfile,
     onSuccess: () => {
       setInitialData(formData);
       setIsEditing(false);
-      alert("تم تحديث الملف الشخصي بنجاح ✅");
+      dispatch(getProfileAct());
+      console.log("تم تحديث الملف الشخصي بنجاح ✅");
     },
     onError: () => {
       setErrorMsg("حدث خطأ أثناء التحديث، حاول مرة أخرى.");

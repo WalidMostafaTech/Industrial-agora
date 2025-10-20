@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Chat from "./sections/Chat";
 import Contacts from "./sections/Contacts";
+import { useParams } from "react-router-dom";
 
 const ChatPage = () => {
   const [showChat, setShowChat] = useState(false);
+  const { id } = useParams();
+  console.log("chat ID :" + id);
 
   return (
     <section className="container pagePadding h-screen">

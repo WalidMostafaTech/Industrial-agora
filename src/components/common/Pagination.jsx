@@ -1,6 +1,8 @@
 import { TfiArrowCircleLeft, TfiArrowCircleRight } from "react-icons/tfi";
 
-const Pagination = ({ totalPages = 5, currentPage = 1, onPageChange }) => {
+const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+  if (totalPages === 0) return null;
+
   const handlePageClick = (page) => {
     if (page >= 1 && page <= totalPages && page !== currentPage) {
       onPageChange(page);

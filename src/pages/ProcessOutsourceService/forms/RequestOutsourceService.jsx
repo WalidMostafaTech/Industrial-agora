@@ -8,7 +8,7 @@ import FormBtn from "../../../components/form/FormBtn";
 import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
-import { addProductApi } from "../../../services/productServices"; 
+import { addProductApi } from "../../../services/productServices";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -89,10 +89,7 @@ const RequestOutsourceService = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <MainInput
         label="Company name"
         id="company_name"
@@ -173,11 +170,11 @@ const RequestOutsourceService = () => {
         error={errors.description?.message}
       />
 
-      {/* ✅ Image Upload */}
       <ImageUploader
-        label="Attach file or pictures"
+        label="Pictures"
         onChange={setImages}
         error={imageError}
+        initialImages={images}
       />
 
       {/* ✅ Server Error */}

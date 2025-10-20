@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,8 @@ import FormBtn from "../../components/form/FormBtn";
 import MainInput from "../../components/form/MainInput";
 import { loginUser } from "../../services/authServices";
 import FormError from "../../components/form/FormError";
+import { useDispatch } from "react-redux";
+import { getProfileAct } from "../../store/profile/profileSlice";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -30,12 +32,15 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // ✅ Mutation: تنفيذ login API
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser,
-    onSuccess: (data) => {
-      alert("✅ Login Success:", data);
+    onSuccess: () => {
+      navigate("/", { replace: true });
+      dispatch(getProfileAct());
     },
     onError: (err) => {
       console.error("❌ Login Failed:", err);
@@ -93,7 +98,10 @@ const Login = () => {
             </div>
 
             <div>
-              <Link className="font-medium text-red-600 hover:brightness-75">
+              <Link
+                to="/forgot-password"
+                className="font-medium text-red-600 hover:brightness-75"
+              >
                 Forgot your password?
               </Link>
             </div>

@@ -9,7 +9,7 @@ import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
 import { addProductApi } from "../../../services/productServices";
-import CommissionModal from "./CommissionModal";
+import CommissionModal from "../../../components/modals/CommissionModal";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -46,18 +46,18 @@ const OfferService = () => {
   });
 
   // ✅ Mutation for API
-const { mutate, isPending, error } = useMutation({
-  mutationFn: addProductApi,
-  onSuccess: () => {
-    alert("✅ Offer submitted successfully!");
-    setImages([]); // 🧹 امسح الصور
-    reset(); // 🧹 ريّسِت كل الحقول
-    setIsModalOpen(false); // 🧹 اقفل المودال بعد النجاح
-  },
-  onError: (error) => {
-    console.error("❌ Failed to submit offer: " + error.message);
-  },
-});
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: addProductApi,
+    onSuccess: () => {
+      alert("✅ Offer submitted successfully!");
+      setImages([]); // 🧹 امسح الصور
+      reset(); // 🧹 ريّسِت كل الحقول
+      setIsModalOpen(false); // 🧹 اقفل المودال بعد النجاح
+    },
+    onError: (error) => {
+      console.error("❌ Failed to submit offer: " + error.message);
+    },
+  });
 
   // ✅ onSubmit Handler
   const onSubmit = (data) => {
@@ -159,6 +159,7 @@ const { mutate, isPending, error } = useMutation({
         />
 
         <FormBtn title="Submit" />
+        <FormError errorMsg={error?.response?.data?.message} />
       </form>
 
       <CommissionModal

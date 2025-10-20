@@ -12,7 +12,7 @@ const HomeVideo = () => {
 
   return (
     <section className="sectionPadding bg-myBlue-1">
-      <div className="px-4 max-w-6xl mx-auto mb-8 lg:mb-12">
+      <div className="px-4 max-w-6xl mx-auto">
         <iframe
           src={embedUrl}
           title="YouTube video player"
