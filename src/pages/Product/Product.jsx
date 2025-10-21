@@ -3,7 +3,7 @@ import { useState } from "react";
 import SendMsgModal from "../../components/modals/SendMsgModal";
 import { useQuery } from "@tanstack/react-query";
 import { getProductDetails } from "../../services/productServices";
-import LoadingSection from "../../components/Loading/LoadingSection";
+import LoadingPage from "../../components/Loading/LoadingPage";
 import EmptySection from "../../components/sections/EmptySection";
 
 const Product = () => {
@@ -20,7 +20,7 @@ const Product = () => {
     enabled: !!id, // يتفعل فقط لما يكون في id
   });
 
-  if (isLoading) return <LoadingSection />;
+  if (isLoading) return <LoadingPage />;
   if (isError || !product) return <EmptySection />;
 
   // const product = {

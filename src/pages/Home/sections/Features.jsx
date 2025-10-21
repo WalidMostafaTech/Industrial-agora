@@ -32,7 +32,9 @@ const Features = () => {
           <h2 className="text-myBlue-1 text-3xl lg:text-5xl font-bold">
             Our Goals
           </h2>
-          <Link className="animationBtn w-fit hidden xl:block">See More</Link>
+          <Link to="/about-us" className="animationBtn w-fit hidden xl:block">
+            See More
+          </Link>
         </div>
 
         <div className="xl:col-span-3 relative">
@@ -91,7 +93,9 @@ const Features = () => {
           </Swiper>
         </div>
 
-        <Link className="animationBtn w-fit mx-auto xl:hidden">See More</Link>
+        <Link to="/about-us" className="animationBtn w-fit mx-auto xl:hidden">
+          See More
+        </Link>
       </div>
     </section>
   );

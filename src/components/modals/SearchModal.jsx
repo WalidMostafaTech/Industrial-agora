@@ -16,37 +16,28 @@ const SearchModal = ({ openSearch, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="modal-box w-11/12 max-w-7xl bg-gray-200/70 backdrop-blur rounded-3xl border-2 border-white p-4 pt-10 space-y-6 
-        absolute top-6  shadow-xl"
+        className="modal-box p-0 shadow-none w-11/12 max-w-7xl bg-transparent absolute top-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
-        <button
-          type="button"
-          className="absolute right-2 top-2 text-3xl text-myBlue-2 hover:text-myBlue-1 transition cursor-pointer"
-          onClick={onClose}
-        >
-          <IoMdCloseCircle />
-        </button>
-
         {/* Search Input */}
-        <div className="relative border-2 border-white rounded-full">
-          <input
-            type="search"
-            placeholder="Search..."
-            className="w-full bg-white/70 text-lg py-2 px-4 pe-12 rounded-full outline-0 border-0"
-          />
+        <div className="bg-gray-200/70 backdrop-blur rounded-2xl border-2 border-white p-2 lg:p-4">
+          <form className="relative border-2 border-white rounded-xl overflow-hidden flex">
+            <input
+              placeholder="Search..."
+              className="w-full bg-white/70 text-lg p-2 outline-0 border-0"
+            />
 
-          <span
-            className="absolute top-1/2 end-0 -translate-y-1/2 h-full aspect-square rounded-full
-            flex items-center justify-center cursor-pointer bg-myBlue-2 text-white text-2xl"
-          >
-            <IoSearchOutline />
-          </span>
+            <button
+              type="submit"
+              className="flex items-center justify-center p-2 cursor-pointer bg-myBlue-2 text-white text-2xl"
+            >
+              <IoSearchOutline />
+            </button>
+          </form>
         </div>
 
         {/* Product Results */}
-        <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+        <div className="space-y-2 lg:space-y-4 max-h-[60vh] overflow-y-auto mt-4 lg:mt-6 bg-gray-200/70 backdrop-blur rounded-2xl border-2 border-white p-2 lg:p-4">
           {products.map((product) => (
             <Link
               to={`/product/${product.id}`}
@@ -68,11 +59,6 @@ const SearchModal = ({ openSearch, onClose }) => {
           ))}
         </div>
       </div>
-
-      {/* overlay */}
-      <form method="dialog" className="modal-backdrop">
-        <button onClick={onClose}>close</button>
-      </form>
     </dialog>
   );
 };

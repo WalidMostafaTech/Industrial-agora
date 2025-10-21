@@ -132,25 +132,20 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
 
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out
-                  flex flex-col gap-4 px-2 bg-white text-black z-50 cursor-pointer relative
-                  ${openLinks === link.name ? "max-h-60 py-2" : "max-h-0"}`}
+                  flex flex-col gap-4 z-50 cursor-pointer relative border-l-4 border-myBlue-2
+                  ${openLinks === link.name ? "max-h-60 p-2" : "max-h-0"}`}
               >
-                {openLinks === link.name && (
-                  <TiArrowSortedUp className="absolute -top-4 start-2 text-white text-2xl z-50" />
-                )}
-
                 {link.list.map((subLink) => (
                   <NavLink
                     to={subLink.link}
                     key={subLink.name}
-                    className="group flex items-center gap-2 font-semibold"
+                    className="group flex items-center gap-2 font-medium"
                     onClick={() => {
                       setActiveNav(false);
                       setOpenLinks(null);
                     }}
                   >
                     {subLink.name}
-                    <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
                   </NavLink>
                 ))}
               </div>

@@ -19,18 +19,21 @@ const MissionVisionSolution = () => {
       paragraph: setting?.mission,
       icon: missionIcon,
       color: "var(--color-myBlue-2)",
+      link: "/about-us",
     },
     {
       title: "Our Solution",
       paragraph: setting?.solution,
       icon: ideaIcon,
       color: "var(--color-myGreen)",
+      link: "/about-us",
     },
     {
       title: "Vision",
       paragraph: setting?.vission,
       icon: eyeIcon,
       color: "white",
+      link: "/about-us",
     },
   ];
 
@@ -58,6 +61,7 @@ const MissionVisionSolution = () => {
               dangerouslySetInnerHTML={{ __html: item.paragraph }}
             />
             <Link
+              to={item.link}
               className={`animationBtn ${
                 item.color === "white" ? "" : "light"
               }`}

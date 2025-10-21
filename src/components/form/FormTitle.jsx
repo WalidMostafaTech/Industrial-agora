@@ -6,7 +6,7 @@ const FormTitle = ({ title, subtitle, position = "center" }) => {
       }`}
     >
       <h2 className="text-xl lg:text-3xl font-bold capitalize">{title}</h2>
-      {subtitle && <p className="lg:text-lg text-gray-500 mt-4">{subtitle}</p>}
+      {subtitle && <p className="lg:text-lg text-gray-500 mt-2">{subtitle}</p>}
     </hgroup>
   );
 };

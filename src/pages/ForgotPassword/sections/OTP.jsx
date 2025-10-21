@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import FormBtn from "../../../components/form/FormBtn";
 import FormError from "../../../components/form/FormError";
-import FormTitle from "../../../components/form/FormTitle";
 
 const OTP = ({ goNext }) => {
   const length = 6;
@@ -76,11 +75,6 @@ const OTP = ({ goNext }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <FormTitle
-        title="Step 2: Enter OTP"
-        subtitle="We have sent a One-Time Password (OTP) to your email address."
-      />
-
       {/* ✅ OTP Inputs */}
       <div className="flex justify-between max-w-sm mx-auto gap-2">
         {otp.map((digit, index) => (
@@ -95,7 +89,8 @@ const OTP = ({ goNext }) => {
             onKeyDown={(e) => handleKeyDown(e, index)}
             onPaste={handlePaste}
             onFocus={() => handleFocus(index)}
-            className="w-12 h-12 text-center text-lg font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-myBlue-2 focus:border-myBlue-2 transition-all"
+            className="w-12 h-12 text-center text-lg font-medium border border-gray-300 rounded-lg 
+            focus:outline-none focus:ring-2 focus:ring-myBlue-2 focus:border-myBlue-2 transition-all"
           />
         ))}
       </div>

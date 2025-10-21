@@ -101,7 +101,7 @@ const MainCategories = () => {
                 <p className="text-gray-600 line-clamp-2 h-12">
                   {item.paragraph}
                 </p>
-                <Link className="animationBtn">see more</Link>
+                <Link to={`/categories/${item.id}`} className="animationBtn">see more</Link>
               </div>
             </SwiperSlide>
           ))}
