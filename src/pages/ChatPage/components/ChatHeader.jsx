@@ -5,24 +5,24 @@ import ChatExternallyModal from "../../../components/modals/ChatExternallyModal"
 import ChatLocalModal from "../../../components/modals/ChatLocalModal";
 import { useState } from "react";
 
-const ChatHeader = ({ contact, setShowChat }) => {
+const ChatHeader = ({ contact = {}, setShowChat }) => {
   const [openLocalModal, setOpenLocalModal] = useState(false);
   const [openExternallyModal, setOpenExternallyModal] = useState(false);
 
   return (
     <div className="flex items-center gap-4 p-4 border-b border-gray-300">
       <div className="flex-1 flex items-center gap-2">
-        <Avatar name={contact.name} />
+        <Avatar name={contact?.name} />
         <div className="flex-1">
           <h4 className="text-base lg:text-2xl font-bold capitalize line-clamp-1 flex-1 break-all">
-            {contact.name}
+            {contact?.name}
           </h4>
 
           <Link
-            to={`/product/${contact.product.id}`}
+            to={`/product/${contact?.product.id}`}
             className="text-base lg:text-lg font-medium text-myBlue-2 line-clamp-1 break-all w-fit"
           >
-            {contact.product.title}
+            {contact?.product.title}
           </Link>
         </div>
       </div>

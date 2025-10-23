@@ -6,7 +6,11 @@ export const addProductApi = async (formData) => {
       "Content-Type": "multipart/form-data",
     },
   });
+  return data;
+};
 
+export const addSubscribe = async (formData) => {
+  const { data } = await api.post("/subscribe", formData);
   return data;
 };
 

@@ -12,9 +12,6 @@ const ProtectedRoute = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    // لو لسة بيحمل، نعرض لودنج لو احتجت
-    if (loading) return <LoadingPage />;
-
     if (!token || !profile) {
       setOpenModal(true);
     }

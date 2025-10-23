@@ -12,7 +12,6 @@ const PublicRoute = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    if (loading) return <LoadingPage />;
     if (token && profile) {
       setOpenModal(true);
     }

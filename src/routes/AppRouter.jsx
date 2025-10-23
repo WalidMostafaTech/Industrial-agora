@@ -40,6 +40,7 @@ const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
 const PaymentPage = React.lazy(() =>
   import("../pages/PaymentPage/PaymentPage")
 );
+const Subscribe = React.lazy(() => import("../pages/Subscribe/Subscribe"));
 const Profile = React.lazy(() => import("../pages/Profile/Profile"));
 
 const router = createBrowserRouter([
@@ -100,7 +101,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "chat/:id",
+        path: "chat/:id?",
         element: (
           <ProtectedRoute>
             <ChatPage />
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PaymentPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "subscribe",
+        element: (
+          <ProtectedRoute>
+            <Subscribe />
           </ProtectedRoute>
         ),
       },

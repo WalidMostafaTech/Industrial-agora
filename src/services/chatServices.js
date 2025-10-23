@@ -7,6 +7,11 @@ export const sendMsg = async (payload) => {
 };
 
 export const getChats = async () => {
-  const { data } = await api.get("/chat");
+  const { data } = await api.get("/chats/allChats");
+  return data?.data || [];
+};
+
+export const getMsgs = async (chatId) => {
+  const { data } = await api.get(`/chats/${chatId}/messages`);
   return data?.data || [];
 };

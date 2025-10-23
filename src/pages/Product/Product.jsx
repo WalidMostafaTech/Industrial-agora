@@ -5,9 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductDetails } from "../../services/productServices";
 import LoadingPage from "../../components/Loading/LoadingPage";
 import EmptySection from "../../components/sections/EmptySection";
+import { useSelector } from "react-redux";
 
 const Product = () => {
   const { id } = useParams();
+  const { profile } = useSelector((state) => state.profile);
+
   const [openMsg, setOpenMsg] = useState(false);
 
   const {
@@ -95,12 +98,14 @@ const Product = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setOpenMsg(true)}
-          className="animationBtn block mx-auto mt-8"
-        >
-          contact with seller
-        </button>
+        {profile?.seller_id === profile?.id && (
+          <button
+            onClick={() => setOpenMsg(true)}
+            className="animationBtn block mx-auto mt-8"
+          >
+            contact with seller
+          </button>
+        )}
       </section>
 
       {/* <ProductsForms /> */}

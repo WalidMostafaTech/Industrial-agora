@@ -17,11 +17,7 @@ const Categories = () => {
 
   const { id } = useParams();
 
-  const {
-    data: category,
-    // isLoading: categoryLoading,
-    // isError: categoryError,
-  } = useQuery({
+  const { data: category } = useQuery({
     queryKey: ["category", id],
     queryFn: () => getCategoryDetails(id),
     enabled: !!id, // يتفعل فقط لما يكون في id
@@ -30,11 +26,7 @@ const Categories = () => {
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  const {
-    data: products,
-    isLoading: productsLoading,
-    // isError: productsError,
-  } = useQuery({
+  const { data: products, isLoading: productsLoading } = useQuery({
     queryKey: ["products-by-category", id, currentPage],
     queryFn: () => getProductsByCategory(id, currentPage),
     enabled: !!id, // يتفعل فقط لما يكون في id
@@ -91,7 +83,7 @@ const Categories = () => {
                 onClick={() => setOpenFilter(false)}
               ></div>
             </div>
-          )}{" "}
+          )}
         </>
       )}
     </article>

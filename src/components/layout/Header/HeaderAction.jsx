@@ -54,7 +54,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             </li>
 
             <li>
-              <Link to={`/chat`} className="flex gap-4 items-center">
+              <Link to={`/subscribe`} className="flex gap-4 items-center">
                 <TbShoppingBagPlus className="text-2xl" />
                 <p>Subscribe</p>
               </Link>

@@ -2,14 +2,12 @@ import { useState } from "react";
 import ContactCard from "../components/ContactCard";
 
 const Contacts = ({ setShowChat }) => {
+  const [activeChat, setActiveChat] = useState(null);
 
-    const [activeChat, setActiveChat] = useState(null);
-
-    const handleClick = (id) => {
-      setActiveChat(id);
-      setShowChat(true);
-    };
-
+  const handleClick = (id) => {
+    setActiveChat(id);
+    setShowChat(true);
+  };
 
   const contactsList = [
     {
