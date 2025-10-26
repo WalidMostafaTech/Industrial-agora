@@ -20,7 +20,7 @@ const Services = () => {
   });
 
   if (isLoading) return <LoadingSection />;
-  if (isError || !services) return <EmptySection />;
+  if (isError || !services) return null;
 
   const items = services?.services || [];
   const disableNavigation = items.length <= 3;
@@ -80,7 +80,7 @@ const Services = () => {
                 <h3 className="text-2xl font-semibold text-myBlue-1">
                   {item.title}
                 </h3>
-                <p className="text-gray-500">{item.paragraph}</p>
+                <p className="text-gray-500 text-center lg:text-start">{item.paragraph}</p>
               </div>
             </SwiperSlide>
           ))}

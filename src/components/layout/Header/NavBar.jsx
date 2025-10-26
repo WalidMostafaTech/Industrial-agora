@@ -1,5 +1,5 @@
 import { PiArrowRightLight } from "react-icons/pi";
-import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
+import { TiArrowSortedDown } from "react-icons/ti";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
@@ -14,12 +14,9 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
   };
 
   const { categories } = useSelector((state) => state.categories);
+  const filterCategories = categories?.filter((cat) => cat.nav);
 
-  // const categoriesLinks = categories?.map((cat) => {
-  //   return { name: cat.title, link: `/categories?category=${cat.id}` };
-  // });
-
-  const categoriesLinks = categories?.map((cat) => {
+  const categoriesLinks = filterCategories?.map((cat) => {
     return { name: cat.title, link: `/categories/${cat.id}` };
   });
 

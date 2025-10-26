@@ -24,22 +24,12 @@ const Product = () => {
   });
 
   if (isLoading) return <LoadingPage />;
-  if (isError || !product) return <EmptySection />;
-
-  // const product = {
-  //   id,
-  //   title:
-  //     "A11VLO190LRDU2/11R-NZD12K02P-S HYDRAULIC PUMP ZL1010000094 ZOOM LION",
-  //   details: {
-  //     status: "Brand New ZL1010000094",
-  //     type: "Concrete pump Spare Parts",
-  //     condition: "Original Packing",
-  //     delivery: "From stock",
-  //     payment: "Advance",
-  //   },
-  //   tags: ["Hydraulcs", "Hydraclcs", "PUMP"],
-  //   image: productImg,
-  // };
+  if (isError || !product)
+    return (
+      <div className="flex justify-center items-center h-[70vh]">
+        <h3 className="text-2xl font-bold">Product Not Found</h3>
+      </div>
+    );
 
   return (
     <article className="container pagePadding space-y-6 lg:space-y-12">
@@ -56,49 +46,28 @@ const Product = () => {
           <div className="flex-1 space-y-4">
             <h2 className="text-lg lg:text-3xl font-bold">{product?.name}</h2>
 
-            {/* <div>
-              <p className="text-gray-600">
-                Status : {product?.details.status}
-              </p>
-              <p className="text-gray-600">Type : {product?.details.type}</p>
-              <p className="text-gray-600">
-                Condition : {product?.details.condition}
-              </p>
-              <p className="text-gray-600">
-                Delivery : {product?.details.delivery}
-              </p>
-              <p className="text-gray-600">
-                Payment : {product?.details.payment}
-              </p>
-            </div> */}
+            <div className="space-y-1 text-gray-700">
+              <p>Length : {product?.length}</p>
+              <p>Width : {product?.width}</p>
+              <p>Height : {product?.height}</p>
+              <p>Weight : {product?.weight}</p>
+            </div>
 
-            <p className="text-myBlue-2 text-lg font-bold">{product?.price}</p>
-
-            {/* <div>
-              <p className="text-gray-600">
-                Status : {product?.details.status}
-              </p>
-              <p className="text-gray-600">Type : {product?.details.type}</p>
-              <p className="text-gray-600">
-                Condition : {product?.details.condition}
-              </p>
-              <p className="text-gray-600">
-                Delivery : {product?.details.delivery}
-              </p>
-              <p className="text-gray-600">
-                Payment : {product?.details.payment}
-              </p>
-            </div> */}
-
-            <p className="border-b border-gray-300 flex justify-end">
-              <span className="bg-gray-200 py-1 px-2">
-                {product?.quantity} IN STOCK
-              </span>
+            <p className="text-myBlue-2 text-lg font-bold">
+              {product?.price} $
             </p>
+
+            {product?.quantity && (
+              <p className="border-b border-gray-300 flex justify-end">
+                <span className="bg-gray-200 py-1 px-2">
+                  {product?.quantity} IN STOCK
+                </span>
+              </p>
+            )}
           </div>
         </div>
 
-        {profile?.seller_id === profile?.id && (
+        {product?.seller_id !== profile?.id && (
           <button
             onClick={() => setOpenMsg(true)}
             className="animationBtn block mx-auto mt-8"

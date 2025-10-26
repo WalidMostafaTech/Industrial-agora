@@ -17,7 +17,7 @@ const Process = () => {
     isError,
   } = useQuery({
     queryKey: ["products", "process"],
-    queryFn: getProductsByType({ type: "offer_service" }),
+    queryFn: getProductsByType({ type: "outsource" }),
   });
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -25,7 +25,7 @@ const Process = () => {
 
   if (isLoading) return <LoadingSection />;
 
-  if (isError || !products) return <EmptySection />;
+  if (isError || !products) return null;
 
   return (
     <section className="sectionPadding bg-myBlue-1">

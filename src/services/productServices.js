@@ -35,3 +35,8 @@ export const getCategoryDetails = async (id) => {
   const { data } = await api.get(`/categories/${id}`);
   return data?.data || [];
 };
+
+export const getProductsOutSource = async (page = 1) => {
+  const { data } = await api.get(`/products`, { params: { page } });
+  return data?.data || [];
+};

@@ -72,7 +72,9 @@ const Subscribe = () => {
             </form>
             <SuccessModal
               openModal={openModal}
-              onClose={() => setOpenModal("")}
+              msg="Subscription successful!"
+              onClose={() => setOpenModal(false)}
+              onConfirm={() => setOpenModal(false)}
             />
           </aside>
         )}

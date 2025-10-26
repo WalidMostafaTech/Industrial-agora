@@ -19,6 +19,9 @@ const ProcessOutSource = React.lazy(() =>
 const ProcessOutsourceService = React.lazy(() =>
   import("../pages/ProcessOutsourceService/ProcessOutsourceService")
 );
+const ProcessOutSourceProducts = React.lazy(() =>
+  import("../pages/ProcessOutSourceProducts/ProcessOutSourceProducts")
+);
 const Terms = React.lazy(() => import("../pages/Terms/Terms"));
 
 const HowToSell = React.lazy(() => import("../pages/HowToSell/HowToSell"));
@@ -60,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ProcessOutsourceService />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "process-outsource/products",
+        element: (
+          <ProtectedRoute>
+            <ProcessOutSourceProducts />
           </ProtectedRoute>
         ),
       },

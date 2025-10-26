@@ -4,29 +4,24 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import bgImg from "../../../assets/images/logo/logo-map.png";
-import { useQuery } from "@tanstack/react-query";
-import { getMainCategories } from "../../../services/homeServices";
 import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState } from "react"; // ✅ ضفناها هنا
+import { useState } from "react"; 
+import { useSelector } from "react-redux";
 
 const MainCategories = () => {
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getMainCategories,
-  });
+  const { categories, loading, error } = useSelector(
+    (state) => state.categories
+  );
 
   // ✅ الحالة اللي بتتحكم في تعطيل الأزرار
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  if (isLoading) return <LoadingSection />;
-  if (isError || !categories) return <EmptySection />;
+  const filterCategories = categories?.filter((cat) => cat.home);
+
+  if (loading) return <LoadingSection />;
+  if (error || !categories) return null;
 
   return (
     <section
@@ -87,7 +82,7 @@ const MainCategories = () => {
             setIsEnd(swiper.isEnd);
           }}
         >
-          {categories?.map((item) => (
+          {filterCategories?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="bg-white p-4 lg:p-8 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
                 <div className="w-full h-52 lg:h-64 rounded-xl shadow-xl overflow-hidden">
@@ -101,7 +96,9 @@ const MainCategories = () => {
                 <p className="text-gray-600 line-clamp-2 h-12">
                   {item.paragraph}
                 </p>
-                <Link to={`/categories/${item.id}`} className="animationBtn">see more</Link>
+                <Link to={`/categories/${item.id}`} className="animationBtn">
+                  see more
+                </Link>
               </div>
             </SwiperSlide>
           ))}

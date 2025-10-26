@@ -11,20 +11,21 @@ const MissionVisionSolution = () => {
 
   if (loading) return <LoadingSection />;
 
-  if (error || !setting) return <EmptySection />;
+  if (error || (!setting?.mission && !setting?.solution && !setting?.vission))
+    return null;
 
   const MissionVisionSolutionList = [
-    {
-      title: "Mission",
-      paragraph: setting?.mission,
-      icon: missionIcon,
-      color: "var(--color-myBlue-2)",
-      link: "/about-us",
-    },
     {
       title: "Our Solution",
       paragraph: setting?.solution,
       icon: ideaIcon,
+      color: "var(--color-myBlue-2)",
+      link: "/about-us",
+    },
+    {
+      title: "Mission",
+      paragraph: setting?.mission,
+      icon: missionIcon,
       color: "var(--color-myGreen)",
       link: "/about-us",
     },
@@ -43,9 +44,7 @@ const MissionVisionSolution = () => {
         {MissionVisionSolutionList.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-col items-center justify-center gap-4 md:gap-8 ${
-              index === 1 && "lg:gap-12"
-            } text-center group p-6`}
+            className={`flex flex-col items-center justify-center gap-4 text-center group p-6`}
             style={{
               gridRow: index === 1 ? "span 2 / span 2" : undefined,
               backgroundColor: item.color,
@@ -57,7 +56,7 @@ const MissionVisionSolution = () => {
               <h3 className="text-2xl font-semibold">{item.title}</h3>
             </div>
             <div
-              className="htmlContent lg:w-2/3"
+              className="htmlContent"
               dangerouslySetInnerHTML={{ __html: item.paragraph }}
             />
             <Link

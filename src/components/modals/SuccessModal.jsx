@@ -7,7 +7,7 @@ const SuccessModal = ({ openModal, onClose, msg, onConfirm, btnText }) => {
   return createPortal(
     <dialog className={`modal modal-open`} onClick={onClose}>
       <div className="modal-box space-y-4" onClick={(e) => e.stopPropagation()}>
-        <div className="w-20 h-20 rounded-full bg-myBlue-1 text-white text-7xl
+        <div className="w-20 h-20 rounded-full bg-myGreen text-white text-7xl
           flex items-center justify-center mx-auto">
           <MdDone />
         </div>

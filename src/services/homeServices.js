@@ -39,3 +39,18 @@ export const getSettings = async () => {
   const { data } = await api.get("/all-settings");
   return data?.data || [];
 };
+
+export const sendNewsletter = async (email) => {
+  const { data } = await api.post("/newsletter", { email });
+  return data?.data || [];
+};
+
+export const getSearch = async (query) => {
+  const { data } = await api.get("/search", {
+    params: { query },
+  });
+
+  console.log("searc", data?.data);
+
+  return data?.data || {};
+};

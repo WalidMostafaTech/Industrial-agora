@@ -6,8 +6,9 @@ const HomeVideo = () => {
   const { setting, loading, error } = useSelector((state) => state.setting);
 
   if (loading) return <LoadingSection />;
-  if (error || !setting) return <EmptySection />;
   const embedUrl = setting?.video_url?.replace("watch?v=", "embed/");
+  // if (error || !embedUrl) return <EmptySection />;
+  if (error || !embedUrl) return null;
 
 
   return (
