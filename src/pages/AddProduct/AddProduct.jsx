@@ -12,6 +12,7 @@ import FormError from "../../components/form/FormError";
 import ImageUploader from "../../components/form/ImageUploader";
 import { addProductApi } from "../../services/productServices";
 import { useSelector } from "react-redux";
+import SuccessModal from "../../components/modals/SuccessModal";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -62,6 +63,7 @@ const schema = yup.object({
 const AddProduct = () => {
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     register,
@@ -75,9 +77,9 @@ const AddProduct = () => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: addProductApi,
     onSuccess: () => {
-      alert("✅ Product added successfully!");
       setImages([]);
       reset();
+      setOpenModal(true);
     },
     onError: (error) => {
       console.error("❌ Failed to add product: " + error.message);
@@ -267,6 +269,13 @@ const AddProduct = () => {
         <FormError errorMsg={error?.response?.data?.message} />
         <FormBtn title="Submit" loading={isPending} disabled={isPending} />
       </form>
+
+      <SuccessModal
+        openModal={openModal}
+        msg="Product added successfully!"
+        onClose={() => setOpenModal(false)}
+        onConfirm={() => setOpenModal(false)}
+      />
     </section>
   );
 };

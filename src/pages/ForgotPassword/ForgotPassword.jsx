@@ -23,6 +23,11 @@ const ForgotPassword = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [parentData, setParentData] = useState({
+    email: "",
+    otp: "",
+    password: "",
+  });
 
   const handleNext = () => {
     setCurrentIndex((prev) => prev + 1);
@@ -42,9 +47,22 @@ const ForgotPassword = () => {
           subtitle={steps[currentIndex].subtitle}
         />
 
-        {currentIndex === 0 && <CheckEmail goNext={handleNext} />}
-        {currentIndex === 1 && <OTP goNext={handleNext} />}
-        {currentIndex === 2 && <ResetPassword />}
+        {currentIndex === 0 && (
+          <CheckEmail goNext={handleNext} setParentData={setParentData} />
+        )}
+        {currentIndex === 1 && (
+          <OTP
+            goNext={handleNext}
+            parentData={parentData}
+            setParentData={setParentData}
+          />
+        )}
+        {currentIndex === 2 && (
+          <ResetPassword
+            parentData={parentData}
+            setParentData={setParentData}
+          />
+        )}
       </div>
     </section>
   );

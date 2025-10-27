@@ -20,7 +20,7 @@ const StepProgress = ({ steps, currentIndex }) => {
           return (
             <div
               key={index}
-              className={`w-8 h-8 lg:w-10 lg:h-10 z-10 flex items-center justify-center rounded-full border-2 font-semibold transition-all duration-500
+              className={`w-8 h-8 lg:w-10 lg:h-10 z-10 flex items-center justify-center rounded-full border-2 font-semibold transition-all duration-700
                   ${
                     isActive
                       ? "bg-myGreen text-white border-myGreen scale-120"

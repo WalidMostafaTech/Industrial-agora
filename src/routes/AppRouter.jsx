@@ -24,15 +24,6 @@ const ProcessOutSourceProducts = React.lazy(() =>
 );
 const Terms = React.lazy(() => import("../pages/Terms/Terms"));
 
-const HowToSell = React.lazy(() => import("../pages/HowToSell/HowToSell"));
-const HowToBeASeller = React.lazy(() =>
-  import("../pages/HowToBeASeller/HowToBeASeller")
-);
-const HowDoesItWork = React.lazy(() =>
-  import("../pages/HowDoesItWork/HowDoesItWork")
-);
-const Advantages = React.lazy(() => import("../pages/Advantages/Advantages"));
-
 const Register = React.lazy(() => import("../pages/Register/Register"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
 const ForgotPassword = React.lazy(() =>

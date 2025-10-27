@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "@tanstack/react-query";
-
 import PageTitle from "../../components/common/PageTitle";
-import contactUsImg from "../../assets/images/32bf46f5bdafd7f6d8d884b65fc96ab358e43f24.jpg";
+import contactUsImg from "../../assets/images/contact-img.jpeg";
 import MainInput from "../../components/form/MainInput";
 import FormBtn from "../../components/form/FormBtn";
 import { LiaFaxSolid } from "react-icons/lia";
@@ -111,7 +110,7 @@ const ContactUs = () => {
           <img
             src={contactUsImg}
             alt="contact us"
-            className="w-2/3 mb-8 mx-auto hidden xl:block"
+            className="w-4/5 mb-8 mx-auto hidden xl:block"
           />
 
           <div className="flex flex-wrap justify-between gap-4">

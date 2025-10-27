@@ -6,10 +6,10 @@ import * as yup from "yup";
 
 import FormBtn from "../../../components/form/FormBtn";
 import MainInput from "../../../components/form/MainInput";
-import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
 import { addProductApi } from "../../../services/productServices";
 import CommissionModal from "../../../components/modals/CommissionModal";
+import SuccessModal from "../../../components/modals/SuccessModal";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -35,6 +35,7 @@ const OfferService = () => {
   const [imageError, setImageError] = useState("");
   const [formDataValues, setFormDataValues] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
   const {
     register,
@@ -49,10 +50,9 @@ const OfferService = () => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: addProductApi,
     onSuccess: () => {
-      alert("✅ Offer submitted successfully!");
-      setImages([]); // 🧹 امسح الصور
-      reset(); // 🧹 ريّسِت كل الحقول
-      setIsModalOpen(false); // 🧹 اقفل المودال بعد النجاح
+      setOpenSuccessModal(true); // ✅ افتح مودال النجاح فوق المودال التاني
+      setImages([]);
+      reset();
     },
     onError: (error) => {
       console.error("❌ Failed to submit offer: " + error.message);
@@ -72,8 +72,6 @@ const OfferService = () => {
   };
 
   const handleConfirmModal = ({ duration, durationType }) => {
-    setIsModalOpen(false);
-
     if (!formDataValues) return; // safety check
 
     const formData = new FormData();
@@ -159,7 +157,6 @@ const OfferService = () => {
         />
 
         <FormBtn title="Submit" />
-        <FormError errorMsg={error?.response?.data?.message} />
       </form>
 
       <CommissionModal
@@ -168,6 +165,19 @@ const OfferService = () => {
         onConfirm={handleConfirmModal}
         error={error}
         loading={isPending}
+      />
+
+      <SuccessModal
+        openModal={openSuccessModal}
+        msg="Offer submitted successfully!"
+        onClose={() => {
+          setOpenSuccessModal(false);
+          setIsModalOpen(false); // ✅ يقفل كمان CommissionModal
+        }}
+        onConfirm={() => {
+          setOpenSuccessModal(false);
+          setIsModalOpen(false); // ✅ يقفل الاتنين
+        }}
       />
     </>
   );

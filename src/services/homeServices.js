@@ -49,8 +49,5 @@ export const getSearch = async (query) => {
   const { data } = await api.get("/search", {
     params: { query },
   });
-
-  console.log("searc", data?.data);
-
   return data?.data || {};
 };

@@ -3,7 +3,6 @@ import CryptoJS from "crypto-js";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 
 dayjs.extend(utc);
@@ -73,7 +72,7 @@ const verifyResponseSignature = (response) => {
   const responseSignature = response.headers["x-signature"];
 
   if (!responseNonce || !responseSignature) {
-    toast.error("❌ الاستجابة غير موقعة أو ناقصة");
+    console.error("❌ الاستجابة غير موقعة أو ناقصة");
     throw new Error("Response signature headers missing");
   }
 
@@ -86,7 +85,7 @@ const verifyResponseSignature = (response) => {
     CryptoJS.enc.Hex.parse(expectedSignature).toString() !==
     CryptoJS.enc.Hex.parse(responseSignature).toString()
   ) {
-    toast.error("❌ التوقيع غير متطابق مع الخادم");
+    console.error("❌ التوقيع غير متطابق مع الخادم");
     throw new Error("Response signature verification failed");
   }
 

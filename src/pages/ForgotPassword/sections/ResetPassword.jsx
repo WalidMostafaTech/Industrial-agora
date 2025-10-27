@@ -1,14 +1,19 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useMutation } from "@tanstack/react-query";
 
 import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import FormBtn from "../../../components/form/FormBtn";
+import { resetPassword } from "../../../services/forgotPasswordServices";
+import { useState } from "react";
+import SuccessModal from "../../../components/modals/SuccessModal";
+import { useNavigate } from "react-router-dom";
 
 // ✅ Validation Schema
 const schema = yup.object().shape({
-  newPassword: yup
+  password: yup
     .string()
     .trim()
     .min(8, "New password must be at least 8 characters")
@@ -17,14 +22,17 @@ const schema = yup.object().shape({
       /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).*$/,
       "Password must contain at least one uppercase letter, one number, and one special character"
     ),
-  confirmPassword: yup
+  password_confirmation: yup
     .string()
     .trim()
-    .oneOf([yup.ref("newPassword"), null], "Passwords must match")
+    .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Please confirm your password"),
 });
 
-const ResetPassword = () => {
+const ResetPassword = ({ parentData, setParentData }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -34,18 +42,35 @@ const ResetPassword = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log("✅ Password reset data:", data);
-  };
+  const {
+    mutate,
+    isPending,
+    isError,
+    error: apiError,
+  } = useMutation({
+    mutationFn: (payload) => resetPassword(payload),
+    onSuccess: (res, payload) => {
+      console.log("✅ Password reset successful:", res);
+      // لو عايز تحفظ أي داتا في الـ parentData:
+      setParentData((prev) => ({
+        ...prev,
+        password: payload.password,
+        password_confirmation: payload.password_confirmation,
+      }));
+      // ممكن هنا تفتح success modal أو تنتقل لصفحة الدخول
+      setOpenModal(true);
+    },
+    onError: (err) => {
+      console.error("❌ Reset password error:", err);
+    },
+  });
 
   // ✅ متابعة كتابة الباسورد
-  const passwordValue = watch("newPassword", "");
+  const passwordValue = watch("password", "");
 
   // ✅ تقييم قوة الباسورد بناءً على 4 عوامل
   const evaluateStrength = (password) => {
-    // إزالة أي مسافات داخل النص
     const cleanPassword = password.replace(/\s/g, "");
-
     let strength = 0;
     if (cleanPassword.length >= 8) strength++;
     if (/[A-Z]/.test(cleanPassword)) strength++;
@@ -57,7 +82,6 @@ const ResetPassword = () => {
   const strength = evaluateStrength(passwordValue);
   const strengthPercent = (strength / 4) * 100;
 
-  // ✅ النصوص حسب القوة
   const getStrengthLabel = () => {
     if (strength <= 1) return "Weak";
     if (strength === 2) return "Medium";
@@ -65,7 +89,6 @@ const ResetPassword = () => {
     return "Very Strong";
   };
 
-  // ✅ الألوان حسب القوة
   const getGradient = () => {
     if (strength <= 1) return "bg-gradient-to-r from-red-500 to-red-600";
     if (strength === 2) return "bg-gradient-to-r from-yellow-400 to-yellow-600";
@@ -73,16 +96,33 @@ const ResetPassword = () => {
     return "bg-gradient-to-r from-green-500 to-emerald-600";
   };
 
+  // ✅ عند الإرسال
+  const onSubmit = (data) => {
+    const payload = {
+      email: parentData.email,
+      otp: parentData.otp,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+    };
+    console.log("📩 Sending reset password data:", payload);
+    mutate(payload);
+  };
+
+  const displayError =
+    (isError &&
+      (apiError?.response?.data?.message || "Failed to reset password")) ||
+    "";
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* ✅ New Password Field */}
       <div className="space-y-2">
         <MainInput
           label="New Password"
-          id="newPassword"
+          id="password"
           type="password"
-          {...register("newPassword")}
-          error={errors.newPassword?.message}
+          {...register("password")}
+          error={errors.password?.message}
         />
 
         {passwordValue && (
@@ -114,15 +154,24 @@ const ResetPassword = () => {
       {/* ✅ Confirm Password */}
       <MainInput
         label="Confirm Password"
-        id="confirmPassword"
+        id="password_confirmation"
         type="password"
-        {...register("confirmPassword")}
-        error={errors.confirmPassword?.message}
+        {...register("password_confirmation")}
+        error={errors.password_confirmation?.message}
       />
 
-      <FormError errorMsg={""} />
+      {/* ✅ عرض خطأ الـ API إن وجد */}
+      <FormError errorMsg={displayError} />
 
-      <FormBtn title={"Reset Password"} />
+      {/* ✅ زر Reset */}
+      <FormBtn title="Reset Password" loading={isPending} />
+
+      <SuccessModal
+        openModal={openModal}
+        msg="Password reset successfully!"
+        btnText={"Go To Login"}
+        onConfirm={() => navigate("/login")}
+      />
     </form>
   );
 };

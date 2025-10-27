@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useMutation } from "@tanstack/react-query";
 
 import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import FormBtn from "../../../components/form/FormBtn";
+import { sendOtp } from "../../../services/forgotPasswordServices";
 
 // ✅ Validation schema
 const schema = yup.object().shape({
@@ -14,7 +16,7 @@ const schema = yup.object().shape({
     .required("Email is required"),
 });
 
-const CheckEmail = ({ goNext }) => {
+const CheckEmail = ({ goNext, setParentData }) => {
   const {
     register,
     handleSubmit,
@@ -23,9 +25,23 @@ const CheckEmail = ({ goNext }) => {
     resolver: yupResolver(schema),
   });
 
+  // ✅ Mutation to send OTP
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: (email) => sendOtp(email),
+    onSuccess: (res, email) => {
+      // ✅ حفظ الإيميل من الـ input نفسه
+      setParentData((prev) => ({ ...prev, email }));
+      console.log("✅ OTP sent successfully:", res);
+      goNext();
+    },
+    onError: (err) => {
+      console.error("❌ Error sending OTP:", err);
+    },
+  });
+
+  // ✅ Handle form submit
   const onSubmit = (data) => {
-    console.log("✅ Email data:", data);
-    goNext();
+    mutate(data.email); // هنا بنمرر الإيميل للميوتشن
   };
 
   return (
@@ -37,9 +53,10 @@ const CheckEmail = ({ goNext }) => {
         error={errors.email?.message}
       />
 
-      <FormError errorMsg={""} />
+      {/* ✅ عرض الخطأ لو موجود */}
+      <FormError errorMsg={error?.response?.data?.message} />
 
-      <FormBtn title={"Continue"} />
+      <FormBtn title={"Continue"} loading={isPending} />
     </form>
   );
 };

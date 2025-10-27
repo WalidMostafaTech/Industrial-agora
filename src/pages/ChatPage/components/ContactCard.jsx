@@ -9,7 +9,7 @@ const ContactCard = ({ contact = {}, activeChat, handleClick }) => {
     name:
       contact.user_id !== profile?.id ? contact.user.name : contact.seller.name,
     last_message: contact.latest_message.message || contact.product.name,
-    new_messages: 99,
+    new_messages: contact.unread_messages_count,
   };
 
   return (
@@ -27,7 +27,7 @@ const ContactCard = ({ contact = {}, activeChat, handleClick }) => {
           <h4 className="text-lg lg:text-2xl font-bold capitalize line-clamp-1 flex-1 break-all">
             {contactList.name}
           </h4>
-          {contactList.new_messages && (
+          {contactList.new_messages > 0 && (
             <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
               {contactList.new_messages}
             </span>

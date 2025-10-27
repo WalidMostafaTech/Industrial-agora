@@ -21,9 +21,11 @@ const MainInput = ({
 
   const commonInputClasses = `w-full lg:text-lg bg-white outline-none border-none p-3 rounded-md ring-1 transition-all ${
     isPassword && "pe-10"
-  } ${error ? "ring-red-600" : "ring-gray-400 focus-within:ring-myBlue-2"} ${
-    disabled ? "opacity-60 cursor-not-allowed bg-gray-100" : ""
-  }`;
+  } ${
+    error
+      ? "ring-red-600 ring-2"
+      : "ring-gray-400 focus-within:ring-myBlue-2 focus-within:ring-2"
+  } ${disabled ? "opacity-60 cursor-not-allowed bg-gray-100" : ""}`;
 
   const commonLabel = label && (
     <label

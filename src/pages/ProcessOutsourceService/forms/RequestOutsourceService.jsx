@@ -9,6 +9,7 @@ import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
 import { addProductApi } from "../../../services/productServices";
+import SuccessModal from "../../../components/modals/SuccessModal";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -37,6 +38,7 @@ const schema = yup.object({
 const RequestOutsourceService = () => {
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     register,
@@ -51,9 +53,9 @@ const RequestOutsourceService = () => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: addProductApi, // نفس الـ API
     onSuccess: () => {
-      alert("✅ Request submitted successfully!");
       setImages([]);
       reset();
+      setOpenModal(true);
     },
     onError: (error) => {
       console.error("❌ Failed to submit request: " + error.message);
@@ -181,6 +183,13 @@ const RequestOutsourceService = () => {
       <FormError errorMsg={error?.response?.data?.message} />
 
       <FormBtn title="Submit" loading={isPending} disabled={isPending} />
+
+      <SuccessModal
+        openModal={openModal}
+        msg="Request submitted successfully!"
+        onClose={() => setOpenModal(false)}
+        onConfirm={() => setOpenModal(false)}
+      />
     </form>
   );
 };

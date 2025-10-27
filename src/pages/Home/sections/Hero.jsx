@@ -23,8 +23,6 @@ export default function HeroSection() {
     queryFn: getSliders,
   });
 
-  
-
   if (isLoading) return <LoadingSection />;
 
   if (isError || !sliders) return <EmptySection />;
@@ -59,9 +57,9 @@ export default function HeroSection() {
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/50" />
 
-              <div className="container relative z-10 flex">
+              <div className="container relative z-10 flex items-end">
                 {/* Vertical Progress Line */}
-                <div className="relative min-w-1.5 h-[300px] lg:h-[400px] bg-white overflow-hidden">
+                <div className="relative min-w-1.5 h-[300px] lg:min-h-[500px] bg-white overflow-hidden">
                   <div
                     className="absolute top-0 left-0 w-full bg-myBlue-2 transition-all duration-500"
                     style={{

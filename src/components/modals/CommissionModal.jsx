@@ -41,7 +41,6 @@ const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {
   }, [duration, durationType, setting]);
 
   // ✅ عند التأكيد
-  // ✅ عند التأكيد
   const handleConfirm = () => {
     let hasError = false;
 
