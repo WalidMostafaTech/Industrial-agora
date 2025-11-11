@@ -1,7 +1,7 @@
 const CategoryBanner = ({ image, title }) => {
   return (
     <div className="relative h-[250px] lg:h-[300px] overflow-hidden group">
-      <img src={image} alt="category" className="w-full h-full object-cover" />
+      <img src={image} alt={title} className="w-full h-full object-cover" />
 
       {title && (
         <div className="absolute bottom-0 left-0 p-4 pe-20">
@@ -12,7 +12,7 @@ const CategoryBanner = ({ image, title }) => {
             }}
           />
 
-          <h3 className="text-2xl font-bold text-white capitalize relative z-10">
+          <h3 className="text-xl font-bold text-white capitalize relative z-10">
             {title}
           </h3>
         </div>

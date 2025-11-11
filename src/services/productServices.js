@@ -23,6 +23,7 @@ export const getProductsByCategory = async (categoryID, page = 1) => {
 
 export const getProductsByType = async (payload) => {
   const { data } = await api.get(`/get-products`, { params: payload });
+
   return data?.data || [];
 };
 

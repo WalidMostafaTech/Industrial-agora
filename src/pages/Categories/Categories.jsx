@@ -20,7 +20,7 @@ const Categories = () => {
   const { data: category } = useQuery({
     queryKey: ["category", id],
     queryFn: () => getCategoryDetails(id),
-    enabled: !!id, // يتفعل فقط لما يكون في id
+    enabled: !!id && id !== "all",
   });
 
   const [searchParams] = useSearchParams();
@@ -29,7 +29,7 @@ const Categories = () => {
   const { data: products, isLoading: productsLoading } = useQuery({
     queryKey: ["products-by-category", id, currentPage],
     queryFn: () => getProductsByCategory(id, currentPage),
-    enabled: !!id, // يتفعل فقط لما يكون في id
+    enabled: !!id,
   });
 
   return (

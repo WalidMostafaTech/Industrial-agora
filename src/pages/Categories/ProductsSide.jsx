@@ -17,7 +17,9 @@ const ProductsSide = ({ products = {}, category = {} }) => {
 
   return (
     <section className="space-y-8 lg:space-y-12 w-full">
-      <CategoryBanner image={category?.image} title={category?.title} />
+      {(category?.image || category?.title) && (
+        <CategoryBanner image={category?.image} title={category?.title} />
+      )}
 
       <ProductCardList ProductsList={products?.items} />
 

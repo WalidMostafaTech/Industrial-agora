@@ -3,7 +3,6 @@ import ideaIcon from "../../../assets/icons/5ec9ae4de2827d68b80c82ee643d00e16871
 import eyeIcon from "../../../assets/icons/193a563129355d056e72368071bf44766b45b1a7.png";
 import { Link } from "react-router-dom";
 import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 import { useSelector } from "react-redux";
 
 const MissionVisionSolution = () => {

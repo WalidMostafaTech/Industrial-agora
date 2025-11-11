@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import "swiper/css";
@@ -17,7 +16,7 @@ const Process = () => {
     isError,
   } = useQuery({
     queryKey: ["products", "process"],
-    queryFn: getProductsByType({ type: "outsource" }),
+    queryFn: () => getProductsByType({ type: "outsource" }),
   });
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -29,34 +28,35 @@ const Process = () => {
 
   return (
     <section className="sectionPadding bg-myBlue-1">
-      <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14">
-        Why Join Industrial Agora
+      <h2 className="text-white text-3xl lg:text-4xl font-bold text-center mb-10">
+        Process Outsource
       </h2>
 
       <div className="container relative">
-        {/* ✅ أزرار التقليب */}
-        <div className="flex justify-end mb-4 gap-3">
-          <button
-            className={`swiper-button-prev-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isBeginning
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
-            disabled={isBeginning}
-          >
-            <FaChevronLeft />
-          </button>
-          <button
-            className={`swiper-button-next-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isEnd
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
-            disabled={isEnd}
-          >
-            <FaChevronRight />
-          </button>
-        </div>
+        {products?.length > 3 && (
+          <div className="flex justify-end mb-4 gap-3">
+            <button
+              className={`swiper-button-prev-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
+                isBeginning
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myGreen hover:text-white"
+              }`}
+              disabled={isBeginning}
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              className={`swiper-button-next-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
+                isEnd
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myGreen hover:text-white"
+              }`}
+              disabled={isEnd}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
 
         {/* ✅ السلايدر */}
         <Swiper
@@ -68,8 +68,8 @@ const Process = () => {
             prevEl: ".swiper-button-prev-custom-process",
           }}
           breakpoints={{
-            1024: { slidesPerView: 2 },
-            1280: { slidesPerView: 3 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
           onInit={(swiper) => {
             setIsBeginning(swiper.isBeginning);
@@ -82,23 +82,28 @@ const Process = () => {
         >
           {products?.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="bg-white p-4 lg:p-8 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
-                <div className="w-full h-52 rounded-xl shadow-xl overflow-hidden">
+              <div className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full">
+                <div className="w-full h-52 rounded-xl shadow-xl overflow-hidden mb-4">
                   <img
-                    src={item.image}
-                    alt={item.title}
+                    src={item.first_image}
+                    alt={item.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-semibold">{item.title}</h3>
+                <h3 className="text-lg font-bold text-myBlue-1">{item.name}</h3>
                 <p className="text-gray-600 text-sm line-clamp-2 h-11">
-                  {item.paragraph}
+                  {item.description}
                 </p>
-                <Link className="animationBtn">see more</Link>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+
+      <div className="flex justify-center mt-10 lg:mt-14">
+        <Link to="/about-us" className="animationBtn light w-fit">
+          See More
+        </Link>
       </div>
     </section>
   );

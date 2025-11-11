@@ -2,7 +2,6 @@ import Marquee from "react-fast-marquee";
 import { useQuery } from "@tanstack/react-query";
 import { getPartners } from "../../../services/homeServices";
 import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 
 const Partners = () => {
   const {

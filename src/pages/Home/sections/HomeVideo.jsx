@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import EmptySection from "../../../components/sections/EmptySection";
 import LoadingSection from "../../../components/loading/LoadingSection";
 
 const HomeVideo = () => {
@@ -9,7 +8,6 @@ const HomeVideo = () => {
   const embedUrl = setting?.video_url?.replace("watch?v=", "embed/");
   // if (error || !embedUrl) return <EmptySection />;
   if (error || !embedUrl) return null;
-
 
   return (
     <section className="sectionPadding bg-myBlue-1">

@@ -6,7 +6,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Services = () => {

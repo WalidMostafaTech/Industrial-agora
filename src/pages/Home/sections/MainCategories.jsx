@@ -36,29 +36,30 @@ const MainCategories = () => {
       <div className="absolute inset-0 bg-stone-500/70"></div>
 
       <div className="container relative z-10">
-        {/* أزرار التقليب */}
-        <div className="flex justify-end mb-4 gap-3">
-          <button
-            className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isBeginning
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
-            disabled={isBeginning}
-          >
-            <FaChevronLeft />
-          </button>
-          <button
-            className={`swiper-button-next-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isEnd
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
-            disabled={isEnd}
-          >
-            <FaChevronRight />
-          </button>
-        </div>
+        {filterCategories?.length > 3 && (
+          <div className="flex justify-end mb-4 gap-3">
+            <button
+              className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
+                isBeginning
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myGreen hover:text-white"
+              }`}
+              disabled={isBeginning}
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              className={`swiper-button-next-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
+                isEnd
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myGreen hover:text-white"
+              }`}
+              disabled={isEnd}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
 
         <Swiper
           modules={[Navigation]}
@@ -70,7 +71,7 @@ const MainCategories = () => {
           }}
           breakpoints={{
             640: { slidesPerView: 2 },
-            1280: { slidesPerView: 3 },
+            1024: { slidesPerView: 3 },
           }}
           // ✅ هنا التحديث
           onInit={(swiper) => {
