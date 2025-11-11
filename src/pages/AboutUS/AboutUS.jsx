@@ -26,7 +26,11 @@ const AboutUS = () => {
     <section className="pagePadding">
       <PageTitle title="About us" />
 
-      <PageBanner image={pageData.image} title={pageData.title} />
+      <PageBanner
+        image={pageData.image}
+        title={pageData.title}
+        overlay="white"
+      />
 
       <div className="container mt-8 lg:mt-12">
         <AboutCardList data={pageData.blocks} border />

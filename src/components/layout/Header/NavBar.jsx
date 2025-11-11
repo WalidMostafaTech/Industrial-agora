@@ -41,7 +41,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     <>
       {/* ✅ Desktop Nav */}
       <nav
-        className="hidden w-max mx-auto xl:flex items-center justify-center gap-4 
+        className="hidden w-max mx-auto lg:flex items-center justify-center gap-2 lg:gap-4 
         absolute top-1/2 left-1/2 -translate-1/2"
       >
         {linksList.map((link) =>
@@ -69,13 +69,13 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu menu-lg bg-base-100 rounded-box z-1 min-w-60 p-2 shadow-sm text-lg"
+                  className="dropdown-content menu menu-sm bg-base-100 rounded-box z-1 min-w-60 p-2 shadow-sm text-lg"
                 >
                   {link.list.map((subLink) => (
                     <NavLink
                       to={subLink.link}
                       key={subLink.name}
-                      className="group flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
+                      className="group text-sm flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
                       onClick={() => {
                         setActiveNav(false);
                         setOpenLinks(null);
@@ -106,7 +106,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
 
       {/* ✅ Mobile Nav */}
       <nav
-        className={`flex xl:hidden flex-col w-full overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`flex lg:hidden flex-col w-full overflow-hidden transition-all duration-500 ease-in-out ${
           activeNav ? "max-h-screen pt-2" : "max-h-0"
         }`}
       >

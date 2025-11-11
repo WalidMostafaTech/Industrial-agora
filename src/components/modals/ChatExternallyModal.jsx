@@ -33,9 +33,9 @@ const ChatExternallyModal = ({
         <img
           src={icon}
           alt="chat externally icon"
-          className="w-18 mx-auto mb-8"
+          className="w-16 mx-auto mb-8"
         />
-        <p className="text-center text-lg font-semibold">
+        <p className="text-center font-semibold">
           You are leaving the Agora platform, and any transactions outside of it
           are at your own risk and we are not responsible for them.
         </p>

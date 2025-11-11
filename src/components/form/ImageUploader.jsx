@@ -43,14 +43,14 @@ const ImageUploader = ({
       <p className="font-medium text-gray-900 mb-2">{label}</p>
 
       {/* Upload Button */}
-      <div className="mt-4 grid grid-cols-3 md:grid-cols-5 gap-2">
+      <div className="mt-4 grid grid-cols-3 md:grid-cols-4 gap-2">
         <label
           htmlFor="product_images"
-          className="w-full aspect-square flex flex-col items-center justify-center gap-2
+          className="w-full aspect-square flex flex-col items-center justify-center gap-2 p-2
           border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-myBlue-2 hover:bg-gray-50 transition"
         >
           <FiCamera className="text-3xl text-gray-500" />
-          <span className="text-gray-500 text-sm">Upload Images</span>
+          <span className="text-gray-500 text-xs">Upload Images</span>
           <input
             id="product_images"
             type="file"

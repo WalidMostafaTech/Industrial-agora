@@ -131,7 +131,7 @@ const AddProduct = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="whiteContainer space-y-6 max-w-3xl mx-auto"
+        className="whiteContainer space-y-6 max-w-xl mx-auto"
       >
         <FormTitle
           title="Add a Product"
@@ -179,14 +179,14 @@ const AddProduct = () => {
           </p>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="length" className="font-medium text-gray-900">
+            <label htmlFor="length" className="font-medium text-gray-900 text-sm">
               Length:
             </label>
             <input
               type="number"
               id="length"
               {...register("length")}
-              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.length && (
               <p className="text-red-500 text-sm">{errors.length.message}</p>
@@ -194,14 +194,14 @@ const AddProduct = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="width" className="font-medium text-gray-900">
+            <label htmlFor="width" className="font-medium text-gray-900 text-sm">
               Width:
             </label>
             <input
               type="number"
               id="width"
               {...register("width")}
-              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.width && (
               <p className="text-red-500 text-sm">{errors.width.message}</p>
@@ -209,14 +209,14 @@ const AddProduct = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="height" className="font-medium text-gray-900">
+            <label htmlFor="height" className="font-medium text-gray-900 text-sm">
               Height:
             </label>
             <input
               type="number"
               id="height"
               {...register("height")}
-              className="w-full bg-white outline-none border-none p-3 rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.height && (
               <p className="text-red-500 text-sm">{errors.height.message}</p>
@@ -249,13 +249,13 @@ const AddProduct = () => {
         />
         {/* Privacy Policy */}
         <div className="form-control">
-          <label className="label cursor-pointer justify-start gap-3">
+          <label className="label cursor-pointer justify-start gap-2">
             <input
               type="checkbox"
-              className="checkbox checkbox-neutral"
+              className="checkbox checkbox-neutral checkbox-xs"
               {...register("accept_privacy_policy")}
             />
-            <span className="label-text text-gray-700">
+            <span className="label-text text-gray-700 text-sm">
               Accept privacy policy
             </span>
           </label>

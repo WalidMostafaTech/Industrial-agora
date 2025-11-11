@@ -61,12 +61,11 @@ const Login = () => {
         {/* ✅ Login Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="whiteContainer space-y-6"
+          className="whiteContainer space-y-6 order-1 lg:order-2"
         >
           <FormTitle
             title="Account Login"
             subtitle="If you are already a member you can login with your email address and password."
-            position="start"
           />
 
           <MainInput
@@ -84,7 +83,7 @@ const Login = () => {
             error={errors.password?.message}
           />
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-sm">
             <div className="flex items-center">
               <input
                 id="remember_me"
@@ -110,14 +109,23 @@ const Login = () => {
           <FormError errorMsg={error?.response?.data?.message} />
 
           <FormBtn loading={isPending} title={"Login"} />
+
+          <div className="text-sm text-center">
+            Don&apos;t have an account?{" "}
+            <Link
+              to="/register"
+              className="font-medium text-myBlue-2 hover:brightness-75 hover:underline"
+            >
+              Sign up here
+            </Link>
+          </div>
         </form>
 
         {/* ✅ Register Section */}
-        <div className="whiteContainer flex flex-col items-center justify-between">
+        <div className="whiteContainer flex flex-col items-center justify-between order-2 lg:order-1">
           <FormTitle
-            title="New Customer"
+            title="New Member"
             subtitle="Creating an account on our website allows you to have an easier and faster shopping experience, keep track of your order status, and easily view your previous purchase history."
-            position="start"
           />
 
           <Link to="/register" className="animationBtn">

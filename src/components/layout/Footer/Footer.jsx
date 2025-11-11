@@ -66,13 +66,13 @@ const Footer = () => {
 
   const FooterComponent = ({ title, links }) => (
     <div>
-      <h3 className="text-xl lg:text-2xl font-bold mb-4">{title}</h3>
-      <ul className="space-y-2">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <ul className="space-y-1">
         {links.map((link, index) => (
           <li key={index}>
             <Link
               to={link.url}
-              className="hover:text-myBlue-2 transition-colors"
+              className="hover:text-myBlue-2 transition-colors text-sm font-semibold"
             >
               {link.name}
             </Link>
@@ -85,16 +85,13 @@ const Footer = () => {
   return (
     <footer className="bg-white">
       <div className="container flex justify-between items-center flex-wrap gap-4 pt-8">
-        <img src={logoImg} alt="Logo" className="w-48 lg:w-56" />
+        <img src={logoImg} alt="Logo" className="w-48 lg:w-52" />
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex gap-2 lg:gap-4 w-full lg:max-w-lg"
-        >
+        <form onSubmit={handleSubmit} className="flex gap-2 w-full lg:max-w-lg">
           <input
             type="email"
             placeholder="Enter your email"
-            className="p-2 lg:px-4 border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
+            className="p-2 lg:px-4 text-sm border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -122,28 +119,28 @@ const Footer = () => {
             <a
               href="#"
               target="_blank"
-              className="text-3xl hover:text-myBlue-2 duration-300"
+              className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <FaFacebook />
             </a>
             <a
               href="#"
               target="_blank"
-              className="text-4xl hover:text-myBlue-2 duration-300"
+              className="text-3xl hover:text-myBlue-2 duration-300"
             >
               <IoLogoLinkedin />
             </a>
             <a
               href="#"
               target="_blank"
-              className="text-3xl hover:text-myBlue-2 duration-300"
+              className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <BsTwitterX />
             </a>
             <a
               href="#"
               target="_blank"
-              className="text-3xl hover:text-myBlue-2 duration-300"
+              className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <FaInstagram />
             </a>
@@ -160,8 +157,9 @@ const Footer = () => {
       </div>
 
       <div className="bg-myBlue-1 p-4">
-        <div className="text-center">
-          <p className="text-white">All rights reserved to @Techno Masr</p>
+        <div className="container text-center text-white text-sm flex items-center justify-between">
+          <p>All Copyrights are reserved my Mamdou Ghaneemy</p>
+          <p>Prepared by @Techno Masr</p>
         </div>
       </div>
 

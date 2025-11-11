@@ -47,11 +47,11 @@ const Header = () => {
         className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
         ref={headerRef}
       >
-        <div className="flex flex-col p-4 xl:py-6 bg-white/70 backdrop-blur shadow-md rounded-3xl">
+        <div className="flex flex-col p-4 bg-stone-300/70 backdrop-blur shadow-md rounded-3xl">
           <div className="flex items-center justify-between gap-2 w-full">
             <div className="flex items-center gap-1">
               <span
-                className="text-3xl text-myBlue-2 cursor-pointer xl:hidden"
+                className="text-2xl text-myBlue-2 cursor-pointer lg:hidden"
                 onClick={() => {
                   setActiveNav((prev) => !prev);
                   setOpenLinks(null);
@@ -68,13 +68,13 @@ const Header = () => {
                   loading="lazy"
                   src={logoMap}
                   alt="Logo"
-                  className="w-10 xl:w-14 group-hover:scale-125 duration-300"
+                  className="w-10 xl:w-12 group-hover:scale-125 duration-300"
                 />
                 <img
                   loading="lazy"
                   src={logoText}
                   alt="Logo"
-                  className="w-22 xl:w-28 group-hover:translate-x-2 duration-300"
+                  className="w-22 xl:w-26 group-hover:translate-x-2 duration-300"
                 />
               </Link>
             </div>

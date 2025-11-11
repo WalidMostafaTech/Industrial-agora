@@ -52,7 +52,7 @@ const SearchModal = ({ openSearch, onClose }) => {
       onClick={handleClose}
     >
       <div
-        className="modal-box p-0 shadow-none w-11/12 max-w-7xl bg-transparent absolute top-4"
+        className="modal-box p-0 shadow-none w-11/12 max-w-6xl bg-transparent absolute top-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 🔍 Search Input */}
@@ -63,7 +63,7 @@ const SearchModal = ({ openSearch, onClose }) => {
           >
             <input
               placeholder="Search..."
-              className="w-full bg-white/70 text-lg p-2 outline-0 border-0"
+              className="w-full bg-white/70 p-2 outline-0 border-0"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -103,7 +103,7 @@ const SearchModal = ({ openSearch, onClose }) => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-lg lg:text-2xl font-semibold line-clamp-2">
+                <h4 className="text-lg font-semibold line-clamp-2">
                   {product.name}
                 </h4>
               </Link>
@@ -124,7 +124,7 @@ const SearchModal = ({ openSearch, onClose }) => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-lg lg:text-2xl font-semibold line-clamp-2">
+                <h4 className="text-lg font-semibold line-clamp-2">
                   {category.title}
                 </h4>
               </Link>

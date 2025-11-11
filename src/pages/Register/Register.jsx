@@ -76,10 +76,10 @@ const Register = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="whiteContainer space-y-6 max-w-3xl mx-auto"
+        className="whiteContainer space-y-6 max-w-xl mx-auto"
       >
         <FormTitle
-          title="Account sign up"
+          title="Account signup"
           subtitle="Become a member and enjoy exclusive promotions."
         />
 
@@ -167,7 +167,7 @@ const Register = () => {
             />
             <label
               htmlFor="privacy_policy"
-              className="ms-2 block text-gray-600"
+              className="ms-2 block text-gray-600 text-sm"
             >
               Accept privacy policy
             </label>

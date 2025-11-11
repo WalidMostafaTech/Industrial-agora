@@ -27,7 +27,7 @@ const MsgsContainer = ({ messages = [] }) => {
   return (
     <div
       ref={containerRef}
-      className="h-full overflow-y-auto bg-gray-100 m-4 p-2 rounded-xl"
+      className="h-full overflow-y-auto bg-gray-100 m-4 p-2 rounded-md"
     >
       {messages.map((msg, index) => {
         const isUser = msg.sender_id === profile?.id;
@@ -38,10 +38,10 @@ const MsgsContainer = ({ messages = [] }) => {
 
         // 🔹 تعديل الزوايا بشكل واضح حسب التتابع
         const bubbleRadius = isUser
-          ? `rounded-2xl ${sameSenderPrev ? "rounded-tr" : ""} ${
+          ? `rounded-lg ${sameSenderPrev ? "rounded-tr" : ""} ${
               sameSenderNext ? "rounded-br" : ""
             }`
-          : `rounded-2xl ${sameSenderPrev ? "rounded-tl" : ""} ${
+          : `rounded-lg ${sameSenderPrev ? "rounded-tl" : ""} ${
               sameSenderNext ? "rounded-bl" : ""
             }`;
 
@@ -53,16 +53,16 @@ const MsgsContainer = ({ messages = [] }) => {
             }`}
           >
             <div
-              className={`max-w-[280px] md:max-w-xl p-2 px-3 shadow-md ${bubbleRadius} ${
+              className={`max-w-[280px] md:max-w-xl p-1.5 px-2 shadow-md ${bubbleRadius} ${
                 isUser ? "bg-myBlue-2 text-white" : "bg-white text-gray-900"
               }`}
             >
-              <p className="text-sm lg:text-lg font-semibold break-all">
+              <p className="text-sm font-semibold break-all">
                 {msg.message}
               </p>
 
               <span
-                className={`text-xs w-fit block ml-auto mt-1 p-1 rounded-md ${
+                className={`text-[10px] w-fit block ml-auto mt-1 p-0.5 rounded ${
                   isUser ? "bg-white/5" : "bg-black/5"
                 }`}
               >

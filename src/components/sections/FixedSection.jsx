@@ -16,22 +16,19 @@ const FixedSection = () => {
 
   return (
     <section className="fixed start-0 top-1/2 translate-y-1/2 z-30">
-      <div className="flex flex-col items-start gap-2 lg:gap-4">
+      <div className="flex flex-col items-start gap-2">
         {list.map((item) => (
           <a
             key={item.id}
             href={item.link}
             target="_blank"
-            className="bg-white p-1 pe-2 lg:p-2 lg:pe-4 shadow-lg rounded-e-full flex items-center gap-1 lg:gap-2 group"
+            className="bg-white p-1 pe-2 shadow-lg rounded-e-full flex items-center gap-1 lg:gap-2 group"
           >
-            <p className="lg:text-xl capitalize max-w-0 overflow-hidden group-hover:max-w-32 transition-all ease-in-out duration-500">
+            <p className="lg:text-sm font-semibold capitalize max-w-0 overflow-hidden group-hover:max-w-32 transition-all ease-in-out duration-500">
               {item.title}
             </p>
 
-            <span
-              className="text-3xl lg:text-4xl"
-              style={{ color: `${item.color}` }}
-            >
+            <span className="text-3xl" style={{ color: `${item.color}` }}>
               {item.icon}
             </span>
           </a>

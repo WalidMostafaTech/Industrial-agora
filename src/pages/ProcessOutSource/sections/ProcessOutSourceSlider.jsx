@@ -89,8 +89,8 @@ const ProcessOutSourceSlider = () => {
                 <div className="absolute inset-0 bg-black/40"></div>
 
                 {/* النصوص */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl md:text-2xl font-bold mb-2">
+                <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 p-6 text-white">
+                  <h3 className="text-xl md:text-2xl font-bold mb-1">
                     {item.title}
                   </h3>
                   <p className="text-sm md:text-base leading-relaxed">

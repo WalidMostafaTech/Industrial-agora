@@ -29,7 +29,7 @@ const Process = () => {
 
   return (
     <section className="sectionPadding bg-myBlue-1">
-      <h2 className="text-white text-3xl lg:text-5xl font-bold text-center mb-6 lg:mb-10">
+      <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14">
         Why Join Industrial Agora
       </h2>
 
@@ -83,15 +83,15 @@ const Process = () => {
           {products?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="bg-white p-4 lg:p-8 rounded-2xl flex flex-col items-center gap-4 text-center h-full">
-                <div className="w-full h-52 lg:h-64 rounded-xl shadow-xl overflow-hidden">
+                <div className="w-full h-52 rounded-xl shadow-xl overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <p className="text-gray-600 line-clamp-2 h-12">
+                <h3 className="text-xl font-semibold">{item.title}</h3>
+                <p className="text-gray-600 text-sm line-clamp-2 h-11">
                   {item.paragraph}
                 </p>
                 <Link className="animationBtn">see more</Link>

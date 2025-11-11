@@ -19,7 +19,7 @@ const MainInput = ({
   const isPassword = type === "password";
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
-  const commonInputClasses = `w-full lg:text-lg bg-white outline-none border-none p-3 rounded-md ring-1 transition-all ${
+  const commonInputClasses = `w-full text-sm bg-white outline-none border-none p-2 rounded-md ring-1 transition-all ${
     isPassword && "pe-10"
   } ${
     error
@@ -30,14 +30,14 @@ const MainInput = ({
   const commonLabel = label && (
     <label
       htmlFor={id}
-      className="block w-fit font-semibold mb-2 text-sm lg:text-base capitalize"
+      className="block w-fit font-semibold mb-1 text-sm capitalize"
     >
       {label} :
     </label>
   );
 
   const commonError = error && (
-    <p className="mt-2 flex items-center gap-1 text-sm text-red-600">{error}</p>
+    <p className="mt-2 flex items-center gap-1 text-xs text-red-600">{error}</p>
   );
 
   if (type === "textarea") {
@@ -60,50 +60,18 @@ const MainInput = ({
     );
   }
 
-  // if (type === "select") {
-  //   return (
-  //     <div>
-  //       {commonLabel}
-  //       <div className="relative">
-  //         {icon && (
-  //           <span className="text-neutral-500 absolute top-1/2 -translate-y-1/2 start-2 pointer-events-none text-2xl">
-  //             {icon}
-  //           </span>
-  //         )}
-  //         <select
-  //           id={id}
-  //           name={id}
-  //           value={value}
-  //           onChange={onChange}
-  //           onBlur={onBlur}
-  //           disabled={disabled}
-  //           className={commonInputClasses}
-  //         >
-  //           {options.map((option, idx) => (
-  //             <option key={`${option.value}-${idx}`} value={option.value}>
-  //               {option.label}
-  //             </option>
-  //           ))}
-  //         </select>
-  //       </div>
-  //       {commonError}
-  //     </div>
-  //   );
-  // }
-
   if (type === "select") {
     return (
       <div>
         {commonLabel}
         <select
-          defaultValue="Pick a font"
           id={id}
           name={id}
           value={value}
           onChange={onChange}
           onBlur={onBlur}
           disabled={disabled}
-          className={`select select-ghost select-lg ${commonInputClasses}`}
+          className={`select select-ghost select-md outline-none! ${commonInputClasses}`}
           {...rest}
         >
           {placeholder && <option value="">{placeholder}</option>}

@@ -28,9 +28,9 @@ const ChatLocalModal = ({ openModal, onClose, chatId, setDisabledBtns }) => {
         <img
           src={icon}
           alt="chat externally icon"
-          className="w-18 mx-auto mb-8"
+          className="w-16 mx-auto mb-8"
         />
-        <p className="text-center text-lg font-semibold">
+        <p className="text-center font-semibold">
           You are now inside the Agora platform, all our services are available
           to you and under our responsibility
         </p>

@@ -21,7 +21,7 @@ const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
         </>
       ) : (
         <div className="flex-grow flex items-center justify-center p-4">
-          <p className="text-white text-center text-lg bg-myBlue-1 py-2 px-4 rounded-full">
+          <p className="text-white text-center text-sm bg-myBlue-1 py-2 px-4 rounded-full">
             Select a chat to start messaging
           </p>
         </div>

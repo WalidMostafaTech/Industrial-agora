@@ -96,8 +96,8 @@ const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {
         }
       }}
     >
-      <div className="modal-box max-w-md space-y-6">
-        <h3 className="font-bold text-xl text-center">
+      <div className="modal-box max-w-md space-y-4">
+        <h3 className="font-bold text-lg text-center">
           Specify the period to know the commission value
         </h3>
 
@@ -127,7 +127,7 @@ const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {
                 setDurationType(type);
                 setDurationTypeError("");
               }}
-              className={`px-4 py-2 border rounded-lg font-medium transition-all cursor-pointer
+              className={`px-3 py-1 text-sm border rounded-lg font-medium transition-all cursor-pointer
                 ${
                   durationType === type
                     ? "bg-myBlue-2 text-white border-myBlue-2"
@@ -156,7 +156,7 @@ const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {
             </p>
             <p className="font-semibold mt-1">
               Calculated commission:{" "}
-              <span className="font-bold text-lg text-myBlue-1">
+              <span className="font-bold text-sm text-myBlue-1">
                 {commission}
               </span>{" "}
               riyals

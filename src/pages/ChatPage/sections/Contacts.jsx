@@ -24,7 +24,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
   if (!chats)
     return (
       <div className="h-full p-4 flex items-center justify-center">
-        <p className="text-white text-center text-lg bg-myBlue-1 py-2 px-4 rounded-full">
+        <p className="text-white text-center text-sm bg-myBlue-1 py-2 px-4 rounded-full">
           No contacts available.
         </p>
       </div>
@@ -32,7 +32,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
 
   return (
     <aside className="h-full overflow-y-auto py-4">
-      <div className="h-full overflow-y-auto space-y-4 px-4">
+      <div className="h-full overflow-y-auto space-y-2 px-4">
         {chats.map((contact) => (
           <ContactCard
             key={contact.id}

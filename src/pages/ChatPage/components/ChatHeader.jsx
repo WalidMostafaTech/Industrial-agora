@@ -25,13 +25,13 @@ const ChatHeader = ({ contact = {}, setShowChat, chatId }) => {
       <div className="flex-1 flex items-center gap-2">
         <Avatar name={contact?.name} />
         <div className="flex-1">
-          <h4 className="text-base lg:text-2xl font-bold capitalize line-clamp-1 flex-1 break-all">
+          <h4 className="text-base font-bold capitalize line-clamp-1 flex-1 break-all">
             {contact?.name}
           </h4>
 
           <Link
             to={`/product/${contact?.product_id}`}
-            className="text-base lg:text-lg font-medium text-myBlue-2 line-clamp-1 break-all w-fit"
+            className="text-sm font-medium text-myBlue-2 line-clamp-1 break-all w-fit"
           >
             {contact?.product_name}
           </Link>
@@ -42,7 +42,7 @@ const ChatHeader = ({ contact = {}, setShowChat, chatId }) => {
         <button
           onClick={() => setOpenExternallyModal(true)}
           disabled={disabledBtns}
-          className={`bg-red-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition ${
+          className={`bg-red-700 text-white text-sm py-1 px-2 rounded-md cursor-pointer hover:brightness-90 transition ${
             disabledBtns ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -52,7 +52,7 @@ const ChatHeader = ({ contact = {}, setShowChat, chatId }) => {
         <button
           onClick={() => setOpenLocalModal(true)}
           disabled={disabledBtns}
-          className={`bg-green-700 text-white text-sm lg:text-lg py-1 px-2 lg:py-2 lg:px-4 rounded-md cursor-pointer hover:brightness-90 transition ${
+          className={`bg-green-700 text-white text-sm py-1 px-2 rounded-md cursor-pointer hover:brightness-90 transition ${
             disabledBtns ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

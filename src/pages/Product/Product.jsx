@@ -31,11 +31,13 @@ const Product = () => {
       </div>
     );
 
+  const tags = ["Hydraulcs", "Hydraclcs", "PUMP"];
+
   return (
     <article className="container pagePadding space-y-6 lg:space-y-12">
       <section className="whiteContainer">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="w-full md:w-1/3 h-[300px] overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-4 lg:gap-12">
+          <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
             <img
               src={product?.images[0]}
               alt={product?.name}
@@ -44,9 +46,9 @@ const Product = () => {
           </div>
 
           <div className="flex-1 space-y-4">
-            <h2 className="text-lg lg:text-3xl font-bold">{product?.name}</h2>
+            <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
 
-            <div className="space-y-1 text-gray-700">
+            <div className="space-y-1 text-stone-700">
               <p>Length : {product?.length}</p>
               <p>Width : {product?.width}</p>
               <p>Height : {product?.height}</p>
@@ -58,8 +60,8 @@ const Product = () => {
             </p>
 
             {product?.quantity && (
-              <p className="border-b border-gray-300 flex justify-end">
-                <span className="bg-gray-200 py-1 px-2">
+              <p className="border-b border-stone-300 flex justify-end">
+                <span className="bg-stone-200 py-1 px-2 text-sm">
                   {product?.quantity} IN STOCK
                 </span>
               </p>
@@ -79,21 +81,21 @@ const Product = () => {
 
       {/* <ProductsForms /> */}
 
-      {/* <div className="whiteContainer relative max-w-3xl mx-auto mt-16 flex flex-wrap justify-center gap-1">
+      <div className="whiteContainer relative max-w-2xl mx-auto mt-16 lg:mt-24 flex flex-wrap justify-center gap-1">
         <h3
-          className="text-xl lg:text-3xl text-myBlue-2 font-bold border-b-3 border-myBlue-2 
+          className="text-xl lg:text-2xl text-myBlue-2 font-bold border-b-3 border-myBlue-2 
         absolute bottom-full left-1/2 -translate-x-1/2"
         >
           PRODUCT TAGS
         </h3>
 
-        {product?.tags.map((tag, index) => (
-          <span key={index} className="text-gray-500 text-lg font-semibold">
+        {tags.map((tag, index) => (
+          <span key={index} className="text-stone-500 text-lg font-semibold">
             {tag}
-            {product?.tags.length - 1 !== index && ","}
+            {tags.length - 1 !== index && ","}
           </span>
         ))}
-      </div> */}
+      </div>
 
       <SendMsgModal
         openModal={openMsg}

@@ -28,7 +28,7 @@ export default function HeroSection() {
   if (isError || !sliders) return <EmptySection />;
 
   return (
-    <section className="relative w-full h-[80vh]">
+    <section className="relative w-full h-screen">
       <Swiper
         slidesPerView={1}
         effect="fade"
@@ -68,11 +68,11 @@ export default function HeroSection() {
                   />
                 </div>
 
-                <div className="p-6 lg:p-12 pe-0 space-y-6 lg:space-y-12">
-                  <h1 className="text-white text-3xl lg:text-6xl font-bold leading-tight max-w-4xl">
+                <div className="p-6 lg:p-12 pe-0 space-y-4 lg:space-y-8">
+                  <h1 className="text-white text-2xl lg:text-5xl font-bold leading-tight max-w-4xl">
                     {slide.title}
                   </h1>
-                  <p className="text-gray-200 text-xl max-w-2xl">
+                  <p className="text-gray-200 text-base lg:text-lg max-w-xl">
                     {slide.paragraph}
                   </p>
 
@@ -97,7 +97,7 @@ export default function HeroSection() {
       {/* Prev Button */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
-        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center bg-white/50
+        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-white/50
       rounded-xl hover:bg-white/70 transition z-10 cursor-pointer"
       >
         <LuChevronLeft className="text-myBlue-2 text-4xl" />
@@ -106,7 +106,7 @@ export default function HeroSection() {
       {/* Next Button */}
       <button
         onClick={() => swiperRef.current?.slideNext()}
-        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center bg-white/50
+        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-white/50
       rounded-xl hover:bg-white/70 transition z-10 cursor-pointer"
       >
         <LuChevronRight className="text-myBlue-2 text-4xl" />

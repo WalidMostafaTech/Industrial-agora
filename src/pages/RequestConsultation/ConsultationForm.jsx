@@ -67,14 +67,12 @@ const ConsultationForm = ({ types }) => {
     >
       <div className="flex items-center gap-2">
         <span
-          className="bg-myBlue-1 text-white text-2xl lg:text-3xl font-bold 
-              w-8 lg:w-10 h-8 lg:h-10 flex items-center justify-center rounded-full"
+          className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 
+              w-8 h-8 flex items-center justify-center rounded-full"
         >
           1
         </span>
-        <p className="font-bold text-xl lg:text-2xl text-myBlue-1">
-          Company information
-        </p>
+        <p className="font-bold text-xl text-myBlue-1">Company information</p>
       </div>
 
       <MainInput
@@ -109,14 +107,12 @@ const ConsultationForm = ({ types }) => {
 
       <div className="flex items-center gap-2">
         <span
-          className="bg-myBlue-1 text-white text-2xl lg:text-3xl font-bold 
-              w-8 lg:w-10 h-8 lg:h-10 flex items-center justify-center rounded-full"
+          className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 
+              w-8 h-8 flex items-center justify-center rounded-full"
         >
           2
         </span>
-        <p className="font-bold text-xl lg:text-2xl text-myBlue-1">
-          Consultation details
-        </p>
+        <p className="font-bold text-xl text-myBlue-1">Consultation details</p>
       </div>
 
       <MainInput
@@ -124,10 +120,6 @@ const ConsultationForm = ({ types }) => {
         id="consultation_type"
         type="select"
         placeholder="Select consultation type"
-        // options={[
-        //   { value: "1", label: "Production Optimization" },
-        //   { value: "2", label: "Material Efficiency" },
-        // ]}
         options={types?.map((type) => ({
           value: type,
           label: type,
@@ -149,10 +141,10 @@ const ConsultationForm = ({ types }) => {
         <label className="label cursor-pointer justify-start gap-3">
           <input
             type="checkbox"
-            className="checkbox checkbox-neutral"
+            className="checkbox checkbox-neutral checkbox-sm"
             {...register("accept_privacy_policy")}
           />
-          <span className="label-text text-gray-700">
+          <span className="text-sm text-gray-700">
             I agree to the{" "}
             <span className="text-myBlue-1 font-semibold cursor-pointer">
               Privacy Policy
@@ -175,7 +167,7 @@ const ConsultationForm = ({ types }) => {
         )}
       </button>
 
-      <p className="font-bold text-xl lg:text-2xl text-myBlue-1 text-center">
+      <p className="font-bold text-xl text-myBlue-1 text-center">
         We’ll get back to you within 24 hours
       </p>
     </form>

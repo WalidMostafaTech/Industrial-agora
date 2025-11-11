@@ -43,7 +43,7 @@ const RequestConsultation = () => {
             {consultationSettings?.solutions.map((point, index) => (
               <li key={index} className="flex items-start gap-2">
                 <img src={checkIcon} alt="check icon" className="w-8 lg:w-10" />
-                <p className="lg:text-2xl pt-2">{point}</p>
+                <p className="lg:text-lg font-semibold pt-2">{point}</p>
               </li>
             ))}
           </ul>

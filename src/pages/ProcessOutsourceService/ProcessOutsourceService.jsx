@@ -23,12 +23,12 @@ const ProcessOutsourceService = () => {
     <section className="container pagePadding">
       <PageTitle title="Process Outsource" />
 
-      <div className="whiteContainer max-w-3xl mx-auto space-y-6">
+      <div className="whiteContainer max-w-xl mx-auto space-y-6">
         <hgroup className="text-center border-b border-gray-300 flex items-center justify-evenly">
           {titles.map((title) => (
             <h3
               key={title.id}
-              className={`lg:text-xl font-bold border-b-3 pb-2 uppercase cursor-pointer translate-y-0.5 ${
+              className={`text-sm lg:text-lg font-bold border-b-3 pb-2 uppercase cursor-pointer translate-y-0.5 ${
                 active === title.link
                   ? "text-myBlue-2 border-myBlue-2"
                   : "text-gray-400 border-transparent"

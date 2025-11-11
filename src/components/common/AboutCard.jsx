@@ -1,9 +1,9 @@
 const AboutCard = ({ title, paragraph, image }) => {
   return (
     <div
-      className={`flex items-center justify-between flex-col lg:flex-row even:lg:flex-row-reverse gap-4 lg:gap-12 not-last:border-b-2 border-myBlue-2 pb-4 lg:pb-12`}
+      className={`flex items-center justify-between flex-col lg:flex-row odd:lg:flex-row-reverse gap-4 lg:gap-12 not-last:border-b border-myBlue-2 pb-4 lg:pb-16`}
     >
-      <div className="lg:w-2/5 max-h-72 overflow-hidden">
+      <div className="lg:w-2/5 max-h-72 overflow-hidden rounded">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
 
@@ -16,7 +16,7 @@ const AboutCard = ({ title, paragraph, image }) => {
           </h3>
         </div>
 
-        <p className="text-gray-600 lg:text-lg">{paragraph}</p>
+        <p className="text-gray-700 lg:text-lg">{paragraph}</p>
       </div>
     </div>
   );

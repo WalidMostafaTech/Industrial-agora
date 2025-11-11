@@ -27,7 +27,7 @@ const Services = () => {
 
   return (
     <section className="sectionPadding my-8 container relative">
-      <h2 className="text-myBlue-1 text-3xl lg:text-5xl font-bold text-center mb-10 lg:mb-14">
+      <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14">
         Why Join Industrial Agora
       </h2>
 
@@ -70,17 +70,19 @@ const Services = () => {
           {items.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="flex flex-col items-center lg:items-start gap-1 group">
-                <span className="h-22 overflow-hidden mb-4">
+                <span className="h-18 overflow-hidden mb-4">
                   <img
                     src={item.icon}
                     alt={item.title}
                     className="w-full h-full object-contain"
                   />
                 </span>
-                <h3 className="text-2xl font-semibold text-myBlue-1">
+                <h3 className="text-xl font-bold text-myBlue-1">
                   {item.title}
                 </h3>
-                <p className="text-gray-500 text-center lg:text-start">{item.paragraph}</p>
+                <p className="text-gray-500 text-sm text-center lg:text-start">
+                  {item.paragraph}
+                </p>
               </div>
             </SwiperSlide>
           ))}
@@ -88,7 +90,9 @@ const Services = () => {
       </div>
 
       <div className="flex justify-center mt-10 lg:mt-14">
-        <Link to="/login" className="animationBtn">get started</Link>
+        <Link to="/login" className="animationBtn">
+          get started
+        </Link>
       </div>
     </section>
   );

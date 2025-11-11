@@ -44,7 +44,7 @@ const MissionVisionSolution = () => {
         {MissionVisionSolutionList.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-col items-center justify-center gap-4 text-center group p-6`}
+            className={`flex flex-col items-center justify-center gap-4 text-center group p-6 rounded`}
             style={{
               gridRow: index === 1 ? "span 2 / span 2" : undefined,
               backgroundColor: item.color,

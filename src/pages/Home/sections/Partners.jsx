@@ -20,7 +20,7 @@ const Partners = () => {
 
   return (
     <section className="sectionPadding my-8">
-      <h2 className="text-myBlue-1 text-3xl lg:text-5xl font-bold text-center mb-10 lg:mb-14 uppercase">
+      <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14 uppercase">
         Our Partners
       </h2>
 
@@ -30,7 +30,7 @@ const Partners = () => {
             key={item.id}
             href={item.url}
             target="_blank"
-            className="h-24 w-32 lg:w-52 overflow-hidden flex items-center justify-center mx-4 lg:mx-10"
+            className="h-24 w-32 lg:w-48 overflow-hidden flex items-center justify-center mx-4 lg:mx-10"
           >
             <img
               src={item.logo}

@@ -75,9 +75,12 @@ const ContactUs = () => {
     <article className="container pagePadding">
       <PageTitle title="Contact Us" />
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-16 whiteContainer">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 whiteContainer">
         {/* ✅ Contact Form */}
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="space-y-4 md:space-y-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <MainInput
             label="Full Name"
             id="name"
@@ -110,21 +113,21 @@ const ContactUs = () => {
           <img
             src={contactUsImg}
             alt="contact us"
-            className="w-4/5 mb-8 mx-auto hidden xl:block"
+            className="w-full xl:w-4/5 mb-8 mx-auto hidden md:block rounded-md shadow-md"
           />
 
-          <div className="flex flex-wrap justify-between gap-4">
+          <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-2">
             {contactUsList.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 text-myBlue-1 group"
+                className="flex items-center gap-2 text-myBlue-1 group"
               >
-                <span className="text-5xl group-hover:scale-130 duration-300">
+                <span className="text-3xl group-hover:scale-120 duration-300">
                   {item.icon}
                 </span>
-                <div>
+                <div className="text-sm">
                   <p className="font-bold">{item.label}</p>
-                  <p>{item.value}</p>
+                  <p className="text-xs">{item.value}</p>
                 </div>
               </div>
             ))}

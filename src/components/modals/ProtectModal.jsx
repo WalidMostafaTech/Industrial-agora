@@ -14,16 +14,12 @@ const ProtectModal = ({
   return createPortal(
     <dialog className={`modal modal-open`} onClick={onClose}>
       <div
-        className="modal-box space-y-4 text-center"
+        className="modal-box space-y-2 text-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={icon}
-          alt="chat externally icon"
-          className="w-18 mx-auto"
-        />
+        <img src={icon} alt="chat externally icon" className="w-16 mx-auto" />
         <h3 className="font-bold text-lg">{title}</h3>
-        <p>{message}</p>
+        <p className="text-sm">{message}</p>
         <div className="modal-action">
           <button onClick={onClose} className="mainBtn danger">
             Close

@@ -24,7 +24,7 @@ const ContactCard = ({ contact = {}, activeChat, handleClick }) => {
       <Avatar name={contactList.name} active={activeChat === contactList.id} />
       <div className="flex-1">
         <div className="w-full flex justify-between gap-2">
-          <h4 className="text-lg lg:text-2xl font-bold capitalize line-clamp-1 flex-1 break-all">
+          <h4 className="text-lg font-bold capitalize line-clamp-1 flex-1 break-all">
             {contactList.name}
           </h4>
           {contactList.new_messages > 0 && (
@@ -32,8 +32,11 @@ const ContactCard = ({ contact = {}, activeChat, handleClick }) => {
               {contactList.new_messages}
             </span>
           )}
+          <span className="bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            23
+          </span>
         </div>
-        <p className="text-sm lg:text-base font-medium line-clamp-1 break-all">
+        <p className="text-sm font-medium line-clamp-1 break-all">
           {contactList.last_message}
         </p>
       </div>

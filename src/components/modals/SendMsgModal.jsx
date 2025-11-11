@@ -57,8 +57,8 @@ const SendMsgModal = ({ openModal, onClose, productId }) => {
         className="modal-box bg-base-100"
         onClick={(e) => e.stopPropagation()}
       >
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <h3 className="text-xl lg:text-3xl text-myBlue-1 font-bold">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <h3 className="text-xl text-myBlue-1 font-bold">
             Send a message to the seller
           </h3>
 

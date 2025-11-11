@@ -15,7 +15,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
       <span
-        className="text-2xl lg:text-3xl text-myBlue-2 cursor-pointer pe-2 lg:pe-4 border-e"
+        className="text-2xl text-myBlue-2 cursor-pointer pe-2 lg:pe-4 border-e"
         onClick={() => {
           setOpenSearch(true);
           setActiveNav(false);
@@ -32,12 +32,12 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content menu lg:menu-lg bg-base-100 rounded-box z-1 w-52 p-2 shadow-lg"
+            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-lg"
           >
             <li>
               <Link
                 to={`/profile/${profile?.id}`}
-                className="flex gap-4 items-center"
+                className="flex gap-2 lg:gap-4 items-center"
               >
                 <FaRegUserCircle className="text-2xl" />
                 <p>Profile</p>
@@ -47,14 +47,14 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             <hr className="my-2 border-gray-300" />
 
             <li>
-              <Link to={`/chat`} className="flex gap-4 items-center">
+              <Link to={`/chat`} className="flex gap-2 lg:gap-4 items-center">
                 <BsChatSquareText className="text-2xl" />
                 <p>Chat</p>
               </Link>
             </li>
 
             <li>
-              <Link to={`/subscribe`} className="flex gap-4 items-center">
+              <Link to={`/subscribe`} className="flex gap-2 lg:gap-4 items-center">
                 <TbShoppingBagPlus className="text-2xl" />
                 <p>Subscribe</p>
               </Link>
@@ -65,7 +65,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             <li className="hover:bg-red-100 rounded">
               <button
                 onClick={() => dispatch(logoutAct())}
-                className="flex gap-4 items-center text-red-600"
+                className="flex gap-2 lg:gap-4 items-center text-red-600"
               >
                 <HiOutlineLogout className="text-2xl" />
                 <p>Log Out</p>
