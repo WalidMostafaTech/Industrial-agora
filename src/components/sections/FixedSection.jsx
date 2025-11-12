@@ -8,7 +8,7 @@ const FixedSection = () => {
     {
       id: 1,
       title: "whatsapp",
-      link: `https://wa.me/${setting?.whatsapp}`,
+      link: `https://wa.me/${(setting?.whatsapp || "").replace(/\s/g, "")}`,
       icon: <FaWhatsapp />,
       color: "#25D366",
     },

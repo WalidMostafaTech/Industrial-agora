@@ -37,7 +37,7 @@ const Footer = () => {
       title: "Our Company",
       links: [
         { name: "Home", url: "/" },
-        { name: "Categories", url: "/categories/0" },
+        { name: "Categories", url: "/categories/all" },
         { name: "About us", url: "/about-us" },
         { name: "Contact us", url: "/contact-us" },
         { name: "Request", url: "/request" },
@@ -46,20 +46,21 @@ const Footer = () => {
     {
       title: "Services",
       links: [
-        { name: "Product Listings", url: "/" },
-        { name: "Direct Supplier Connection", url: "/" },
+        { name: "Material & Machinery Exchange", url: "/" },
+        { name: "Industrial Process Outsourcing", url: "/" },
+        { name: "Waste Reduction Consulting", url: "/" },
         { name: "Business Opportunities", url: "/" },
-        { name: "Logistics", url: "/" },
+        { name: "Customized Industrial Offers", url: "/" },
       ],
     },
     {
       title: "Features",
       links: [
-        { name: "User-Friendly Platform", url: "/" },
-        { name: "Verified Suppliers", url: "/" },
-        { name: "Wide Product Range", url: "/" },
-        { name: "Fast & Secure Shipping", url: "/" },
-        { name: "Real-Time Updates", url: "/" },
+        { name: "Trusted & User-Friendly Platform", url: "/" },
+        { name: "Verified Industrial Suppliers", url: "/" },
+        { name: "Wide Range of Products & Services", url: "/" },
+        { name: "Sustainability-Focused Solutions", url: "/" },
+        { name: "Reduce Costs & Improve Efficiency", url: "/" },
       ],
     },
   ];
@@ -117,29 +118,29 @@ const Footer = () => {
 
           <div className="flex items-center space-x-3">
             <a
-              href="#"
-              target="_blank"
+              // href="#"
+              // target="_blank"
               className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <FaFacebook />
             </a>
             <a
-              href="#"
-              target="_blank"
+              // href="#"
+              // target="_blank"
               className="text-3xl hover:text-myBlue-2 duration-300"
             >
               <IoLogoLinkedin />
             </a>
             <a
-              href="#"
-              target="_blank"
+              // href="#"
+              // target="_blank"
               className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <BsTwitterX />
             </a>
             <a
-              href="#"
-              target="_blank"
+              // href="#"
+              // target="_blank"
               className="text-2xl hover:text-myBlue-2 duration-300"
             >
               <FaInstagram />

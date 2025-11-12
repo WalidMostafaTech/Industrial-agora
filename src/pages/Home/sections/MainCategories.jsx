@@ -36,7 +36,7 @@ const MainCategories = () => {
       <div className="absolute inset-0 bg-stone-500/70"></div>
 
       <div className="container relative z-10">
-        {filterCategories?.length > 3 && (
+        {filterCategories?.length > 4 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
               className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
@@ -72,6 +72,7 @@ const MainCategories = () => {
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
+            1280: { slidesPerView: filterCategories?.length > 3 ? 4 : 3 },
           }}
           // ✅ هنا التحديث
           onInit={(swiper) => {

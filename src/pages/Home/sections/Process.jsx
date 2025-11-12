@@ -33,7 +33,7 @@ const Process = () => {
       </h2>
 
       <div className="container relative">
-        {products?.length > 3 && (
+        {products?.length > 4 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
               className={`swiper-button-prev-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
@@ -70,6 +70,7 @@ const Process = () => {
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
+            1280: { slidesPerView: products?.length > 3 ? 4 : 3 },
           }}
           onInit={(swiper) => {
             setIsBeginning(swiper.isBeginning);

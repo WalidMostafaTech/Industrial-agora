@@ -11,6 +11,7 @@ import { TbPhoneCall } from "react-icons/tb";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import FormError from "../../components/form/FormError";
 import { sendContact } from "../../services/mainServices";
+import { useSelector } from "react-redux";
 
 const ContactUs = () => {
   // ✅ Validation Schema
@@ -53,20 +54,24 @@ const ContactUs = () => {
     mutate(data);
   };
 
+  const { setting } = useSelector((state) => state.setting);
+
   const contactUsList = [
     {
       label: "Phone",
-      value: "+88 123 456 789",
+      value: setting?.whatsapp,
+      link: `https://wa.me/${(setting?.whatsapp || "").replace(/\s/g, "")}`,
       icon: <TbPhoneCall />,
     },
     {
       label: "Email",
-      value: "example6@example.com",
+      value: setting?.site_email,
+      link: `mailto:${setting?.site_email || ""}`,
       icon: <HiOutlineMailOpen />,
     },
     {
       label: "Fax",
-      value: "03 123 45",
+      value: setting?.site_fax,
       icon: <LiaFaxSolid />,
     },
   ];
@@ -116,21 +121,47 @@ const ContactUs = () => {
             className="w-full xl:w-4/5 mb-8 mx-auto hidden md:block rounded-md shadow-md"
           />
 
-          <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-2">
-            {contactUsList.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 text-myBlue-1 group"
-              >
-                <span className="text-3xl group-hover:scale-120 duration-300">
-                  {item.icon}
-                </span>
-                <div className="text-sm">
-                  <p className="font-bold">{item.label}</p>
-                  <p className="text-xs">{item.value}</p>
-                </div>
-              </div>
-            ))}
+          {/* <div className="flex flex-col lg:flex-row justify-evenly gap-4 lg:gap-2">
+            {contactUsList.map(
+              (item, index) =>
+                item.value && (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 text-myBlue-1 group"
+                  >
+                    <span className="text-3xl group-hover:scale-120 duration-300">
+                      {item.icon}
+                    </span>
+                    <div className="text-sm">
+                      <p className="font-bold">{item.label}</p>
+                      <p className="text-xs">{item.value}</p>
+                    </div>
+                  </div>
+                )
+            )}
+          </div> */}
+          
+          <div className="flex flex-col lg:flex-row justify-evenly gap-4 lg:gap-2">
+            {contactUsList.map(
+              (item, index) =>
+                item.value && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={index}
+                    className="flex items-center gap-2 text-myBlue-1 group"
+                  >
+                    <span className="text-3xl group-hover:scale-120 duration-300">
+                      {item.icon}
+                    </span>
+                    <div className="text-sm">
+                      <p className="font-bold">{item.label}</p>
+                      <p className="text-xs">{item.value}</p>
+                    </div>
+                  </a>
+                )
+            )}
           </div>
         </div>
       </div>
