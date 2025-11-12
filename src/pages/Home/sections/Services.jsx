@@ -19,7 +19,7 @@ const Services = () => {
   });
 
   if (isLoading) return <LoadingSection />;
-  if (isError || !services) return null;
+  if (isError || !services || services.length === 0) return null;
 
   const items = services?.services || [];
   const disableNavigation = items.length <= 3;

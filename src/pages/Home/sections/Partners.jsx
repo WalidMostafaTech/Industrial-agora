@@ -15,7 +15,7 @@ const Partners = () => {
 
   if (isLoading) return <LoadingSection />;
 
-  if (isError || !partners) return null;
+  if (isError || !partners || partners.length === 0) return null;
 
   return (
     <section className="sectionPadding my-8">

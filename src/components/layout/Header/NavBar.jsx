@@ -75,7 +75,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                     <NavLink
                       to={subLink.link}
                       key={subLink.name}
-                      className="group text-sm flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
+                      className="group text-sm text-black flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
                       onClick={() => {
                         setActiveNav(false);
                         setOpenLinks(null);

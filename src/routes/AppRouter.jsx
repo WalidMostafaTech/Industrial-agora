@@ -60,9 +60,9 @@ const router = createBrowserRouter([
       {
         path: "process-outsource/products",
         element: (
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <ProcessOutSourceProducts />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
       },
       { path: "terms", element: <Terms /> },

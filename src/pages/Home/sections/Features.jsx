@@ -19,7 +19,7 @@ const Features = () => {
   });
 
   if (isLoading) return <LoadingSection />;
-  if (isError || !features) return null;
+  if (isError || !features|| features.length === 0) return null;
 
   const items = features?.features || [];
   const disableNavigation = items.length <= 3;

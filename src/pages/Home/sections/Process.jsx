@@ -24,7 +24,7 @@ const Process = () => {
 
   if (isLoading) return <LoadingSection />;
 
-  if (isError || !products) return null;
+  if (isError || !products|| products.length === 0) return null;
 
   return (
     <section className="sectionPadding bg-myBlue-1">
@@ -102,7 +102,7 @@ const Process = () => {
       </div>
 
       <div className="flex justify-center mt-10 lg:mt-14">
-        <Link to="/about-us" className="animationBtn light w-fit">
+        <Link to="/process-outsource/products" className="animationBtn light w-fit">
           See More
         </Link>
       </div>

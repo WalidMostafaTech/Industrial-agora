@@ -21,7 +21,7 @@ const MainCategories = () => {
   const filterCategories = categories?.filter((cat) => cat.home);
 
   if (loading) return <LoadingSection />;
-  if (error || !categories) return null;
+  if (error || !filterCategories || filterCategories.length === 0) return null;
 
   return (
     <section

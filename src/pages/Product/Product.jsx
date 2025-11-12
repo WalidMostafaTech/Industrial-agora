@@ -49,15 +49,17 @@ const Product = () => {
             <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
 
             <div className="space-y-1 text-stone-700">
-              <p>Length : {product?.length}</p>
-              <p>Width : {product?.width}</p>
-              <p>Height : {product?.height}</p>
-              <p>Weight : {product?.weight}</p>
+              {product?.length && <p>Length : {product?.length}</p>}
+              {product?.width && <p>Width : {product?.width}</p>}
+              {product?.height && <p>Height : {product?.height}</p>}
+              {product?.weight && <p>Weight : {product?.weight}</p>}
             </div>
 
-            <p className="text-myBlue-2 text-lg font-bold">
-              {product?.price} $
-            </p>
+            {product?.price && (
+              <p className="text-myBlue-2 text-lg font-bold">
+                {product?.price} $
+              </p>
+            )}
 
             {product?.quantity && (
               <p className="border-b border-stone-300 flex justify-end">
