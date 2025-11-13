@@ -121,8 +121,8 @@ const ConsultationForm = ({ types }) => {
         type="select"
         placeholder="Select consultation type"
         options={types?.map((type) => ({
-          value: type,
-          label: type,
+          value: type.id,
+          label: type.name,
         }))}
         {...register("consultation_type")}
         error={errors.consultation_type?.message}
@@ -152,7 +152,7 @@ const ConsultationForm = ({ types }) => {
           </span>
         </label>
         {errors.accept_privacy_policy && (
-          <p className="text-red-500 text-sm mt-1">
+          <p className="text-red-700 text-sm">
             {errors.accept_privacy_policy.message}
           </p>
         )}
@@ -167,7 +167,7 @@ const ConsultationForm = ({ types }) => {
         )}
       </button>
 
-      <p className="font-bold text-xl text-myBlue-1 text-center">
+      <p className="font-bold text-lg text-myBlue-1 text-center">
         We’ll get back to you within 24 hours
       </p>
     </form>

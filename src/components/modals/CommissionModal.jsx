@@ -143,7 +143,7 @@ const CommissionModal = ({ isOpen, onClose, onConfirm, error, loading }) => {
 
         {/* 🟥 Error message for duration type */}
         {durationTypeError && (
-          <p className="text-red-500 text-sm text-center">
+          <p className="text-red-700 text-sm text-center">
             {durationTypeError}
           </p>
         )}

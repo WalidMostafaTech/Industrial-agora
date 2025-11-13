@@ -27,7 +27,7 @@ const ProcessOutSourceProducts = () => {
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (isError)
-    return <p className="text-center text-red-500">Error: {error.message}</p>;
+    return <p className="text-center text-red-700">Error: {error.message}</p>;
 
   console.log("Products OutSource Data:", data);
 

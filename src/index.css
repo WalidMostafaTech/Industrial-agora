@@ -133,11 +133,11 @@ input::-webkit-inner-spin-button {
     }
 
     &.danger {
-      @apply text-red-600;
+      @apply text-red-700;
 
       &::after,
       &::before {
-        @apply border-red-600;
+        @apply border-red-700;
       }
     }
 

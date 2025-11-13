@@ -111,7 +111,7 @@ const Profile = () => {
       <section className="w-full max-w-3xl mx-auto flex flex-col items-center gap-6">
         {/* Avatar Section */}
         <div className="flex flex-col items-center gap-3">
-          <div className="w-28 h-28 rounded-full bg-myBlue-1 text-white flex items-center justify-center text-4xl font-semibold shadow-lg">
+          <div className="w-24 h-24 rounded-full bg-myBlue-1 text-white flex items-center justify-center text-4xl font-semibold shadow-lg">
             {initials}
           </div>
           <h2 className="text-3xl font-bold text-gray-800 capitalize">
@@ -130,7 +130,7 @@ const Profile = () => {
           className="whiteContainer space-y-4 w-full"
           onSubmit={handleSubmit}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <MainInput
               label="Full Name"
               id="name"

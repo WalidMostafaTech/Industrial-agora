@@ -73,7 +73,7 @@ const ImageUploader = ({
               <button
                 type="button"
                 onClick={() => handleRemoveImage(index)}
-                className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full shadow-md opacity-0 cursor-pointer group-hover:opacity-100 transition"
+                className="absolute top-1 right-1 bg-red-700 text-white p-1 rounded-full shadow-md opacity-0 cursor-pointer group-hover:opacity-100 transition"
               >
                 <FiX className="text-lg" />
               </button>
@@ -82,7 +82,7 @@ const ImageUploader = ({
       </div>
 
       {/* Error Message */}
-      {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+      {error && <p className="text-red-700 text-sm mt-2">{error}</p>}
     </div>
   );
 };

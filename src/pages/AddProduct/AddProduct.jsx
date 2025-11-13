@@ -179,7 +179,10 @@ const AddProduct = () => {
           </p>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="length" className="font-medium text-gray-900 text-sm">
+            <label
+              htmlFor="length"
+              className="font-medium text-gray-900 text-sm"
+            >
               Length:
             </label>
             <input
@@ -189,12 +192,15 @@ const AddProduct = () => {
               className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.length && (
-              <p className="text-red-500 text-sm">{errors.length.message}</p>
+              <p className="text-red-700 text-sm">{errors.length.message}</p>
             )}
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="width" className="font-medium text-gray-900 text-sm">
+            <label
+              htmlFor="width"
+              className="font-medium text-gray-900 text-sm"
+            >
               Width:
             </label>
             <input
@@ -204,12 +210,15 @@ const AddProduct = () => {
               className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.width && (
-              <p className="text-red-500 text-sm">{errors.width.message}</p>
+              <p className="text-red-700 text-sm">{errors.width.message}</p>
             )}
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="height" className="font-medium text-gray-900 text-sm">
+            <label
+              htmlFor="height"
+              className="font-medium text-gray-900 text-sm"
+            >
               Height:
             </label>
             <input
@@ -219,7 +228,7 @@ const AddProduct = () => {
               className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
             />
             {errors.height && (
-              <p className="text-red-500 text-sm">{errors.height.message}</p>
+              <p className="text-red-700 text-sm">{errors.height.message}</p>
             )}
           </div>
         </div>
@@ -260,7 +269,7 @@ const AddProduct = () => {
             </span>
           </label>
           {errors.accept_privacy_policy && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-700 text-sm mt-1">
               {errors.accept_privacy_policy.message}
             </p>
           )}

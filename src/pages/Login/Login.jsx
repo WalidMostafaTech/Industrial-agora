@@ -11,6 +11,8 @@ import { loginUser } from "../../services/authServices";
 import FormError from "../../components/form/FormError";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
+import SuccessModal from "../../components/modals/SuccessModal";
+import { useState } from "react";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -25,6 +27,8 @@ const schema = yup.object({
 });
 
 const Login = () => {
+  const [completeRegister, setCompleteRegister] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -35,12 +39,16 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleCompleteLogin = () => {
+    navigate("/", { replace: true });
+    dispatch(getProfileAct());
+  };
+
   // ✅ Mutation: تنفيذ login API
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser,
     onSuccess: () => {
-      navigate("/", { replace: true });
-      dispatch(getProfileAct());
+      setCompleteRegister(true);
     },
     onError: (err) => {
       console.error("❌ Login Failed:", err);
@@ -57,7 +65,7 @@ const Login = () => {
     <section className="container pagePadding">
       <PageTitle title="Welcome, Please Sign In!" />
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* ✅ Login Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -99,7 +107,7 @@ const Login = () => {
             <div>
               <Link
                 to="/forgot-password"
-                className="font-medium text-red-600 hover:brightness-75"
+                className="font-medium text-red-700 hover:brightness-75"
               >
                 Forgot your password?
               </Link>
@@ -133,6 +141,14 @@ const Login = () => {
           </Link>
         </div>
       </section>
+
+      <SuccessModal
+        openModal={completeRegister}
+        onClose={handleCompleteLogin}
+        onConfirm={handleCompleteLogin}
+        btnText="Home"
+        msg="You Signed In Successfully!"
+      />
     </section>
   );
 };

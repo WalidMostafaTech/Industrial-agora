@@ -34,7 +34,13 @@ const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
 const PaymentPage = React.lazy(() =>
   import("../pages/PaymentPage/PaymentPage")
 );
-const Subscribe = React.lazy(() => import("../pages/Subscribe/Subscribe"));
+const SubscriptionPackages = React.lazy(() =>
+  import("../pages/Subscription/SubscriptionPackages")
+);
+const SubscriptionDetails = React.lazy(() =>
+  import("../pages/Subscription/SubscriptionDetails")
+);
+
 const Profile = React.lazy(() => import("../pages/Profile/Profile"));
 
 const router = createBrowserRouter([
@@ -61,7 +67,7 @@ const router = createBrowserRouter([
         path: "process-outsource/products",
         element: (
           // <ProtectedRoute>
-            <ProcessOutSourceProducts />
+          <ProcessOutSourceProducts />
           // </ProtectedRoute>
         ),
       },
@@ -119,10 +125,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "subscribe",
+        path: "subscription-packages",
         element: (
           <ProtectedRoute>
-            <Subscribe />
+            <SubscriptionPackages />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "subscription-details",
+        element: (
+          <ProtectedRoute>
+            <SubscriptionDetails />
           </ProtectedRoute>
         ),
       },

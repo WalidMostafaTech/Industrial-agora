@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
         {product.type !== "product" && (
           <p
             className={`absolute -top-4 -start-13 -rotate-45 text-white lg:text-lg font-semibold p-10 pb-2 z-10 ${
-              product.type === "outsource" ? "bg-red-600" : "bg-green-600"
+              product.type === "outsource" ? "bg-red-700" : "bg-green-600"
             }`}
           >
             {product.type === "outsource" ? "request" : "offered"}

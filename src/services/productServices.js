@@ -9,11 +9,6 @@ export const addProductApi = async (formData) => {
   return data;
 };
 
-export const addSubscribe = async (formData) => {
-  const { data } = await api.post("/subscribe", formData);
-  return data;
-};
-
 export const getProductsByCategory = async (categoryID, page = 1) => {
   const { data } = await api.get(`/products-by-category/${categoryID}`, {
     params: { page },

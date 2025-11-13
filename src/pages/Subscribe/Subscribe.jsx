@@ -4,8 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import Avatar from "../../components/common/Avatar";
 import FormBtn from "../../components/form/FormBtn";
 import FormError from "../../components/form/FormError";
-import { addSubscribe } from "../../services/productServices";
 import SuccessModal from "../../components/modals/SuccessModal";
+import { addSubscribe } from "../../services/subscriptionServices";
 
 const Subscribe = () => {
   const { profile } = useSelector((state) => state.profile);
@@ -65,7 +65,7 @@ const Subscribe = () => {
                   </button>
                 ))}
               </div>
-              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+              {errorMsg && <p className="text-red-700">{errorMsg}</p>}
 
               <FormBtn title={"Membership renewal"} loading={isPending} />
               <FormError errorMsg={error?.response?.data?.message} />

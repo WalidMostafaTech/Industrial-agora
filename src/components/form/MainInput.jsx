@@ -23,7 +23,7 @@ const MainInput = ({
     isPassword && "pe-10"
   } ${
     error
-      ? "ring-red-600 ring-2"
+      ? "ring-red-700 ring-2"
       : "ring-gray-400 focus-within:ring-myBlue-2 focus-within:ring-2"
   } ${disabled ? "opacity-60 cursor-not-allowed bg-gray-100" : ""}`;
 
@@ -37,7 +37,7 @@ const MainInput = ({
   );
 
   const commonError = error && (
-    <p className="mt-2 flex items-center gap-1 text-xs text-red-600">{error}</p>
+    <p className="mt-2 flex items-center gap-1 text-xs text-red-700">{error}</p>
   );
 
   if (type === "textarea") {
@@ -112,7 +112,7 @@ const MainInput = ({
         {isPassword && (
           <span
             onClick={() => !disabled && setShowPassword(!showPassword)}
-            className={`text-neutral-500 cursor-pointer absolute top-1/2 -translate-y-1/2 end-2 text-2xl ${
+            className={`text-neutral-500 cursor-pointer absolute top-1/2 -translate-y-1/2 end-2 text-xl ${
               disabled ? "opacity-40 cursor-not-allowed" : ""
             }`}
           >

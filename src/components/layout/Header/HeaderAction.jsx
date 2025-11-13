@@ -54,9 +54,16 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             </li>
 
             <li>
-              <Link to={`/subscribe`} className="flex gap-2 lg:gap-4 items-center">
+              <Link
+                to={
+                  profile?.subscription
+                    ? `/subscription-details`
+                    : `/subscription-packages`
+                }
+                className="flex gap-2 lg:gap-4 items-center"
+              >
                 <TbShoppingBagPlus className="text-2xl" />
-                <p>Subscribe</p>
+                <p>Subscription</p>
               </Link>
             </li>
 
@@ -65,7 +72,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             <li className="hover:bg-red-100 rounded">
               <button
                 onClick={() => dispatch(logoutAct())}
-                className="flex gap-2 lg:gap-4 items-center text-red-600"
+                className="flex gap-2 lg:gap-4 items-center text-red-700"
               >
                 <HiOutlineLogout className="text-2xl" />
                 <p>Log Out</p>

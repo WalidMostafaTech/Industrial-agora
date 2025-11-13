@@ -90,7 +90,7 @@ const ResetPassword = ({ parentData, setParentData }) => {
   };
 
   const getGradient = () => {
-    if (strength <= 1) return "bg-gradient-to-r from-red-500 to-red-600";
+    if (strength <= 1) return "bg-gradient-to-r from-red-700 to-red-700";
     if (strength === 2) return "bg-gradient-to-r from-yellow-400 to-yellow-600";
     if (strength === 3) return "bg-gradient-to-r from-blue-500 to-blue-700";
     return "bg-gradient-to-r from-green-500 to-emerald-600";
@@ -137,7 +137,7 @@ const ResetPassword = ({ parentData, setParentData }) => {
             <p
               className={`mt-1 font-medium ${
                 strength <= 1
-                  ? "text-red-600"
+                  ? "text-red-700"
                   : strength === 2
                   ? "text-yellow-600"
                   : strength === 3

@@ -59,7 +59,7 @@ export default function HeroSection() {
 
               <div className="container relative z-10 flex items-end">
                 {/* Vertical Progress Line */}
-                <div className="relative min-w-1.5 h-[300px] lg:min-h-[500px] bg-white overflow-hidden">
+                <div className="relative min-w-1.5 h-[350px] lg:min-h-[400px] bg-white overflow-hidden">
                   <div
                     className="absolute top-0 left-0 w-full bg-myBlue-2 transition-all duration-500"
                     style={{

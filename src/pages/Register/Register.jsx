@@ -12,6 +12,8 @@ import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import SuccessModal from "../../components/modals/SuccessModal";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProfileAct } from "../../store/profile/profileSlice";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -43,6 +45,12 @@ const schema = yup.object({
 const Register = () => {
   const [completeRegister, setCompleteRegister] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleCompleteLogin = () => {
+    navigate("/subscription-packages", { replace: true });
+    dispatch(getProfileAct());
+  };
 
   // ✅ React Hook Form
   const {
@@ -173,7 +181,7 @@ const Register = () => {
             </label>
           </div>
           {errors.privacy_policy?.message && (
-            <p className="text-red-600 text-sm">
+            <p className="text-red-700 text-sm">
               {errors.privacy_policy?.message}
             </p>
           )}
@@ -187,9 +195,9 @@ const Register = () => {
 
       <SuccessModal
         openModal={completeRegister}
-        onClose={() => setCompleteRegister(false)}
-        onConfirm={() => navigate("/")}
-        btnText="Home"
+        onClose={handleCompleteLogin}
+        onConfirm={handleCompleteLogin}
+        btnText="Continue"
         msg="Registration successful!"
       />
     </section>
