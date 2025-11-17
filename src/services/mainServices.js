@@ -19,3 +19,8 @@ export const getPages = async () => {
   const { data } = await api.get("/pages");
   return data?.data || [];
 };
+
+export const getCities = async () => {
+  const { data } = await api.get("/cities");
+  return data?.data || [];
+};

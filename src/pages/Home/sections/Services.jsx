@@ -33,8 +33,8 @@ const Services = () => {
       <div className="relative">
         {/* أزرار التنقل */}
         <button
-          className={`swiper-button-prev-custom-services absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
-            hover:bg-myGreen hover:text-white transition ${
+          className={`swiper-button-prev-custom-services absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-lg border border-gray-300 shadow 
+            hover:brightness-85 transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"
                 : "cursor-pointer"
@@ -43,8 +43,8 @@ const Services = () => {
           <FaChevronLeft />
         </button>
         <button
-          className={`swiper-button-next-custom-services absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
-            hover:bg-myGreen hover:text-white transition ${
+          className={`swiper-button-next-custom-services absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-lg border border-gray-300 shadow 
+            hover:brightness-85 transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"
                 : "cursor-pointer"

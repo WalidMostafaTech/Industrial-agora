@@ -4,7 +4,7 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="flex flex-col md:flex-row bg-stone-200 shadow-lg"
+      className="flex flex-col md:flex-row bg-stone-200/60 shadow-lg"
     >
       <div className="w-full md:w-[300px] aspect-square md:aspect-auto overflow-hidden bg-white relative">
         <img
@@ -27,17 +27,19 @@ const ProductCard = ({ product }) => {
       <div className="flex-1 flex flex-col justify-between gap-4 p-4">
         <h4 className="text-lg font-bold line-clamp-2">{product.name}</h4>
 
-        {/* <div>
-          <p className="text-gray-600">Status : {product.details.status}</p>
-          <p className="text-gray-600">Type : {product.details.type}</p>
-          <p className="text-gray-600">
-            Condition : {product.details.condition}
-          </p>
-          <p className="text-gray-600">Delivery : {product.details.delivery}</p>
-          <p className="text-gray-600">Payment : {product.details.payment}</p>
-        </div> */}
+        <AutoFields
+          data={{
+            status: product.status,
+            type: product.type,
+            condition: product.condition,
+            delivery: product.delivery,
+            payment: product.payment,
+          }}
+        />
 
-        <p className="text-gray-600 line-clamp-3">{product.description}</p>
+        {product.description && (
+          <p className="text-gray-700 line-clamp-3">{product.description}</p>
+        )}
 
         <Link
           to={`/product/${product.id}`}
@@ -51,3 +53,28 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
+
+const AutoFields = ({ data }) => {
+  if (!data || typeof data !== "object") return null;
+
+  return (
+    <div className="space-y-1">
+      {Object.entries(data).map(([key, value]) => {
+        if (
+          value === null ||
+          value === undefined ||
+          value === "" ||
+          (typeof value === "string" && value.trim() === "")
+        ) {
+          return null;
+        }
+
+        return (
+          <p key={key} className="text-gray-700">
+            {key.charAt(0).toUpperCase() + key.slice(1)} : {value}
+          </p>
+        );
+      })}
+    </div>
+  );
+};

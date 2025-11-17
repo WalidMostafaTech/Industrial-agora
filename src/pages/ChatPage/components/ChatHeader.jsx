@@ -8,7 +8,6 @@ import { useState } from "react";
 const ChatHeader = ({ contact = {}, setShowChat, chatId }) => {
   const [openLocalModal, setOpenLocalModal] = useState(false);
   const [openExternallyModal, setOpenExternallyModal] = useState(false);
-  console.log("contact", contact);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -17,8 +16,6 @@ const ChatHeader = ({ contact = {}, setShowChat, chatId }) => {
   };
 
   const [disabledBtns, setDisabledBtns] = useState(contact?.action !== null);
-
-  console.log("action", contact?.action);
 
   return (
     <div className="flex items-center gap-4 p-4 border-b border-gray-300">

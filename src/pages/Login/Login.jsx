@@ -56,7 +56,6 @@ const Login = () => {
   });
 
   const onSubmit = (formData) => {
-    console.log("Form submitted:", formData);
 
     mutate(formData);
   };
@@ -107,7 +106,7 @@ const Login = () => {
             <div>
               <Link
                 to="/forgot-password"
-                className="font-medium text-red-700 hover:brightness-75"
+                className="font-medium text-red-700 hover:brightness-85"
               >
                 Forgot your password?
               </Link>
@@ -122,7 +121,7 @@ const Login = () => {
             Don&apos;t have an account?{" "}
             <Link
               to="/register"
-              className="font-medium text-myBlue-2 hover:brightness-75 hover:underline"
+              className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
             >
               Sign up here
             </Link>

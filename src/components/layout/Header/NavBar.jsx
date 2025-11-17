@@ -27,7 +27,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     { name: "about", path: "/about-us", list: [] },
     {
       name: "exchange categories",
-      path: "/categories/1",
+      path: "/categories/all",
       list: categoriesLinks,
     },
     { name: "Process OutSource", path: "/process-outsource", list: [] },

@@ -18,46 +18,68 @@ import SuccessModal from "../../components/modals/SuccessModal";
 const schema = yup.object({
   name: yup.string().required("Product name is required"),
   category_id: yup.string().required("Category is required"),
+
+  // 🟢 Existing fields
   price: yup
     .number()
     .typeError("Price must be a number")
     .positive("Price must be positive")
     .required("Price is required"),
+
   quantity: yup
     .number()
     .typeError("Quantity must be a number")
     .positive("Quantity must be positive")
     .integer("Quantity must be an integer")
     .required("Quantity is required"),
+
   description: yup.string().required("Description is required"),
-  // ✅ Optional fields but must be valid if entered
+
+  // 🟢 Optional numeric fields
   length: yup
     .number()
     .typeError("Length must be a number")
     .positive("Length must be positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
+
   width: yup
     .number()
     .typeError("Width must be a number")
     .positive("Width must be positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
+
   height: yup
     .number()
     .typeError("Height must be a number")
     .positive("Height must be positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
+
   weight: yup
     .number()
     .typeError("Weight must be a number")
     .positive("Weight must be positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
+
   accept_privacy_policy: yup
     .bool()
     .oneOf([true], "You must accept the privacy policy"),
+
+  // 🟢 NEW FIELDS — all optional
+  product_status: yup.string().nullable(),
+  type: yup.string().nullable(),
+  condition: yup.string().nullable(),
+  delivery: yup.string().nullable(),
+  payment: yup.string().nullable(),
+  location: yup.string().nullable(),
+  for_equipments: yup.string().nullable(),
+  manufacturers: yup.string().nullable(),
+  sku: yup.string().nullable(),
+  vendor: yup.string().nullable(),
+  warehouse: yup.string().nullable(),
 });
 
 const AddProduct = () => {
@@ -91,27 +113,27 @@ const AddProduct = () => {
       setImageError("Please upload at least one product image.");
       return;
     }
+
     setImageError("");
 
     const formData = new FormData();
 
-    // 🟢 تحويل boolean إلى 1 أو 0
+    // 🟢 Convert boolean to number
     const formattedData = {
       ...data,
       accept_privacy_policy: data.accept_privacy_policy ? 1 : 0,
     };
 
-    // 🟢 إضافة باقي الحقول
+    // 🟢 Add all fields automatically
     Object.entries(formattedData).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
         formData.append(key, value);
       }
     });
 
-    // 🟢 إضافة نوع المنتج
     formData.append("type", "product");
 
-    // 🟢 الصور بالشكل المطلوب (images[0], images[1], ...)
+    // 🟢 Add images correctly
     images.forEach((img, index) => {
       formData.append(`images[${index}]`, img.file);
     });
@@ -137,6 +159,7 @@ const AddProduct = () => {
           title="Add a Product"
           subtitle="Product Data - Please fill in the details accurately"
         />
+
         {/* Product Name */}
         <MainInput
           label="Product name"
@@ -144,9 +167,9 @@ const AddProduct = () => {
           {...register("name")}
           error={errors.name?.message}
         />
+
         {/* Category */}
         <MainInput
-          // label="Category/Classification"
           id="category_id"
           type="select"
           options={[
@@ -156,6 +179,7 @@ const AddProduct = () => {
           {...register("category_id")}
           error={errors.category_id?.message}
         />
+
         {/* Price */}
         <MainInput
           label="Price"
@@ -164,6 +188,7 @@ const AddProduct = () => {
           {...register("price")}
           error={errors.price?.message}
         />
+
         {/* Quantity */}
         <MainInput
           label="Available quantity (stock)"
@@ -172,6 +197,97 @@ const AddProduct = () => {
           {...register("quantity")}
           error={errors.quantity?.message}
         />
+
+        {/* NEW TEXT FIELDS */}
+
+        <MainInput
+          label="Status"
+          id="product_status"
+          type="text"
+          {...register("product_status")}
+          error={errors.product_status?.message}
+        />
+
+        <MainInput
+          label="Type"
+          id="type"
+          type="text"
+          {...register("type")}
+          error={errors.type?.message}
+        />
+
+        <MainInput
+          label="Condition"
+          id="condition"
+          type="text"
+          {...register("condition")}
+          error={errors.condition?.message}
+        />
+
+        <MainInput
+          label="Delivery"
+          id="delivery"
+          type="text"
+          {...register("delivery")}
+          error={errors.delivery?.message}
+        />
+
+        <MainInput
+          label="Payment"
+          id="payment"
+          type="text"
+          {...register("payment")}
+          error={errors.payment?.message}
+        />
+
+        <MainInput
+          label="Location"
+          id="location"
+          type="text"
+          {...register("location")}
+          error={errors.location?.message}
+        />
+
+        <MainInput
+          label="For Equipments"
+          id="for_equipments"
+          type="text"
+          {...register("for_equipments")}
+          error={errors.for_equipments?.message}
+        />
+
+        <MainInput
+          label="Manufacturers"
+          id="manufacturers"
+          type="text"
+          {...register("manufacturers")}
+          error={errors.manufacturers?.message}
+        />
+
+        <MainInput
+          label="SKU"
+          id="sku"
+          type="text"
+          {...register("sku")}
+          error={errors.sku?.message}
+        />
+
+        <MainInput
+          label="Vendor"
+          id="vendor"
+          type="text"
+          {...register("vendor")}
+          error={errors.vendor?.message}
+        />
+
+        <MainInput
+          label="Warehouse"
+          id="warehouse"
+          type="text"
+          {...register("warehouse")}
+          error={errors.warehouse?.message}
+        />
+
         {/* Dimensions */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <p className="font-medium text-gray-900 col-span-2 lg:col-span-3">
@@ -232,6 +348,7 @@ const AddProduct = () => {
             )}
           </div>
         </div>
+
         {/* Weight */}
         <MainInput
           label="Weight (if required)"
@@ -240,14 +357,15 @@ const AddProduct = () => {
           {...register("weight")}
           error={errors.weight?.message}
         />
-        {/* Product Images */}
 
+        {/* Images */}
         <ImageUploader
           label="Product Images"
           onChange={setImages}
           error={imageError}
           initialImages={images}
         />
+
         {/* Description */}
         <MainInput
           label="Product Description"
@@ -256,6 +374,7 @@ const AddProduct = () => {
           {...register("description")}
           error={errors.description?.message}
         />
+
         {/* Privacy Policy */}
         <div className="form-control">
           <label className="label cursor-pointer justify-start gap-2">
@@ -274,7 +393,7 @@ const AddProduct = () => {
             </p>
           )}
         </div>
-        {/* Server Error */}
+
         <FormError errorMsg={error?.response?.data?.message} />
         <FormBtn title="Submit" loading={isPending} disabled={isPending} />
       </form>

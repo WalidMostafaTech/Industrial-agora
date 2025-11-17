@@ -104,7 +104,6 @@ const ResetPassword = ({ parentData, setParentData }) => {
       password: data.password,
       password_confirmation: data.password_confirmation,
     };
-    console.log("📩 Sending reset password data:", payload);
     mutate(payload);
   };
 

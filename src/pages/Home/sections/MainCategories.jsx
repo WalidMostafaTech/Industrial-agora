@@ -39,20 +39,18 @@ const MainCategories = () => {
         {filterCategories?.length > 4 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
-              className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
+              className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-lg shadow border border-gray-300 transition cursor-pointer ${
                 isBeginning
                   ? "opacity-40 cursor-not-allowed"
-                  : "hover:bg-myGreen hover:text-white"
+                  : "hover:brightness-85"
               }`}
               disabled={isBeginning}
             >
               <FaChevronLeft />
             </button>
             <button
-              className={`swiper-button-next-custom-main-category bg-white p-4 rounded-full shadow transition cursor-pointer ${
-                isEnd
-                  ? "opacity-40 cursor-not-allowed"
-                  : "hover:bg-myGreen hover:text-white"
+              className={`swiper-button-next-custom-main-category bg-white p-4 rounded-lg shadow border border-gray-300 transition cursor-pointer ${
+                isEnd ? "opacity-40 cursor-not-allowed" : "hover:brightness-85"
               }`}
               disabled={isEnd}
             >

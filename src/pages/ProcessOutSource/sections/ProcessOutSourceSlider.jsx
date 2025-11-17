@@ -1,29 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
-import { getMainCategories } from "../../../services/homeServices";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import LoadingSection from "../../../components/Loading/LoadingSection";
-import EmptySection from "../../../components/sections/EmptySection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
+import processImg1 from "../../../assets/images/procces-img-1.jpg";
+import processImg2 from "../../../assets/images/procces-img-2.jpg";
+import processImg3 from "../../../assets/images/procces-img-3.jpg";
 
 const ProcessOutSourceSlider = () => {
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getMainCategories,
-  });
-
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  if (isLoading) return <LoadingSection />;
-  if (isError || !categories) return <EmptySection />;
+  const list = [
+    {
+      id: 1,
+      image: processImg1,
+      title: "Engineering & Technical Support",
+      paragraph:
+        "Professional engineering consultation and technical drawings.Prototype reports for design validation.",
+    },
+    {
+      id: 2,
+      image: processImg2,
+      title: "Security & Confidentiality",
+      paragraph:
+        "Protect your production line — suppliers won’t access your machines.Service Level Agreements (SLA) to safeguard commitments.",
+    },
+    {
+      id: 3,
+      image: processImg3,
+      title: "Quality Assurance",
+      paragraph:
+        "Inspection reports included with every order.100% visual inspection for every part. Highly vetted casting and manufacturing partners. Guaranteed quality — if parts aren’t made to spec, we’ll make them right.  ",
+    },
+  ];
 
   return (
     <section className="sectionPadding">
@@ -54,7 +65,7 @@ const ProcessOutSourceSlider = () => {
 
         {/* ✅ السلايدر */}
         <Swiper
-          key={categories?.length || 0}
+          key={list?.length || 0}
           modules={[Navigation]}
           spaceBetween={20}
           slidesPerView={1}
@@ -75,7 +86,7 @@ const ProcessOutSourceSlider = () => {
             setIsEnd(swiper.isEnd);
           }}
         >
-          {categories?.map((item) => (
+          {list?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden shadow-xl">
                 {/* الصورة */}

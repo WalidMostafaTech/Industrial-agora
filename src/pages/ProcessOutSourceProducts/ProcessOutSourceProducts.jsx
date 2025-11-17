@@ -29,7 +29,6 @@ const ProcessOutSourceProducts = () => {
   if (isError)
     return <p className="text-center text-red-700">Error: {error.message}</p>;
 
-  console.log("Products OutSource Data:", data);
 
   return (
     <section className="container pagePadding">

@@ -19,7 +19,7 @@ const Features = () => {
   });
 
   if (isLoading) return <LoadingSection />;
-  if (isError || !features|| features.length === 0) return null;
+  if (isError || !features || features.length === 0) return null;
 
   const items = features?.features || [];
   const disableNavigation = items.length <= 3;
@@ -39,8 +39,8 @@ const Features = () => {
         <div className="xl:col-span-3 relative">
           {/* أزرار التنقل */}
           <button
-            className={`swiper-button-prev-custom-features absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
-            hover:bg-myGreen hover:text-white transition ${
+            className={`swiper-button-prev-custom-features absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-lg border border-gray-300 shadow 
+            hover:brightness-85 transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"
                 : "cursor-pointer"
@@ -49,8 +49,8 @@ const Features = () => {
             <FaChevronLeft />
           </button>
           <button
-            className={`swiper-button-next-custom-features absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow 
-            hover:bg-myGreen hover:text-white transition ${
+            className={`swiper-button-next-custom-features absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-lg border border-gray-300 shadow 
+            hover:brightness-85 transition ${
               disableNavigation
                 ? "opacity-50 pointer-events-none"
                 : "cursor-pointer"
@@ -85,7 +85,9 @@ const Features = () => {
                   <h3 className="text-xl font-semibold line-clamp-1">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm line-clamp-3">{item.paragraph}</p>
+                  <p className="text-gray-600 text-sm line-clamp-3">
+                    {item.paragraph}
+                  </p>
                 </div>
               </SwiperSlide>
             ))}

@@ -24,7 +24,7 @@ const Process = () => {
 
   if (isLoading) return <LoadingSection />;
 
-  if (isError || !products|| products.length === 0) return null;
+  if (isError || !products || products.length === 0) return null;
 
   return (
     <section className="sectionPadding bg-myBlue-1">
@@ -36,20 +36,18 @@ const Process = () => {
         {products?.length > 4 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
-              className={`swiper-button-prev-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
+              className={`swiper-button-prev-custom-process bg-white p-4 rounded-lg border border-gray-300 shadow transition cursor-pointer ${
                 isBeginning
                   ? "opacity-40 cursor-not-allowed"
-                  : "hover:bg-myGreen hover:text-white"
+                  : "hover:brightness-85"
               }`}
               disabled={isBeginning}
             >
               <FaChevronLeft />
             </button>
             <button
-              className={`swiper-button-next-custom-process bg-white p-4 rounded-full shadow transition cursor-pointer ${
-                isEnd
-                  ? "opacity-40 cursor-not-allowed"
-                  : "hover:bg-myGreen hover:text-white"
+              className={`swiper-button-next-custom-process bg-white p-4 rounded-lg border border-gray-300 shadow transition cursor-pointer ${
+                isEnd ? "opacity-40 cursor-not-allowed" : "hover:brightness-85"
               }`}
               disabled={isEnd}
             >
@@ -102,7 +100,10 @@ const Process = () => {
       </div>
 
       <div className="flex justify-center mt-10 lg:mt-14">
-        <Link to="/process-outsource/products" className="animationBtn light w-fit">
+        <Link
+          to="/process-outsource/products"
+          className="animationBtn light w-fit"
+        >
           See More
         </Link>
       </div>

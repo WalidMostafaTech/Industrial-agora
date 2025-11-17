@@ -3,7 +3,6 @@ import MsgInput from "../components/MsgInput";
 import MsgsContainer from "../components/MsgsContainer";
 
 const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
-  console.log("chatData", chatData);
 
   return (
     <div

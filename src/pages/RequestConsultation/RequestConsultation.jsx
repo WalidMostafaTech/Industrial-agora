@@ -19,7 +19,6 @@ const RequestConsultation = () => {
     queryFn: getConsultationSettings,
   });
 
-  console.log("consultationSettings",consultationSettings);
   
 
   if (isLoading) return <LoadingSection />;

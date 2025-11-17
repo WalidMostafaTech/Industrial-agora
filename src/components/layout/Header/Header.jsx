@@ -10,7 +10,7 @@ import HeaderAction from "./HeaderAction";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../../store/profile/profileSlice";
 import { getMainCategoriesAct } from "../../../store/categories/categories";
-import { fetchSetting } from "../../../store/setting/setting";
+import { fetchCities, fetchSetting } from "../../../store/setting/setting";
 import Cookies from "js-cookie";
 
 const Header = () => {
@@ -39,6 +39,7 @@ const Header = () => {
     }
     dispatch(getMainCategoriesAct());
     dispatch(fetchSetting());
+    dispatch(fetchCities());
   }, [dispatch]);
 
   return (

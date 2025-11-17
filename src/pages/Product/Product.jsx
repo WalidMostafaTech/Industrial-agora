@@ -6,10 +6,13 @@ import { getProductDetails } from "../../services/productServices";
 import LoadingPage from "../../components/Loading/LoadingPage";
 import EmptySection from "../../components/sections/EmptySection";
 import { useSelector } from "react-redux";
+import useHasPermission from "../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../permissions";
 
 const Product = () => {
   const { id } = useParams();
   const { profile } = useSelector((state) => state.profile);
+  const canNotView = useHasPermission(PERMISSIONS.VIEW_POSTS_WITHOUT_CONTACTS);
 
   const [openMsg, setOpenMsg] = useState(false);
 
@@ -48,18 +51,39 @@ const Product = () => {
           <div className="flex-1 space-y-4">
             <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
 
-            <div className="space-y-1 text-stone-700">
-              {product?.length && <p>Length : {product?.length}</p>}
-              {product?.width && <p>Width : {product?.width}</p>}
-              {product?.height && <p>Height : {product?.height}</p>}
-              {product?.weight && <p>Weight : {product?.weight}</p>}
-            </div>
+            <AutoFields
+              data={{
+                manufacturers: product.manufacturers,
+                sku: product.sku,
+                vendor: product.vendor,
+                warehouse: product.warehouse,
+              }}
+            />
+
+            <AutoFields
+              data={{
+                length: product.length,
+                width: product.width,
+                height: product.height,
+                weight: product.weight,
+              }}
+            />
 
             {product?.price && (
               <p className="text-myBlue-2 text-lg font-bold">
                 {product?.price} $
               </p>
             )}
+
+            <AutoFields
+              data={{
+                status: product.status,
+                type: product.type,
+                condition: product.condition,
+                delivery: product.delivery,
+                payment: product.payment,
+              }}
+            />
 
             {product?.quantity && (
               <p className="border-b border-stone-300 flex justify-end">
@@ -109,3 +133,28 @@ const Product = () => {
 };
 
 export default Product;
+
+const AutoFields = ({ data }) => {
+  if (!data || typeof data !== "object") return null;
+
+  return (
+    <div className="space-y-1">
+      {Object.entries(data).map(([key, value]) => {
+        if (
+          value === null ||
+          value === undefined ||
+          value === "" ||
+          (typeof value === "string" && value.trim() === "")
+        ) {
+          return null;
+        }
+
+        return (
+          <p key={key} className="text-gray-700">
+            {key.charAt(0).toUpperCase() + key.slice(1)} : {value}
+          </p>
+        );
+      })}
+    </div>
+  );
+};

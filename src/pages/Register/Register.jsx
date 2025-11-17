@@ -12,7 +12,7 @@ import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import SuccessModal from "../../components/modals/SuccessModal";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 
 // ✅ Validation Schema
@@ -46,6 +46,8 @@ const Register = () => {
   const [completeRegister, setCompleteRegister] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { cities } = useSelector((state) => state.setting);
 
   const handleCompleteLogin = () => {
     navigate("/subscription-packages", { replace: true });
@@ -108,13 +110,6 @@ const Register = () => {
         <MainInput
           label="Company Name"
           id="company_name"
-          type="select"
-          options={[
-            { value: "", label: "Select company" },
-            { value: "company 1", label: "company 1" },
-            { value: "company 2", label: "company 2" },
-            { value: "company 3", label: "company 3" },
-          ]}
           {...register("company_name")}
           error={errors.company_name?.message}
         />
@@ -125,9 +120,7 @@ const Register = () => {
           type="select"
           options={[
             { value: "", label: "Select city" },
-            { value: "city 1", label: "city 1" },
-            { value: "city 2", label: "city 2" },
-            { value: "city 3", label: "city 3" },
+            ...cities.map((city) => ({ value: city.id, label: city.name })),
           ]}
           {...register("city")}
           error={errors.city?.message}

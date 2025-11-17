@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getSettings } from "../../services/homeServices";
+import { getCities } from "../../services/mainServices";
 
 export const fetchSetting = createAsyncThunk(
   "setting/fetchSetting",
@@ -15,10 +16,25 @@ export const fetchSetting = createAsyncThunk(
   }
 );
 
+export const fetchCities = createAsyncThunk(
+  "setting/fetchCities",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getCities();
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data.error_msg || "Failed to load config"
+      );
+    }
+  }
+);
+
 const appSetting = createSlice({
   name: "setting",
   initialState: {
     setting: {},
+    cities: [],
     loading: false,
     error: null,
   },
@@ -36,7 +52,11 @@ const appSetting = createSlice({
       .addCase(fetchSetting.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Something went wrong";
-      });
+      })
+      .addCase(fetchCities.fulfilled, (state, action) => {
+        state.loading = false;
+        state.cities = action.payload;
+      })
   },
 });
 

@@ -7,11 +7,15 @@ import * as yup from "yup";
 import FormBtn from "../../../components/form/FormBtn";
 import MainInput from "../../../components/form/MainInput";
 import ImageUploader from "../../../components/form/ImageUploader";
-import { addProductApi } from "../../../services/productServices";
 import CommissionModal from "../../../components/modals/CommissionModal";
 import SuccessModal from "../../../components/modals/SuccessModal";
 
-// ✅ Validation Schema
+import {
+  addProductApi,
+  addPromotionProduct,
+} from "../../../services/productServices";
+
+// Validation Schema
 const schema = yup.object({
   machine_name: yup.string().required("Machine name is required"),
   machine_specification: yup
@@ -42,24 +46,24 @@ const OfferService = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm({ resolver: yupResolver(schema) });
+
+  // 1️⃣ Mutation لاضافة المنتج
+  const addProductMutation = useMutation({
+    mutationFn: addProductApi,
   });
 
-  // ✅ Mutation for API
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: addProductApi,
+  // 2️⃣ Mutation لإضافة البروموشن
+  const addPromotionMutation = useMutation({
+    mutationFn: addPromotionProduct,
     onSuccess: () => {
-      setOpenSuccessModal(true); // ✅ افتح مودال النجاح فوق المودال التاني
+      setOpenSuccessModal(true);
       setImages([]);
       reset();
     },
-    onError: (error) => {
-      console.error("❌ Failed to submit offer: " + error.message);
-    },
   });
 
-  // ✅ onSubmit Handler
+  // Submit handler
   const onSubmit = (data) => {
     if (images.length === 0) {
       setImageError("Please upload at least one image.");
@@ -67,32 +71,49 @@ const OfferService = () => {
     }
     setImageError("");
 
-    setFormDataValues(data); // ✅ خزّن بيانات الفورم هنا
-    setIsModalOpen(true); // افتح المودال بعد الفاليديشن
+    setFormDataValues(data);
+    setIsModalOpen(true);
   };
 
-  const handleConfirmModal = ({ duration, durationType }) => {
-    if (!formDataValues) return; // safety check
+  // Confirm Modal (months فقط)
+  const handleConfirmModal = async ({ months }) => {
+    if (!formDataValues) return;
 
     const formData = new FormData();
 
-    // 🟢 أضف كل الحقول اللي من الفورم
+    // إضافة الحقول الأساسية
     Object.entries(formDataValues).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    // 🟢 أضف القيم الإضافية
-    formData.append("duration", duration);
-    formData.append("duration_type", durationType);
+    // type ثابت
     formData.append("type", "offer_service");
 
-    // 🟢 أضف الصور
+    // إضافة الصور
     images.forEach((img, index) => {
       formData.append(`images[${index}]`, img.file);
     });
 
-    // 🟢 استدعاء الـ API
-    mutate(formData);
+    try {
+      // 1️⃣ أول API → إضافة المنتج
+      const productResponse = await addProductMutation.mutateAsync(formData);
+
+      const product_id = productResponse?.data?.id;
+
+      if (!product_id) {
+        console.error("❌ product_id is missing");
+        return;
+      }
+
+      // 2️⃣ ثاني API → إضافة البروموشن
+      const promoForm = new FormData();
+      promoForm.append("product_id", product_id);
+      promoForm.append("months", months);
+
+      await addPromotionMutation.mutateAsync(promoForm);
+    } catch (error) {
+      console.error("❌ Error in workflow:", error);
+    }
   };
 
   return (
@@ -104,21 +125,18 @@ const OfferService = () => {
           {...register("machine_name")}
           error={errors.machine_name?.message}
         />
-
         <MainInput
           label="Machine specifications"
           id="machine_specification"
           {...register("machine_specification")}
           error={errors.machine_specification?.message}
         />
-
         <MainInput
           label="Machine types compatible"
           id="material_types_compatible"
           {...register("material_types_compatible")}
           error={errors.material_types_compatible?.message}
         />
-
         <MainInput
           label="Machine specifications accepted"
           id="material_specifications_accepted"
@@ -126,7 +144,7 @@ const OfferService = () => {
           error={errors.material_specifications_accepted?.message}
         />
 
-        {/* ✅ Image Uploader */}
+        {/* Images */}
         <ImageUploader
           label="Pictures"
           onChange={setImages}
@@ -140,14 +158,12 @@ const OfferService = () => {
           {...register("main_applications_processes")}
           error={errors.main_applications_processes?.message}
         />
-
         <MainInput
           label="Input / Output"
           id="input_output"
           {...register("input_output")}
           error={errors.input_output?.message}
         />
-
         <MainInput
           label="Note"
           id="description"
@@ -159,24 +175,26 @@ const OfferService = () => {
         <FormBtn title="Submit" />
       </form>
 
+      {/* Modal months */}
       <CommissionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirmModal}
-        error={error}
-        loading={isPending}
+        error={addProductMutation.error || addPromotionMutation.error}
+        loading={addProductMutation.isPending || addPromotionMutation.isPending}
       />
 
+      {/* Success */}
       <SuccessModal
         openModal={openSuccessModal}
         msg="Offer submitted successfully!"
         onClose={() => {
           setOpenSuccessModal(false);
-          setIsModalOpen(false); // ✅ يقفل كمان CommissionModal
+          setIsModalOpen(false);
         }}
         onConfirm={() => {
           setOpenSuccessModal(false);
-          setIsModalOpen(false); // ✅ يقفل الاتنين
+          setIsModalOpen(false);
         }}
       />
     </>
