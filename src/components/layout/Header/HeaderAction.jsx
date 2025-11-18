@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAct } from "../../../store/profile/profileSlice";
 import useHasPermission from "../../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../../permissions";
+import LanguageSwitcher from "../../common/LanguageSwitcher";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const { profile } = useSelector((state) => state.profile);
@@ -20,6 +21,8 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
+      <LanguageSwitcher />
+
       {canSearch && (
         <span
           className="text-2xl text-myBlue-2 cursor-pointer pe-2 lg:pe-4 border-e"
