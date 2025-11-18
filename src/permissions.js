@@ -1,17 +1,28 @@
 export const PERMISSIONS = {
+  VIEW_SEARCH_LISTINGS: "view_search_listings", //done
+  SHARE_POST_OFFER: "share_post_offer", //done
+  SHARE_OUTSOURCE_REQUEST: "share_outsource_request", //done
+  POST_OUTSOURCE_AD: "post_outsource_ad", //done
+  REQUEST_CONSULT: "request_consult", //done
+  CHAT_MEMBERS: "chat_members", //done
   VIEW_POSTS_WITHOUT_CONTACTS: "view_posts_without_contacts",
-  VIEW_SEARCH_LISTINGS: "view_search_listings",
-  SHARE_POST_OFFER: "share_post_offer",
-  SHARE_OUTSOURCE_REQUEST: "share_outsource_request",
-  POST_OUTSOURCE_AD: "post_outsource_ad",
-  REQUEST_CONSULT: "request_consult",
   VIEW_CONTACT_DETAILS: "view_contact_details",
-  CHAT_MEMBERS: "chat_members",
-  SAVE_FAVORITES: "save_favorites",
-  NOTIFICATIONS_REALTIME_MATCHES: "notifications_realtime_matches",
-  PUBLISH_OUTSOURCE_REQUESTS: "publish_outsource_requests",
-  MANAGE_OUTSOURCE_REQUESTS: "manage_outsource_requests",
 };
+
+// export const PERMISSIONS = {
+//   VIEW_POSTS_WITHOUT_CONTACTS: "view_posts_without_contacts",
+//   VIEW_SEARCH_LISTINGS: "view_search_listings",
+//   SHARE_POST_OFFER: "share_post_offer",
+//   SHARE_OUTSOURCE_REQUEST: "share_outsource_request",
+//   POST_OUTSOURCE_AD: "post_outsource_ad",
+//   REQUEST_CONSULT: "request_consult",
+//   VIEW_CONTACT_DETAILS: "view_contact_details",
+//   CHAT_MEMBERS: "chat_members",
+//   SAVE_FAVORITES: "save_favorites",
+//   NOTIFICATIONS_REALTIME_MATCHES: "notifications_realtime_matches",
+//   PUBLISH_OUTSOURCE_REQUESTS: "publish_outsource_requests",
+//   MANAGE_OUTSOURCE_REQUESTS: "manage_outsource_requests",
+// };
 
 // 'view_posts_without_contacts' => 'عرض جميع المنشورات بدون تفاصيل الاتصال',
 //'view_search_listings' => 'عرض والبحث في القوائم',

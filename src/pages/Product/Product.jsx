@@ -12,7 +12,9 @@ import { PERMISSIONS } from "../../permissions";
 const Product = () => {
   const { id } = useParams();
   const { profile } = useSelector((state) => state.profile);
+
   const canNotView = useHasPermission(PERMISSIONS.VIEW_POSTS_WITHOUT_CONTACTS);
+  const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
 
   const [openMsg, setOpenMsg] = useState(false);
 
@@ -95,7 +97,7 @@ const Product = () => {
           </div>
         </div>
 
-        {product?.seller_id !== profile?.id && (
+        {canChat && product?.seller_id !== profile?.id && (
           <button
             onClick={() => setOpenMsg(true)}
             className="animationBtn block mx-auto mt-8"

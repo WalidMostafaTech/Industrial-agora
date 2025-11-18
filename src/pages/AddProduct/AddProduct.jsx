@@ -13,6 +13,9 @@ import ImageUploader from "../../components/form/ImageUploader";
 import { addProductApi } from "../../services/productServices";
 import { useSelector } from "react-redux";
 import SuccessModal from "../../components/modals/SuccessModal";
+import useHasPermission from "../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../permissions";
+import PermissionSection from "../../components/sections/PermissionSection";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -146,6 +149,12 @@ const AddProduct = () => {
     value: category.id,
     label: category.title,
   }));
+
+  const canPost = useHasPermission(PERMISSIONS.POST_OUTSOURCE_AD);
+
+  if (!canPost) {
+    return <PermissionSection />;
+  }
 
   return (
     <section className="container pagePadding">

@@ -12,6 +12,8 @@ import { getProfileAct } from "../../../store/profile/profileSlice";
 import { getMainCategoriesAct } from "../../../store/categories/categories";
 import { fetchCities, fetchSetting } from "../../../store/setting/setting";
 import Cookies from "js-cookie";
+import useHasPermission from "../../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../../permissions";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
@@ -41,6 +43,8 @@ const Header = () => {
     dispatch(fetchSetting());
     dispatch(fetchCities());
   }, [dispatch]);
+
+  const canSearch = useHasPermission(PERMISSIONS.VIEW_SEARCH_LISTINGS);
 
   return (
     <>
@@ -96,10 +100,12 @@ const Header = () => {
         </div>
       </header>
 
-      <SearchModal
-        openSearch={openSearch}
-        onClose={() => setOpenSearch(false)}
-      />
+      {canSearch && (
+        <SearchModal
+          openSearch={openSearch}
+          onClose={() => setOpenSearch(false)}
+        />
+      )}
     </>
   );
 };

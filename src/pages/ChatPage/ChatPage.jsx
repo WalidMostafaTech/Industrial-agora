@@ -5,6 +5,9 @@ import Chat from "./sections/Chat";
 import Contacts from "./sections/Contacts";
 import { getChats, getMsgs } from "../../services/chatServices";
 import { useSelector } from "react-redux";
+import useHasPermission from "../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../permissions";
+import PermissionSection from "../../components/sections/PermissionSection";
 
 const ChatPage = () => {
   const [showChat, setShowChat] = useState(false);
@@ -47,6 +50,12 @@ const ChatPage = () => {
     },
     messages: messages || [],
   };
+
+  const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
+
+  if (!canChat) {
+    return <PermissionSection />;
+  }
 
   return (
     <section className="container pagePadding h-screen">

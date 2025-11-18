@@ -158,8 +158,15 @@ const Footer = () => {
       </div>
 
       <div className="bg-myBlue-1 p-4">
-        <div className="container text-center text-white text-sm flex items-center justify-between">
-          <p>All Copyrights are reserved my Mamdou Ghaneemy</p>
+        <div
+          className="container text-white text-sm 
+  flex flex-col md:flex-row items-center justify-center 
+  gap-2 md:gap-8 text-center flex-wrap"
+        >
+          <p>All Copyrights are reserved by Mamdou Ghaneemy</p>
+
+          <p>Registration Number with the Saudi Business Center: 0000201140</p>
+
           <p>Prepared by @Techno Masr</p>
         </div>
       </div>

@@ -21,7 +21,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
     navigate(`/chat/${id}`); // ✅ يغير الـ URL
   };
 
-  if (!chats)
+  if (!chats || chats.length === 0)
     return (
       <div className="h-full p-4 flex items-center justify-center">
         <p className="text-white text-center text-sm bg-myBlue-1 py-2 px-4 rounded-full">

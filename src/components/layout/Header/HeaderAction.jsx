@@ -7,23 +7,31 @@ import { TbShoppingBagPlus } from "react-icons/tb";
 import { BsChatSquareText } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAct } from "../../../store/profile/profileSlice";
+import useHasPermission from "../../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../../permissions";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
+  const canSearch = useHasPermission(PERMISSIONS.VIEW_SEARCH_LISTINGS);
+
+  const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
+
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
-      <span
-        className="text-2xl text-myBlue-2 cursor-pointer pe-2 lg:pe-4 border-e"
-        onClick={() => {
-          setOpenSearch(true);
-          setActiveNav(false);
-          setOpenLinks(null);
-        }}
-      >
-        <IoSearchOutline />
-      </span>
+      {canSearch && (
+        <span
+          className="text-2xl text-myBlue-2 cursor-pointer pe-2 lg:pe-4 border-e"
+          onClick={() => {
+            setOpenSearch(true);
+            setActiveNav(false);
+            setOpenLinks(null);
+          }}
+        >
+          <IoSearchOutline />
+        </span>
+      )}
 
       {profile ? (
         <div className="dropdown dropdown-end">
@@ -46,12 +54,14 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
             <hr className="my-2 border-gray-300" />
 
-            <li>
-              <Link to={`/chat`} className="flex gap-2 lg:gap-4 items-center">
-                <BsChatSquareText className="text-2xl" />
-                <p>Chat</p>
-              </Link>
-            </li>
+            {canChat && (
+              <li>
+                <Link to={`/chat`} className="flex gap-2 lg:gap-4 items-center">
+                  <BsChatSquareText className="text-2xl" />
+                  <p>Chat</p>
+                </Link>
+              </li>
+            )}
 
             <li>
               <Link
