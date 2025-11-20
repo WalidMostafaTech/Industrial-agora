@@ -29,14 +29,14 @@ const Process = () => {
   return (
     <section className="sectionPadding bg-myBlue-1">
       <h2 className="text-white text-3xl lg:text-4xl font-bold text-center mb-10">
-        Process Outsource
+      PROCESS OUTSOURSE
       </h2>
 
       <div className="container relative">
-        {products?.length > 4 && (
+        {products?.length > 3 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
-              className={`swiper-button-prev-custom-process bg-white p-4 rounded-lg border border-gray-300 shadow transition cursor-pointer ${
+              className={`swiper-button-prev-custom-process bg-white p-2 rounded-md border border-gray-300 shadow transition cursor-pointer ${
                 isBeginning
                   ? "opacity-40 cursor-not-allowed"
                   : "hover:brightness-85"
@@ -46,7 +46,7 @@ const Process = () => {
               <FaChevronLeft />
             </button>
             <button
-              className={`swiper-button-next-custom-process bg-white p-4 rounded-lg border border-gray-300 shadow transition cursor-pointer ${
+              className={`swiper-button-next-custom-process bg-white p-2 rounded-md border border-gray-300 shadow transition cursor-pointer ${
                 isEnd ? "opacity-40 cursor-not-allowed" : "hover:brightness-85"
               }`}
               disabled={isEnd}
@@ -96,6 +96,9 @@ const Process = () => {
               </div>
             </SwiperSlide>
           ))}
+
+
+          
         </Swiper>
       </div>
 

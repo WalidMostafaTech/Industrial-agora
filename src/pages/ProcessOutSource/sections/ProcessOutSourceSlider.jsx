@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import processImg1 from "../../../assets/images/procces-img-1.jpg";
 import processImg2 from "../../../assets/images/procces-img-2.jpg";
 import processImg3 from "../../../assets/images/procces-img-3.jpg";
+import processImg4 from "../../../assets/images/image45.jpg";
 
 const ProcessOutSourceSlider = () => {
   const [isBeginning, setIsBeginning] = useState(true);
@@ -16,9 +17,9 @@ const ProcessOutSourceSlider = () => {
     {
       id: 1,
       image: processImg1,
-      title: "Engineering & Technical Support",
+      title: " Engineering & Technical Support",
       paragraph:
-        "Professional engineering consultation and technical drawings.Prototype reports for design validation.",
+        "Professional engineering consultation and technical drawings.Prototype reports for design validation.  ",
     },
     {
       id: 2,
@@ -34,29 +35,47 @@ const ProcessOutSourceSlider = () => {
       paragraph:
         "Inspection reports included with every order.100% visual inspection for every part. Highly vetted casting and manufacturing partners. Guaranteed quality — if parts aren’t made to spec, we’ll make them right.  ",
     },
+
+    {
+      id: 4,
+      image: processImg4,
+      title: "Procurement & Order Handling",
+      paragraph:
+        "Requests for service come through Industrial Agora; we source the best price. On-time material delivery assurance.Payment security — only pay after you receive and confirm quality.",
+    },
+
+
+
   ];
 
   return (
-    <section className="sectionPadding">
+    <section className="sectionPadding md:mt-[-30px]">
       <div className="container">
         {/* ✅ أزرار التقليب */}
         <div className="flex justify-end mb-4 gap-3">
           <button
-            className={`swiper-button-prev-custom-outsource bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isBeginning
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
+            className={`swiper-button-prev-custom-outsource bg-white p-3 rounded-sm shadow transition cursor-pointer btnArrow 
+              
+              ${
+                isBeginning
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myBlue-2 hover:text-white"
+              }
+              `}
             disabled={isBeginning}
           >
             <FaChevronLeft />
           </button>
           <button
-            className={`swiper-button-next-custom-outsource bg-white p-4 rounded-full shadow transition cursor-pointer ${
-              isEnd
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-myGreen hover:text-white"
-            }`}
+            className={`swiper-button-next-custom-outsource bg-white p-3 rounded-sm shadow transition cursor-pointer btnArrow
+              
+              ${
+                isEnd
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-myBlue-2 hover:text-white"
+              }
+
+              `}
             disabled={isEnd}
           >
             <FaChevronRight />
@@ -67,7 +86,7 @@ const ProcessOutSourceSlider = () => {
         <Swiper
           key={list?.length || 0}
           modules={[Navigation]}
-          spaceBetween={20}
+          spaceBetween={5}
           slidesPerView={1}
           navigation={{
             nextEl: ".swiper-button-next-custom-outsource",
@@ -75,7 +94,7 @@ const ProcessOutSourceSlider = () => {
           }}
           breakpoints={{
             1024: { slidesPerView: 2 },
-            1280: { slidesPerView: 3 },
+            1280: { slidesPerView: 2.75 },
           }}
           onInit={(swiper) => {
             setIsBeginning(swiper.isBeginning);
@@ -88,7 +107,11 @@ const ProcessOutSourceSlider = () => {
         >
           {list?.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden shadow-xl">
+
+              <div className="p-2">
+
+
+              <div className="relative w-full h-64 lg:h-90 rounded-md overflow-hidden  shadow-[9px_2px_8px_#01377D7A]">
                 {/* الصورة */}
                 <img
                   src={item.image}
@@ -97,18 +120,30 @@ const ProcessOutSourceSlider = () => {
                 />
 
                 {/* الأوفرلاي */}
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-black/50"></div>
 
                 {/* النصوص */}
-                <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl md:text-2xl font-bold mb-1">
+                <div className="
+                absolute top-1/2 transform -translate-y-1/2 left-0 right-0 p-6 text-white
+                 
+                h-full
+                
+                ">
+                  <div className="md:mt-32 mt-16">
+
+                  <h3 className="text-xl md:text-2xl font-bold mb-1  ">
                     {item.title}
                   </h3>
                   <p className="text-sm md:text-base leading-relaxed">
                     {item.paragraph}
                   </p>
+
+                  </div>
+                
                 </div>
               </div>
+              </div>
+
             </SwiperSlide>
           ))}
         </Swiper>

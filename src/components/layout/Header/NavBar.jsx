@@ -63,7 +63,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                     }`}
                   >
                     {link.name}
-                    <TiArrowSortedDown className="text-xl" />
+                    {/* <TiArrowSortedDown className="text-xl" /> */}
                   </button>
                 </div>
 

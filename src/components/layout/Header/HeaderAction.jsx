@@ -21,7 +21,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
-      <LanguageSwitcher />
+      {/* <LanguageSwitcher /> */}
 
       {canSearch && (
         <span

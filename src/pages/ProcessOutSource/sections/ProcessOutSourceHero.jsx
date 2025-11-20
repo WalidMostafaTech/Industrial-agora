@@ -32,6 +32,9 @@ const ProcessOutSourceHero = () => {
           through Industrial Agora.
         </p>
 
+
+
+
         <p className="text-lg lg:text-lg leading-relaxed">
           Our platform connects factories to share capacity, expertise, and
           technology — helping you cut costs, reduce idle time, and access

@@ -19,6 +19,8 @@ const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
   const [openLinks, setOpenLinks] = useState(null);
   const [openSearch, setOpenSearch] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const headerRef = useRef();
 
@@ -31,6 +33,23 @@ const Header = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024); // < lg
+    };
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    handleResize();
+    handleScroll();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const dispatch = useDispatch();
@@ -49,10 +68,23 @@ const Header = () => {
   return (
     <>
       <header
-        className="container fixed left-1/2 -translate-x-1/2 top-4 z-50"
+        className={`${
+          isMobile && isScrolled
+            ? " top-0   "
+            : "container   top-4 "
+        } transition-all duration-200  w-full z-50 left-0 right-0 fixed`}
         ref={headerRef}
       >
-        <div className="flex flex-col p-4 bg-stone-300/70 backdrop-blur shadow-md rounded-3xl">
+        <div
+          className={`flex flex-col p-4 bg-stone-300/70 backdrop-blur shadow-mdtransition-all duration-200 
+            
+            ${
+              isMobile && isScrolled ? "rounded-none" : "rounded-3xl"
+            }
+            `}
+        >
+ 
+       
           <div className="flex items-center justify-between gap-2 w-full">
             <div className="flex items-center gap-1">
               <span

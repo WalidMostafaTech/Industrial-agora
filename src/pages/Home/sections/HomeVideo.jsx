@@ -10,7 +10,7 @@ const HomeVideo = () => {
   if (error || !embedUrl) return null;
 
   return (
-    <section className="sectionPadding bg-myBlue-1">
+    <section className="sectionPadding bg-myBlue-1 pb0">
       <div className="px-4 max-w-6xl mx-auto">
         <iframe
           src={embedUrl}

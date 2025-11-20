@@ -10,6 +10,12 @@ import { useSelector } from "react-redux";
 import { sendNewsletter } from "../../../services/homeServices";
 import SuccessModal from "../../modals/SuccessModal";
 
+import instagram from "../../../assets/icons/insta.png";
+import linkedin from "../../../assets/icons/linked.png";
+import whatsapp from "../../../assets/icons/whats.png";
+
+
+
 const Footer = () => {
   const { setting } = useSelector((state) => state.setting);
   const [email, setEmail] = useState("");
@@ -40,7 +46,7 @@ const Footer = () => {
         { name: "Categories", url: "/categories/all" },
         { name: "About us", url: "/about-us" },
         { name: "Contact us", url: "/contact-us" },
-        { name: "Request", url: "/request" },
+        { name: "Request consultation", url: "/request" },
       ],
     },
     {
@@ -64,6 +70,7 @@ const Footer = () => {
       ],
     },
   ];
+
 
   const FooterComponent = ({ title, links }) => (
     <div>
@@ -119,31 +126,33 @@ const Footer = () => {
           <div className="flex items-center space-x-3">
             <a
               // href="#"
-              // target="_blank"
-              className="text-2xl hover:text-myBlue-2 duration-300"
+              target="_blank"
+
+
+ href={`https://wa.me/${(setting?.whatsapp || "").replace(/\s/g, "")}`}
+
+
+
+              className="text-2xl hover:text-myBlue-2 duration-300  cursor-pointer"
             >
-              <FaFacebook />
+                           <img src={whatsapp} alt="whatsapp" className="w-6 h-6" />
+
             </a>
             <a
               // href="#"
               // target="_blank"
-              className="text-3xl hover:text-myBlue-2 duration-300"
+              className="text-3xl hover:text-myBlue-2 duration-300  cursor-pointer"
             >
-              <IoLogoLinkedin />
+              <img src={linkedin} alt="linkedin" className="w-6 h-6" />
+
             </a>
+        
             <a
               // href="#"
               // target="_blank"
-              className="text-2xl hover:text-myBlue-2 duration-300"
+              className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer"
             >
-              <BsTwitterX />
-            </a>
-            <a
-              // href="#"
-              // target="_blank"
-              className="text-2xl hover:text-myBlue-2 duration-300"
-            >
-              <FaInstagram />
+              <img src={instagram} alt="Instagram" className="w-6 h-6" />
             </a>
           </div>
         </div>
@@ -160,14 +169,14 @@ const Footer = () => {
       <div className="bg-myBlue-1 p-4">
         <div
           className="container text-white text-sm 
-  flex flex-col md:flex-row items-center justify-center 
+  flex flex-col md:flex-row items-center justify-between 
   gap-2 md:gap-8 text-center flex-wrap"
         >
           <p>All Copyrights are reserved by Mamdou Ghaneemy</p>
 
           <p>Registration Number with the Saudi Business Center: 0000201140</p>
 
-          <p>Prepared by @Techno Masr</p>
+          <p>Prepared by @ <a href="http://technomasr.com" target="_blank" rel="noopener noreferrer">Techno Masr</a></p>
         </div>
       </div>
 
