@@ -3,47 +3,45 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
+  const { t } = useTranslation();
   const handleOpenLinks = (name) => {
-    if (openLinks === name) {
-      setOpenLinks(null);
-    } else {
-      setOpenLinks(name);
-    }
+    setOpenLinks(openLinks === name ? null : name);
   };
 
   const { categories } = useSelector((state) => state.categories);
   const filterCategories = categories?.filter((cat) => cat.nav);
-
-  const categoriesLinks = filterCategories?.map((cat) => {
-    return { name: cat.title, link: `/categories/${cat.id}` };
-  });
+  const categoriesLinks = filterCategories?.map((cat) => ({
+    name: cat.title,
+    link: `/categories/${cat.id}`,
+  }));
 
   const exchangeBtnRef = useRef();
+  const { pathname } = useLocation();
 
   const linksList = [
-    { name: "home", path: "/", list: [] },
-    { name: "about", path: "/about-us", list: [] },
+    { name: t("navbar.home"), path: "/", list: [] },
+    { name: t("navbar.about"), path: "/about-us", list: [] },
     {
-      name: "exchange categories",
+      name: t("navbar.exchange_categories"),
       path: "/categories/all",
       list: categoriesLinks,
     },
-    { name: "Process OutSource", path: "/process-outsource", list: [] },
-    { name: "request consultation", path: "/request", list: [] },
-    { name: "contact", path: "/contact-us", list: [] },
+    {
+      name: t("navbar.process_outsource"),
+      path: "/process-outsource",
+      list: [],
+    },
+    { name: t("navbar.request_consultation"), path: "/request", list: [] },
+    { name: t("navbar.contact"), path: "/contact-us", list: [] },
   ];
-
-  const { pathname } = useLocation();
 
   return (
     <>
-      {/* ✅ Desktop Nav */}
-      <nav
-        className="hidden w-max mx-auto lg:flex items-center justify-center gap-2 lg:gap-4 
-        absolute top-1/2 left-1/2 -translate-1/2"
-      >
+      {/* Desktop Nav */}
+      <nav className="hidden w-max mx-auto lg:flex items-center justify-center gap-2 lg:gap-4 absolute top-1/2 left-1/2 -translate-1/2">
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
@@ -63,7 +61,6 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                     }`}
                   >
                     {link.name}
-                    {/* <TiArrowSortedDown className="text-xl" /> */}
                   </button>
                 </div>
 
@@ -82,7 +79,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                       }}
                     >
                       <p className="flex-1 line-clamp-2">{subLink.name}</p>
-                      <PiArrowRightLight className="group-hover:translate-x-1 transition-all duration-300" />
+                      <PiArrowRightLight className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all duration-300" />
                     </NavLink>
                   ))}
                 </ul>
@@ -104,7 +101,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
         )}
       </nav>
 
-      {/* ✅ Mobile Nav */}
+      {/* Mobile Nav */}
       <nav
         className={`flex lg:hidden flex-col w-full overflow-hidden transition-all duration-500 ease-in-out ${
           activeNav ? "max-h-screen pt-2" : "max-h-0"
@@ -128,9 +125,9 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out
-                  flex flex-col gap-4 z-50 cursor-pointer relative border-l-4 border-myBlue-2
-                  ${openLinks === link.name ? "max-h-60 p-2" : "max-h-0"}`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-4 z-50 cursor-pointer relative border-l-4 border-myBlue-2 ${
+                  openLinks === link.name ? "max-h-60 p-2" : "max-h-0"
+                }`}
               >
                 {link.list.map((subLink) => (
                   <NavLink

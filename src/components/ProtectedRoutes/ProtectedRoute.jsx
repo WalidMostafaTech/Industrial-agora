@@ -4,50 +4,40 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import ProtectModal from "../modals/ProtectModal";
 import LoadingPage from "../Loading/LoadingPage";
+import { useTranslation } from "react-i18next";
 
 const ProtectedRoute = ({ children }) => {
+  const { t } = useTranslation();
   const token = Cookies.get("tokenAG");
   const { profile, loading } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    if (!token || !profile) {
-      setOpenModal(true);
-    }
+    if (!token || !profile) setOpenModal(true);
   }, [token, profile, loading]);
 
   const handleConfirm = () => {
     setOpenModal(false);
     navigate("/login", { replace: true });
   };
-
   const handleClose = () => {
     setOpenModal(false);
-    // لو عايز تمنع البقاء على الصفحة الحالية ممكن نرجع للصفحة الرئيسية:
     navigate("/", { replace: true });
   };
 
-  // لو فيه توكن وبروفايل نعرض المحتوى
-  if (!loading && token && profile) {
-    return <>{children}</>;
-  }
-
-  // أثناء تحميل البروفايل نقدر نعرض عنصر لودينج بسيط
+  if (!loading && token && profile) return <>{children}</>;
   if (loading) return <LoadingPage />;
 
-  // بخلاف ذلك، نعرض المودال التنبيهي فقط
   return (
-    <>
-      <ProtectModal
-        open={openModal}
-        title="Login Required"
-        message="You need to be logged in to access this page. Would you like to go to the login page now?"
-        confirmText="Go to Login"
-        onConfirm={handleConfirm}
-        onClose={handleClose}
-      />
-    </>
+    <ProtectModal
+      open={openModal}
+      title={t("ProtectedRoutes.ProtectedRoute.title")}
+      message={t("ProtectedRoutes.ProtectedRoute.message")}
+      confirmText={t("ProtectedRoutes.ProtectedRoute.confirm")}
+      onConfirm={handleConfirm}
+      onClose={handleClose}
+    />
   );
 };
 

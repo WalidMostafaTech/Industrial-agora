@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import emptyIcon from "../../assets/icons/folder-empty@3x.png";
 
 const EmptyData = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <img
@@ -9,7 +11,7 @@ const EmptyData = () => {
         className="mx-auto mb-4 w-32 lg:w-36"
       />
       <p className="text-center text-gray-500 text-lg font-semibold">
-        No Data Available
+        {t("noDataAvailable")}
       </p>
     </div>
   );

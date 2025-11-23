@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import PageTitle from "../../components/common/PageTitle";
 import FormBtn from "../../components/form/FormBtn";
@@ -10,68 +12,55 @@ import FormTitle from "../../components/form/FormTitle";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import ImageUploader from "../../components/form/ImageUploader";
-import { addProductApi } from "../../services/productServices";
-import { useSelector } from "react-redux";
 import SuccessModal from "../../components/modals/SuccessModal";
 import useHasPermission from "../../hooks/useHasPermission";
-import { PERMISSIONS } from "../../permissions";
 import PermissionSection from "../../components/sections/PermissionSection";
+import { addProductApi } from "../../services/productServices";
+import { PERMISSIONS } from "../../permissions";
 
 // ✅ Validation Schema
 const schema = yup.object({
-  name: yup.string().required("Product name is required"),
-  category_id: yup.string().required("Category is required"),
-
-  // 🟢 Existing fields
+  name: yup.string().required("AddProduct.errors.name"),
+  category_id: yup.string().required("AddProduct.errors.category_id"),
   price: yup
     .number()
-    .typeError("Price must be a number")
-    .positive("Price must be positive")
-    .required("Price is required"),
-
+    .typeError("AddProduct.errors.price_number")
+    .positive("AddProduct.errors.price_positive")
+    .required("AddProduct.errors.price_required"),
   quantity: yup
     .number()
-    .typeError("Quantity must be a number")
-    .positive("Quantity must be positive")
-    .integer("Quantity must be an integer")
-    .required("Quantity is required"),
-
-  description: yup.string().required("Description is required"),
-
-  // 🟢 Optional numeric fields
+    .typeError("AddProduct.errors.quantity_number")
+    .positive("AddProduct.errors.quantity_positive")
+    .integer("AddProduct.errors.quantity_integer")
+    .required("AddProduct.errors.quantity_required"),
+  description: yup.string().required("AddProduct.errors.description"),
   length: yup
     .number()
-    .typeError("Length must be a number")
-    .positive("Length must be positive")
+    .typeError("AddProduct.errors.length_number")
+    .positive("AddProduct.errors.length_positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
-
   width: yup
     .number()
-    .typeError("Width must be a number")
-    .positive("Width must be positive")
+    .typeError("AddProduct.errors.width_number")
+    .positive("AddProduct.errors.width_positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
-
   height: yup
     .number()
-    .typeError("Height must be a number")
-    .positive("Height must be positive")
+    .typeError("AddProduct.errors.height_number")
+    .positive("AddProduct.errors.height_positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
-
   weight: yup
     .number()
-    .typeError("Weight must be a number")
-    .positive("Weight must be positive")
+    .typeError("AddProduct.errors.weight_number")
+    .positive("AddProduct.errors.weight_positive")
     .nullable()
     .transform((v, o) => (o === "" ? null : v)),
-
   accept_privacy_policy: yup
     .bool()
-    .oneOf([true], "You must accept the privacy policy"),
-
-  // 🟢 NEW FIELDS — all optional
+    .oneOf([true], "AddProduct.errors.privacy_policy"),
   product_status: yup.string().nullable(),
   type: yup.string().nullable(),
   condition: yup.string().nullable(),
@@ -86,9 +75,18 @@ const schema = yup.object({
 });
 
 const AddProduct = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState("");
   const [openModal, setOpenModal] = useState(false);
+
+  const { categories } = useSelector((state) => state.categories);
+  const categoriesOptions = categories?.map((category) => ({
+    value: category.id,
+    label: category.title,
+  }));
+
+  const canPost = useHasPermission(PERMISSIONS.POST_OUTSOURCE_AD);
 
   const {
     register,
@@ -106,282 +104,158 @@ const AddProduct = () => {
       reset();
       setOpenModal(true);
     },
-    onError: (error) => {
-      console.error("❌ Failed to add product: " + error.message);
-    },
+    onError: (error) => console.error(error),
   });
 
   const onSubmit = (data) => {
     if (images.length === 0) {
-      setImageError("Please upload at least one product image.");
+      setImageError(t("AddProduct.errors.images_required"));
       return;
     }
 
     setImageError("");
 
     const formData = new FormData();
-
-    // 🟢 Convert boolean to number
     const formattedData = {
       ...data,
       accept_privacy_policy: data.accept_privacy_policy ? 1 : 0,
     };
 
-    // 🟢 Add all fields automatically
     Object.entries(formattedData).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        formData.append(key, value);
-      }
+      if (value !== null && value !== undefined) formData.append(key, value);
     });
 
     formData.append("type", "product");
 
-    // 🟢 Add images correctly
-    images.forEach((img, index) => {
-      formData.append(`images[${index}]`, img.file);
-    });
+    images.forEach((img, index) =>
+      formData.append(`images[${index}]`, img.file)
+    );
 
     mutate(formData);
   };
 
-  const { categories } = useSelector((state) => state.categories);
-  const categoriesOptions = categories?.map((category) => ({
-    value: category.id,
-    label: category.title,
-  }));
-
-  const canPost = useHasPermission(PERMISSIONS.POST_OUTSOURCE_AD);
-
-  if (!canPost) {
-    return <PermissionSection />;
-  }
+  if (!canPost) return <PermissionSection />;
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="Start Selling" />
+      <PageTitle title={t("AddProduct.pageTitle")} />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="whiteContainer space-y-6 max-w-xl mx-auto"
       >
         <FormTitle
-          title="Add a Product"
-          subtitle="Product Data - Please fill in the details accurately"
+          title={t("AddProduct.formTitle")}
+          subtitle={t("AddProduct.formSubtitle")}
         />
 
-        {/* Product Name */}
         <MainInput
-          label="Product name"
+          label={t("AddProduct.fields.name")}
           id="name"
           {...register("name")}
-          error={errors.name?.message}
+          error={t(errors.name?.message)}
         />
 
-        {/* Category */}
         <MainInput
+          label={t("AddProduct.fields.category_id")}
           id="category_id"
           type="select"
           options={[
-            { value: "", label: "Select Category" },
+            { value: "", label: t("AddProduct.fields.category_id") },
             ...categoriesOptions,
           ]}
           {...register("category_id")}
-          error={errors.category_id?.message}
+          error={t(errors.category_id?.message)}
         />
 
-        {/* Price */}
         <MainInput
-          label="Price"
+          label={t("AddProduct.fields.price")}
           id="price"
           type="number"
           {...register("price")}
-          error={errors.price?.message}
+          error={t(errors.price?.message)}
         />
 
-        {/* Quantity */}
         <MainInput
-          label="Available quantity (stock)"
+          label={t("AddProduct.fields.quantity")}
           id="quantity"
           type="number"
           {...register("quantity")}
-          error={errors.quantity?.message}
+          error={t(errors.quantity?.message)}
         />
 
-        {/* NEW TEXT FIELDS */}
-
-        <MainInput
-          label="Status"
-          id="product_status"
-          type="text"
-          {...register("product_status")}
-          error={errors.product_status?.message}
-        />
-
-        <MainInput
-          label="Type"
-          id="type"
-          type="text"
-          {...register("type")}
-          error={errors.type?.message}
-        />
-
-        <MainInput
-          label="Condition"
-          id="condition"
-          type="text"
-          {...register("condition")}
-          error={errors.condition?.message}
-        />
-
-        <MainInput
-          label="Delivery"
-          id="delivery"
-          type="text"
-          {...register("delivery")}
-          error={errors.delivery?.message}
-        />
-
-        <MainInput
-          label="Payment"
-          id="payment"
-          type="text"
-          {...register("payment")}
-          error={errors.payment?.message}
-        />
-
-        <MainInput
-          label="Location"
-          id="location"
-          type="text"
-          {...register("location")}
-          error={errors.location?.message}
-        />
-
-        <MainInput
-          label="For Equipments"
-          id="for_equipments"
-          type="text"
-          {...register("for_equipments")}
-          error={errors.for_equipments?.message}
-        />
-
-        <MainInput
-          label="Manufacturers"
-          id="manufacturers"
-          type="text"
-          {...register("manufacturers")}
-          error={errors.manufacturers?.message}
-        />
-
-        <MainInput
-          label="SKU"
-          id="sku"
-          type="text"
-          {...register("sku")}
-          error={errors.sku?.message}
-        />
-
-        <MainInput
-          label="Vendor"
-          id="vendor"
-          type="text"
-          {...register("vendor")}
-          error={errors.vendor?.message}
-        />
-
-        <MainInput
-          label="Warehouse"
-          id="warehouse"
-          type="text"
-          {...register("warehouse")}
-          error={errors.warehouse?.message}
-        />
+        {/* باقي الحقول النصية */}
+        {[
+          "product_status",
+          "type",
+          "condition",
+          "delivery",
+          "payment",
+          "location",
+          "for_equipments",
+          "manufacturers",
+          "sku",
+          "vendor",
+          "warehouse",
+        ].map((field) => (
+          <MainInput
+            key={field}
+            label={t(`AddProduct.fields.${field}`)}
+            id={field}
+            type="text"
+            {...register(field)}
+            error={t(errors[field]?.message)}
+          />
+        ))}
 
         {/* Dimensions */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <p className="font-medium text-gray-900 col-span-2 lg:col-span-3">
-            Product Dimensions (if required):
+            {t("AddProduct.fields.length")} / {t("AddProduct.fields.width")} /{" "}
+            {t("AddProduct.fields.height")}
           </p>
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="length"
-              className="font-medium text-gray-900 text-sm"
-            >
-              Length:
-            </label>
-            <input
-              type="number"
-              id="length"
-              {...register("length")}
-              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
-            />
-            {errors.length && (
-              <p className="text-red-700 text-sm">{errors.length.message}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="width"
-              className="font-medium text-gray-900 text-sm"
-            >
-              Width:
-            </label>
-            <input
-              type="number"
-              id="width"
-              {...register("width")}
-              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
-            />
-            {errors.width && (
-              <p className="text-red-700 text-sm">{errors.width.message}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="height"
-              className="font-medium text-gray-900 text-sm"
-            >
-              Height:
-            </label>
-            <input
-              type="number"
-              id="height"
-              {...register("height")}
-              className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
-            />
-            {errors.height && (
-              <p className="text-red-700 text-sm">{errors.height.message}</p>
-            )}
-          </div>
+          {["length", "width", "height"].map((dim) => (
+            <div key={dim} className="flex flex-col gap-1">
+              <label
+                htmlFor={dim}
+                className="font-medium text-gray-900 text-sm"
+              >
+                {t(`AddProduct.fields.${dim}`)}
+              </label>
+              <input
+                type="number"
+                id={dim}
+                {...register(dim)}
+                className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
+              />
+              {errors[dim] && (
+                <p className="text-red-700 text-sm">{t(errors[dim].message)}</p>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Weight */}
         <MainInput
-          label="Weight (if required)"
+          label={t("AddProduct.fields.weight")}
           id="weight"
           type="number"
           {...register("weight")}
-          error={errors.weight?.message}
+          error={t(errors.weight?.message)}
         />
 
-        {/* Images */}
         <ImageUploader
-          label="Product Images"
+          label={t("AddProduct.fields.images")}
           onChange={setImages}
           error={imageError}
           initialImages={images}
         />
 
-        {/* Description */}
         <MainInput
-          label="Product Description"
+          label={t("AddProduct.fields.description")}
           id="description"
           type="textarea"
           {...register("description")}
-          error={errors.description?.message}
+          error={t(errors.description?.message)}
         />
 
         {/* Privacy Policy */}
@@ -393,23 +267,27 @@ const AddProduct = () => {
               {...register("accept_privacy_policy")}
             />
             <span className="label-text text-gray-700 text-sm">
-              Accept privacy policy
+              {t("AddProduct.fields.accept_privacy_policy")}
             </span>
           </label>
           {errors.accept_privacy_policy && (
             <p className="text-red-700 text-sm mt-1">
-              {errors.accept_privacy_policy.message}
+              {t(errors.accept_privacy_policy.message)}
             </p>
           )}
         </div>
 
         <FormError errorMsg={error?.response?.data?.message} />
-        <FormBtn title="Submit" loading={isPending} disabled={isPending} />
+        <FormBtn
+          title={t("AddProduct.submitBtn")}
+          loading={isPending}
+          disabled={isPending}
+        />
       </form>
 
       <SuccessModal
         openModal={openModal}
-        msg="Product added successfully!"
+        msg={t("AddProduct.successMsg")}
         onClose={() => setOpenModal(false)}
         onConfirm={() => setOpenModal(false)}
       />

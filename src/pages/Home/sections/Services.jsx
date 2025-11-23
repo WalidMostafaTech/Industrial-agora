@@ -7,8 +7,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
+  const { t } = useTranslation();
   const {
     data: services,
     isLoading,
@@ -27,7 +29,7 @@ const Services = () => {
   return (
     <section className="sectionPadding my-8 container relative">
       <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14">
-        Why Join Industrial Agora
+        {t("WhyJoinIndustrialAgora")}
       </h2>
 
       <div className="relative">
@@ -90,7 +92,7 @@ const Services = () => {
 
       <div className="flex justify-center mt-10 lg:mt-14">
         <Link to="/login" className="animationBtn">
-          get started
+          {t("getStarted")}
         </Link>
       </div>
     </section>

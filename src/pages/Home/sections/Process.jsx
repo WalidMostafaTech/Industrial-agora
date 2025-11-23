@@ -8,8 +8,10 @@ import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { getProductsByType } from "../../../services/productServices";
+import { useTranslation } from "react-i18next";
 
 const Process = () => {
+  const { t } = useTranslation();
   const {
     data: products,
     isLoading,
@@ -29,7 +31,7 @@ const Process = () => {
   return (
     <section className="sectionPadding bg-myBlue-1">
       <h2 className="text-white text-3xl lg:text-4xl font-bold text-center mb-10">
-      PROCESS OUTSOURSE
+        {t("PROCESSOUTSOURSE")}
       </h2>
 
       <div className="container relative">
@@ -96,9 +98,6 @@ const Process = () => {
               </div>
             </SwiperSlide>
           ))}
-
-
-          
         </Swiper>
       </div>
 
@@ -107,7 +106,7 @@ const Process = () => {
           to="/process-outsource/products"
           className="animationBtn light w-fit"
         >
-          See More
+          {t("seeMore")}
         </Link>
       </div>
     </section>

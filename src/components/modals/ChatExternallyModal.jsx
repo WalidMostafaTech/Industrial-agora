@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { useMutation } from "@tanstack/react-query";
 import icon from "../../assets/icons/chat-external-icon.png";
 import { updateChatAction } from "../../services/chatServices";
+import { useTranslation } from "react-i18next";
 
 const ChatExternallyModal = ({
   openModal,
@@ -9,10 +10,12 @@ const ChatExternallyModal = ({
   chatId,
   setDisabledBtns,
 }) => {
+  const { t } = useTranslation();
+
   const { mutate, isPending } = useMutation({
     mutationFn: (payload) => updateChatAction(payload),
     onSuccess: () => {
-      onClose(); // يقفل المودال بعد نجاح العملية
+      onClose();
       setDisabledBtns(true);
     },
     onError: (error) => {
@@ -36,13 +39,12 @@ const ChatExternallyModal = ({
           className="w-16 mx-auto mb-8"
         />
         <p className="text-center font-semibold">
-          You are leaving the Agora platform, and any transactions outside of it
-          are at your own risk and we are not responsible for them.
+          {t("modals.ChatExternallyModal.warning")}
         </p>
 
         <div className="modal-action">
           <button className="mainBtn danger" onClick={onClose}>
-            Close
+            {t("modals.ChatExternallyModal.close")}
           </button>
 
           <button
@@ -50,7 +52,9 @@ const ChatExternallyModal = ({
             onClick={handleContinue}
             disabled={isPending}
           >
-            {isPending ? "Loading..." : "Continue"}
+            {isPending
+              ? t("modals.ChatExternallyModal.loading")
+              : t("modals.ChatExternallyModal.continue")}
           </button>
         </div>
       </div>

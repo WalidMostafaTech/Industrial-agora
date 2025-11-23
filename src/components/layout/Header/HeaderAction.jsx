@@ -10,18 +10,19 @@ import { logoutAct } from "../../../store/profile/profileSlice";
 import useHasPermission from "../../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../../permissions";
 import LanguageSwitcher from "../../common/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const canSearch = useHasPermission(PERMISSIONS.VIEW_SEARCH_LISTINGS);
-
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
-      {/* <LanguageSwitcher /> */}
+      <LanguageSwitcher />
 
       {canSearch && (
         <span
@@ -51,7 +52,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
                 className="flex gap-2 lg:gap-4 items-center"
               >
                 <FaRegUserCircle className="text-2xl" />
-                <p>Profile</p>
+                <p>{t("header_action.profile")}</p>
               </Link>
             </li>
 
@@ -61,7 +62,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
               <li>
                 <Link to={`/chat`} className="flex gap-2 lg:gap-4 items-center">
                   <BsChatSquareText className="text-2xl" />
-                  <p>Chat</p>
+                  <p>{t("header_action.chat")}</p>
                 </Link>
               </li>
             )}
@@ -76,7 +77,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
                 className="flex gap-2 lg:gap-4 items-center"
               >
                 <TbShoppingBagPlus className="text-2xl" />
-                <p>Subscription</p>
+                <p>{t("header_action.subscription")}</p>
               </Link>
             </li>
 
@@ -88,14 +89,14 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
                 className="flex gap-2 lg:gap-4 items-center text-red-700"
               >
                 <HiOutlineLogout className="text-2xl" />
-                <p>Log Out</p>
+                <p>{t("header_action.log_out")}</p>
               </button>
             </li>
           </ul>
         </div>
       ) : (
         <Link to="/login" className="mainBtn !rounded-full">
-          Join us
+          {t("header_action.join_us")}
         </Link>
       )}
     </div>

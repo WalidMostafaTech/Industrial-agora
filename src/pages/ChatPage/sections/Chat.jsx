@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next";
 import ChatHeader from "../components/ChatHeader";
 import MsgInput from "../components/MsgInput";
 import MsgsContainer from "../components/MsgsContainer";
 
 const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
+  const { t } = useTranslation();
 
   return (
     <div
@@ -12,7 +14,11 @@ const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
     >
       {chatId ? (
         <>
-          <ChatHeader contact={chatData.header} setShowChat={setShowChat} chatId={chatId} />
+          <ChatHeader
+            contact={chatData.header}
+            setShowChat={setShowChat}
+            chatId={chatId}
+          />
 
           <MsgsContainer messages={chatData.messages} />
 
@@ -21,7 +27,7 @@ const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
       ) : (
         <div className="flex-grow flex items-center justify-center p-4">
           <p className="text-white text-center text-sm bg-myBlue-1 py-2 px-4 rounded-full">
-            Select a chat to start messaging
+            {t("SelectChatToStartMessaging")}
           </p>
         </div>
       )}

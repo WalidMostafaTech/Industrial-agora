@@ -24,7 +24,7 @@ const LanguageSwitcher = () => {
       {/* زرار واحد يبدل اللغة */}
       <button
         onClick={handleToggle}
-        className={`cursor-pointer px-2 py-1 rounded-md border-2`}
+        className={`cursor-pointer px-2 py-1 rounded-md text-myBlue-2 border-2`}
       >
         <span className="font-semibold">
           {lang === "en" ? "العربية" : "English"}

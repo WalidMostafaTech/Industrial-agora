@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const MsgsContainer = ({ messages = [] }) => {
+  const { t } = useTranslation();
   const { profile } = useSelector((state) => state.profile);
   const containerRef = useRef(null);
 
@@ -16,13 +18,14 @@ const MsgsContainer = ({ messages = [] }) => {
     }
   }, [messages]);
 
-  if (!messages.length) return (
-    <div className="h-full p-4 flex items-center justify-center">
-      <p className="text-white text-center text-lg bg-myBlue-1 py-2 px-4 rounded-full">
-        No messages yet. Start the conversation!
-      </p>
-    </div>
-  );
+  if (!messages.length)
+    return (
+      <div className="h-full p-4 flex items-center justify-center">
+        <p className="text-white text-center text-lg bg-myBlue-1 py-2 px-4 rounded-full">
+          {t("NoMessagesYet")}
+        </p>
+      </div>
+    );
 
   return (
     <div
@@ -57,9 +60,7 @@ const MsgsContainer = ({ messages = [] }) => {
                 isUser ? "bg-myBlue-2 text-white" : "bg-white text-gray-900"
               }`}
             >
-              <p className="text-sm font-semibold break-all">
-                {msg.message}
-              </p>
+              <p className="text-sm font-semibold break-all">{msg.message}</p>
 
               <span
                 className={`text-[10px] w-fit block ml-auto mt-1 p-0.5 rounded ${

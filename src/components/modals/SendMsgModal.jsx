@@ -7,16 +7,17 @@ import FormBtn from "../form/FormBtn";
 import MainInput from "../form/MainInput";
 import FormError from "../form/FormError";
 import { sendMsg } from "../../services/chatServices";
+import { useTranslation } from "react-i18next";
 
-// ✅ Yup validation schema
-const schema = Yup.object().shape({
-  message: Yup.string().required("Message is required"),
-});
-
+// ✅ SendMsgModal with i18n
 const SendMsgModal = ({ openModal, onClose, productId }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // ✅ React Hook Form setup
+  const schema = Yup.object().shape({
+    message: Yup.string().required(t("modals.SendMsgModal.messageRequired")),
+  });
+
   const {
     register,
     handleSubmit,
@@ -26,21 +27,16 @@ const SendMsgModal = ({ openModal, onClose, productId }) => {
     resolver: yupResolver(schema),
   });
 
-  // ✅ React Query mutation
   const { mutate, isPending, error } = useMutation({
     mutationFn: sendMsg,
     onSuccess: (data) => {
       const chatId = data?.chat?.id;
-
-      if (chatId) {
-        navigate(`/chat/${chatId}`);
-      }
+      if (chatId) navigate(`/chat/${chatId}`);
       reset();
       onClose();
     },
   });
 
-  // ✅ Submit handler
   const onSubmit = (formData) => {
     mutate({
       message: formData.message,
@@ -59,12 +55,12 @@ const SendMsgModal = ({ openModal, onClose, productId }) => {
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <h3 className="text-xl text-myBlue-1 font-bold">
-            Send a message to the seller
+            {t("modals.SendMsgModal.title")}
           </h3>
 
           <MainInput
             type="textarea"
-            placeholder="Write your message..."
+            placeholder={t("modals.SendMsgModal.placeholder")}
             {...register("message")}
             error={errors.message?.message}
           />
@@ -72,14 +68,18 @@ const SendMsgModal = ({ openModal, onClose, productId }) => {
           <FormError errorMsg={error?.response?.data?.message} />
 
           <div className="flex justify-between gap-4">
-            <FormBtn title={"Send"} loading={isPending} margin={false} />
+            <FormBtn
+              title={t("modals.SendMsgModal.send")}
+              loading={isPending}
+              margin={false}
+            />
 
             <button
               onClick={onClose}
               type="button"
               className="animationBtn danger"
             >
-              Cancel
+              {t("modals.SendMsgModal.cancel")}
             </button>
           </div>
         </form>

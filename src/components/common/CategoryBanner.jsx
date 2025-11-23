@@ -4,7 +4,7 @@ const CategoryBanner = ({ image, title }) => {
       <img src={image} alt={title} className="w-full h-full object-cover" />
 
       {title && (
-        <div className="absolute bottom-0 left-0 p-4 pe-20">
+        <div className="absolute bottom-0 left-0 p-4 pr-20">
           <span
             className="absolute bg-myBlue-1 inset-0 z-0 pointer-events-none transform origin-top-left transition-transform duration-300 group-hover:scale-85"
             style={{

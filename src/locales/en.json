@@ -1,1 +1,164 @@
-{}
+{
+  "loading": "Loading...",
+  "noDataAvailable": "No data available",
+  "seeMore": "see more",
+  "getStarted": "get started",
+  "details": "details",
+
+  "footer": {
+    "company": "Our Company",
+    "services": "Services",
+    "features": "Features",
+    "home": "Home",
+    "categories": "Categories",
+    "about_us": "About us",
+    "contact_us": "Contact us",
+    "request_consultation": "Request consultation",
+    "material_exchange": "Material & Machinery Exchange",
+    "industrial_outsourcing": "Industrial Process Outsourcing",
+    "waste_reduction": "Waste Reduction Consulting",
+    "business_opportunities": "Business Opportunities",
+    "customized_offers": "Customized Industrial Offers",
+    "trusted_platform": "Trusted & User-Friendly Platform",
+    "verified_suppliers": "Verified Industrial Suppliers",
+    "wide_range": "Wide Range of Products & Services",
+    "sustainable_solutions": "Sustainability-Focused Solutions",
+    "reduce_costs": "Reduce Costs & Improve Efficiency",
+    "email_placeholder": "Enter your email",
+    "join_us": "Join Us",
+    "sending": "Sending...",
+    "copyright": "All Copyrights are reserved by Mamdou Ghaneemy",
+    "registration": "Registration Number with the Saudi Business Center: 0000201140",
+    "prepared_by": "Prepared by"
+  },
+
+  "header_action": {
+    "profile": "Profile",
+    "chat": "Chat",
+    "subscription": "Subscription",
+    "log_out": "Log Out",
+    "join_us": "Join us"
+  },
+
+  "navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "exchange_categories": "Exchange Categories",
+    "process_outsource": "Process OutSource",
+    "request_consultation": "Request Consultation",
+    "contact": "Contact"
+  },
+
+  "modals": {
+    "ChatExternallyModal": {
+      "warning": "You are leaving the Agora platform, and any transactions outside of it are at your own risk and we are not responsible for them.",
+      "close": "Close",
+      "continue": "Continue",
+      "loading": "Loading..."
+    },
+    "ChatLocalModal": {
+      "warning": "You are now inside the Agora platform, all our services are available to you and under our responsibility",
+      "close": "Close",
+      "continue": "Continue",
+      "loading": "Loading..."
+    },
+    "CommissionModal": {
+      "title": "Enter the subscription period in months",
+      "durationLabel": "Duration in Months",
+      "monthsError": "Please enter number of months",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "loading": "Loading..."
+    },
+    "SendMsgModal": {
+      "title": "Send a message to the seller",
+      "placeholder": "Write your message...",
+      "send": "Send",
+      "cancel": "Cancel",
+      "messageRequired": "Message is required"
+    }
+  },
+
+  "ProtectedRoutes": {
+    "ProtectedRoute": {
+      "title": "Login Required",
+      "message": "You need to be logged in to access this page. Would you like to go to the login page now?",
+      "confirm": "Go to Login"
+    },
+    "PublicRoute": {
+      "title": "Already Logged In",
+      "message": "You are already logged in. You cannot access this page while logged in.",
+      "confirm": "Go to Home"
+    }
+  },
+
+  "PermissionSection": {
+    "title": "You do not have permission for this page.",
+    "upgrade": "Upgrade Permissions"
+  },
+
+  "AddProduct": {
+    "pageTitle": "Start Selling",
+    "formTitle": "Add a Product",
+    "formSubtitle": "Product Data - Please fill in the details accurately",
+    "fields": {
+      "name": "Product name",
+      "category_id": "Category",
+      "price": "Price",
+      "quantity": "Available quantity (stock)",
+      "product_status": "Status",
+      "type": "Type",
+      "condition": "Condition",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "location": "Location",
+      "for_equipments": "For Equipments",
+      "manufacturers": "Manufacturers",
+      "sku": "SKU",
+      "vendor": "Vendor",
+      "warehouse": "Warehouse",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "weight": "Weight (if required)",
+      "images": "Product Images",
+      "description": "Product Description",
+      "accept_privacy_policy": "Accept privacy policy"
+    },
+    "submitBtn": "Submit",
+    "successMsg": "Product added successfully!",
+    "errors": {
+      "name": "Product name is required",
+      "category_id": "Category is required",
+      "price_number": "Price must be a number",
+      "price_positive": "Price must be positive",
+      "price_required": "Price is required",
+      "quantity_number": "Quantity must be a number",
+      "quantity_positive": "Quantity must be positive",
+      "quantity_integer": "Quantity must be an integer",
+      "quantity_required": "Quantity is required",
+      "description": "Description is required",
+      "length_number": "Length must be a number",
+      "length_positive": "Length must be positive",
+      "width_number": "Width must be a number",
+      "width_positive": "Width must be positive",
+      "height_number": "Height must be a number",
+      "height_positive": "Height must be positive",
+      "weight_number": "Weight must be a number",
+      "weight_positive": "Weight must be positive",
+      "privacy_policy": "You must accept the privacy policy",
+      "images_required": "Please upload at least one product image."
+    }
+  },
+
+  "NoContactsAvailable": "No contacts available.",
+  "SelectChatToStartMessaging": "Select a chat to start messaging",
+  "NoMessagesYet": "No messages yet. Start the conversation!",
+
+  "OurGoals": "Our Goals",
+  "WhyJoinIndustrialAgora": "Why Join Industrial Agora",
+  "OurSolution": "Our Solution",
+  "Mission": "Mission",
+  "Vision": "Vision",
+  "PROCESSOUTSOURSE": "PROCESS OUTSOURSE"
+}

@@ -4,8 +4,10 @@ import eyeIcon from "../../../assets/icons/193a563129355d056e72368071bf44766b45b
 import { Link } from "react-router-dom";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const MissionVisionSolution = () => {
+  const { t } = useTranslation();
   const { setting, loading, error } = useSelector((state) => state.setting);
 
   if (loading) return <LoadingSection />;
@@ -15,21 +17,21 @@ const MissionVisionSolution = () => {
 
   const MissionVisionSolutionList = [
     {
-      title: "Our Solution",
+      title: t("OurSolution"),
       paragraph: setting?.solution,
       icon: ideaIcon,
       color: "var(--color-myBlue-2)",
       link: "/about-us",
     },
     {
-      title: "Mission",
+      title: t("Mission"),
       paragraph: setting?.mission,
       icon: missionIcon,
       color: "var(--color-myGreen)",
       link: "/about-us",
     },
     {
-      title: "Vision",
+      title: t("Vision"),
       paragraph: setting?.vission,
       icon: eyeIcon,
       color: "white",
@@ -64,7 +66,7 @@ const MissionVisionSolution = () => {
                 item.color === "white" ? "" : "light"
               }`}
             >
-              details
+              {t("details")}
             </Link>
           </div>
         ))}

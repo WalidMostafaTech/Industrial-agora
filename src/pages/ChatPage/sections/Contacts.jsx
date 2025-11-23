@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContactCard from "../components/ContactCard";
+import { useTranslation } from "react-i18next";
 
 const Contacts = ({ setShowChat, chats, chatId }) => {
+  const { t } = useTranslation();
   const [activeChat, setActiveChat] = useState(null);
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
     return (
       <div className="h-full p-4 flex items-center justify-center">
         <p className="text-white text-center text-sm bg-myBlue-1 py-2 px-4 rounded-full">
-          No contacts available.
+          {t("NoContactsAvailable")}
         </p>
       </div>
     );

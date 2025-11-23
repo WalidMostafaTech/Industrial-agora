@@ -1,1 +1,164 @@
-{}
+{
+  "loading": "جاري التحميل...",
+  "noDataAvailable": "لا توجد بيانات متاحة",
+  "seeMore": "المزيد",
+  "getStarted": "البدء الآن",
+  "details": "التفاصيل",
+
+  "footer": {
+    "company": "شركتنا",
+    "services": "الخدمات",
+    "features": "المميزات",
+    "home": "الرئيسية",
+    "categories": "التصنيفات",
+    "about_us": "من نحن",
+    "contact_us": "تواصل معنا",
+    "request_consultation": "طلب استشارة",
+    "material_exchange": "تبادل المواد والآلات",
+    "industrial_outsourcing": "تعهد العمليات الصناعية",
+    "waste_reduction": "استشارات تقليل الهدر",
+    "business_opportunities": "فرص الأعمال",
+    "customized_offers": "عروض صناعية مخصصة",
+    "trusted_platform": "منصة موثوقة وسهلة الاستخدام",
+    "verified_suppliers": "موردون صناعيون موثوقون",
+    "wide_range": "مجموعة واسعة من المنتجات والخدمات",
+    "sustainable_solutions": "حلول تركز على الاستدامة",
+    "reduce_costs": "تقليل التكاليف وتحسين الكفاءة",
+    "email_placeholder": "أدخل بريدك الإلكتروني",
+    "join_us": "انضم إلينا",
+    "sending": "جاري الإرسال...",
+    "copyright": "جميع الحقوق محفوظة لممدوح غنيمي",
+    "registration": "رقم التسجيل لدى المركز السعودي للأعمال: 0000201140",
+    "prepared_by": "تم التطوير بواسطة"
+  },
+
+  "header_action": {
+    "profile": "الملف الشخصي",
+    "chat": "الدردشة",
+    "subscription": "الاشتراك",
+    "log_out": "تسجيل الخروج",
+    "join_us": "انضم إلينا"
+  },
+
+  "navbar": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "exchange_categories": "تصنيفات التبادل",
+    "process_outsource": "تعهيد العمليات",
+    "request_consultation": "طلب استشارة",
+    "contact": "تواصل معنا"
+  },
+
+  "modals": {
+    "ChatExternallyModal": {
+      "warning": "أنت تغادر منصة أجورا، وأي معاملات خارجها تكون على مسؤوليتك الخاصة ونحن غير مسؤولين عنها.",
+      "close": "إغلاق",
+      "continue": "متابعة",
+      "loading": "جارٍ التحميل..."
+    },
+    "ChatLocalModal": {
+      "warning": "أنت الآن داخل منصة أجورا، جميع خدماتنا متاحة لك وتحت مسؤوليتنا",
+      "close": "إغلاق",
+      "continue": "متابعة",
+      "loading": "جارٍ التحميل..."
+    },
+    "CommissionModal": {
+      "title": "أدخل مدة الاشتراك بالشهور",
+      "durationLabel": "المدة بالشهور",
+      "monthsError": "يرجى إدخال عدد الشهور",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "loading": "جارٍ التحميل..."
+    },
+    "SendMsgModal": {
+      "title": "أرسل رسالة للبائع",
+      "placeholder": "اكتب رسالتك...",
+      "send": "إرسال",
+      "cancel": "إلغاء",
+      "messageRequired": "الرسالة مطلوبة"
+    }
+  },
+
+  "ProtectedRoutes": {
+    "ProtectedRoute": {
+      "title": "تسجيل الدخول مطلوب",
+      "message": "تحتاج إلى تسجيل الدخول للوصول إلى هذه الصفحة. هل ترغب بالانتقال إلى صفحة تسجيل الدخول الآن؟",
+      "confirm": "اذهب لتسجيل الدخول"
+    },
+    "PublicRoute": {
+      "title": "تم تسجيل الدخول بالفعل",
+      "message": "أنت مسجل دخول بالفعل. لا يمكنك الوصول إلى هذه الصفحة أثناء تسجيل الدخول.",
+      "confirm": "اذهب إلى الصفحة الرئيسية"
+    }
+  },
+
+  "PermissionSection": {
+    "title": "ليس لديك صلاحية لهذه الصفحة.",
+    "upgrade": "ترقية الصلاحيات"
+  },
+
+  "AddProduct": {
+    "pageTitle": "ابدأ البيع",
+    "formTitle": "إضافة منتج",
+    "formSubtitle": "بيانات المنتج - يرجى تعبئة التفاصيل بدقة",
+    "fields": {
+      "name": "اسم المنتج",
+      "category_id": "القسم",
+      "price": "السعر",
+      "quantity": "الكمية المتاحة (المخزون)",
+      "product_status": "الحالة",
+      "type": "النوع",
+      "condition": "الحالة الفيزيائية",
+      "delivery": "التوصيل",
+      "payment": "طريقة الدفع",
+      "location": "الموقع",
+      "for_equipments": "للأجهزة",
+      "manufacturers": "الشركة المصنعة",
+      "sku": "SKU",
+      "vendor": "البائع",
+      "warehouse": "المخزن",
+      "length": "الطول",
+      "width": "العرض",
+      "height": "الارتفاع",
+      "weight": "الوزن (إن وجد)",
+      "images": "صور المنتج",
+      "description": "وصف المنتج",
+      "accept_privacy_policy": "أوافق على سياسة الخصوصية"
+    },
+    "submitBtn": "إرسال",
+    "successMsg": "تمت إضافة المنتج بنجاح!",
+    "errors": {
+      "name": "اسم المنتج مطلوب",
+      "category_id": "القسم مطلوب",
+      "price_number": "السعر يجب أن يكون رقمًا",
+      "price_positive": "السعر يجب أن يكون موجبًا",
+      "price_required": "السعر مطلوب",
+      "quantity_number": "الكمية يجب أن تكون رقمًا",
+      "quantity_positive": "الكمية يجب أن تكون موجبة",
+      "quantity_integer": "الكمية يجب أن تكون عددًا صحيحًا",
+      "quantity_required": "الكمية مطلوبة",
+      "description": "الوصف مطلوب",
+      "length_number": "الطول يجب أن يكون رقمًا",
+      "length_positive": "الطول يجب أن يكون موجبًا",
+      "width_number": "العرض يجب أن يكون رقمًا",
+      "width_positive": "العرض يجب أن يكون موجبًا",
+      "height_number": "الارتفاع يجب أن يكون رقمًا",
+      "height_positive": "الارتفاع يجب أن يكون موجبًا",
+      "weight_number": "الوزن يجب أن يكون رقمًا",
+      "weight_positive": "الوزن يجب أن يكون موجبًا",
+      "privacy_policy": "يجب الموافقة على سياسة الخصوصية",
+      "images_required": "يرجى رفع صورة واحدة على الأقل للمنتج."
+    }
+  },
+
+  "NoContactsAvailable": "لا توجد جهات اتصال متاحة.",
+  "SelectChatToStartMessaging": "اختر محادثة لبدء المراسلة",
+  "NoMessagesYet": "لا توجد رسائل بعد. ابدأ المحادثة!",
+
+  "OurGoals": "أهدافنا",
+  "WhyJoinIndustrialAgora": "لماذا تنضم إلى أجورا الصناعية",
+  "OurSolution": "حلولنا",
+  "Mission": "المهمة",
+  "Vision": "الرؤية",
+  "PROCESSOUTSOURSE": "تعهد العمليات الصناعية"
+}

@@ -2,12 +2,15 @@ import { createPortal } from "react-dom";
 import icon from "../../assets/icons/chat-local-icon.png";
 import { useMutation } from "@tanstack/react-query";
 import { updateChatAction } from "../../services/chatServices";
+import { useTranslation } from "react-i18next";
 
 const ChatLocalModal = ({ openModal, onClose, chatId, setDisabledBtns }) => {
+  const { t } = useTranslation();
+
   const { mutate, isPending } = useMutation({
     mutationFn: (payload) => updateChatAction(payload),
     onSuccess: () => {
-      onClose(); // يقفل المودال بعد نجاح العملية
+      onClose();
       setDisabledBtns(true);
     },
     onError: (error) => {
@@ -23,27 +26,25 @@ const ChatLocalModal = ({ openModal, onClose, chatId, setDisabledBtns }) => {
   if (!openModal) return null;
 
   return createPortal(
-    <dialog className={`modal modal-open`} onClick={onClose}>
+    <dialog className="modal modal-open" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-        <img
-          src={icon}
-          alt="chat externally icon"
-          className="w-16 mx-auto mb-8"
-        />
+        <img src={icon} alt="chat locally icon" className="w-16 mx-auto mb-8" />
         <p className="text-center font-semibold">
-          You are now inside the Agora platform, all our services are available
-          to you and under our responsibility
+          {t("modals.ChatLocalModal.warning")}
         </p>
+
         <div className="modal-action">
           <button className="mainBtn danger" onClick={onClose}>
-            Close
+            {t("modals.ChatLocalModal.close")}
           </button>
           <button
             className="mainBtn"
             onClick={handleContinue}
             disabled={isPending}
           >
-            {isPending ? "Loading..." : "Continue"}
+            {isPending
+              ? t("modals.ChatLocalModal.loading")
+              : t("modals.ChatLocalModal.continue")}
           </button>
         </div>
       </div>

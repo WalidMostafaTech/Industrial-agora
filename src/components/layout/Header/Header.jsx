@@ -69,22 +69,16 @@ const Header = () => {
     <>
       <header
         className={`${
-          isMobile && isScrolled
-            ? " top-0   "
-            : "container   top-4 "
+          isMobile && isScrolled ? " top-0   " : "container   top-4 "
         } transition-all duration-200  w-full z-50 left-0 right-0 fixed`}
         ref={headerRef}
       >
         <div
-          className={`flex flex-col p-4 bg-stone-300/70 backdrop-blur shadow-mdtransition-all duration-200 
+          className={`flex flex-col p-4 bg-stone-300/70 backdrop-blur shadow-md transition-all duration-200 
             
-            ${
-              isMobile && isScrolled ? "rounded-none" : "rounded-3xl"
-            }
+            ${isMobile && isScrolled ? "rounded-none" : "rounded-3xl"}
             `}
         >
- 
-       
           <div className="flex items-center justify-between gap-2 w-full">
             <div className="flex items-center gap-1">
               <span
@@ -99,7 +93,7 @@ const Header = () => {
               <Link
                 to="/"
                 onClick={() => setActiveNav(false)}
-                className="flex items-center gap-2 group"
+                className="flex flex-row rtl:flex-row-reverse items-center gap-2 group"
               >
                 <img
                   loading="lazy"

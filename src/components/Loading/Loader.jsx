@@ -1,7 +1,9 @@
 // import logoImg from "../../assets/images/logo/logo-map.png";
+import { useTranslation } from "react-i18next";
 import { FaCog } from "react-icons/fa";
 
 const Loader = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center">
       {/* <img src={logoImg} alt="Logo" className="w-16 lg:w-22 animate-bounce" /> */}
@@ -20,7 +22,7 @@ const Loader = () => {
         />
       </div>
 
-      <h2 className="text-xl font-bold text-myBlue-2 mt-4">Loading ...</h2>
+      <h2 className="text-xl font-bold text-myBlue-2 mt-4"> {t("loading")}</h2>
     </div>
   );
 };

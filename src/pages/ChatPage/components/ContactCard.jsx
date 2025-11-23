@@ -28,13 +28,10 @@ const ContactCard = ({ contact = {}, activeChat, handleClick }) => {
             {contactList.name}
           </h4>
           {contactList.new_messages > 0 && (
-            <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+            <span className="bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {contactList.new_messages}
             </span>
           )}
-          <span className="bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            23
-          </span>
         </div>
         <p className="text-sm font-medium line-clamp-1 break-all">
           {contactList.last_message}

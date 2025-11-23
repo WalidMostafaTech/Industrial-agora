@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+  const { t } = useTranslation();
   return (
     <div
       key={product.id}
@@ -45,7 +47,7 @@ const ProductCard = ({ product }) => {
           to={`/product/${product.id}`}
           className="animationBtn block w-fit ms-auto"
         >
-          see more
+          {t("seeMore")}
         </Link>
       </div>
     </div>

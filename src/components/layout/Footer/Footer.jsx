@@ -1,27 +1,23 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import logoImg from "../../../assets/images/logo/logo-blue.png";
 import { Link } from "react-router-dom";
-import { IoLogoLinkedin } from "react-icons/io";
-import { BsTwitterX } from "react-icons/bs";
 import { TiArrowRight } from "react-icons/ti";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { sendNewsletter } from "../../../services/homeServices";
 import SuccessModal from "../../modals/SuccessModal";
 
+import logoImg from "../../../assets/images/logo/logo-blue.png";
 import instagram from "../../../assets/icons/insta.png";
 import linkedin from "../../../assets/icons/linked.png";
 import whatsapp from "../../../assets/icons/whats.png";
 
-
-
 const Footer = () => {
+  const { t } = useTranslation();
   const { setting } = useSelector((state) => state.setting);
   const [email, setEmail] = useState("");
   const [successModal, setSuccessModal] = useState(false);
 
-  // ✅ React Query mutation
   const mutation = useMutation({
     mutationFn: sendNewsletter,
     onSuccess: () => {
@@ -32,45 +28,42 @@ const Footer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!email.trim()) return;
-
     mutation.mutate(email);
   };
 
   const footerLinks = [
     {
-      title: "Our Company",
+      title: t("footer.company"),
       links: [
-        { name: "Home", url: "/" },
-        { name: "Categories", url: "/categories/all" },
-        { name: "About us", url: "/about-us" },
-        { name: "Contact us", url: "/contact-us" },
-        { name: "Request consultation", url: "/request" },
+        { name: t("footer.home"), url: "/" },
+        { name: t("footer.categories"), url: "/categories/all" },
+        { name: t("footer.about_us"), url: "/about-us" },
+        { name: t("footer.contact_us"), url: "/contact-us" },
+        { name: t("footer.request_consultation"), url: "/request" },
       ],
     },
     {
-      title: "Services",
+      title: t("footer.services"),
       links: [
-        { name: "Material & Machinery Exchange", url: "/" },
-        { name: "Industrial Process Outsourcing", url: "/" },
-        { name: "Waste Reduction Consulting", url: "/" },
-        { name: "Business Opportunities", url: "/" },
-        { name: "Customized Industrial Offers", url: "/" },
+        { name: t("footer.material_exchange"), url: "/" },
+        { name: t("footer.industrial_outsourcing"), url: "/" },
+        { name: t("footer.waste_reduction"), url: "/" },
+        { name: t("footer.business_opportunities"), url: "/" },
+        { name: t("footer.customized_offers"), url: "/" },
       ],
     },
     {
-      title: "Features",
+      title: t("footer.features"),
       links: [
-        { name: "Trusted & User-Friendly Platform", url: "/" },
-        { name: "Verified Industrial Suppliers", url: "/" },
-        { name: "Wide Range of Products & Services", url: "/" },
-        { name: "Sustainability-Focused Solutions", url: "/" },
-        { name: "Reduce Costs & Improve Efficiency", url: "/" },
+        { name: t("footer.trusted_platform"), url: "/" },
+        { name: t("footer.verified_suppliers"), url: "/" },
+        { name: t("footer.wide_range"), url: "/" },
+        { name: t("footer.sustainable_solutions"), url: "/" },
+        { name: t("footer.reduce_costs"), url: "/" },
       ],
     },
   ];
-
 
   const FooterComponent = ({ title, links }) => (
     <div>
@@ -98,7 +91,7 @@ const Footer = () => {
         <form onSubmit={handleSubmit} className="flex gap-2 w-full lg:max-w-lg">
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder={t("footer.email_placeholder")}
             className="p-2 lg:px-4 text-sm border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -108,8 +101,8 @@ const Footer = () => {
             disabled={mutation.isPending}
             className="mainBtn disabled:opacity-60 flex items-center gap-1"
           >
-            {mutation.isPending ? "Sending..." : "Join Us"}
-            <TiArrowRight />
+            {mutation.isPending ? t("footer.sending") : t("footer.join_us")}
+            <TiArrowRight className="rtl:rotate-180" />
           </button>
         </form>
       </div>
@@ -125,33 +118,19 @@ const Footer = () => {
 
           <div className="flex items-center space-x-3">
             <a
-              // href="#"
               target="_blank"
-
-
- href={`https://wa.me/${(setting?.whatsapp || "").replace(/\s/g, "")}`}
-
-
-
-              className="text-2xl hover:text-myBlue-2 duration-300  cursor-pointer"
-            >
-                           <img src={whatsapp} alt="whatsapp" className="w-6 h-6" />
-
-            </a>
-            <a
-              // href="#"
-              // target="_blank"
-              className="text-3xl hover:text-myBlue-2 duration-300  cursor-pointer"
-            >
-              <img src={linkedin} alt="linkedin" className="w-6 h-6" />
-
-            </a>
-        
-            <a
-              // href="#"
-              // target="_blank"
+              href={`https://wa.me/${(setting?.whatsapp || "").replace(
+                /\s/g,
+                ""
+              )}`}
               className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer"
             >
+              <img src={whatsapp} alt="whatsapp" className="w-6 h-6" />
+            </a>
+            <a className="text-3xl hover:text-myBlue-2 duration-300 cursor-pointer">
+              <img src={linkedin} alt="linkedin" className="w-6 h-6" />
+            </a>
+            <a className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer">
               <img src={instagram} alt="Instagram" className="w-6 h-6" />
             </a>
           </div>
@@ -167,25 +146,28 @@ const Footer = () => {
       </div>
 
       <div className="bg-myBlue-1 p-4">
-        <div
-          className="container text-white text-sm 
-  flex flex-col md:flex-row items-center justify-between 
-  gap-2 md:gap-8 text-center flex-wrap"
-        >
-          <p>All Copyrights are reserved by Mamdou Ghaneemy</p>
-
-          <p>Registration Number with the Saudi Business Center: 0000201140</p>
-
-          <p>Prepared by @ <a href="http://technomasr.com" target="_blank" rel="noopener noreferrer">Techno Masr</a></p>
+        <div className="container text-white text-sm flex flex-col md:flex-row items-center justify-between gap-2 md:gap-8 text-center flex-wrap">
+          <p>{t("footer.copyright")}</p>
+          <p>{t("footer.registration")}</p>
+          <p>
+            {t("footer.prepared_by")}{" "}
+            <a
+              href="http://technomasr.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Techno Masr
+            </a>
+          </p>
         </div>
       </div>
 
       <SuccessModal
         openModal={successModal}
         onClose={() => setSuccessModal(false)}
-        msg="You have successfully joined our newsletter!"
+        msg={t("footer.newsletter_success")}
         onConfirm={() => setSuccessModal(false)}
-        btnText="OK"
+        btnText={t("footer.ok")}
       />
     </footer>
   );

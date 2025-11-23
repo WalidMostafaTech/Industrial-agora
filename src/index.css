@@ -68,12 +68,10 @@ input::-webkit-inner-spin-button {
   .sectionPadding {
     @apply py-8 lg:py-14;
 
-
     &.pb0 {
-      @apply pb-0 lg:pb-0 ;
+      @apply pb-0 lg:pb-0;
     }
   }
-
 
   .whiteContainer {
     @apply p-6 lg:p-10 bg-white shadow-lg;
@@ -92,7 +90,7 @@ input::-webkit-inner-spin-button {
       @apply bg-white text-myBlue-2;
 
       & svg {
-        @apply translate-x-2;
+        @apply translate-x-2 rtl:-translate-x-2;
       }
     }
 
@@ -122,11 +120,13 @@ input::-webkit-inner-spin-button {
     &::before {
       @apply absolute content-[''] h-full aspect-square rotate-90 border-3 border-myBlue-2 transition-all duration-500;
     }
+
     &::after {
-      @apply top-0 start-0 border-s-0 border-t-0;
+      @apply top-0 left-0 border-l-0 border-t-0;
     }
+
     &::before {
-      @apply top-0 end-0 border-e-0 border-b-0;
+      @apply top-0 right-0 border-r-0 border-b-0;
     }
 
     &.light {
@@ -150,11 +150,11 @@ input::-webkit-inner-spin-button {
     &:hover,
     &.active {
       &::after {
-        @apply start-full -translate-x-full rotate-0;
+        @apply left-full -translate-x-full rotate-0;
       }
 
       &::before {
-        @apply end-full translate-x-full rotate-0;
+        @apply right-full translate-x-full rotate-0;
       }
     }
   }
@@ -163,7 +163,7 @@ input::-webkit-inner-spin-button {
     @apply lg:text-xs xl:text-sm font-bold text-myBlue-2 duration-300 uppercase cursor-pointer relative;
 
     &::after {
-      @apply content-[''] absolute bottom-0 start-1/2 -translate-x-1/2 h-[2px] w-0 bg-myBlue-2 rounded-2xl transition-all duration-300;
+      @apply content-[''] absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-myBlue-2 rounded-2xl transition-all duration-300;
     }
 
     &.active,
@@ -203,7 +203,6 @@ input::-webkit-inner-spin-button {
 .animate-spin-reverse-slow {
   animation: spin-reverse-slow 3s linear infinite;
 }
-
 
 .btnArrow {
   border: 1px solid #8080809e;

@@ -8,8 +8,10 @@ import LoadingSection from "../../../components/Loading/LoadingSection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const MainCategories = () => {
+  const { t } = useTranslation();
   const { categories, loading, error } = useSelector(
     (state) => state.categories
   );
@@ -99,7 +101,7 @@ const MainCategories = () => {
                   {item.paragraph}
                 </p>
                 <Link to={`/categories/${item.id}`} className="animationBtn">
-                  see more
+                  {t("seeMore")}
                 </Link>
               </div>
             </SwiperSlide>

@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Features = () => {
   const {
@@ -17,6 +18,7 @@ const Features = () => {
     queryKey: ["features"],
     queryFn: getFeatures,
   });
+  const { t } = useTranslation();
 
   if (isLoading) return <LoadingSection />;
   if (isError || !features || features.length === 0) return null;
@@ -29,10 +31,10 @@ const Features = () => {
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
         <div className="flex flex-col justify-center items-center xl:items-start gap-8">
           <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold">
-            Our Goals
+            {t("OurGoals")}
           </h2>
           <Link to="/about-us" className="animationBtn w-fit hidden xl:block">
-            See More
+            {t("seeMore")}
           </Link>
         </div>
 
