@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import Avatar from "../../components/common/Avatar";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SubscriptionDetails = () => {
+  const { t } = useTranslation();
   const { profile } = useSelector((state) => state.profile);
-  const { setting } = useSelector((state) => state.setting);
+  // const { setting } = useSelector((state) => state.setting);
 
   return (
     <section className="pagePadding container">
@@ -18,34 +20,37 @@ const SubscriptionDetails = () => {
               </h4>
             </div>
           </div>
-          <span className="text-myBlue-2 text-xl font-bold">
+          {/* <span className="text-myBlue-2 text-xl font-bold">
             {setting?.subscription_amount} $
-          </span>
+          </span> */}
         </div>
 
+        {/* Person Card */}
         <div className="pb-4 border-b border-gray-300">
-          <h3 className="text-xl font-bold mb-1">Person Card:</h3>
+          <h3 className="text-xl font-bold mb-1">
+            {t("subscriptionDetails.personCard")}
+          </h3>
           <ul>
             <li className="flex gap-2">
-              <p>Name:</p>
+              <p>{t("subscriptionDetails.name")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.name}
               </span>
             </li>
             <li className="flex gap-2">
-              <p>Phone:</p>
+              <p>{t("subscriptionDetails.phone")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.phone}
               </span>
             </li>
             <li className="flex gap-2">
-              <p>Email:</p>
+              <p>{t("subscriptionDetails.email")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.email}
               </span>
             </li>
             <li className="flex gap-2">
-              <p>Company:</p>
+              <p>{t("subscriptionDetails.company")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.company_name}
               </span>
@@ -53,17 +58,20 @@ const SubscriptionDetails = () => {
           </ul>
         </div>
 
+        {/* Address Card */}
         <div className="pb-4 border-b border-gray-300">
-          <h3 className="text-xl font-bold mb-1">Address Card:</h3>
+          <h3 className="text-xl font-bold mb-1">
+            {t("subscriptionDetails.addressCard")}
+          </h3>
           <ul>
             <li className="flex gap-2">
-              <p>Address:</p>
+              <p>{t("subscriptionDetails.address")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.city}
               </span>
             </li>
             <li className="flex gap-2">
-              <p>Tax Number:</p>
+              <p>{t("subscriptionDetails.taxNumber")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
                 {profile?.tax_number}
               </span>
@@ -71,46 +79,49 @@ const SubscriptionDetails = () => {
           </ul>
         </div>
 
+        {/* Subscription Details */}
         <div>
-          <h3 className="text-xl font-bold mb-1">Subscribe Details:</h3>
+          <h3 className="text-xl font-bold mb-1">
+            {t("subscriptionDetails.details")}
+          </h3>
           <ul>
             <li className="flex gap-2">
-              <p>Subscription Name:</p>
+              <p>{t("subscriptionDetails.name")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1 flex items-center gap-1">
-                {profile?.subscription.subscription_name}
+                {profile?.subscription?.subscription_name}
                 <Link
                   to="/subscription-packages"
                   className="px-2 py-1 bg-myGreen text-white text-xs rounded-md cursor-pointer"
                 >
-                  Change
+                  {t("subscriptionDetails.change")}
                 </Link>
               </span>
             </li>
             <li className="flex gap-2">
-              <p>Subscription Description:</p>
+              <p>{t("subscriptionDetails.description")}:</p>
               <span className="font-semibold text-myBlue-2 flex-1">
-                {profile?.subscription.subscription_description}
+                {profile?.subscription?.subscription_description}
               </span>
             </li>
-            {profile?.subscription.status === "pending" ? (
+            {profile?.subscription?.status === "pending" ? (
               <li className="flex gap-2">
-                <p>Subscription Status:</p>
+                <p>{t("subscriptionDetails.status")}:</p>
                 <span className="font-semibold text-myBlue-2 flex-1">
-                  {profile?.subscription.status}
+                  {profile?.subscription?.status}
                 </span>
               </li>
             ) : (
               <>
                 <li className="flex gap-2">
-                  <p>Subscription Start:</p>
+                  <p>{t("subscriptionDetails.start")}:</p>
                   <span className="font-semibold text-myBlue-2 flex-1">
-                    {profile?.subscription.subscription_start}
+                    {profile?.subscription?.subscription_start}
                   </span>
                 </li>
                 <li className="flex gap-2">
-                  <p>Subscription End:</p>
+                  <p>{t("subscriptionDetails.end")}:</p>
                   <span className="font-semibold text-myBlue-2 flex-1">
-                    {profile?.subscription.subscription_end}
+                    {profile?.subscription?.subscription_end}
                   </span>
                 </li>
               </>

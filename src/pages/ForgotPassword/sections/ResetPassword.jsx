@@ -2,36 +2,38 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import FormBtn from "../../../components/form/FormBtn";
-import { resetPassword } from "../../../services/forgotPasswordServices";
-import { useState } from "react";
 import SuccessModal from "../../../components/modals/SuccessModal";
-import { useNavigate } from "react-router-dom";
-
-// ✅ Validation Schema
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .trim()
-    .min(8, "New password must be at least 8 characters")
-    .required("New password is required")
-    .matches(
-      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).*$/,
-      "Password must contain at least one uppercase letter, one number, and one special character"
-    ),
-  password_confirmation: yup
-    .string()
-    .trim()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Please confirm your password"),
-});
+import { resetPassword } from "../../../services/forgotPasswordServices";
 
 const ResetPassword = ({ parentData, setParentData }) => {
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
+
+  // Validation Schema
+  const schema = yup.object().shape({
+    password: yup
+      .string()
+      .trim()
+      .min(8, t("reset.minLength"))
+      .required(t("reset.passwordRequired"))
+      .matches(
+        /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).*$/,
+        t("reset.passwordRule")
+      ),
+    password_confirmation: yup
+      .string()
+      .trim()
+      .oneOf([yup.ref("password"), null], t("reset.passwordMatch"))
+      .required(t("reset.confirmRequired")),
+  });
 
   const {
     register,
@@ -50,25 +52,19 @@ const ResetPassword = ({ parentData, setParentData }) => {
   } = useMutation({
     mutationFn: (payload) => resetPassword(payload),
     onSuccess: (res, payload) => {
-      console.log("✅ Password reset successful:", res);
-      // لو عايز تحفظ أي داتا في الـ parentData:
       setParentData((prev) => ({
         ...prev,
         password: payload.password,
         password_confirmation: payload.password_confirmation,
       }));
-      // ممكن هنا تفتح success modal أو تنتقل لصفحة الدخول
       setOpenModal(true);
     },
-    onError: (err) => {
-      console.error("❌ Reset password error:", err);
-    },
+    onError: (err) => console.error("❌ Reset password error:", err),
   });
 
-  // ✅ متابعة كتابة الباسورد
   const passwordValue = watch("password", "");
 
-  // ✅ تقييم قوة الباسورد بناءً على 4 عوامل
+  // Password strength
   const evaluateStrength = (password) => {
     const cleanPassword = password.replace(/\s/g, "");
     let strength = 0;
@@ -83,10 +79,10 @@ const ResetPassword = ({ parentData, setParentData }) => {
   const strengthPercent = (strength / 4) * 100;
 
   const getStrengthLabel = () => {
-    if (strength <= 1) return "Weak";
-    if (strength === 2) return "Medium";
-    if (strength === 3) return "Strong";
-    return "Very Strong";
+    if (strength <= 1) return t("reset.weak");
+    if (strength === 2) return t("reset.medium");
+    if (strength === 3) return t("reset.strong");
+    return t("reset.veryStrong");
   };
 
   const getGradient = () => {
@@ -96,28 +92,25 @@ const ResetPassword = ({ parentData, setParentData }) => {
     return "bg-gradient-to-r from-green-500 to-emerald-600";
   };
 
-  // ✅ عند الإرسال
   const onSubmit = (data) => {
-    const payload = {
+    mutate({
       email: parentData.email,
       otp: parentData.otp,
       password: data.password,
       password_confirmation: data.password_confirmation,
-    };
-    mutate(payload);
+    });
   };
 
   const displayError =
-    (isError &&
-      (apiError?.response?.data?.message || "Failed to reset password")) ||
+    (isError && (apiError?.response?.data?.message || t("reset.apiError"))) ||
     "";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* ✅ New Password Field */}
+      {/* Password */}
       <div className="space-y-2">
         <MainInput
-          label="New Password"
+          label={t("reset.newPassword")}
           id="password"
           type="password"
           {...register("password")}
@@ -150,25 +143,23 @@ const ResetPassword = ({ parentData, setParentData }) => {
         )}
       </div>
 
-      {/* ✅ Confirm Password */}
+      {/* Confirm */}
       <MainInput
-        label="Confirm Password"
+        label={t("reset.confirmPassword")}
         id="password_confirmation"
         type="password"
         {...register("password_confirmation")}
         error={errors.password_confirmation?.message}
       />
 
-      {/* ✅ عرض خطأ الـ API إن وجد */}
       <FormError errorMsg={displayError} />
 
-      {/* ✅ زر Reset */}
-      <FormBtn title="Reset Password" loading={isPending} />
+      <FormBtn title={t("reset.btn")} loading={isPending} />
 
       <SuccessModal
         openModal={openModal}
-        msg="Password reset successfully!"
-        btnText={"Go To Login"}
+        msg={t("reset.successMsg")}
+        btnText={t("reset.goLogin")}
         onConfirm={() => navigate("/login")}
       />
     </form>

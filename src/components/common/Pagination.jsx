@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { TfiArrowCircleLeft, TfiArrowCircleRight } from "react-icons/tfi";
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+  const { t } = useTranslation();
   if (totalPages === 0) return null;
 
   const handlePageClick = (page) => {
@@ -46,7 +48,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"
         }`}
       >
-        FIRST
+        {t("FIRST")}
       </button>
 
       {/* Previous Button */}
@@ -59,7 +61,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"
         }`}
       >
-        <TfiArrowCircleLeft className="text-lg" />
+        <TfiArrowCircleLeft className="text-lg rtl:rotate-180" />
       </button>
 
       {/* Pages */}
@@ -87,7 +89,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"
         }`}
       >
-        <TfiArrowCircleRight className="text-lg" />
+        <TfiArrowCircleRight className="text-lg rtl:rotate-180" />
       </button>
 
       {/* Last Button */}
@@ -100,7 +102,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             : "border-transparent bg-stone-200 text-gray-600 hover:bg-stone-300 cursor-pointer"
         }`}
       >
-        LAST
+        {t("LAST")}
       </button>
     </div>
   );

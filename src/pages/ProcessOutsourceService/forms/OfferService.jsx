@@ -14,27 +14,29 @@ import {
   addProductApi,
   addPromotionProduct,
 } from "../../../services/productServices";
+import { useTranslation } from "react-i18next";
 
 // Validation Schema
 const schema = yup.object({
-  machine_name: yup.string().required("Machine name is required"),
+  machine_name: yup.string().required("offerService.machineNameRequired"),
   machine_specification: yup
     .string()
-    .required("Machine specification is required"),
+    .required("offerService.machineSpecificationRequired"),
   material_types_compatible: yup
     .string()
-    .required("Material types compatible is required"),
+    .required("offerService.materialTypesRequired"),
   material_specifications_accepted: yup
     .string()
-    .required("Material specifications accepted is required"),
+    .required("offerService.materialSpecAcceptedRequired"),
   main_applications_processes: yup
     .string()
-    .required("Main applications/processes is required"),
-  input_output: yup.string().required("Input / Output is required"),
-  description: yup.string().required("Description is required"),
+    .required("offerService.mainApplicationsRequired"),
+  input_output: yup.string().required("offerService.inputOutputRequired"),
+  description: yup.string().required("offerService.descriptionRequired"),
 });
 
 const OfferService = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState("");
   const [formDataValues, setFormDataValues] = useState(null);
@@ -48,12 +50,8 @@ const OfferService = () => {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
-  // 1️⃣ Mutation لاضافة المنتج
-  const addProductMutation = useMutation({
-    mutationFn: addProductApi,
-  });
+  const addProductMutation = useMutation({ mutationFn: addProductApi });
 
-  // 2️⃣ Mutation لإضافة البروموشن
   const addPromotionMutation = useMutation({
     mutationFn: addPromotionProduct,
     onSuccess: () => {
@@ -63,49 +61,35 @@ const OfferService = () => {
     },
   });
 
-  // Submit handler
   const onSubmit = (data) => {
     if (images.length === 0) {
-      setImageError("Please upload at least one image.");
+      setImageError(t("offerService.uploadAtLeastOneImage"));
       return;
     }
     setImageError("");
-
     setFormDataValues(data);
     setIsModalOpen(true);
   };
 
-  // Confirm Modal (months فقط)
   const handleConfirmModal = async ({ months }) => {
     if (!formDataValues) return;
 
     const formData = new FormData();
-
-    // إضافة الحقول الأساسية
     Object.entries(formDataValues).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    // type ثابت
     formData.append("type", "offer_service");
 
-    // إضافة الصور
     images.forEach((img, index) => {
       formData.append(`images[${index}]`, img.file);
     });
 
     try {
-      // 1️⃣ أول API → إضافة المنتج
       const productResponse = await addProductMutation.mutateAsync(formData);
-
       const product_id = productResponse?.data?.id;
+      if (!product_id) return;
 
-      if (!product_id) {
-        console.error("❌ product_id is missing");
-        return;
-      }
-
-      // 2️⃣ ثاني API → إضافة البروموشن
       const promoForm = new FormData();
       promoForm.append("product_id", product_id);
       promoForm.append("months", months);
@@ -120,62 +104,73 @@ const OfferService = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <MainInput
-          label="Machine name"
+          label={t("offerService.machineName")}
           id="machine_name"
           {...register("machine_name")}
-          error={errors.machine_name?.message}
+          error={
+            errors.machine_name?.message && t(errors.machine_name?.message)
+          }
         />
         <MainInput
-          label="Machine specifications"
+          label={t("offerService.machineSpecification")}
           id="machine_specification"
           {...register("machine_specification")}
-          error={errors.machine_specification?.message}
+          error={
+            errors.machine_specification?.message &&
+            t(errors.machine_specification?.message)
+          }
         />
         <MainInput
-          label="Machine types compatible"
+          label={t("offerService.materialTypesCompatible")}
           id="material_types_compatible"
           {...register("material_types_compatible")}
-          error={errors.material_types_compatible?.message}
+          error={
+            errors.material_types_compatible?.message &&
+            t(errors.material_types_compatible?.message)
+          }
         />
         <MainInput
-          label="Machine specifications accepted"
+          label={t("offerService.materialSpecAccepted")}
           id="material_specifications_accepted"
           {...register("material_specifications_accepted")}
-          error={errors.material_specifications_accepted?.message}
+          error={
+            errors.material_specifications_accepted?.message &&
+            t(errors.material_specifications_accepted?.message)
+          }
         />
-
-        {/* Images */}
         <ImageUploader
-          label="Pictures"
+          label={t("offerService.pictures")}
           onChange={setImages}
           error={imageError}
           initialImages={images}
         />
-
         <MainInput
-          label="Main applications / Process"
+          label={t("offerService.mainApplications")}
           id="main_applications_processes"
           {...register("main_applications_processes")}
-          error={errors.main_applications_processes?.message}
+          error={
+            errors.main_applications_processes?.message &&
+            t(errors.main_applications_processes?.message)
+          }
         />
         <MainInput
-          label="Input / Output"
+          label={t("offerService.inputOutput")}
           id="input_output"
           {...register("input_output")}
-          error={errors.input_output?.message}
+          error={
+            errors.input_output?.message && t(errors.input_output?.message)
+          }
         />
         <MainInput
-          label="Note"
+          label={t("offerService.description")}
           id="description"
           type="textarea"
           {...register("description")}
-          error={errors.description?.message}
+          error={errors.description?.message && t(errors.description?.message)}
         />
-
-        <FormBtn title="Submit" />
+        <FormBtn title={t("offerService.submit")} />
       </form>
 
-      {/* Modal months */}
       <CommissionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -184,10 +179,9 @@ const OfferService = () => {
         loading={addProductMutation.isPending || addPromotionMutation.isPending}
       />
 
-      {/* Success */}
       <SuccessModal
         openModal={openSuccessModal}
-        msg="Offer submitted successfully!"
+        msg={t("offerService.successMsg")}
         onClose={() => {
           setOpenSuccessModal(false);
           setIsModalOpen(false);

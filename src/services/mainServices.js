@@ -15,6 +15,11 @@ export const getConsultationSettings = async () => {
   return data?.data || [];
 };
 
+export const getProcessOutsourcePage = async () => {
+  const { data } = await api.get("/process-outsource-page");
+  return data?.data || [];
+};
+
 export const getPages = async () => {
   const { data } = await api.get("/pages");
   return data?.data || [];

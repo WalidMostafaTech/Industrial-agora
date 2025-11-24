@@ -10,8 +10,10 @@ import {
 } from "../../services/productServices";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSection from "../../components/Loading/LoadingSection";
+import { useTranslation } from "react-i18next";
 
 const Categories = () => {
+  const { t } = useTranslation();
   const [openFilter, setOpenFilter] = useState(false);
   let showFilter = false;
 
@@ -34,7 +36,7 @@ const Categories = () => {
 
   return (
     <article className="container pagePadding">
-      <PageTitle title="Categories" />
+      <PageTitle title={t("categories")} />
 
       {productsLoading ? (
         <LoadingSection />

@@ -1,9 +1,24 @@
 {
   "loading": "Loading...",
   "noDataAvailable": "No data available",
-  "seeMore": "see more",
+  "seeMore": "See More",
+  "request": "Request",
+  "offered": "Offered",
+  "Status": "Status",
+  "Type": "Type",
+  "Condition": "Condition",
+  "Delivery": "Delivery",
+  "Payment": "Payment",
+  "FIRST": "FIRST",
+  "LAST": "LAST",
   "getStarted": "get started",
   "details": "details",
+  "aboutUs": "About us",
+  "categories": "Categories",
+  "processOutsource": "Process Outsource",
+  "requestConsultation": "Request Consultation",
+  "close": "close",
+  "OK": "OK",
 
   "footer": {
     "company": "Our Company",
@@ -70,6 +85,13 @@
       "confirm": "Confirm",
       "loading": "Loading..."
     },
+    "searchModal": {
+      "placeholder": "Search...",
+      "loading": "Loading...",
+      "noResults": "No results found.",
+      "company": "Products",
+      "categories": "Categories"
+    },
     "SendMsgModal": {
       "title": "Send a message to the seller",
       "placeholder": "Write your message...",
@@ -122,6 +144,8 @@
       "height": "Height",
       "weight": "Weight (if required)",
       "images": "Product Images",
+      "tags": "tags",
+      "tags_placeholder": "tag1,tag2,tag3...",
       "description": "Product Description",
       "accept_privacy_policy": "Accept privacy policy"
     },
@@ -149,6 +173,341 @@
       "privacy_policy": "You must accept the privacy policy",
       "images_required": "Please upload at least one product image."
     }
+  },
+
+  "contactUs": {
+    "title": "Contact Us",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "enquiry": "Enquiry",
+    "submit": "Submit",
+
+    "phone": "Phone",
+    "email": "Email",
+    "fax": "Fax",
+
+    "errors": {
+      "nameRequired": "Full name is required",
+      "nameMin": "Must be at least 3 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "messageRequired": "Enquiry is required"
+    }
+  },
+
+  "forgotPassword": {
+    "pageTitle": "Forgot Password",
+
+    "steps": {
+      "checkEmail": {
+        "title": "Check Email",
+        "subtitle": "We have sent a password reset link to your email address."
+      },
+      "otp": {
+        "title": "Enter OTP",
+        "subtitle": "We have sent a One-Time Password (OTP) to your email address."
+      },
+      "resetPassword": {
+        "title": "Reset Password",
+        "subtitle": "Please enter your new password below."
+      }
+    },
+
+    "stepLabel": "Step"
+  },
+
+  "checkEmail": {
+    "title": "Check Email",
+    "subtitle": "We have sent a password reset link to your email address.",
+    "emailLabel": "Email",
+    "continue": "Continue",
+
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address"
+    },
+
+    "success": "OTP sent successfully",
+    "failed": "Failed to send OTP"
+  },
+
+  "otp": {
+    "onlyNumbers": "OTP must contain only numbers.",
+    "enterAllDigits": "Please enter all digits of the OTP.",
+    "invalid": "Invalid OTP, please try again.",
+    "checkBtn": "Check"
+  },
+
+  "reset": {
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "btn": "Reset Password",
+
+    "weak": "Weak",
+    "medium": "Medium",
+    "strong": "Strong",
+    "veryStrong": "Very Strong",
+
+    "minLength": "New password must be at least 8 characters",
+    "passwordRequired": "New password is required",
+    "passwordRule": "Password must contain one uppercase letter, one number, and one special character",
+    "passwordMatch": "Passwords must match",
+    "confirmRequired": "Please confirm your password",
+
+    "apiError": "Failed to reset password",
+    "successMsg": "Password reset successfully!",
+    "goLogin": "Go To Login"
+  },
+
+  "login": {
+    "welcome": "Welcome, Please Sign In!",
+    "accountLogin": "Account Login",
+    "accountSubtitle": "If you are already a member, you can login with your email and password.",
+
+    "email": "Email Address",
+    "password": "Password",
+
+    "emailValid": "Please enter a valid email address",
+    "emailRequired": "Email is required",
+    "passMin": "Password must be at least 6 characters",
+    "passRequired": "Password is required",
+
+    "remember": "Remember me",
+    "forgot": "Forgot your password?",
+
+    "loginBtn": "Login",
+
+    "noAccount": "Don't have an account?",
+    "signup": "Sign up here",
+
+    "newMember": "New Member",
+    "newMemberText": "Creating an account on our website allows you to have an easier and faster shopping experience, keep track of your order status, and easily view your previous purchase history.",
+    "registerBtn": "Register",
+
+    "success": "You Signed In Successfully!",
+    "homeBtn": "Home"
+  },
+
+  "register": {
+    "register": "Register",
+    "accountSignup": "Account signup",
+    "accountSignupSubtitle": "Become a member and enjoy exclusive promotions.",
+    "fullName": "Full Name",
+    "fullNameRequired": "Full name is required",
+    "email": "Email Address",
+    "invalidEmail": "Please enter a valid email",
+    "emailRequired": "Email is required",
+    "companyName": "Company Name",
+    "companyRequired": "Please select your company",
+    "city": "City",
+    "selectCity": "Select city",
+    "cityRequired": "Please select your city",
+    "phone": "Phone",
+    "phoneNumbersOnly": "Phone must contain only numbers",
+    "phoneRequired": "Phone is required",
+    "taxNumber": "Tax Number",
+    "taxRequired": "Tax number is required",
+    "password": "Password",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordRequired": "Password is required",
+    "confirmPassword": "Confirm Password",
+    "passwordsMustMatch": "Passwords must match",
+    "confirmPasswordRequired": "Please confirm your password",
+    "acceptPrivacyPolicy": "Accept privacy policy",
+    "continue": "Continue",
+    "registrationSuccess": "Registration successful!"
+  },
+
+  "NotFound": {
+    "title": "Page Not Found",
+    "goHome": "Go Home"
+  },
+
+  "processOutsourceHero": {
+    "title": "Process Outsource",
+    "subtitle": "Let’s create solutions, side by side.",
+    "paragraph1": "Unlock new opportunities by outsourcing your production processes through Industrial Agora.",
+    "paragraph2": "Our platform connects factories to share capacity, expertise, and technology — helping you cut costs, reduce idle time, and access specialized skills without heavy investment.",
+    "paragraph3": "This collaboration not only improves efficiency but also increases your chances of winning new projects and driving sales growth, as businesses can expand their reach and deliver more competitive solutions.",
+    "cta": "Start your journey with your service now"
+  },
+
+  "processOutsourceSlider": {
+    "engineering": {
+      "title": "Engineering & Technical Support",
+      "paragraph": "Professional engineering consultation and technical drawings. Prototype reports for design validation."
+    },
+    "security": {
+      "title": "Security & Confidentiality",
+      "paragraph": "Protect your production line — suppliers won’t access your machines. Service Level Agreements (SLA) to safeguard commitments."
+    },
+    "quality": {
+      "title": "Quality Assurance",
+      "paragraph": "Inspection reports included with every order. 100% visual inspection for every part. Highly vetted casting and manufacturing partners. Guaranteed quality — if parts aren’t made to spec, we’ll make them right."
+    },
+    "procurement": {
+      "title": "Procurement & Order Handling",
+      "paragraph": "Requests for service come through Industrial Agora; we source the best price. On-time material delivery assurance. Payment security — only pay after you receive and confirm quality."
+    }
+  },
+
+  "processOutsourceService": {
+    "title": "Process Outsource",
+    "requestOutsource": "Request outsource service",
+    "offerService": "Offer Service"
+  },
+
+  "offerService": {
+    "machineName": "Machine name",
+    "machineSpecification": "Machine specifications",
+    "materialTypesCompatible": "Material types compatible",
+    "materialSpecAccepted": "Material specifications accepted",
+    "mainApplications": "Main applications / Process",
+    "inputOutput": "Input / Output",
+    "description": "Note",
+    "pictures": "Pictures",
+    "submit": "Submit",
+    "successMsg": "Offer submitted successfully!",
+    "machineNameRequired": "Machine name is required",
+    "machineSpecificationRequired": "Machine specification is required",
+    "materialTypesRequired": "Material types compatible is required",
+    "materialSpecAcceptedRequired": "Material specifications accepted is required",
+    "mainApplicationsRequired": "Main applications/processes is required",
+    "inputOutputRequired": "Input / Output is required",
+    "descriptionRequired": "Description is required",
+    "uploadAtLeastOneImage": "Please upload at least one image."
+  },
+
+  "requestOutsource": {
+    "companyName": "Company name",
+    "location": "Location",
+    "materialSpec1": "Material Specifications 1",
+    "materialSpec2": "Material Specifications 2",
+    "materialSpec3": "Material Specifications 3",
+    "processDesc": "Process Description",
+    "preferredMachine": "Preferred / Expected Machine or Technology",
+    "qualityStandard": "Quality Standard / Tolerance (if any)",
+    "quantity": "QTY",
+    "specialInstructions": "Special Instructions",
+    "note": "Note",
+    "pictures": "Pictures",
+    "submit": "Submit",
+    "successMsg": "Request submitted successfully!",
+    "companyNameRequired": "Company name is required",
+    "locationRequired": "Location is required",
+    "materialSpec1Required": "Material Specification 1 is required",
+    "processDescRequired": "Process description is required",
+    "preferredMachineRequired": "Preferred Machine or Technology is required",
+    "quantityNumber": "Quantity must be a number",
+    "quantityPositive": "Quantity must be positive",
+    "quantityInteger": "Quantity must be an integer",
+    "quantityRequired": "Quantity is required",
+    "noteRequired": "Note/Description is required",
+    "uploadAtLeastOneImage": "Please upload at least one image."
+  },
+
+  "product": {
+    "notFound": "Product Not Found",
+    "contactSeller": "Contact with seller",
+    "tags": "PRODUCT TAGS",
+    "noTags": "No tags available",
+    "inStock": "IN STOCK",
+    "fields": {
+      "manufacturers": "Manufacturers",
+      "sku": "SKU",
+      "vendor": "Vendor",
+      "warehouse": "Warehouse",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "weight": "Weight",
+      "status": "Status",
+      "type": "Type",
+      "condition": "Condition",
+      "delivery": "Delivery",
+      "payment": "Payment"
+    }
+  },
+
+  "profile": {
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "companyName": "Company Name",
+    "city": "City",
+    "taxNumber": "Tax Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "passwordConfirmationRequired": "Please confirm your password.",
+    "passwordMismatch": "Password does not match.",
+    "updateSuccess": "Profile updated successfully ✅",
+    "updateError": "An error occurred while updating. Please try again."
+  },
+
+  "consultationForm": {
+    "companyInformation": "Company information",
+    "companyName": "Company name",
+    "companyNameRequired": "Company name is required",
+    "contactPerson": "Contact person",
+    "contactPersonRequired": "Contact person is required",
+    "email": "Email",
+    "emailRequired": "Email is required",
+    "invalidEmail": "Invalid email address",
+    "phone": "Phone",
+    "phoneRequired": "Phone number is required",
+    "phoneNumeric": "Phone must be numeric",
+    "details": "Consultation details",
+    "type": "Type of consultation required",
+    "selectType": "Please select consultation type",
+    "selectTypePlaceholder": "Select consultation type",
+    "description": "Brief description of the problem",
+    "descriptionRequired": "Please provide a brief description of the problem",
+    "iAgree": "I agree to the",
+    "privacyPolicy": "Privacy Policy",
+    "acceptPrivacy": "You must accept the privacy policy",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "somethingWrong": "Something went wrong",
+    "responseTime": "We’ll get back to you within 24 hours"
+  },
+
+  "subscriptionDetails": {
+    "personCard": "Person Card:",
+    "addressCard": "Address Card:",
+    "details": "Subscription Details:",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "company": "Company",
+    "address": "Address",
+    "taxNumber": "Tax Number",
+    "status": "Subscription Status",
+    "start": "Subscription Start",
+    "end": "Subscription End",
+    "description": "Subscription Description",
+    "change": "Change"
+  },
+
+  "subscriptionPackages": {
+    "success": "Subscription successful!",
+    "confirmTitle": "Confirm Subscription",
+    "confirmMessage": "Are you sure you want to subscribe to this plan?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "processing": "Processing...",
+    "price": "Price",
+    "free": "Free",
+    "readMore": "Read more",
+    "showLess": "Show less",
+    "subscribe": "Subscribe"
+  },
+
+  "terms": {
+    "title": "Terms Of Use",
+    "content": "1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat. 1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat."
   },
 
   "NoContactsAvailable": "No contacts available.",

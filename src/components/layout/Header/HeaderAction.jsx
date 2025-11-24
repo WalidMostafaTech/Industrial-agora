@@ -21,7 +21,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
 
   return (
-    <div className="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
+    <div className="flex items-center justify-center flex-wrap gap-2 xl:gap-4">
       <LanguageSwitcher />
 
       {canSearch && (

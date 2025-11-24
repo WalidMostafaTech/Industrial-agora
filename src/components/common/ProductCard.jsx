@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { t } = useTranslation();
+
   return (
     <div
       key={product.id}
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
               product.type === "outsource" ? "bg-red-700" : "bg-green-600"
             }`}
           >
-            {product.type === "outsource" ? "request" : "offered"}
+            {product.type === "outsource" ? t("request") : t("offered")}
           </p>
         )}
       </div>
@@ -37,6 +38,7 @@ const ProductCard = ({ product }) => {
             delivery: product.delivery,
             payment: product.payment,
           }}
+          t={t} // نمرر دالة الترجمة
         />
 
         {product.description && (
@@ -56,7 +58,7 @@ const ProductCard = ({ product }) => {
 
 export default ProductCard;
 
-const AutoFields = ({ data }) => {
+const AutoFields = ({ data, t }) => {
   if (!data || typeof data !== "object") return null;
 
   return (
@@ -73,7 +75,7 @@ const AutoFields = ({ data }) => {
 
         return (
           <p key={key} className="text-gray-700">
-            {key.charAt(0).toUpperCase() + key.slice(1)} : {value}
+            {t(key.charAt(0).toUpperCase() + key.slice(1))} : {value}
           </p>
         );
       })}

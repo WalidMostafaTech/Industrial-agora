@@ -3,31 +3,34 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import PageTitle from "../../components/common/PageTitle";
 import FormTitle from "../../components/form/FormTitle";
 import FormBtn from "../../components/form/FormBtn";
 import MainInput from "../../components/form/MainInput";
 import { loginUser } from "../../services/authServices";
 import FormError from "../../components/form/FormError";
-import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 import SuccessModal from "../../components/modals/SuccessModal";
-import { useState } from "react";
 
-// ✅ Validation Schema
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-});
-
+// Validation Schema
 const Login = () => {
+  const { t } = useTranslation();
   const [completeRegister, setCompleteRegister] = useState(false);
+
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t("login.emailValid"))
+      .required(t("login.emailRequired")),
+    password: yup
+      .string()
+      .min(6, t("login.passMin"))
+      .required(t("login.passRequired")),
+  });
 
   const {
     register,
@@ -36,6 +39,7 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,46 +48,39 @@ const Login = () => {
     dispatch(getProfileAct());
   };
 
-  // ✅ Mutation: تنفيذ login API
+  // Mutation for login API
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser,
-    onSuccess: () => {
-      setCompleteRegister(true);
-    },
-    onError: (err) => {
-      console.error("❌ Login Failed:", err);
-    },
+    onSuccess: () => setCompleteRegister(true),
+    onError: (err) => console.error("❌ Login Failed:", err),
   });
 
-  const onSubmit = (formData) => {
-
-    mutate(formData);
-  };
+  const onSubmit = (formData) => mutate(formData);
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="Welcome, Please Sign In!" />
+      <PageTitle title={t("login.welcome")} />
 
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* ✅ Login Form */}
+        {/* Login Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="whiteContainer space-y-6 order-1 lg:order-2"
         >
           <FormTitle
-            title="Account Login"
-            subtitle="If you are already a member you can login with your email address and password."
+            title={t("login.accountLogin")}
+            subtitle={t("login.accountSubtitle")}
           />
 
           <MainInput
-            label="Email Address"
+            label={t("login.email")}
             id="email"
             {...register("email")}
             error={errors.email?.message}
           />
 
           <MainInput
-            label="Password"
+            label={t("login.password")}
             id="password"
             type="password"
             {...register("password")}
@@ -99,7 +96,7 @@ const Login = () => {
                 className="h-4 w-4 text-myBlue-1 focus:ring-myBlue-1 border-gray-300 rounded"
               />
               <label htmlFor="remember_me" className="ms-2 block text-gray-600">
-                Remember me
+                {t("login.remember")}
               </label>
             </div>
 
@@ -108,35 +105,35 @@ const Login = () => {
                 to="/forgot-password"
                 className="font-medium text-red-700 hover:brightness-85"
               >
-                Forgot your password?
+                {t("login.forgot")}
               </Link>
             </div>
           </div>
 
           <FormError errorMsg={error?.response?.data?.message} />
 
-          <FormBtn loading={isPending} title={"Login"} />
+          <FormBtn loading={isPending} title={t("login.loginBtn")} />
 
           <div className="text-sm text-center">
-            Don&apos;t have an account?{" "}
+            {t("login.noAccount")}{" "}
             <Link
               to="/register"
               className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
             >
-              Sign up here
+              {t("login.signup")}
             </Link>
           </div>
         </form>
 
-        {/* ✅ Register Section */}
+        {/* Register Section */}
         <div className="whiteContainer flex flex-col items-center justify-between order-2 lg:order-1">
           <FormTitle
-            title="New Member"
-            subtitle="Creating an account on our website allows you to have an easier and faster shopping experience, keep track of your order status, and easily view your previous purchase history."
+            title={t("login.newMember")}
+            subtitle={t("login.newMemberText")}
           />
 
           <Link to="/register" className="animationBtn">
-            Register
+            {t("login.registerBtn")}
           </Link>
         </div>
       </section>
@@ -145,8 +142,8 @@ const Login = () => {
         openModal={completeRegister}
         onClose={handleCompleteLogin}
         onConfirm={handleCompleteLogin}
-        btnText="Home"
-        msg="You Signed In Successfully!"
+        btnText={t("login.homeBtn")}
+        msg={t("login.success")}
       />
     </section>
   );

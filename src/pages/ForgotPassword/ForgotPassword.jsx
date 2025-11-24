@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import PageTitle from "../../components/common/PageTitle";
 import CheckEmail from "./sections/CheckEmail";
 import OTP from "./sections/OTP";
@@ -7,18 +9,21 @@ import FormTitle from "../../components/form/FormTitle";
 import StepProgress from "../../components/common/StepProgress";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
+
+  // 🔹 Steps translated using i18n
   const steps = [
     {
-      title: "Check Email",
-      subtitle: "We have sent a password reset link to your email address.",
+      title: t("forgotPassword.steps.checkEmail.title"),
+      subtitle: t("forgotPassword.steps.checkEmail.subtitle"),
     },
     {
-      title: "Enter OTP",
-      subtitle: "We have sent a One-Time Password (OTP) to your email address.",
+      title: t("forgotPassword.steps.otp.title"),
+      subtitle: t("forgotPassword.steps.otp.subtitle"),
     },
     {
-      title: "Reset Password",
-      subtitle: "Please enter your new password below.",
+      title: t("forgotPassword.steps.resetPassword.title"),
+      subtitle: t("forgotPassword.steps.resetPassword.subtitle"),
     },
   ];
 
@@ -35,7 +40,7 @@ const ForgotPassword = () => {
 
   return (
     <section className="pagePadding container">
-      <PageTitle title="Forgot Password" />
+      <PageTitle title={t("forgotPassword.pageTitle")} />
 
       <div className="whiteContainer w-full max-w-xl mx-auto mb-4">
         <StepProgress steps={steps} currentIndex={currentIndex} />
@@ -43,13 +48,16 @@ const ForgotPassword = () => {
 
       <div className="whiteContainer space-y-6 w-full max-w-xl mx-auto">
         <FormTitle
-          title={`Step ${currentIndex + 1}: ${steps[currentIndex].title}`}
+          title={`${t("forgotPassword.stepLabel")} ${currentIndex + 1}: ${
+            steps[currentIndex].title
+          }`}
           subtitle={steps[currentIndex].subtitle}
         />
 
         {currentIndex === 0 && (
           <CheckEmail goNext={handleNext} setParentData={setParentData} />
         )}
+
         {currentIndex === 1 && (
           <OTP
             goNext={handleNext}
@@ -57,6 +65,7 @@ const ForgotPassword = () => {
             setParentData={setParentData}
           />
         )}
+
         {currentIndex === 2 && (
           <ResetPassword
             parentData={parentData}

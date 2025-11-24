@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
+import { useTranslation } from "react-i18next";
 import { registerUser } from "../../services/authServices";
 
 import PageTitle from "../../components/common/PageTitle";
@@ -15,44 +16,42 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 
-// ✅ Validation Schema
-const schema = yup.object({
-  name: yup.string().required("Full name is required"),
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
-  company_name: yup.string().required("Please select your company"),
-  city: yup.string().required("Please select your city"),
-  phone: yup
-    .string()
-    .matches(/^[0-9]+$/, "Phone must contain only numbers")
-    .required("Phone is required"),
-  tax_number: yup.string().required("Tax number is required"),
-  password: yup
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  password_confirmation: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Please confirm your password"),
-  privacy_policy: yup
-    .bool()
-    .oneOf([true], "You must accept the privacy policy"),
-});
-
 const Register = () => {
+  const { t } = useTranslation(); // ✅ i18n
   const [completeRegister, setCompleteRegister] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { cities } = useSelector((state) => state.setting);
 
   const handleCompleteLogin = () => {
-    navigate("/subscription-packages", { replace: true });
+    navigate("/subscription-details", { replace: true });
     dispatch(getProfileAct());
   };
+
+  // ✅ Validation Schema with i18n messages
+  const schema = yup.object({
+    name: yup.string().required(t("register.fullNameRequired")),
+    email: yup
+      .string()
+      .email(t("register.invalidEmail"))
+      .required(t("register.emailRequired")),
+    company_name: yup.string().required(t("register.companyRequired")),
+    city: yup.string().required(t("register.cityRequired")),
+    phone: yup
+      .string()
+      .matches(/^[0-9]+$/, t("register.phoneNumbersOnly"))
+      .required(t("register.phoneRequired")),
+    tax_number: yup.string().required(t("register.taxRequired")),
+    password: yup
+      .string()
+      .min(6, t("register.passwordMin"))
+      .required(t("register.passwordRequired")),
+    password_confirmation: yup
+      .string()
+      .oneOf([yup.ref("password")], t("register.passwordsMustMatch"))
+      .required(t("register.confirmPasswordRequired")),
+    privacy_policy: yup.bool().oneOf([true], t("register.acceptPrivacyPolicy")),
+  });
 
   // ✅ React Hook Form
   const {
@@ -82,44 +81,44 @@ const Register = () => {
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="Register" />
+      <PageTitle title={t("register.register")} />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="whiteContainer space-y-6 max-w-xl mx-auto"
       >
         <FormTitle
-          title="Account signup"
-          subtitle="Become a member and enjoy exclusive promotions."
+          title={t("register.accountSignup")}
+          subtitle={t("register.accountSignupSubtitle")}
         />
 
         <MainInput
-          label="Full Name"
+          label={t("register.fullName")}
           id="name"
           {...register("name")}
           error={errors.name?.message}
         />
 
         <MainInput
-          label="Email Address"
+          label={t("register.email")}
           id="email"
           {...register("email")}
           error={errors.email?.message}
         />
 
         <MainInput
-          label="Company Name"
+          label={t("register.companyName")}
           id="company_name"
           {...register("company_name")}
           error={errors.company_name?.message}
         />
 
         <MainInput
-          label="City"
+          label={t("register.city")}
           id="city"
           type="select"
           options={[
-            { value: "", label: "Select city" },
+            { value: "", label: t("register.selectCity") },
             ...cities.map((city) => ({ value: city.id, label: city.name })),
           ]}
           {...register("city")}
@@ -127,7 +126,7 @@ const Register = () => {
         />
 
         <MainInput
-          label="Phone"
+          label={t("register.phone")}
           id="phone"
           type="number"
           {...register("phone")}
@@ -135,7 +134,7 @@ const Register = () => {
         />
 
         <MainInput
-          label="Tax Number"
+          label={t("register.taxNumber")}
           id="tax_number"
           type="number"
           {...register("tax_number")}
@@ -143,7 +142,7 @@ const Register = () => {
         />
 
         <MainInput
-          label="Password"
+          label={t("register.password")}
           id="password"
           type="password"
           {...register("password")}
@@ -151,7 +150,7 @@ const Register = () => {
         />
 
         <MainInput
-          label="Confirm Password"
+          label={t("register.confirmPassword")}
           id="password_confirmation"
           type="password"
           {...register("password_confirmation")}
@@ -170,7 +169,7 @@ const Register = () => {
               htmlFor="privacy_policy"
               className="ms-2 block text-gray-600 text-sm"
             >
-              Accept privacy policy
+              {t("register.acceptPrivacyPolicy")}
             </label>
           </div>
           {errors.privacy_policy?.message && (
@@ -180,18 +179,17 @@ const Register = () => {
           )}
         </div>
 
-        {/* ✅ Error / Success Messages */}
         <FormError errorMsg={error?.response?.data?.message} />
 
-        <FormBtn loading={isPending} title={"Register"} />
+        <FormBtn loading={isPending} title={t("register.register")} />
       </form>
 
       <SuccessModal
         openModal={completeRegister}
         onClose={handleCompleteLogin}
         onConfirm={handleCompleteLogin}
-        btnText="Continue"
-        msg="Registration successful!"
+        btnText={t("register.continue")}
+        msg={t("register.registrationSuccess")}
       />
     </section>
   );

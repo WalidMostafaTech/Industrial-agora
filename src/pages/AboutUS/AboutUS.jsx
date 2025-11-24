@@ -5,8 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getPages } from "../../services/mainServices";
 import LoadingPage from "../../components/Loading/LoadingPage";
 import EmptySection from "../../components/sections/EmptySection";
+import { useTranslation } from "react-i18next";
 
 const AboutUS = () => {
+  const { t } = useTranslation();
   const {
     data: pages,
     isLoading,
@@ -24,7 +26,7 @@ const AboutUS = () => {
 
   return (
     <section className="pagePadding">
-      <PageTitle title="About us" />
+      <PageTitle title={t("aboutUs")} />
 
       <PageBanner
         image={pageData.image}

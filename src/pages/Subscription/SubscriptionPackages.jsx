@@ -11,15 +11,16 @@ import FormError from "../../components/form/FormError";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SubscriptionPackages = () => {
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedId, setSelectedId] = useState(null); // 🆕 لحفظ الباقة المختارة
+  const [selectedId, setSelectedId] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // 🧠 Fetch subscription types
   const {
     data: subscriptions,
     isLoading,
@@ -29,7 +30,6 @@ const SubscriptionPackages = () => {
     queryFn: getSubscribeType,
   });
 
-  // 🧩 Mutation for adding subscription
   const {
     mutate: handleSubscribe,
     isPending,
@@ -48,7 +48,6 @@ const SubscriptionPackages = () => {
     navigate("/subscription-details");
   };
 
-  // 🆕 تحكم في مودال التأكيد
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   const confirmSubscribe = () => {
@@ -75,35 +74,34 @@ const SubscriptionPackages = () => {
               setSelectedId(item.id);
               setConfirmModalOpen(true);
             }}
+            t={t}
           />
         ))}
       </div>
 
       <FormError errorMsg={error?.response?.data?.message} />
 
-      {/* ✅ Success modal */}
       <SuccessModal
         openModal={openModal}
-        msg="Subscription successful!"
+        msg={t("subscriptionPackages.success")}
         onClose={handleSuccess}
         onConfirm={handleSuccess}
       />
 
-      {/* ✅ DaisyUI confirmation modal */}
       {confirmModalOpen && (
         <dialog open className="modal modal-open">
           <div className="modal-box">
-            <h3 className="font-bold text-lg mb-2">Confirm Subscription</h3>
-            <p className="py-2">
-              Are you sure you want to subscribe to this plan?
-            </p>
+            <h3 className="font-bold text-lg mb-2">
+              {t("subscriptionPackages.confirmTitle")}
+            </h3>
+            <p className="py-2">{t("subscriptionPackages.confirmMessage")}</p>
 
             <div className="modal-action flex justify-end gap-3">
               <button
                 className="btn btn-outline"
                 onClick={() => setConfirmModalOpen(false)}
               >
-                Cancel
+                {t("subscriptionPackages.cancel")}
               </button>
               <button
                 className="btn bg-myGreen text-white hover:bg-green-600"
@@ -112,7 +110,7 @@ const SubscriptionPackages = () => {
                   setConfirmModalOpen(false);
                 }}
               >
-                Confirm
+                {t("subscriptionPackages.confirm")}
               </button>
             </div>
           </div>
@@ -123,17 +121,16 @@ const SubscriptionPackages = () => {
         </dialog>
       )}
 
-      {/* Overlay while pending */}
       {isPending && (
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white text-lg font-semibold rounded-xl">
-          Processing...
+          {t("subscriptionPackages.processing")}
         </div>
       )}
     </section>
   );
 };
 
-const SubscriptionCard = ({ item, onSubscribe }) => {
+const SubscriptionCard = ({ item, onSubscribe, t }) => {
   const [showAll, setShowAll] = useState(false);
   const featuresToShow = showAll ? item.features : item.features?.slice(0, 3);
 
@@ -148,13 +145,14 @@ const SubscriptionCard = ({ item, onSubscribe }) => {
       </span>
 
       <h3 className="text-2xl font-bold">{item.name}</h3>
-
       <p className="text-center font-medium">{item.description}</p>
 
       <p className="text-lg">
-        Price:{" "}
+        {t("subscriptionPackages.price")}:{" "}
         <span className="text-myGreen font-bold text-xl">
-          {item.price === 0 || item.price === null ? "Free" : `${item.price}$`}
+          {item.price === 0 || item.price === null
+            ? t("subscriptionPackages.free")
+            : `${item.price}$`}
         </span>
       </p>
 
@@ -174,14 +172,16 @@ const SubscriptionCard = ({ item, onSubscribe }) => {
               onClick={() => setShowAll(!showAll)}
               className="mt-2 text-sm font-semibold underline text-center block w-fit mx-auto cursor-pointer"
             >
-              {showAll ? "Show less" : "Read more"}
+              {showAll
+                ? t("subscriptionPackages.showLess")
+                : t("subscriptionPackages.readMore")}
             </button>
           )}
         </div>
       )}
 
       <button onClick={onSubscribe} className="animationBtn mt-4">
-        Subscribe
+        {t("subscriptionPackages.subscribe")}
       </button>
     </div>
   );

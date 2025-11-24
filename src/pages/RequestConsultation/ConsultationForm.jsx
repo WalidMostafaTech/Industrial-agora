@@ -5,27 +5,30 @@ import { useMutation } from "@tanstack/react-query";
 import { sendConsultationRequest } from "../../services/mainServices";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
+import { useTranslation } from "react-i18next";
 
 const ConsultationForm = ({ types }) => {
+  const { t } = useTranslation();
+
   // ✅ Validation schema
   const schema = yup.object({
-    company_name: yup.string().required("Company name is required"),
-    responsible_name: yup.string().required("Contact person is required"),
+    company_name: yup.string().required(t("consultationForm.companyNameRequired")),
+    responsible_name: yup
+      .string()
+      .required(t("consultationForm.contactPersonRequired")),
     email: yup
       .string()
-      .email("Invalid email address")
-      .required("Email is required"),
+      .email(t("consultationForm.invalidEmail"))
+      .required(t("consultationForm.emailRequired")),
     phone: yup
       .string()
-      .matches(/^[0-9]+$/, "Phone must be numeric")
-      .required("Phone number is required"),
-    consultation_type: yup.string().required("Please select consultation type"),
-    description: yup
-      .string()
-      .required("Please provide a brief description of the problem"),
+      .matches(/^[0-9]+$/, t("consultationForm.phoneNumeric"))
+      .required(t("consultationForm.phoneRequired")),
+    consultation_type: yup.string().required(t("consultationForm.selectType")),
+    description: yup.string().required(t("consultationForm.descriptionRequired")),
     accept_privacy_policy: yup
       .boolean()
-      .oneOf([true], "You must accept the privacy policy"),
+      .oneOf([true], t("consultationForm.acceptPrivacy")),
   });
 
   // ✅ Form hook
@@ -46,13 +49,14 @@ const ConsultationForm = ({ types }) => {
       reset();
     },
     onError: (err) => {
-      console.error(err.response?.data?.message || "Something went wrong");
+      console.error(
+        err.response?.data?.message || t("consultationForm.somethingWrong")
+      );
     },
   });
 
   // ✅ Submit handler
   const onSubmit = (data) => {
-    // نحول boolean إلى 1 أو 0 قبل الإرسال
     const formattedData = {
       ...data,
       accept_privacy_policy: data.accept_privacy_policy ? 1 : 0,
@@ -66,31 +70,30 @@ const ConsultationForm = ({ types }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex items-center gap-2">
-        <span
-          className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 
-              w-8 h-8 flex items-center justify-center rounded-full"
-        >
+        <span className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 w-8 h-8 flex items-center justify-center rounded-full">
           1
         </span>
-        <p className="font-bold text-xl text-myBlue-1">Company information</p>
+        <p className="font-bold text-xl text-myBlue-1">
+          {t("consultationForm.companyInformation")}
+        </p>
       </div>
 
       <MainInput
-        label="Company name"
+        label={t("consultationForm.companyName")}
         id="company_name"
         {...register("company_name")}
         error={errors.company_name?.message}
       />
 
       <MainInput
-        label="Contact person"
+        label={t("consultationForm.contactPerson")}
         id="responsible_name"
         {...register("responsible_name")}
         error={errors.responsible_name?.message}
       />
 
       <MainInput
-        label="Email"
+        label={t("consultationForm.email")}
         id="email"
         type="email"
         {...register("email")}
@@ -98,7 +101,7 @@ const ConsultationForm = ({ types }) => {
       />
 
       <MainInput
-        label="Phone"
+        label={t("consultationForm.phone")}
         id="phone"
         type="number"
         {...register("phone")}
@@ -106,20 +109,19 @@ const ConsultationForm = ({ types }) => {
       />
 
       <div className="flex items-center gap-2">
-        <span
-          className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 
-              w-8 h-8 flex items-center justify-center rounded-full"
-        >
+        <span className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 w-8 h-8 flex items-center justify-center rounded-full">
           2
         </span>
-        <p className="font-bold text-xl text-myBlue-1">Consultation details</p>
+        <p className="font-bold text-xl text-myBlue-1">
+          {t("consultationForm.details")}
+        </p>
       </div>
 
       <MainInput
-        label="Type of consultation required"
+        label={t("consultationForm.type")}
         id="consultation_type"
         type="select"
-        placeholder="Select consultation type"
+        placeholder={t("consultationForm.selectTypePlaceholder")}
         options={types?.map((type) => ({
           value: type.id,
           label: type.name,
@@ -129,14 +131,13 @@ const ConsultationForm = ({ types }) => {
       />
 
       <MainInput
-        label="Brief description of the problem"
+        label={t("consultationForm.description")}
         id="description"
         type="textarea"
         {...register("description")}
         error={errors.description?.message}
       />
 
-      {/* ✅ Privacy Policy Checkbox (DaisyUI) */}
       <div className="form-control">
         <label className="label cursor-pointer justify-start gap-3">
           <input
@@ -145,9 +146,9 @@ const ConsultationForm = ({ types }) => {
             {...register("accept_privacy_policy")}
           />
           <span className="text-sm text-gray-700">
-            I agree to the{" "}
+            {t("consultationForm.iAgree")}{" "}
             <span className="text-myBlue-1 font-semibold cursor-pointer">
-              Privacy Policy
+              {t("consultationForm.privacyPolicy")}
             </span>
           </span>
         </label>
@@ -161,14 +162,14 @@ const ConsultationForm = ({ types }) => {
       <FormError errorMsg={error?.response?.data?.message} />
 
       <button type="submit" className="mainBtn w-full" disabled={isPending}>
-        {isPending ? "Submitting..." : "Submit Request"}
+        {isPending ? t("consultationForm.submitting") : t("consultationForm.submit")}
         {isPending && (
           <span className="ml-2 spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full" />
         )}
       </button>
 
       <p className="font-bold text-lg text-myBlue-1 text-center">
-        We’ll get back to you within 24 hours
+        {t("consultationForm.responseTime")}
       </p>
     </form>
   );

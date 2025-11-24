@@ -10,32 +10,36 @@ import FormError from "../../../components/form/FormError";
 import ImageUploader from "../../../components/form/ImageUploader";
 import { addProductApi } from "../../../services/productServices";
 import SuccessModal from "../../../components/modals/SuccessModal";
+import { useTranslation } from "react-i18next";
 
 // ✅ Validation Schema
 const schema = yup.object({
-  company_name: yup.string().required("Company name is required"),
-  location: yup.string().required("Location is required"),
+  company_name: yup.string().required("requestOutsource.companyNameRequired"),
+  location: yup.string().required("requestOutsource.locationRequired"),
   material_specification_1: yup
     .string()
-    .required("Material Specification 1 is required"),
+    .required("requestOutsource.materialSpec1Required"),
   material_specification_2: yup.string().nullable(),
   material_specification_3: yup.string().nullable(),
-  process_description: yup.string().required("Process description is required"),
+  process_description: yup
+    .string()
+    .required("requestOutsource.processDescRequired"),
   preferred_expected_machine_or_technology: yup
     .string()
-    .required("Preferred Machine or Technology is required"),
+    .required("requestOutsource.preferredMachineRequired"),
   quality_standard_tolerance: yup.string().nullable(),
   quantity: yup
     .number()
-    .typeError("Quantity must be a number")
-    .positive("Quantity must be positive")
-    .integer("Quantity must be an integer")
-    .required("Quantity is required"),
+    .typeError("requestOutsource.quantityNumber")
+    .positive("requestOutsource.quantityPositive")
+    .integer("requestOutsource.quantityInteger")
+    .required("requestOutsource.quantityRequired"),
   special_instructions: yup.string().nullable(),
-  description: yup.string().required("Note/Description is required"),
+  description: yup.string().required("requestOutsource.noteRequired"),
 });
 
 const RequestOutsourceService = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [imageError, setImageError] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -49,9 +53,8 @@ const RequestOutsourceService = () => {
     resolver: yupResolver(schema),
   });
 
-  // ✅ Mutation using React Query
   const { mutate, isPending, error } = useMutation({
-    mutationFn: addProductApi, // نفس الـ API
+    mutationFn: addProductApi,
     onSuccess: () => {
       setImages([]);
       reset();
@@ -62,27 +65,21 @@ const RequestOutsourceService = () => {
     },
   });
 
-  // ✅ onSubmit Handler
   const onSubmit = (data) => {
     if (images.length === 0) {
-      setImageError("Please upload at least one image.");
+      setImageError(t("requestOutsource.uploadAtLeastOneImage"));
       return;
     }
     setImageError("");
 
     const formData = new FormData();
-
-    // 🟢 إضافة باقي الحقول
     Object.entries(data).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
         formData.append(key, value);
       }
     });
-
-    // 🟢 type = outsource
     formData.append("type", "outsource");
 
-    // 🟢 إضافة الصور بالشكل المطلوب (images[0], images[1], ...)
     images.forEach((img, index) => {
       formData.append(`images[${index}]`, img.file);
     });
@@ -93,100 +90,124 @@ const RequestOutsourceService = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <MainInput
-        label="Company name"
+        label={t("requestOutsource.companyName")}
         id="company_name"
         {...register("company_name")}
-        error={errors.company_name?.message}
+        error={errors.company_name?.message && t(errors.company_name?.message)}
       />
 
       <MainInput
-        label="Location"
+        label={t("requestOutsource.location")}
         id="location"
         {...register("location")}
-        error={errors.location?.message}
+        error={errors.location?.message && t(errors.location?.message)}
       />
 
       <MainInput
-        label="Material Specifications 1"
+        label={t("requestOutsource.materialSpec1")}
         id="material_specification_1"
         {...register("material_specification_1")}
-        error={errors.material_specification_1?.message}
+        error={
+          errors.material_specification_1?.message &&
+          t(errors.material_specification_1?.message)
+        }
       />
 
       <MainInput
-        label="Material Specifications 2"
+        label={t("requestOutsource.materialSpec2")}
         id="material_specification_2"
         {...register("material_specification_2")}
-        error={errors.material_specification_2?.message}
+        error={
+          errors.material_specification_2?.message &&
+          t(errors.material_specification_2?.message)
+        }
       />
 
       <MainInput
-        label="Material Specifications 3"
+        label={t("requestOutsource.materialSpec3")}
         id="material_specification_3"
         {...register("material_specification_3")}
-        error={errors.material_specification_3?.message}
+        error={
+          errors.material_specification_3?.message &&
+          t(errors.material_specification_3?.message)
+        }
       />
 
       <MainInput
-        label="Process Description"
+        label={t("requestOutsource.processDesc")}
         id="process_description"
         type="textarea"
         {...register("process_description")}
-        error={errors.process_description?.message}
+        error={
+          errors.process_description?.message &&
+          t(errors.process_description?.message)
+        }
       />
 
       <MainInput
-        label="Preferred / Expected Machine or Technology"
+        label={t("requestOutsource.preferredMachine")}
         id="preferred_expected_machine_or_technology"
         {...register("preferred_expected_machine_or_technology")}
-        error={errors.preferred_expected_machine_or_technology?.message}
+        error={
+          errors.preferred_expected_machine_or_technology?.message &&
+          t(errors.preferred_expected_machine_or_technology?.message)
+        }
       />
 
       <MainInput
-        label="Quality Standard / Tolerance (if any)"
+        label={t("requestOutsource.qualityStandard")}
         id="quality_standard_tolerance"
         {...register("quality_standard_tolerance")}
-        error={errors.quality_standard_tolerance?.message}
+        error={
+          errors.quality_standard_tolerance?.message &&
+          t(errors.quality_standard_tolerance?.message)
+        }
       />
 
       <MainInput
-        label="QTY"
+        label={t("requestOutsource.quantity")}
         id="quantity"
         type="number"
         {...register("quantity")}
-        error={errors.quantity?.message}
+        error={errors.quantity?.message && t(errors.quantity?.message)}
       />
 
       <MainInput
-        label="Special Instructions"
+        label={t("requestOutsource.specialInstructions")}
         id="special_instructions"
         {...register("special_instructions")}
-        error={errors.special_instructions?.message}
+        error={
+          errors.special_instructions?.message &&
+          t(errors.special_instructions?.message)
+        }
       />
 
       <MainInput
-        label="Note"
+        label={t("requestOutsource.note")}
         id="description"
         type="textarea"
         {...register("description")}
-        error={errors.description?.message}
+        error={errors.description?.message && t(errors.description?.message)}
       />
 
       <ImageUploader
-        label="Pictures"
+        label={t("requestOutsource.pictures")}
         onChange={setImages}
         error={imageError}
         initialImages={images}
       />
 
-      {/* ✅ Server Error */}
       <FormError errorMsg={error?.response?.data?.message} />
 
-      <FormBtn title="Submit" loading={isPending} disabled={isPending} />
+      <FormBtn
+        title={t("requestOutsource.submit")}
+        loading={isPending}
+        disabled={isPending}
+      />
 
       <SuccessModal
         openModal={openModal}
-        msg="Request submitted successfully!"
+        msg={t("requestOutsource.successMsg")}
         onClose={() => setOpenModal(false)}
         onConfirm={() => setOpenModal(false)}
       />

@@ -1,7 +1,9 @@
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import { MdDone } from "react-icons/md";
 
 const SuccessModal = ({ openModal, onClose, msg, onConfirm, btnText }) => {
+  const { t } = useTranslation();
   if (!openModal) return null;
 
   return createPortal(
@@ -15,7 +17,7 @@ const SuccessModal = ({ openModal, onClose, msg, onConfirm, btnText }) => {
         <p className="text-center font-semibold">{msg}</p>
 
         <button onClick={onConfirm} className="mainBtn mx-auto">
-          {btnText || "OK"}
+          {btnText || t("OK")}
         </button>
       </div>
     </dialog>,

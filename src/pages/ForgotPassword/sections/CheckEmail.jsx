@@ -7,16 +7,18 @@ import MainInput from "../../../components/form/MainInput";
 import FormError from "../../../components/form/FormError";
 import FormBtn from "../../../components/form/FormBtn";
 import { sendOtp } from "../../../services/forgotPasswordServices";
-
-// ✅ Validation schema
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-});
+import { useTranslation } from "react-i18next";
 
 const CheckEmail = ({ goNext, setParentData }) => {
+  const { t } = useTranslation();
+
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email(t("checkEmail.errors.emailInvalid"))
+      .required(t("checkEmail.errors.emailRequired")),
+  });
+
   const {
     register,
     handleSubmit,
@@ -25,38 +27,30 @@ const CheckEmail = ({ goNext, setParentData }) => {
     resolver: yupResolver(schema),
   });
 
-  // ✅ Mutation to send OTP
   const { mutate, isPending, error } = useMutation({
     mutationFn: (email) => sendOtp(email),
     onSuccess: (res, email) => {
-      // ✅ حفظ الإيميل من الـ input نفسه
       setParentData((prev) => ({ ...prev, email }));
-      console.log("✅ OTP sent successfully:", res);
       goNext();
-    },
-    onError: (err) => {
-      console.error("❌ Error sending OTP:", err);
     },
   });
 
-  // ✅ Handle form submit
   const onSubmit = (data) => {
-    mutate(data.email); // هنا بنمرر الإيميل للميوتشن
+    mutate(data.email);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <MainInput
-        label="Email"
+        label={t("checkEmail.emailLabel")}
         id="email"
         {...register("email")}
         error={errors.email?.message}
       />
 
-      {/* ✅ عرض الخطأ لو موجود */}
       <FormError errorMsg={error?.response?.data?.message} />
 
-      <FormBtn title={"Continue"} loading={isPending} />
+      <FormBtn title={t("checkEmail.continue")} loading={isPending} />
     </form>
   );
 };

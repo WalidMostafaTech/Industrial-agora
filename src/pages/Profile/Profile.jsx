@@ -6,13 +6,14 @@ import FormBtn from "../../components/form/FormBtn";
 import FormError from "../../components/form/FormError";
 import { updateProfile } from "../../services/authServices";
 import { getProfileAct } from "../../store/profile/profileSlice";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const { profile } = useSelector((state) => state.profile);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // ✅ البيانات المبدئية
   const [formData, setFormData] = useState({
     name: profile?.name || "",
     email: profile?.email || "",
@@ -24,7 +25,6 @@ const Profile = () => {
     password_confirmation: "",
   });
 
-  // ✅ نحتفظ بالنسخة الأصلية للمقارنة
   const [initialData, setInitialData] = useState(formData);
 
   useEffect(() => {
@@ -44,51 +44,46 @@ const Profile = () => {
     }
   }, [profile]);
 
-  // ✅ دالة التغيير في الحقول
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // ✅ التحقق من وجود تغييرات
   const hasChanges = JSON.stringify(formData) !== JSON.stringify(initialData);
 
-  // ✅ التحقق من الباسورد
   useEffect(() => {
     if (formData.password && !formData.password_confirmation) {
-      setErrorMsg("يرجى تأكيد كلمة المرور.");
+      setErrorMsg(t("profile.passwordConfirmationRequired"));
     } else if (
       formData.password &&
       formData.password_confirmation &&
       formData.password !== formData.password_confirmation
     ) {
-      setErrorMsg("كلمة المرور غير متطابقة.");
+      setErrorMsg(t("profile.passwordMismatch"));
     } else {
       setErrorMsg("");
     }
-  }, [formData.password, formData.password_confirmation]);
+  }, [formData.password, formData.password_confirmation, t]);
 
   const dispatch = useDispatch();
 
-  // ✅ React Query Mutation
   const { mutate, isPending } = useMutation({
     mutationFn: updateProfile,
     onSuccess: () => {
       setInitialData(formData);
       setIsEditing(false);
       dispatch(getProfileAct());
-      console.log("تم تحديث الملف الشخصي بنجاح ✅");
+      console.log(t("profile.updateSuccess"));
     },
     onError: () => {
-      setErrorMsg("حدث خطأ أثناء التحديث، حاول مرة أخرى.");
+      setErrorMsg(t("profile.updateError"));
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (errorMsg) return; // لو فيه خطأ في الباسورد
-    if (!hasChanges) return; // لو مفيش تغييرات
+    if (errorMsg) return;
+    if (!hasChanges) return;
 
     const payload = { ...formData };
     if (!formData.password) {
@@ -99,7 +94,6 @@ const Profile = () => {
     mutate(payload);
   };
 
-  // ✅ أول حرفين من الاسم
   const initials = formData.name
     .split(" ")
     .slice(0, 2)
@@ -121,7 +115,7 @@ const Profile = () => {
             onClick={() => setIsEditing((prev) => !prev)}
             className="mainBtn"
           >
-            {isEditing ? "Cancel" : "Edit"}
+            {isEditing ? t("profile.cancel") : t("profile.edit")}
           </button>
         </div>
 
@@ -132,7 +126,7 @@ const Profile = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <MainInput
-              label="Full Name"
+              label={t("profile.fullName")}
               id="name"
               value={formData.name}
               onChange={handleChange}
@@ -140,7 +134,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Email"
+              label={t("profile.email")}
               id="email"
               value={formData.email}
               onChange={handleChange}
@@ -148,7 +142,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Phone"
+              label={t("profile.phone")}
               id="phone"
               type="number"
               value={formData.phone}
@@ -157,7 +151,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Company Name"
+              label={t("profile.companyName")}
               id="company_name"
               value={formData.company_name}
               onChange={handleChange}
@@ -165,7 +159,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="City"
+              label={t("profile.city")}
               id="city"
               value={formData.city}
               onChange={handleChange}
@@ -173,7 +167,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Tax Number"
+              label={t("profile.taxNumber")}
               id="tax_number"
               type="number"
               value={formData.tax_number}
@@ -182,7 +176,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Password"
+              label={t("profile.password")}
               id="password"
               type="password"
               value={formData.password}
@@ -191,7 +185,7 @@ const Profile = () => {
             />
 
             <MainInput
-              label="Confirm Password"
+              label={t("profile.confirmPassword")}
               id="password_confirmation"
               type="password"
               value={formData.password_confirmation}
@@ -204,7 +198,7 @@ const Profile = () => {
 
           {isEditing && (
             <FormBtn
-              title="Save"
+              title={t("profile.save")}
               disabled={!hasChanges || !!errorMsg}
               loading={isPending}
             />

@@ -31,9 +31,6 @@ const ForgotPassword = React.lazy(() =>
 );
 const AddProduct = React.lazy(() => import("../pages/AddProduct/AddProduct"));
 const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
-const PaymentPage = React.lazy(() =>
-  import("../pages/PaymentPage/PaymentPage")
-);
 const SubscriptionPackages = React.lazy(() =>
   import("../pages/Subscription/SubscriptionPackages")
 );
@@ -42,6 +39,7 @@ const SubscriptionDetails = React.lazy(() =>
 );
 
 const Profile = React.lazy(() => import("../pages/Profile/Profile"));
+const NotFound = React.lazy(() => import("../pages/NotFound/NotFound"));
 
 const router = createBrowserRouter([
   {
@@ -71,11 +69,7 @@ const router = createBrowserRouter([
           // </ProtectedRoute>
         ),
       },
-      { path: "terms", element: <Terms /> },
-      // { path: "how-to-sell", element: <HowToSell /> },
-      // { path: "how-to-be-a-seller", element: <HowToBeASeller /> },
-      // { path: "how-does-it-work", element: <HowDoesItWork /> },
-      // { path: "advantages", element: <Advantages /> },
+      // { path: "terms", element: <Terms /> },
       {
         path: "login",
         element: (
@@ -117,14 +111,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "payment",
-        element: (
-          <ProtectedRoute>
-            <PaymentPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "subscription-packages",
         element: (
           <ProtectedRoute>
@@ -147,6 +133,10 @@ const router = createBrowserRouter([
             <Profile />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

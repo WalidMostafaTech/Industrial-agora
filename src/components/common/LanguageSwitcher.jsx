@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../store/languageSlice/languageSlice";
 import LoadingModal from "../Loading/LoadingModal";
 
+import arFlag from "../../assets/icons/flag-ar.png";
+import enFlag from "../../assets/icons/flag-en.png";
+
 const LanguageSwitcher = () => {
   const dispatch = useDispatch();
   const { lang } = useSelector((state) => state.language);
 
   const [openLoading, setOpenLoading] = useState(false);
 
-  // ⬅️ كل ما lang يتغير عدل الاتجاه وافتح المودال
   useEffect(() => {
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
@@ -20,18 +22,21 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="relative text-sm">
-      {/* زرار واحد يبدل اللغة */}
+    <div className="relative text-xs">
       <button
         onClick={handleToggle}
-        className={`cursor-pointer px-2 py-1 rounded-md text-myBlue-2 border-2`}
+        className="cursor-pointer px-1 py-0.5 rounded-md text-myBlue-2 border-2 flex items-center gap-1"
       >
+        <img
+          src={lang === "en" ? arFlag : enFlag}
+          alt="flag"
+          className="w-5 rounded-sm"
+        />
         <span className="font-semibold">
           {lang === "en" ? "العربية" : "English"}
         </span>
       </button>
 
-      {/* المودال */}
       <LoadingModal openModal={openLoading} />
     </div>
   );

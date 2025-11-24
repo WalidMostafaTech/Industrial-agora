@@ -3,8 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import FormBtn from "../../../components/form/FormBtn";
 import FormError from "../../../components/form/FormError";
 import { verifyOtp } from "../../../services/forgotPasswordServices";
+import { useTranslation } from "react-i18next";
 
 const OTP = ({ goNext, parentData, setParentData }) => {
+  const { t } = useTranslation();
   const length = 6;
   const [otp, setOtp] = useState(Array(length).fill(""));
   const [error, setError] = useState("");
@@ -60,7 +62,7 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     e.preventDefault();
     const pasted = e.clipboardData.getData("text").trim();
     if (!/^\d+$/.test(pasted)) {
-      setError("OTP must contain only numbers");
+      setError(t("otp.onlyNumbers"));
       return;
     }
     const newOtp = pasted.split("").slice(0, length);
@@ -83,7 +85,7 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     const joinedOtp = otp.join("");
 
     if (joinedOtp.length !== length) {
-      setError("Please enter all digits of the OTP.");
+      setError(t("otp.enterAllDigits"));
       return;
     }
 
@@ -112,19 +114,15 @@ const OTP = ({ goNext, parentData, setParentData }) => {
         ))}
       </div>
 
-      {/* ✅ عرض الخطأ من API أو من التحقق */}
       <FormError
         errorMsg={
           error ||
-          (isError
-            ? apiError?.response?.data?.message ||
-              "Invalid OTP, please try again."
-            : "")
+          (isError ? apiError?.response?.data?.message || t("otp.invalid") : "")
         }
       />
 
-      {/* ✅ زر التحقق */}
-      <FormBtn title={"Check"} loading={isPending} />
+      {/* Button */}
+      <FormBtn title={t("otp.checkBtn")} loading={isPending} />
     </form>
   );
 };

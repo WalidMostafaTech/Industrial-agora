@@ -4,15 +4,18 @@ import PageTitle from "../../components/common/PageTitle";
 import { useSearchParams } from "react-router-dom";
 import ProductCardList from "../../components/common/ProductCardList";
 import Pagination from "../../components/common/Pagination";
+import LoadingPage from "../../components/Loading/LoadingPage";
+import { useTranslation } from "react-i18next";
 
 const ProcessOutSourceProducts = () => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
 
   // 📄 تحديد الصفحة الحالية من الـ URL
   const currentPage = Number(searchParams.get("page")) || 1;
 
   // 🌀 جلب البيانات مع تمرير الصفحة
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["productsOutSource", currentPage], // ⬅️ خلي الصفحة جزء من الـ key
     queryFn: () => getProductsOutSource(currentPage), // ⬅️ مرّر الصفحة للفنكشن
     keepPreviousData: true, // 🔁 يحافظ على البيانات القديمة أثناء تحميل الصفحة الجديدة
@@ -25,14 +28,11 @@ const ProcessOutSourceProducts = () => {
     setSearchParams(newParams);
   };
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
-  if (isError)
-    return <p className="text-center text-red-700">Error: {error.message}</p>;
-
+  if (isLoading) return <LoadingPage />;
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="Process Outsource" />
+      <PageTitle title={t("processOutsource")} />
 
       <div className="max-w-3xl mx-auto space-y-6">
         <ProductCardList ProductsList={data?.items || []} />

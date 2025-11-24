@@ -3,20 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getSearch } from "../../services/homeServices";
+import { useTranslation } from "react-i18next";
 
 const SearchModal = ({ openSearch, onClose }) => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  // ✅ Debounce logic (500ms)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(searchTerm);
-    }, 500);
+    const timer = setTimeout(() => setDebouncedSearch(searchTerm), 500);
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  // ✅ React Query
   const { data: searchData, isLoading } = useQuery({
     queryKey: ["search", debouncedSearch],
     queryFn: () => getSearch(debouncedSearch),
@@ -25,7 +23,6 @@ const SearchModal = ({ openSearch, onClose }) => {
   });
 
   const handleSubmit = (e) => e.preventDefault();
-
   const handleClose = () => {
     setSearchTerm("");
     onClose();
@@ -34,7 +31,6 @@ const SearchModal = ({ openSearch, onClose }) => {
   const products = searchData?.products || [];
   const categories = searchData?.categories || [];
 
-  // ✅ نتحقق إذا كان المفروض نظهر الـ div ولا لأ
   const shouldShowResults =
     isLoading ||
     (searchTerm.trim().length > 2 &&
@@ -55,19 +51,18 @@ const SearchModal = ({ openSearch, onClose }) => {
         className="modal-box p-0 shadow-none w-11/12 max-w-6xl bg-transparent absolute top-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 🔍 Search Input */}
+        {/* حقل البحث */}
         <div className="bg-gray-200/70 backdrop-blur rounded-2xl border-2 border-white p-2 lg:p-4">
           <form
             onSubmit={handleSubmit}
             className="relative border-2 border-white rounded-xl overflow-hidden flex"
           >
             <input
-              placeholder="Search..."
+              placeholder={t("modals.searchModal.placeholder")}
               className="w-full bg-white/70 p-2 outline-0 border-0"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-
             <button
               type="submit"
               className="flex items-center justify-center p-2 cursor-pointer bg-myBlue-2 text-white text-2xl"
@@ -77,18 +72,19 @@ const SearchModal = ({ openSearch, onClose }) => {
           </form>
         </div>
 
-        {/* ✅ Results Section (مش بتظهر إلا لما يكون في لودنج أو نتائج أو مفيش نتائج) */}
         {(shouldShowResults || noResults) && (
           <div className="space-y-2 lg:space-y-4 max-h-[60vh] overflow-y-auto mt-4 lg:mt-6 bg-gray-200/70 backdrop-blur rounded-2xl border-2 border-white p-2 lg:p-4">
             {isLoading && (
-              <p className="text-center text-gray-600">Loading...</p>
+              <p className="text-center text-gray-600">{t("modals.searchModal.loading")}</p>
             )}
 
             {noResults && (
-              <p className="text-center text-gray-600">No results found.</p>
+              <p className="text-center text-gray-600">
+                {t("modals.searchModal.noResults")}
+              </p>
             )}
 
-            {/* 🛒 Products */}
+            {/* المنتجات */}
             {products.map((product) => (
               <Link
                 to={`/product/${product.id}`}
@@ -109,7 +105,7 @@ const SearchModal = ({ openSearch, onClose }) => {
               </Link>
             ))}
 
-            {/* 🏷 Categories */}
+            {/* الفئات */}
             {categories.map((category) => (
               <Link
                 to={`/categories/${category.id}`}

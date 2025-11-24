@@ -9,8 +9,10 @@ import EmptySection from "../../components/sections/EmptySection";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
 import PermissionSection from "../../components/sections/PermissionSection";
+import { useTranslation } from "react-i18next";
 
 const RequestConsultation = () => {
+  const { t } = useTranslation();
   const {
     data: consultationSettings,
     isLoading,
@@ -32,7 +34,7 @@ const RequestConsultation = () => {
 
   return (
     <section className="pagePadding">
-      <PageTitle title="Request Consultation" />
+      <PageTitle title={t("requestConsultation")} />
 
       <PageBanner
         image={consultationSettings?.consultation_banner}

@@ -72,6 +72,7 @@ const schema = yup.object({
   sku: yup.string().nullable(),
   vendor: yup.string().nullable(),
   warehouse: yup.string().nullable(),
+  tags: yup.string().nullable(),
 });
 
 const AddProduct = () => {
@@ -248,6 +249,14 @@ const AddProduct = () => {
           onChange={setImages}
           error={imageError}
           initialImages={images}
+        />
+
+        <MainInput
+          label={t("AddProduct.fields.tags")}
+          placeholder={t("AddProduct.fields.tags_placeholder")}
+          id="tags"
+          {...register("tags")}
+          error={t(errors.tags?.message)}
         />
 
         <MainInput

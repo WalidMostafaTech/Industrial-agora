@@ -4,16 +4,16 @@ import SendMsgModal from "../../components/modals/SendMsgModal";
 import { useQuery } from "@tanstack/react-query";
 import { getProductDetails } from "../../services/productServices";
 import LoadingPage from "../../components/Loading/LoadingPage";
-import EmptySection from "../../components/sections/EmptySection";
 import { useSelector } from "react-redux";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
+import { useTranslation } from "react-i18next";
 
 const Product = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { profile } = useSelector((state) => state.profile);
 
-  const canNotView = useHasPermission(PERMISSIONS.VIEW_POSTS_WITHOUT_CONTACTS);
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
 
   const [openMsg, setOpenMsg] = useState(false);
@@ -25,14 +25,14 @@ const Product = () => {
   } = useQuery({
     queryKey: ["product", id],
     queryFn: () => getProductDetails(id),
-    enabled: !!id, // يتفعل فقط لما يكون في id
+    enabled: !!id,
   });
 
   if (isLoading) return <LoadingPage />;
   if (isError || !product)
     return (
       <div className="flex justify-center items-center h-[70vh]">
-        <h3 className="text-2xl font-bold">Product Not Found</h3>
+        <h3 className="text-2xl font-bold">{t("product.notFound")}</h3>
       </div>
     );
 
@@ -60,6 +60,7 @@ const Product = () => {
                 vendor: product.vendor,
                 warehouse: product.warehouse,
               }}
+              t={t}
             />
 
             <AutoFields
@@ -69,6 +70,7 @@ const Product = () => {
                 height: product.height,
                 weight: product.weight,
               }}
+              t={t}
             />
 
             {product?.price && (
@@ -85,12 +87,13 @@ const Product = () => {
                 delivery: product.delivery,
                 payment: product.payment,
               }}
+              t={t}
             />
 
             {product?.quantity && (
               <p className="border-b border-stone-300 flex justify-end">
                 <span className="bg-stone-200 py-1 px-2 text-sm">
-                  {product?.quantity} IN STOCK
+                  {product?.quantity} {t("product.inStock")}
                 </span>
               </p>
             )}
@@ -102,27 +105,31 @@ const Product = () => {
             onClick={() => setOpenMsg(true)}
             className="animationBtn block mx-auto mt-8"
           >
-            contact with seller
+            {t("product.contactSeller")}
           </button>
         )}
       </section>
 
-      {/* <ProductsForms /> */}
-
       <div className="whiteContainer relative max-w-2xl mx-auto mt-16 lg:mt-24 flex flex-wrap justify-center gap-1">
         <h3
           className="text-xl lg:text-2xl text-myBlue-2 font-bold border-b-3 border-myBlue-2 
-        absolute bottom-full left-1/2 -translate-x-1/2"
+          absolute bottom-full left-1/2 -translate-x-1/2"
         >
-          PRODUCT TAGS
+          {t("product.tags")}
         </h3>
 
-        {tags.map((tag, index) => (
-          <span key={index} className="text-stone-500 text-lg font-semibold">
-            {tag}
-            {tags.length - 1 !== index && ","}
+        {product?.tags?.length > 0 ? (
+          product?.tags?.map((tag, index) => (
+            <span key={index} className="text-stone-500 text-lg font-semibold">
+              {tag}
+              {tags.length - 1 !== index && ","}
+            </span>
+          ))
+        ) : (
+          <span className="text-stone-500 text-lg font-semibold">
+            {t("product.noTags")}
           </span>
-        ))}
+        )}
       </div>
 
       <SendMsgModal
@@ -136,7 +143,7 @@ const Product = () => {
 
 export default Product;
 
-const AutoFields = ({ data }) => {
+const AutoFields = ({ data, t }) => {
   if (!data || typeof data !== "object") return null;
 
   return (
@@ -153,7 +160,7 @@ const AutoFields = ({ data }) => {
 
         return (
           <p key={key} className="text-gray-700">
-            {key.charAt(0).toUpperCase() + key.slice(1)} : {value}
+            {t(`product.fields.${key}`)} : {value}
           </p>
         );
       })}

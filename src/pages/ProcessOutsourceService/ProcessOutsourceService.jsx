@@ -4,8 +4,11 @@ import RequestOutsourceService from "./forms/RequestOutsourceService";
 import OfferService from "./forms/OfferService";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
+import { useTranslation } from "react-i18next";
+import PermissionSection from "../../components/sections/PermissionSection";
 
 const ProcessOutsourceService = () => {
+  const { t } = useTranslation();
   const [active, setActive] = useState("request");
 
   const canShareOffer = useHasPermission(PERMISSIONS.SHARE_POST_OFFER);
@@ -13,16 +16,18 @@ const ProcessOutsourceService = () => {
     PERMISSIONS.SHARE_OUTSOURCE_REQUEST
   );
 
+  if (!canShareOffer && !canShareOutsourceRequest) return <PermissionSection />;
+
   const titles = [
     {
       id: 1,
-      title: "Request outsource service",
+      title: t("processOutsourceService.requestOutsource"),
       link: "request",
       allowed: canShareOutsourceRequest,
     },
     {
       id: 2,
-      title: "Offer Service",
+      title: t("processOutsourceService.offerService"),
       link: "offer",
       allowed: canShareOffer,
     },
@@ -30,12 +35,12 @@ const ProcessOutsourceService = () => {
 
   return (
     <section className="container pagePadding">
-      <PageTitle title="Process Outsource" />
+      <PageTitle title={t("processOutsourceService.title")} />
 
       <div className="whiteContainer max-w-xl mx-auto space-y-6">
         <hgroup className="text-center border-b border-gray-300 flex items-center justify-evenly">
           {titles
-            .filter((t) => t.allowed) // ⛔ عرض التاب فقط لو له صلاحية
+            .filter((t) => t.allowed) // عرض التاب فقط لو له صلاحية
             .map((title) => (
               <h3
                 key={title.id}
@@ -51,12 +56,12 @@ const ProcessOutsourceService = () => {
             ))}
         </hgroup>
 
-        {/* ⛔ فورم Request فقط لو له صلاحية */}
+        {/* فورم Request فقط لو له صلاحية */}
         {active === "request" && canShareOutsourceRequest && (
           <RequestOutsourceService />
         )}
 
-        {/* ⛔ فورم Offer فقط لو له صلاحية */}
+        {/* فورم Offer فقط لو له صلاحية */}
         {active === "offer" && canShareOffer && <OfferService />}
       </div>
     </section>

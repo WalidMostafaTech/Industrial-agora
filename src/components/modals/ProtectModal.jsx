@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import icon from "../../assets/icons/chat-external-icon.png";
+import { useTranslation } from "react-i18next";
 
 const ProtectModal = ({
   open,
@@ -9,6 +10,7 @@ const ProtectModal = ({
   onConfirm,
   onClose,
 }) => {
+  const { t } = useTranslation();
   if (!open) return null;
 
   return createPortal(
@@ -22,7 +24,7 @@ const ProtectModal = ({
         <p className="text-sm">{message}</p>
         <div className="modal-action">
           <button onClick={onClose} className="mainBtn danger">
-            Close
+            {t("close")}
           </button>
           <button onClick={onConfirm} className="mainBtn">
             {confirmText}
