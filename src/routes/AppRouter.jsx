@@ -54,11 +54,7 @@ const router = createBrowserRouter([
       { path: "contact-us", element: <ContactUs /> },
       {
         path: "request",
-        element: (
-          <ProtectedRoute>
-            <RequestConsultation />
-          </ProtectedRoute>
-        ),
+        element: <RequestConsultation />,
       },
       { path: "process-outsource", element: <ProcessOutSource /> },
       {

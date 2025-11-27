@@ -103,6 +103,13 @@
       "send": "Send",
       "cancel": "Cancel",
       "messageRequired": "Message is required"
+    },
+    "permissionModal": {
+      "upgradeTitle": "You must upgrade your account to access this feature",
+      "upgradeButton": "Upgrade your account now",
+      "loginTitle": "You must be logged in to access this feature",
+      "loginButton": "Go to Login",
+      "closeButton": "Close"
     }
   },
 

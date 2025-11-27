@@ -103,6 +103,13 @@
       "send": "إرسال",
       "cancel": "إلغاء",
       "messageRequired": "الرسالة مطلوبة"
+    },
+    "permissionModal": {
+      "upgradeTitle": "يجب ترقية حسابك للوصول إلى هذه الميزة",
+      "upgradeButton": "قم بترقية حسابك الآن",
+      "loginTitle": "يجب تسجيل الدخول للوصول إلى هذه الميزة",
+      "loginButton": "اذهب لتسجيل الدخول",
+      "closeButton": "إغلاق"
     }
   },
 
