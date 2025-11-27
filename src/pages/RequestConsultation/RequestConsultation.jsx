@@ -6,9 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getConsultationSettings } from "../../services/mainServices";
 import LoadingSection from "../../components/Loading/LoadingSection";
 import EmptySection from "../../components/sections/EmptySection";
-import useHasPermission from "../../hooks/useHasPermission";
-import { PERMISSIONS } from "../../permissions";
-import PermissionSection from "../../components/sections/PermissionSection";
 import { useTranslation } from "react-i18next";
 
 const RequestConsultation = () => {
@@ -21,12 +18,6 @@ const RequestConsultation = () => {
     queryKey: ["consultationSettings"],
     queryFn: getConsultationSettings,
   });
-
-  const canRequest = useHasPermission(PERMISSIONS.REQUEST_CONSULT);
-
-  if (!canRequest) {
-    return <PermissionSection />;
-  }
 
   if (isLoading) return <LoadingSection />;
 

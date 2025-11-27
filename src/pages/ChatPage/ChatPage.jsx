@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import Chat from "./sections/Chat";
 import Contacts from "./sections/Contacts";
 import { getChats, getMsgs } from "../../services/chatServices";
-import { useSelector } from "react-redux";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
 import PermissionSection from "../../components/sections/PermissionSection";
@@ -12,7 +11,6 @@ import PermissionSection from "../../components/sections/PermissionSection";
 const ChatPage = () => {
   const [showChat, setShowChat] = useState(false);
   const { id } = useParams();
-  const { profile } = useSelector((state) => state.profile);
 
   useEffect(() => {
     if (id) setShowChat(true);
@@ -38,19 +36,6 @@ const ChatPage = () => {
   });
   const currentChat = chats?.find((chat) => chat.id.toString() === id);
 
-  const chatData = {
-    header: {
-      name:
-        currentChat?.user_id !== profile?.id
-          ? currentChat?.user.name
-          : currentChat?.seller.name,
-      product_name: currentChat?.product.name,
-      product_id: currentChat?.product.id,
-      action: currentChat?.action,
-    },
-    messages: messages || [],
-  };
-
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
 
   if (!canChat) {
@@ -64,7 +49,8 @@ const ChatPage = () => {
         <Chat
           showChat={showChat}
           setShowChat={setShowChat}
-          chatData={chatData}
+          currentChat={currentChat}
+          messages={messages}
           chatId={id}
         />
       </div>

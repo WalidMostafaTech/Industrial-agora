@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
@@ -17,6 +17,7 @@ import useHasPermission from "../../hooks/useHasPermission";
 import PermissionSection from "../../components/sections/PermissionSection";
 import { addProductApi } from "../../services/productServices";
 import { PERMISSIONS } from "../../permissions";
+import { useSearchParams } from "react-router-dom";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -81,6 +82,11 @@ const AddProduct = () => {
   const [imageError, setImageError] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
+  const [searchParams] = useSearchParams();
+  const defaultCategory = searchParams.get("category");
+
+  console.log("defaultCategory", defaultCategory);
+
   const { categories } = useSelector((state) => state.categories);
   const categoriesOptions = categories?.map((category) => ({
     value: category.id,
@@ -94,9 +100,16 @@ const AddProduct = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    if (defaultCategory) {
+      setValue("category_id", defaultCategory);
+    }
+  }, [defaultCategory, setValue]);
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: addProductApi,

@@ -3,7 +3,7 @@ import ChatHeader from "../components/ChatHeader";
 import MsgInput from "../components/MsgInput";
 import MsgsContainer from "../components/MsgsContainer";
 
-const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
+const Chat = ({ showChat, setShowChat, currentChat, messages, chatId }) => {
   const { t } = useTranslation();
 
   return (
@@ -15,12 +15,12 @@ const Chat = ({ showChat, setShowChat, chatData, chatId }) => {
       {chatId ? (
         <>
           <ChatHeader
-            contact={chatData.header}
+            currentChat={currentChat}
             setShowChat={setShowChat}
             chatId={chatId}
           />
 
-          <MsgsContainer messages={chatData.messages} />
+          <MsgsContainer messages={messages} />
 
           <MsgInput chatId={chatId} />
         </>

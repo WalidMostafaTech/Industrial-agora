@@ -1,22 +1,19 @@
 import { createPortal } from "react-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import icon from "../../assets/icons/chat-external-icon.png";
 import { updateChatAction } from "../../services/chatServices";
 import { useTranslation } from "react-i18next";
 
-const ChatExternallyModal = ({
-  openModal,
-  onClose,
-  chatId,
-  setDisabledBtns,
-}) => {
+const ChatExternallyModal = ({ openModal, onClose, chatId }) => {
   const { t } = useTranslation();
+
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload) => updateChatAction(payload),
     onSuccess: () => {
+      queryClient.invalidateQueries(["chats"]);
       onClose();
-      setDisabledBtns(true);
     },
     onError: (error) => {
       console.error("Update chat action failed:", error);

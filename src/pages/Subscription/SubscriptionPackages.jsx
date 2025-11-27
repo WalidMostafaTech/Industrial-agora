@@ -4,11 +4,11 @@ import {
   getSubscribeType,
 } from "../../services/subscriptionServices";
 import LoadingSection from "../../components/Loading/LoadingSection";
-import { MdOutlineDone } from "react-icons/md";
+import { MdDone, MdOutlineDone } from "react-icons/md";
 import { useState } from "react";
 import SuccessModal from "../../components/modals/SuccessModal";
 import FormError from "../../components/form/FormError";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,8 @@ const SubscriptionPackages = () => {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+
+  const { profile } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,6 +70,7 @@ const SubscriptionPackages = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {subscriptions?.map((item) => (
           <SubscriptionCard
+            profile={profile}
             key={item.id}
             item={item}
             onSubscribe={() => {
@@ -130,7 +133,7 @@ const SubscriptionPackages = () => {
   );
 };
 
-const SubscriptionCard = ({ item, onSubscribe, t }) => {
+const SubscriptionCard = ({ profile, item, onSubscribe, t }) => {
   const [showAll, setShowAll] = useState(false);
   const featuresToShow = showAll ? item.features : item.features?.slice(0, 3);
 
@@ -180,9 +183,18 @@ const SubscriptionCard = ({ item, onSubscribe, t }) => {
         </div>
       )}
 
-      <button onClick={onSubscribe} className="animationBtn mt-4">
-        {t("subscriptionPackages.subscribe")}
-      </button>
+      {profile?.subscription?.subscription_type_id === item.id ? (
+        <p className="mt-4 p-2 bg-myGreen text-white font-semibold rounded-full flex items-center gap-2">
+          {t("subscriptionPackages.currentPlan")}{" "}
+          <span className="text-xl p-1 rounded-full text-myGreen bg-white">
+            <MdDone />
+          </span>
+        </p>
+      ) : (
+        <button onClick={onSubscribe} className="animationBtn mt-4">
+          {t("subscriptionPackages.subscribe")}
+        </button>
+      )}
     </div>
   );
 };

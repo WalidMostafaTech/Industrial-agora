@@ -1,10 +1,13 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Pagination from "../../components/common/Pagination";
 import ProductCardList from "../../components/common/ProductCardList";
 import CategoryBanner from "../../components/common/CategoryBanner";
+import { LuPlus } from "react-icons/lu";
+import { useTranslation } from "react-i18next";
 
 const ProductsSide = ({ products = {}, category = {} }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const currentPage =
     Number(searchParams.get("page")) || products?.meta?.current_page || 1;
@@ -21,7 +24,16 @@ const ProductsSide = ({ products = {}, category = {} }) => {
         <CategoryBanner image={category?.image} title={category?.title} />
       )}
 
-      <ProductCardList ProductsList={products?.items} />
+      <div>
+        <Link
+          to={`/add-product?category=${category?.id}`}
+          className="mainBtn success w-fit ms-auto mb-4"
+        >
+          {t("addProduct")} <LuPlus className="text-xl!" />
+        </Link>
+
+        <ProductCardList ProductsList={products?.items} />
+      </div>
 
       <Pagination
         totalPages={products?.meta?.total}

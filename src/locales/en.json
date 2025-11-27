@@ -18,7 +18,11 @@
   "processOutsource": "Process Outsource",
   "requestConsultation": "Request Consultation",
   "close": "close",
+  "remove": "remove",
   "OK": "OK",
+  "addProduct": "Add Product",
+  "select_delete_reason": "Select delete reason",
+  "delete_request_sent": "Delete request sent",
 
   "footer": {
     "company": "Our Company",
@@ -49,6 +53,7 @@
 
   "header_action": {
     "profile": "Profile",
+    "my_products": "My Products",
     "chat": "Chat",
     "subscription": "Subscription",
     "log_out": "Log Out",
@@ -115,8 +120,8 @@
   },
 
   "PermissionSection": {
-    "title": "You do not have permission for this page.",
-    "upgrade": "Upgrade Permissions"
+    "title": "You must upgrade your account to access this feature",
+    "upgrade": "Upgrade your account now"
   },
 
   "AddProduct": {
@@ -502,7 +507,8 @@
     "free": "Free",
     "readMore": "Read more",
     "showLess": "Show less",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "currentPlan": "Current Plan"
   },
 
   "terms": {

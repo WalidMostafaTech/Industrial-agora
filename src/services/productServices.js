@@ -41,3 +41,18 @@ export const getProductsOutSource = async (page = 1) => {
   const { data } = await api.get(`/products`, { params: { page } });
   return data?.data || [];
 };
+
+export const getMyProducts = async (payload) => {
+  const { data } = await api.get(`/my-products`, { params: payload });
+  return data?.data || [];
+};
+
+export const getReasons = async () => {
+  const { data } = await api.get(`/delete-reasons`);
+  return data?.data || [];
+};
+
+export const deleteProduct = async (params) => {
+  const { data } = await api.post(`/delete-product`, params);
+  return data;
+};

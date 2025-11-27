@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import ProductDeleteModal from "../modals/ProductDeleteModal";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, dltBtn = false }) => {
   const { t } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div
@@ -45,13 +48,40 @@ const ProductCard = ({ product }) => {
           <p className="text-gray-700 line-clamp-3">{product.description}</p>
         )}
 
-        <Link
-          to={`/product/${product.id}`}
-          className="animationBtn block w-fit ms-auto"
-        >
-          {t("seeMore")}
-        </Link>
+        {dltBtn ? (
+          <>
+            {product.request_delete ? (
+              <p className="block w-fit ms-auto text-sm bg-red-800 py-2 px-4 rounded-full text-white">
+                {t("delete_request_sent")}
+              </p>
+            ) : (
+              <button
+                onClick={() => setOpenModal(true)}
+                disabled={product.request_delete}
+                className="animationBtn danger block w-fit ms-auto"
+                style={{
+                  opacity: product.request_delete ? 0.5 : 1,
+                }}
+              >
+                {t("remove")}
+              </button>
+            )}
+          </>
+        ) : (
+          <Link
+            to={`/product/${product.id}`}
+            className="animationBtn block w-fit ms-auto"
+          >
+            {t("seeMore")}
+          </Link>
+        )}
       </div>
+
+      <ProductDeleteModal
+        openModal={openModal}
+        onClose={() => setOpenModal(false)}
+        productId={product.id}
+      />
     </div>
   );
 };

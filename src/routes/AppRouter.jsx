@@ -39,6 +39,7 @@ const SubscriptionDetails = React.lazy(() =>
 );
 
 const Profile = React.lazy(() => import("../pages/Profile/Profile"));
+const MyProducts = React.lazy(() => import("../pages/MyProducts/MyProducts"));
 const NotFound = React.lazy(() => import("../pages/NotFound/NotFound"));
 
 const router = createBrowserRouter([
@@ -51,7 +52,14 @@ const router = createBrowserRouter([
       { path: "product/:id", element: <Product /> },
       { path: "about-us", element: <AboutUS /> },
       { path: "contact-us", element: <ContactUs /> },
-      { path: "request", element: <RequestConsultation /> },
+      {
+        path: "request",
+        element: (
+          <ProtectedRoute>
+            <RequestConsultation />
+          </ProtectedRoute>
+        ),
+      },
       { path: "process-outsource", element: <ProcessOutSource /> },
       {
         path: "process-outsource/service",
@@ -131,6 +139,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-products",
+        element: (
+          <ProtectedRoute>
+            <MyProducts />
           </ProtectedRoute>
         ),
       },

@@ -6,13 +6,19 @@ import { sendConsultationRequest } from "../../services/mainServices";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import { useTranslation } from "react-i18next";
+import PermissionModal from "../../components/modals/PermissionModal";
+import { useState } from "react";
+import useHasPermission from "../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../permissions";
 
 const ConsultationForm = ({ types }) => {
   const { t } = useTranslation();
 
   // ✅ Validation schema
   const schema = yup.object({
-    company_name: yup.string().required(t("consultationForm.companyNameRequired")),
+    company_name: yup
+      .string()
+      .required(t("consultationForm.companyNameRequired")),
     responsible_name: yup
       .string()
       .required(t("consultationForm.contactPersonRequired")),
@@ -25,7 +31,9 @@ const ConsultationForm = ({ types }) => {
       .matches(/^[0-9]+$/, t("consultationForm.phoneNumeric"))
       .required(t("consultationForm.phoneRequired")),
     consultation_type: yup.string().required(t("consultationForm.selectType")),
-    description: yup.string().required(t("consultationForm.descriptionRequired")),
+    description: yup
+      .string()
+      .required(t("consultationForm.descriptionRequired")),
     accept_privacy_policy: yup
       .boolean()
       .oneOf([true], t("consultationForm.acceptPrivacy")),
@@ -64,10 +72,20 @@ const ConsultationForm = ({ types }) => {
     mutate(formattedData);
   };
 
+  const canRequest = useHasPermission(PERMISSIONS.REQUEST_CONSULT);
+
+  // ✅ Permission Modal State
+  const [openModal, setOpenModal] = useState(false);
+
+  const onClickForm = () => {
+    if (!canRequest) setOpenModal(true);
+  };
+
   return (
     <form
       className="whiteContainer space-y-4 lg:col-span-2"
       onSubmit={handleSubmit(onSubmit)}
+      onClick={onClickForm}
     >
       <div className="flex items-center gap-2">
         <span className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 w-8 h-8 flex items-center justify-center rounded-full">
@@ -161,16 +179,29 @@ const ConsultationForm = ({ types }) => {
 
       <FormError errorMsg={error?.response?.data?.message} />
 
-      <button type="submit" className="mainBtn w-full" disabled={isPending}>
-        {isPending ? t("consultationForm.submitting") : t("consultationForm.submit")}
-        {isPending && (
-          <span className="ml-2 spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full" />
-        )}
-      </button>
+      {canRequest ? (
+        <button type="submit" className="mainBtn w-full" disabled={isPending}>
+          {isPending
+            ? t("consultationForm.submitting")
+            : t("consultationForm.submit")}
+          {isPending && (
+            <span className="ml-2 spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full" />
+          )}
+        </button>
+      ) : (
+        <button type="button" className="mainBtn w-full" onClick={onClickForm}>
+          {t("consultationForm.submit")}
+        </button>
+      )}
 
       <p className="font-bold text-lg text-myBlue-1 text-center">
         {t("consultationForm.responseTime")}
       </p>
+
+      <PermissionModal
+        openModal={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </form>
   );
 };

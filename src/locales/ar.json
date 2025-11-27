@@ -18,7 +18,11 @@
   "processOutsource": "تعهد العمليات الصناعية",
   "requestConsultation": "طلب استشارة",
   "close": "إغلاق",
+  "remove": "حذف",
   "OK": "حسنًا",
+  "addProduct": "إضافة منتج",
+  "select_delete_reason": "اختر سبب الحذف",
+  "delete_request_sent": "تم ارسال طلب حذف",
 
   "footer": {
     "company": "شركتنا",
@@ -49,6 +53,7 @@
 
   "header_action": {
     "profile": "الملف الشخصي",
+    "my_products": "منتجاتي",
     "chat": "الدردشة",
     "subscription": "الاشتراك",
     "log_out": "تسجيل الخروج",
@@ -115,8 +120,8 @@
   },
 
   "PermissionSection": {
-    "title": "ليس لديك صلاحية لهذه الصفحة.",
-    "upgrade": "ترقية الصلاحيات"
+    "title": "يجب عليك ترقيه حسابك للوصول الى هذه الميزه",
+    "upgrade": "ترقيه الحساب الان"
   },
 
   "AddProduct": {
@@ -502,7 +507,8 @@
     "free": "مجاني",
     "readMore": "اقرأ المزيد",
     "showLess": "عرض أقل",
-    "subscribe": "اشترك"
+    "subscribe": "اشترك",
+    "currentPlan": "الخطة الحالية"
   },
 
   "terms": {

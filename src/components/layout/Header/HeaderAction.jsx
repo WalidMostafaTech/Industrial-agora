@@ -11,6 +11,7 @@ import useHasPermission from "../../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../../permissions";
 import LanguageSwitcher from "../../common/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { LuClipboardList } from "react-icons/lu";
 
 const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
   const { profile } = useSelector((state) => state.profile);
@@ -57,6 +58,16 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
             </li>
 
             <hr className="my-2 border-gray-300" />
+
+            <li>
+              <Link
+                to={`/my-products`}
+                className="flex gap-2 lg:gap-4 items-center"
+              >
+                <LuClipboardList className="text-2xl" />
+                <p>{t("header_action.my_products")}</p>
+              </Link>
+            </li>
 
             {canChat && (
               <li>

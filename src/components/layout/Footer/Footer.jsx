@@ -127,10 +127,18 @@ const Footer = () => {
             >
               <img src={whatsapp} alt="whatsapp" className="w-6 h-6" />
             </a>
-            <a className="text-3xl hover:text-myBlue-2 duration-300 cursor-pointer">
+            <a
+              href={setting?.linkedin}
+              target="_blank"
+              className="text-3xl hover:text-myBlue-2 duration-300 cursor-pointer"
+            >
               <img src={linkedin} alt="linkedin" className="w-6 h-6" />
             </a>
-            <a className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer">
+            <a
+              href={setting?.instagram}
+              target="_blank"
+              className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer"
+            >
               <img src={instagram} alt="Instagram" className="w-6 h-6" />
             </a>
           </div>
@@ -147,14 +155,20 @@ const Footer = () => {
 
       <div className="bg-myBlue-1 p-4">
         <div className="container text-white text-sm flex flex-col md:flex-row items-center justify-between gap-2 md:gap-8 text-center flex-wrap">
-          <p>{t("footer.copyright")}</p>
-          <p>{t("footer.registration")}</p>
+          <p>{setting?.mondo_label}</p>
+          <a
+            href="https://eauthenticate.saudibusiness.gov.sa/inquiry"
+            target="_blank"
+          >
+            {t("footer.registration")}
+          </a>
           <p>
             {t("footer.prepared_by")}{" "}
             <a
               href="http://technomasr.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="underline"
             >
               Techno Masr
             </a>
