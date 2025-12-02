@@ -185,7 +185,7 @@ const SubscriptionCard = ({ profile, item, onSubscribe, t }) => {
 
       {profile?.subscription?.subscription_type_id === item.id ? (
         <p className="mt-4 p-2 bg-myGreen text-white font-semibold rounded-full flex items-center gap-2">
-          {t("subscriptionPackages.currentPlan")}{" "}
+          {t("subscriptionPackages.currentSubscription")}{" "}
           <span className="text-xl p-1 rounded-full text-myGreen bg-white">
             <MdDone />
           </span>

@@ -14,6 +14,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const { cities } = useSelector((state) => state.setting);
+
   const [formData, setFormData] = useState({
     name: profile?.name || "",
     email: profile?.email || "",
@@ -159,8 +161,13 @@ const Profile = () => {
             />
 
             <MainInput
+              type="select"
               label={t("profile.city")}
               id="city"
+              options={[
+                ...cities.map((city) => ({ value: city.id, label: city.name })),
+              ]}
+              placeholder={t("register.selectCity")}
               value={formData.city}
               onChange={handleChange}
               disabled={!isEditing}

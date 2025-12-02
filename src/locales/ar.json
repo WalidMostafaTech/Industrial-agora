@@ -327,7 +327,9 @@
     "confirmPasswordRequired": "من فضلك أكد كلمة المرور",
     "acceptPrivacyPolicy": "أوافق على سياسة الخصوصية",
     "continue": "استمرار",
-    "registrationSuccess": "تم التسجيل بنجاح!"
+    "registrationSuccess": "تم التسجيل بنجاح!",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "login": "تسجيل الدخول"
   },
 
   "NotFound": {
@@ -515,7 +517,7 @@
     "readMore": "اقرأ المزيد",
     "showLess": "عرض أقل",
     "subscribe": "اشترك",
-    "currentPlan": "الخطة الحالية"
+    "currentSubscription": "الاشتراك الحالي"
   },
 
   "terms": {

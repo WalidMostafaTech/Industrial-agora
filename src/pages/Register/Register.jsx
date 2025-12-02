@@ -12,7 +12,7 @@ import FormTitle from "../../components/form/FormTitle";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import SuccessModal from "../../components/modals/SuccessModal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 
@@ -24,7 +24,7 @@ const Register = () => {
   const { cities } = useSelector((state) => state.setting);
 
   const handleCompleteLogin = () => {
-    navigate("/subscription-details", { replace: true });
+    navigate("/subscription-packages", { replace: true });
     dispatch(getProfileAct());
   };
 
@@ -182,6 +182,16 @@ const Register = () => {
         <FormError errorMsg={error?.response?.data?.message} />
 
         <FormBtn loading={isPending} title={t("register.register")} />
+
+        <div className="text-sm text-center">
+          {t("register.alreadyHaveAccount")}{" "}
+          <Link
+            to="/login"
+            className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
+          >
+            {t("register.login")}
+          </Link>
+        </div>
       </form>
 
       <SuccessModal

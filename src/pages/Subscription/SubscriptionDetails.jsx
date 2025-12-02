@@ -112,18 +112,22 @@ const SubscriptionDetails = () => {
               </li>
             ) : (
               <>
-                <li className="flex gap-2">
-                  <p>{t("subscriptionDetails.start")}:</p>
-                  <span className="font-semibold text-myBlue-2 flex-1">
-                    {profile?.subscription?.subscription_start}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <p>{t("subscriptionDetails.end")}:</p>
-                  <span className="font-semibold text-myBlue-2 flex-1">
-                    {profile?.subscription?.subscription_end}
-                  </span>
-                </li>
+                {profile?.subscription?.subscription_start && (
+                  <li className="flex gap-2">
+                    <p>{t("subscriptionDetails.start")}:</p>
+                    <span className="font-semibold text-myBlue-2 flex-1">
+                      {profile?.subscription?.subscription_start}
+                    </span>
+                  </li>
+                )}
+                {profile?.subscription?.subscription_end && (
+                  <li className="flex gap-2">
+                    <p>{t("subscriptionDetails.end")}:</p>
+                    <span className="font-semibold text-myBlue-2 flex-1">
+                      {profile?.subscription?.subscription_end}
+                    </span>
+                  </li>
+                )}
               </>
             )}
           </ul>

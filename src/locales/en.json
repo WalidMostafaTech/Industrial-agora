@@ -327,7 +327,9 @@
     "confirmPasswordRequired": "Please confirm your password",
     "acceptPrivacyPolicy": "Accept privacy policy",
     "continue": "Continue",
-    "registrationSuccess": "Registration successful!"
+    "registrationSuccess": "Registration successful!",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login"
   },
 
   "NotFound": {
@@ -515,7 +517,7 @@
     "readMore": "Read more",
     "showLess": "Show less",
     "subscribe": "Subscribe",
-    "currentPlan": "Current Plan"
+    "currentSubscription": "Current Subscription"
   },
 
   "terms": {
