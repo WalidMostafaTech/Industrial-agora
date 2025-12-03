@@ -29,6 +29,10 @@ const Login = React.lazy(() => import("../pages/Login/Login"));
 const ForgotPassword = React.lazy(() =>
   import("../pages/ForgotPassword/ForgotPassword")
 );
+const VerifiedEmail = React.lazy(() =>
+  import("../pages/VerifiedEmail/VerifiedEmail")
+);
+
 const AddProduct = React.lazy(() => import("../pages/AddProduct/AddProduct"));
 const ChatPage = React.lazy(() => import("../pages/ChatPage/ChatPage"));
 const SubscriptionPackages = React.lazy(() =>
@@ -88,6 +92,14 @@ const router = createBrowserRouter([
           <PublicRoute>
             <ForgotPassword />
           </PublicRoute>
+        ),
+      },
+      {
+        path: "verify-email",
+        element: (
+          // <PublicRoute>
+            <VerifiedEmail />
+          // </PublicRoute>
         ),
       },
       {

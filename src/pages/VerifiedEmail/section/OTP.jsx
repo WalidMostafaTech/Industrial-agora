@@ -1,36 +1,57 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import FormBtn from "../../../components/form/FormBtn";
 import FormError from "../../../components/form/FormError";
-import { verifyOtp } from "../../../services/forgotPasswordServices";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { verifyEmail } from "../../../services/verifiedEmailServices";
 
-const OTP = ({ goNext, parentData, setParentData }) => {
+const OTP = ({ setStep }) => {
   const { t } = useTranslation();
   const length = 6;
   const [otp, setOtp] = useState(Array(length).fill(""));
   const [error, setError] = useState("");
   const inputsRef = useRef([]);
 
-  // ✅ Mutation to verify OTP
+  const { profile } = useSelector((state) => state.profile);
+
+  // ⏳ STATE للعدّاد
+  const [timer, setTimer] = useState(60); // 3 دقائق
+
+  // 🔁 Mutation لإعادة إرسال الكود
+  const resendMutation = useMutation({
+    mutationFn: () => verifyEmail({ email: profile?.email }),
+    onSuccess: () => {
+      setTimer(60); // إعادة العدّاد
+      setOtp(Array(length).fill(""));
+      inputsRef.current[0]?.focus();
+    },
+  });
+
+  // 🔥 عدّاد الـ 3 دقائق
+  useEffect(() => {
+    if (timer === 0) return;
+
+    const interval = setInterval(() => {
+      setTimer((t) => t - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer]);
+
+  // Mutation للتحقق من الكود
   const {
     mutate,
     isPending,
     isError,
     error: apiError,
   } = useMutation({
-    mutationFn: ({ otp, email }) => verifyOtp({ otp, email }),
-    onSuccess: (res, variables) => {
-      setParentData((prev) => ({ ...prev, otp: variables.otp }));
-      console.log("✅ OTP verified successfully:", res);
-      goNext();
-    },
-    onError: (err) => {
-      console.error("❌ Error verifying OTP:", err);
+    mutationFn: ({ otp, email }) => verifyEmail({ otp, email }),
+    onSuccess: () => {
+      setStep("new-password");
     },
   });
 
-  // ✅ handle input change
   const handleChange = (e, index) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -47,7 +68,6 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     }
   };
 
-  // ✅ handle backspace
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       const newOtp = [...otp];
@@ -57,7 +77,6 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     }
   };
 
-  // ✅ handle paste
   const handlePaste = (e) => {
     e.preventDefault();
     const pasted = e.clipboardData.getData("text").trim();
@@ -70,7 +89,6 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     setOtp(newOtp);
   };
 
-  // ✅ handle focus
   const handleFocus = (index) => {
     const firstEmptyIndex = otp.findIndex((val) => val === "");
     if (firstEmptyIndex === -1) return;
@@ -79,7 +97,6 @@ const OTP = ({ goNext, parentData, setParentData }) => {
     }
   };
 
-  // ✅ handle submit (verify OTP)
   const handleSubmit = (e) => {
     e.preventDefault();
     const joinedOtp = otp.join("");
@@ -89,12 +106,29 @@ const OTP = ({ goNext, parentData, setParentData }) => {
       return;
     }
 
-    mutate({ otp: joinedOtp, email: parentData.email });
+    mutate({ otp: joinedOtp, email: profile?.email });
+  };
+
+  // ⏱ عرض الوقت بشكل mm:ss
+  const formatTime = () => {
+    const m = Math.floor(timer / 60);
+    const s = timer % 60;
+    return `${m}:${s < 10 ? "0" + s : s}`;
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* OTP Inputs */}
+      <p className="max-w-sm mx-auto">
+        We have sent a verification code to your email{" "}
+        <span className="text-myGreen font-bold">{profile?.email}</span>{" "}
+        <span
+          className="text-myBlue-2 text-sm hover:underline cursor-pointer"
+          onClick={() => setStep("email")}
+        >
+          Change Email?
+        </span>
+      </p>
+
       <div className="flex justify-between max-w-sm mx-auto gap-2" dir="ltr">
         {otp.map((digit, index) => (
           <input
@@ -109,9 +143,27 @@ const OTP = ({ goNext, parentData, setParentData }) => {
             onPaste={handlePaste}
             onFocus={() => handleFocus(index)}
             className="w-12 h-12 text-center text-lg font-medium border border-gray-300 rounded-lg 
-              focus:outline-none focus:ring-2 focus:ring-myBlue-2 focus:border-myBlue-2 transition-all"
+            focus:outline-none focus:ring-2 focus:ring-myBlue-2 focus:border-myBlue-2 transition-all"
           />
         ))}
+      </div>
+
+      {/* ⏳ عرض العدّاد أو زر إعادة الإرسال */}
+      <div className="text-center">
+        {timer > 0 ? (
+          <p className="text-gray-500 text-sm">
+            إعادة إرسال الكود خلال:{" "}
+            <span className="font-semibold">{formatTime()}</span>
+          </p>
+        ) : (
+          <button
+            type="button"
+            onClick={() => resendMutation.mutate()}
+            className="text-myBlue-2 text-sm font-semibold hover:underline"
+          >
+            إعادة إرسال الكود
+          </button>
+        )}
       </div>
 
       <FormError
@@ -121,7 +173,6 @@ const OTP = ({ goNext, parentData, setParentData }) => {
         }
       />
 
-      {/* Button */}
       <FormBtn title={t("otp.checkBtn")} loading={isPending} />
     </form>
   );

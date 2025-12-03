@@ -5,8 +5,15 @@ const FormTitle = ({ title, subtitle, position = "center" }) => {
         position === "start" ? "text-start" : "text-center"
       }`}
     >
-      <h2 className="text-xl lg:text-2xl font-bold capitalize">{title}</h2>
-      {subtitle && <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">{subtitle}</p>}
+      {title && (
+        <h2 className="text-xl lg:text-2xl font-bold capitalize">{title}</h2>
+      )}
+
+      {subtitle && (
+        <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">
+          {subtitle}
+        </p>
+      )}
     </hgroup>
   );
 };
