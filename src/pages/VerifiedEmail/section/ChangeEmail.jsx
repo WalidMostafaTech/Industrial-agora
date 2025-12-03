@@ -8,15 +8,18 @@ import MainInput from "../../../components/form/MainInput";
 
 import * as yup from "yup";
 import { changeEmail } from "../../../services/verifiedEmailServices";
-
-const changeEmailSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
-});
+import { useTranslation } from "react-i18next";
 
 const ChangeEmail = ({ setStep }) => {
+  const { t } = useTranslation();
+
+  const changeEmailSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email(t("changeEmail.emailInvalid"))
+      .required(t("changeEmail.emailRequired")),
+  });
+
   const {
     register,
     handleSubmit,
@@ -28,7 +31,6 @@ const ChangeEmail = ({ setStep }) => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: (payload) => changeEmail(payload.email),
     onSuccess: () => {
-      // بعد ما الإيميل يتغير
       setStep("otp");
     },
   });
@@ -39,25 +41,29 @@ const ChangeEmail = ({ setStep }) => {
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-      <p className="text-lg font-bold text-center">Change your email</p>
+      <p className="text-lg font-bold text-center">{t("changeEmail.title")}</p>
 
       <MainInput
-        label="New Email"
+        label={t("changeEmail.newEmail")}
         id="email"
-        placeholder="Enter your email"
+        placeholder={t("changeEmail.placeholder")}
         {...register("email")}
         error={errors.email?.message}
       />
 
       <FormError errorMsg={error?.response?.data?.message} />
 
-      <FormBtn title={isPending ? "Loading..." : "Change"} />
+      <FormBtn
+        title={
+          isPending ? t("changeEmail.loading") : t("changeEmail.changeBtn")
+        }
+      />
 
       <p
         className="text-myGreen text-sm text-center font-semibold hover:underline cursor-pointer"
         onClick={() => setStep("otp")}
       >
-        Back to OTP
+        {t("changeEmail.backToOtp")}
       </p>
     </form>
   );

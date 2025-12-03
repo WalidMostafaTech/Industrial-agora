@@ -32,6 +32,21 @@ const PermissionModal = ({ openModal, onClose }) => {
               </Link>
             </div>
           </>
+        ) : profile?.verified ? (
+          <>
+            <IoWarningOutline className="text-[100px] text-red-700" />
+            <h2 className="text-xl font-bold max-w-sm">
+              {t("modals.permissionModal.verifiedTitle")}
+            </h2>
+            <div className="modal-action">
+              <button onClick={onClose} className="mainBtn danger">
+                {t("modals.permissionModal.closeButton")}
+              </button>
+              <Link to="/verify-email" className="mainBtn">
+                {t("modals.permissionModal.verifiedButton")}
+              </Link>
+            </div>
+          </>
         ) : (
           <>
             <IoWarningOutline className="text-[100px] text-red-700" />

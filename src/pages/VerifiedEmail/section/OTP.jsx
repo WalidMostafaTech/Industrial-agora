@@ -5,6 +5,7 @@ import FormError from "../../../components/form/FormError";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { verifyEmail } from "../../../services/verifiedEmailServices";
+import { useNavigate } from "react-router-dom";
 
 const OTP = ({ setStep }) => {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ const OTP = ({ setStep }) => {
   const [otp, setOtp] = useState(Array(length).fill(""));
   const [error, setError] = useState("");
   const inputsRef = useRef([]);
+  const navigate = useNavigate();
 
   const { profile } = useSelector((state) => state.profile);
 
@@ -48,7 +50,7 @@ const OTP = ({ setStep }) => {
   } = useMutation({
     mutationFn: ({ otp, email }) => verifyEmail({ otp, email }),
     onSuccess: () => {
-      setStep("new-password");
+      navigate("/subscription-packages", { replace: true });
     },
   });
 
@@ -119,13 +121,13 @@ const OTP = ({ setStep }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <p className="max-w-sm mx-auto">
-        We have sent a verification code to your email{" "}
+        {t("otp.sentToEmail")}{" "}
         <span className="text-myGreen font-bold">{profile?.email}</span>{" "}
         <span
           className="text-myBlue-2 text-sm hover:underline cursor-pointer"
           onClick={() => setStep("email")}
         >
-          Change Email?
+          {t("otp.changeEmail")}
         </span>
       </p>
 
@@ -152,16 +154,16 @@ const OTP = ({ setStep }) => {
       <div className="text-center">
         {timer > 0 ? (
           <p className="text-gray-500 text-sm">
-            إعادة إرسال الكود خلال:{" "}
+            {t("otp.resendIn")}{" "}
             <span className="font-semibold">{formatTime()}</span>
           </p>
         ) : (
           <button
             type="button"
             onClick={() => resendMutation.mutate()}
-            className="text-myBlue-2 text-sm font-semibold hover:underline"
+            className="text-myBlue-2 text-sm font-semibold hover:underline cursor-pointer"
           >
-            إعادة إرسال الكود
+            {t("otp.resendCode")}
           </button>
         )}
       </div>

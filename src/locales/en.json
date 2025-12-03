@@ -23,6 +23,7 @@
   "addProduct": "Add Product",
   "select_delete_reason": "Select delete reason",
   "delete_request_sent": "Delete request sent",
+  "VerifyEmail": "Verify Email",
 
   "footer": {
     "company": "Our Company",
@@ -109,6 +110,8 @@
       "upgradeButton": "Upgrade your account now",
       "loginTitle": "You must be logged in to access this feature",
       "loginButton": "Go to Login",
+      "verifyTitle": "You must verify your email to access this feature",
+      "verifyButton": "Go to Verification",
       "closeButton": "Close"
     }
   },
@@ -123,6 +126,11 @@
       "title": "Already Logged In",
       "message": "You are already logged in. You cannot access this page while logged in.",
       "confirm": "Go to Home"
+    },
+    "VerifiedEmailRoute": {
+      "title": "You are not verified",
+      "message": "You need to verify your email to access this page. Would you like to go to the verification page now?",
+      "confirm": "Go to Verification"
     }
   },
 
@@ -247,7 +255,12 @@
     "onlyNumbers": "OTP must contain only numbers.",
     "enterAllDigits": "Please enter all digits of the OTP.",
     "invalid": "Invalid OTP, please try again.",
-    "checkBtn": "Check"
+    "checkBtn": "Check",
+
+    "sentToEmail": "We have sent a verification code to your email",
+    "changeEmail": "Change Email?",
+    "resendIn": "Resend code in:",
+    "resendCode": "Resend Code"
   },
 
   "reset": {
@@ -523,6 +536,17 @@
   "terms": {
     "title": "Terms Of Use",
     "content": "1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat. 1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat."
+  },
+
+  "changeEmail": {
+    "title": "Change your email",
+    "newEmail": "New Email",
+    "placeholder": "Enter your email",
+    "loading": "Loading...",
+    "changeBtn": "Change",
+    "backToOtp": "Back to OTP",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email"
   },
 
   "NoContactsAvailable": "No contacts available.",
