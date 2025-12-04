@@ -128,9 +128,9 @@
       "confirm": "اذهب إلى الصفحة الرئيسية"
     },
     "VerifiedEmailRoute": {
-      "title": "You are not verified",
-      "message": "You need to verify your email to access this page. Would you like to go to the verification page now?",
-      "confirm": "Go to Verification"
+      "title": "لم يتم التحقق من بريدك الألكتروني",
+      "message": "تحتاج إلى التحقق من بريدك الألكتروني للوصول إلى هذه الصفحة. هل ترغب بالانتقال إلى صفحة التحقق الآن؟",
+      "confirm": "اذهب للتحقق"
     }
   },
 
@@ -536,6 +536,20 @@
   "terms": {
     "title": "شروط الاستخدام",
     "content": "1.2. تقدم \"STOKARTI\" \"شروط الاستخدام\" للبوابة \"Portal\"، وتعني أي معلومات موجودة ضمن \"المحتوى\"، و\"المستخدم\"، ويمكن تعديلها في أي وقت دون أي إشعار أو إخطار مسبق. يتم نشر هذه التغييرات بشكل دوري على \"PORTAL\"، وتصبح سارية اعتبارًا من تاريخ النشر. يوفر \"PORTAL\" لأي شخص طبيعي أو اعتباري إمكانية الوصول إلى \"شروط الاستخدام\" عن طريق دفع سعر معين للخدمة أو نقل الفائدة بطريقة ما. ويعتبر أن كل شخص طبيعي أو اعتباري قد قبل جميع التعديلات التي أُجريت على هذه \"الشروط\". تُنشر هذه \"الشروط\" على الموقع الإلكتروني، ويتمكن أي شخص طبيعي أو اعتباري من الوصول إليها من خلال الوسائل المتاحة."
+  },
+
+  "verifyEmailPage": {
+    "title": "Verify Email",
+    "notLoggedIn": {
+      "title": "You are not logged in",
+      "message": "You need to be logged in to access this page. Would you like to go to the login page now?",
+      "confirm": "Go to Login"
+    },
+    "alreadyVerified": {
+      "title": "You are already verified",
+      "message": "You are already verified. You cannot access this page while verified.",
+      "confirm": "Go to Home"
+    }
   },
 
   "changeEmail": {

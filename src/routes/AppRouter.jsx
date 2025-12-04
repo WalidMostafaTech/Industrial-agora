@@ -4,6 +4,7 @@ import App from "../App";
 import LoadingPage from "../components/Loading/LoadingPage";
 import PublicRoute from "../components/ProtectedRoutes/PublicRoute";
 import ProtectedRoute from "../components/ProtectedRoutes/ProtectedRoute";
+import VerifiedEmailRoute from "../components/ProtectedRoutes/VerifiedEmailRoute";
 
 const Home = React.lazy(() => import("../pages/Home/Home"));
 const Categories = React.lazy(() => import("../pages/Categories/Categories"));
@@ -65,7 +66,9 @@ const router = createBrowserRouter([
         path: "process-outsource/service",
         element: (
           <ProtectedRoute>
-            <ProcessOutsourceService />
+            <VerifiedEmailRoute>
+              <ProcessOutsourceService />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -96,11 +99,7 @@ const router = createBrowserRouter([
       },
       {
         path: "verify-email",
-        element: (
-          // <PublicRoute>
-            <VerifiedEmail />
-          // </PublicRoute>
-        ),
+        element: <VerifiedEmail />,
       },
       {
         path: "register",
@@ -114,7 +113,9 @@ const router = createBrowserRouter([
         path: "add-product",
         element: (
           <ProtectedRoute>
-            <AddProduct />
+            <VerifiedEmailRoute>
+              <AddProduct />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -122,7 +123,9 @@ const router = createBrowserRouter([
         path: "chat/:id?",
         element: (
           <ProtectedRoute>
-            <ChatPage />
+            <VerifiedEmailRoute>
+              <ChatPage />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -130,7 +133,9 @@ const router = createBrowserRouter([
         path: "subscription-packages",
         element: (
           <ProtectedRoute>
-            <SubscriptionPackages />
+            <VerifiedEmailRoute>
+              <SubscriptionPackages />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -138,7 +143,9 @@ const router = createBrowserRouter([
         path: "subscription-details",
         element: (
           <ProtectedRoute>
-            <SubscriptionDetails />
+            <VerifiedEmailRoute>
+              <SubscriptionDetails />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -146,7 +153,9 @@ const router = createBrowserRouter([
         path: "profile/:id",
         element: (
           <ProtectedRoute>
-            <Profile />
+            <VerifiedEmailRoute>
+              <Profile />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },
@@ -154,7 +163,9 @@ const router = createBrowserRouter([
         path: "my-products",
         element: (
           <ProtectedRoute>
-            <MyProducts />
+            <VerifiedEmailRoute>
+              <MyProducts />
+            </VerifiedEmailRoute>
           </ProtectedRoute>
         ),
       },

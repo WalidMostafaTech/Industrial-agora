@@ -9,9 +9,12 @@ import MainInput from "../../../components/form/MainInput";
 import * as yup from "yup";
 import { changeEmail } from "../../../services/verifiedEmailServices";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { getProfileAct } from "../../../store/profile/profileSlice";
 
 const ChangeEmail = ({ setStep }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const changeEmailSchema = yup.object().shape({
     email: yup
@@ -31,7 +34,11 @@ const ChangeEmail = ({ setStep }) => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: (payload) => changeEmail(payload.email),
     onSuccess: () => {
-      setStep("otp");
+      dispatch(getProfileAct())
+        .unwrap()
+        .then(() => {
+          setStep("otp");
+        });
     },
   });
 

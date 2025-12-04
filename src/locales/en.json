@@ -538,6 +538,20 @@
     "content": "1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat. 1.2. \"STOKARTI\" present \"Terms of Use\" of \"Portal\" means any information and is situated \"Content\", \"USER\" or you can change at any time without any notice or notification. These changes periodically \"PORTAL\" will be published and will be valid on the date of publication. \"PORTAL\" by paying a certain price of the service or transfer the benefit of or in any way \"PORTAL\" Every natural or legal person provides access to the \"Terms of Use\" and \"STOKARTI\" this \"Terms of Use\" is deemed to have accepted all the amendments made to the . This \"Terms of Use\" published on the website; \"PORTAL\" access by any natural or legal person is made possible using heat."
   },
 
+  "verifyEmailPage": {
+    "title": "تأكيد البريد الإلكتروني",
+    "notLoggedIn": {
+      "title": "أنت غير مسجّل دخول",
+      "message": "يجب أن تقوم بتسجيل الدخول للوصول إلى هذه الصفحة. هل ترغب بالانتقال إلى صفحة تسجيل الدخول الآن؟",
+      "confirm": "الذهاب لتسجيل الدخول"
+    },
+    "alreadyVerified": {
+      "title": "أنت بالفعل مُفعّل",
+      "message": "لقد تم تفعيل بريدك الإلكتروني مسبقًا. لا يمكنك الوصول لهذه الصفحة أثناء كونك مفعّلًا.",
+      "confirm": "الذهاب للصفحة الرئيسية"
+    }
+  },
+
   "changeEmail": {
     "title": "Change your email",
     "newEmail": "New Email",

@@ -24,7 +24,7 @@ const Register = () => {
   const { cities } = useSelector((state) => state.setting);
 
   const handleCompleteLogin = () => {
-    navigate("/subscription-packages", { replace: true });
+    navigate("/verify-email", { replace: true });
     dispatch(getProfileAct());
   };
 

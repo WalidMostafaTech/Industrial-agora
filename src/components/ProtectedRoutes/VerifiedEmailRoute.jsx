@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ProtectModal from "../modals/ProtectModal";
 
-const VerifiedEmailRoute = () => {
+const VerifiedEmailRoute = ({ children }) => {
   const { t } = useTranslation();
   const { profile } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    if (!profile.verified) setOpenModal(true);
+    if (profile && !profile.email_verified_at) {
+      setOpenModal(true);
+    }
   }, [profile]);
 
   const handleConfirm = () => {
@@ -23,15 +26,19 @@ const VerifiedEmailRoute = () => {
     navigate("/", { replace: true });
   };
 
+  // ⭐ لو الإيميل verified → رجّع الأطفال
+  if (profile?.email_verified_at) return <>{children}</>;
+
   return (
     <ProtectModal
       open={openModal}
-      title={t("VerifiedEmailRoute.ProtectedRoute.title")}
-      message={t("VerifiedEmailRoute.ProtectedRoute.message")}
-      confirmText={t("VerifiedEmailRoute.ProtectedRoute.confirm")}
+      title={t("ProtectedRoutes.VerifiedEmailRoute.title")}
+      message={t("ProtectedRoutes.VerifiedEmailRoute.message")}
+      confirmText={t("ProtectedRoutes.VerifiedEmailRoute.confirm")}
       onConfirm={handleConfirm}
       onClose={handleClose}
     />
   );
 };
+
 export default VerifiedEmailRoute;

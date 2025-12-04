@@ -3,9 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import FormBtn from "../../../components/form/FormBtn";
 import FormError from "../../../components/form/FormError";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { verifyEmail } from "../../../services/verifiedEmailServices";
+import { useDispatch, useSelector } from "react-redux";
+import { sendOtp, verifyEmail } from "../../../services/verifiedEmailServices";
 import { useNavigate } from "react-router-dom";
+import { getProfileAct } from "../../../store/profile/profileSlice";
 
 const OTP = ({ setStep }) => {
   const { t } = useTranslation();
@@ -14,23 +15,31 @@ const OTP = ({ setStep }) => {
   const [error, setError] = useState("");
   const inputsRef = useRef([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { profile } = useSelector((state) => state.profile);
 
-  // ⏳ STATE للعدّاد
-  const [timer, setTimer] = useState(60); // 3 دقائق
+  const [timer, setTimer] = useState(60);
 
-  // 🔁 Mutation لإعادة إرسال الكود
+  // 🔁 نفس الـ Mutation الخاصة بإعادة الإرسال
   const resendMutation = useMutation({
-    mutationFn: () => verifyEmail({ email: profile?.email }),
+    mutationFn: () => sendOtp(profile?.email),
     onSuccess: () => {
-      setTimer(60); // إعادة العدّاد
+      setTimer(60);
       setOtp(Array(length).fill(""));
       inputsRef.current[0]?.focus();
+      setError("");
     },
   });
 
-  // 🔥 عدّاد الـ 3 دقائق
+  // 🚀 تشغيل sendOtp أول ما الصفحة تفتح
+  useEffect(() => {
+    if (profile?.email) {
+      resendMutation.mutate(); // ← تشغيل API أول ما نخش
+    }
+  }, [profile?.email]);
+
+  // ⏱ العدّاد
   useEffect(() => {
     if (timer === 0) return;
 
@@ -41,16 +50,19 @@ const OTP = ({ setStep }) => {
     return () => clearInterval(interval);
   }, [timer]);
 
-  // Mutation للتحقق من الكود
   const {
     mutate,
     isPending,
     isError,
     error: apiError,
   } = useMutation({
-    mutationFn: ({ otp, email }) => verifyEmail({ otp, email }),
+    mutationFn: ({ otp_code, email }) => verifyEmail({ otp_code, email }),
     onSuccess: () => {
-      navigate("/subscription-packages", { replace: true });
+      dispatch(getProfileAct())
+        .unwrap()
+        .then(() => {
+          navigate("/subscription-packages", { replace: true });
+        });
     },
   });
 
@@ -93,9 +105,8 @@ const OTP = ({ setStep }) => {
 
   const handleFocus = (index) => {
     const firstEmptyIndex = otp.findIndex((val) => val === "");
-    if (firstEmptyIndex === -1) return;
-    if (index > firstEmptyIndex) {
-      inputsRef.current[firstEmptyIndex].focus();
+    if (firstEmptyIndex !== -1 && index > firstEmptyIndex) {
+      inputsRef.current[firstEmptyIndex]?.focus();
     }
   };
 
@@ -108,10 +119,9 @@ const OTP = ({ setStep }) => {
       return;
     }
 
-    mutate({ otp: joinedOtp, email: profile?.email });
+    mutate({ otp_code: joinedOtp, email: profile?.email });
   };
 
-  // ⏱ عرض الوقت بشكل mm:ss
   const formatTime = () => {
     const m = Math.floor(timer / 60);
     const s = timer % 60;
