@@ -10,7 +10,7 @@ import HeaderAction from "./HeaderAction";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../../store/profile/profileSlice";
 import { getMainCategoriesAct } from "../../../store/categories/categories";
-import { fetchCities, fetchSetting } from "../../../store/setting/setting";
+import { fetchCities, fetchSetting, fetchTerms } from "../../../store/setting/setting";
 import Cookies from "js-cookie";
 import useHasPermission from "../../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../../permissions";
@@ -61,6 +61,7 @@ const Header = () => {
     dispatch(getMainCategoriesAct());
     dispatch(fetchSetting());
     dispatch(fetchCities());
+    dispatch(fetchTerms());
   }, [dispatch]);
 
   const canSearch = useHasPermission(PERMISSIONS.VIEW_SEARCH_LISTINGS);
@@ -105,7 +106,7 @@ const Header = () => {
                   loading="lazy"
                   src={logoText}
                   alt="Logo"
-                  className="w-22 xl:w-26 group-hover:translate-x-2 duration-300"
+                  className="w-22 xl:w-26 group-hover:translate-x-1 duration-300"
                 />
               </Link>
             </div>

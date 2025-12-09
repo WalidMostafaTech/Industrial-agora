@@ -35,11 +35,6 @@ export const getFooter = async () => {
   return data?.data || [];
 };
 
-export const getSettings = async () => {
-  const { data } = await api.get("/all-settings");
-  return data?.data || [];
-};
-
 export const sendNewsletter = async (email) => {
   const { data } = await api.post("/newsletter", { email });
   return data?.data || [];

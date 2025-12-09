@@ -13,7 +13,7 @@ const PermissionModal = ({ openModal, onClose }) => {
   return createPortal(
     <dialog className={`modal modal-open`} onClick={onClose}>
       <div
-        className="modal-box space-y-4 flex flex-col items-center justify-center gap-4 text-center"
+        className="modal-box flex flex-col items-center justify-center gap-2 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {profile ? (

@@ -10,9 +10,12 @@ import PermissionModal from "../../components/modals/PermissionModal";
 import { useState } from "react";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
+import TermsModal from "../../components/modals/TermsModal";
 
 const ConsultationForm = ({ types }) => {
   const { t } = useTranslation();
+  const [successMsg, setSuccessMsg] = useState("");
+  const [openTermsModal, setOpenTermsModal] = useState(false);
 
   // ✅ Validation schema
   const schema = yup.object({
@@ -44,16 +47,22 @@ const ConsultationForm = ({ types }) => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const handleAcceptTerms = () => {
+    setValue("accept_privacy_policy", true, { shouldValidate: true }); // ✅ نحدّث القيمة ونشغّل التحقق
+  };
 
   // ✅ React Query Mutation
   const { mutate, isPending, error } = useMutation({
     mutationFn: sendConsultationRequest,
     onSuccess: () => {
       console.log("✅ Consultation request sent successfully!");
+      setSuccessMsg(t("consultationForm.successMsg"));
       reset();
     },
     onError: (err) => {
@@ -65,6 +74,11 @@ const ConsultationForm = ({ types }) => {
 
   // ✅ Submit handler
   const onSubmit = (data) => {
+    if (!canRequest) {
+      setOpenModal(true);
+      return;
+    }
+
     const formattedData = {
       ...data,
       accept_privacy_policy: data.accept_privacy_policy ? 1 : 0,
@@ -85,7 +99,6 @@ const ConsultationForm = ({ types }) => {
     <form
       className="whiteContainer space-y-4 lg:col-span-2"
       onSubmit={handleSubmit(onSubmit)}
-      onClick={onClickForm}
     >
       <div className="flex items-center gap-2">
         <span className="bg-myBlue-1 text-white text-2xl font-bold shadow-md shadow-myBlue-1 w-8 h-8 flex items-center justify-center rounded-full">
@@ -156,28 +169,35 @@ const ConsultationForm = ({ types }) => {
         error={errors.description?.message}
       />
 
-      <div className="form-control">
-        <label className="label cursor-pointer justify-start gap-3">
+      <div>
+        <div className="flex items-center">
           <input
+            id="accept_privacy_policy"
             type="checkbox"
-            className="checkbox checkbox-neutral checkbox-sm"
             {...register("accept_privacy_policy")}
+            className="h-4 w-4 text-myBlue-1 focus:ring-myBlue-1 border-gray-300 rounded"
           />
-          <span className="text-sm text-gray-700">
-            {t("consultationForm.iAgree")}{" "}
-            <span className="text-myBlue-1 font-semibold cursor-pointer">
-              {t("consultationForm.privacyPolicy")}
+          <div>
+            <label
+              htmlFor="accept_privacy_policy"
+              className="ms-2 text-gray-600 text-sm"
+            >
+              {t("acceptOn")}{" "}
+            </label>
+            <span
+              onClick={() => setOpenTermsModal(true)}
+              className="text-myBlue-2 font-semibold hover:underline cursor-pointer"
+            >
+              {t("TermsAndConditions")}
             </span>
-          </span>
-        </label>
-        {errors.accept_privacy_policy && (
-          <p className="text-red-700 text-sm">
-            {errors.accept_privacy_policy.message}
+          </div>
+        </div>
+        {errors.accept_privacy_policy?.message && (
+          <p className="text-red-700 text-xs mt-1">
+            {errors.accept_privacy_policy?.message}
           </p>
         )}
       </div>
-
-      <FormError errorMsg={error?.response?.data?.message} />
 
       {canRequest ? (
         <button type="submit" className="mainBtn w-full" disabled={isPending}>
@@ -194,9 +214,23 @@ const ConsultationForm = ({ types }) => {
         </button>
       )}
 
+      {successMsg && (
+        <div className="bg-green-200 border border-green-400 text-green-800 text-sm text-center py-2 px-4 rounded-lg">
+          {successMsg}
+        </div>
+      )}
+
+      <FormError errorMsg={error?.response?.data?.message} />
+
       <p className="font-bold text-lg text-myBlue-1 text-center">
         {t("consultationForm.responseTime")}
       </p>
+
+      <TermsModal
+        openModal={openTermsModal}
+        onClose={() => setOpenTermsModal(false)}
+        onAccept={handleAcceptTerms}
+      />
 
       <PermissionModal
         openModal={openModal}

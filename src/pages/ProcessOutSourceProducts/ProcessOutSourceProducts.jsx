@@ -38,7 +38,7 @@ const ProcessOutSourceProducts = () => {
         <ProductCardList ProductsList={data?.items || []} />
 
         <Pagination
-          totalPages={data?.meta?.total}
+          totalPages={data?.meta?.last_page}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />

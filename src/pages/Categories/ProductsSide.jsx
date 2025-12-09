@@ -36,7 +36,7 @@ const ProductsSide = ({ products = {}, category = {} }) => {
       </div>
 
       <Pagination
-        totalPages={products?.meta?.total}
+        totalPages={products?.meta?.last_page}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />

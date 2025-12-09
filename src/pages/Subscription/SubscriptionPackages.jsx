@@ -67,7 +67,7 @@ const SubscriptionPackages = () => {
         isPending ? "opacity-50 pointer-events-none" : ""
       }`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {subscriptions?.map((item) => (
           <SubscriptionCard
             profile={profile}
@@ -138,7 +138,7 @@ const SubscriptionCard = ({ profile, item, onSubscribe, t }) => {
   const featuresToShow = showAll ? item.features : item.features?.slice(0, 3);
 
   return (
-    <div className="whiteContainer flex flex-col items-center gap-2">
+    <div className="whiteContainer flex flex-col items-center gap-2 max-w-md">
       <span className="w-16 h-16 overflow-hidden">
         <img
           src={item.icon_url}

@@ -82,7 +82,6 @@ const Product = () => {
             <AutoFields
               data={{
                 status: product.status,
-                type: product.type,
                 condition: product.condition,
                 delivery: product.delivery,
                 payment: product.payment,

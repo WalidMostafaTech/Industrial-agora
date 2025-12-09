@@ -61,11 +61,11 @@ const Login = () => {
     <section className="container pagePadding">
       <PageTitle title={t("login.welcome")} />
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <section className="flex flex-wrap justify-center gap-4">
         {/* Login Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="whiteContainer space-y-6 order-1 lg:order-2"
+          className="whiteContainer space-y-6 order-1 lg:order-2 max-w-md"
         >
           <FormTitle
             title={t("login.accountLogin")}
@@ -126,7 +126,7 @@ const Login = () => {
         </form>
 
         {/* Register Section */}
-        <div className="whiteContainer flex flex-col items-center justify-between order-2 lg:order-1">
+        <div className="whiteContainer flex flex-col items-center justify-between order-2 lg:order-1 max-w-md">
           <FormTitle
             title={t("login.newMember")}
             subtitle={t("login.newMemberText")}

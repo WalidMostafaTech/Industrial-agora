@@ -38,7 +38,7 @@ const MainCategories = () => {
       <div className="absolute inset-0 bg-stone-500/70"></div>
 
       <div className="container relative z-10">
-        {filterCategories?.length > 4 && (
+        {filterCategories?.length > 3 && (
           <div className="flex justify-end mb-4 gap-3">
             <button
               className={`swiper-button-prev-custom-main-category bg-white p-4 rounded-lg shadow border border-gray-300 transition cursor-pointer ${
@@ -87,7 +87,7 @@ const MainCategories = () => {
           {filterCategories?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full">
-                <div className="w-full h-52 rounded-xl shadow-xl overflow-hidden mb-4">
+                <div className="w-full h-52 xl:h-64 rounded-xl shadow-xl overflow-hidden mb-4">
                   <img
                     src={item.image}
                     alt={item.title}

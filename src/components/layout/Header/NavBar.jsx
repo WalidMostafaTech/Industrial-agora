@@ -125,7 +125,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-4 z-50 cursor-pointer relative border-l-4 border-myBlue-2 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-4 z-50 cursor-pointer relative border-s-4 border-myBlue-2 ${
                   openLinks === link.name ? "max-h-60 p-2" : "max-h-0"
                 }`}
               >

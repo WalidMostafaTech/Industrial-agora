@@ -15,13 +15,19 @@ import SuccessModal from "../../components/modals/SuccessModal";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
+import TermsModal from "../../components/modals/TermsModal";
 
 const Register = () => {
   const { t } = useTranslation(); // ✅ i18n
   const [completeRegister, setCompleteRegister] = useState(false);
+  const [openTermsModal, setOpenTermsModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cities } = useSelector((state) => state.setting);
+
+  const handleAcceptTerms = () => {
+    setValue("privacy_policy", true, { shouldValidate: true }); // ✅ نحدّث القيمة ونشغّل التحقق
+  };
 
   const handleCompleteLogin = () => {
     navigate("/verify-email", { replace: true });
@@ -59,6 +65,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue, // ✅ أضفنا setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -165,15 +172,23 @@ const Register = () => {
               {...register("privacy_policy")}
               className="h-4 w-4 text-myBlue-1 focus:ring-myBlue-1 border-gray-300 rounded"
             />
-            <label
-              htmlFor="privacy_policy"
-              className="ms-2 block text-gray-600 text-sm"
-            >
-              {t("register.acceptPrivacyPolicy")}
-            </label>
+            <div>
+              <label
+                htmlFor="privacy_policy"
+                className="ms-2 text-gray-600 text-sm"
+              >
+                {t("acceptOn")}{" "}
+              </label>
+              <span
+                onClick={() => setOpenTermsModal(true)}
+                className="text-myBlue-2 font-semibold hover:underline cursor-pointer"
+              >
+                {t("TermsAndConditions")}
+              </span>
+            </div>
           </div>
           {errors.privacy_policy?.message && (
-            <p className="text-red-700 text-sm">
+            <p className="text-red-700 text-xs mt-1">
               {errors.privacy_policy?.message}
             </p>
           )}
@@ -193,6 +208,12 @@ const Register = () => {
           </Link>
         </div>
       </form>
+
+      <TermsModal
+        openModal={openTermsModal}
+        onClose={() => setOpenTermsModal(false)}
+        onAccept={handleAcceptTerms}
+      />
 
       <SuccessModal
         openModal={completeRegister}

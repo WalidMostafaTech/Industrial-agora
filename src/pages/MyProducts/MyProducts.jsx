@@ -67,7 +67,7 @@ const MyProducts = () => {
 
       {/* Pagination */}
       <Pagination
-        totalPages={products?.meta?.total}
+        totalPages={products?.meta?.last_page}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />

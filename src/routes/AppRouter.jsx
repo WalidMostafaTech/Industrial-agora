@@ -74,13 +74,9 @@ const router = createBrowserRouter([
       },
       {
         path: "process-outsource/products",
-        element: (
-          // <ProtectedRoute>
-          <ProcessOutSourceProducts />
-          // </ProtectedRoute>
-        ),
+        element: <ProcessOutSourceProducts />,
       },
-      // { path: "terms", element: <Terms /> },
+      { path: "terms", element: <Terms /> },
       {
         path: "login",
         element: (

@@ -21,7 +21,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
 
         {product.type !== "product" && (
           <p
-            className={`absolute -top-4 -start-13 -rotate-45 text-white lg:text-lg font-semibold p-10 pb-2 z-10 ${
+            className={`absolute -top-4 -start-16 -rotate-45 rtl:rotate-45 text-white lg:text-lg font-semibold h-20 w-40 flex items-end justify-center p-2 z-10 ${
               product.type === "outsource" ? "bg-red-700" : "bg-green-600"
             }`}
           >
@@ -36,7 +36,6 @@ const ProductCard = ({ product, dltBtn = false }) => {
         <AutoFields
           data={{
             status: product.status,
-            type: product.type,
             condition: product.condition,
             delivery: product.delivery,
             payment: product.payment,

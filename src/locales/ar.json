@@ -15,7 +15,7 @@
   "details": "التفاصيل",
   "aboutUs": "من نحن",
   "categories": "التصنيفات",
-  "processOutsource": "تعهد العمليات الصناعية",
+  "processOutsource": "المصادر الصناعية",
   "requestConsultation": "طلب استشارة",
   "close": "إغلاق",
   "remove": "حذف",
@@ -24,6 +24,9 @@
   "select_delete_reason": "اختر سبب الحذف",
   "delete_request_sent": "تم ارسال طلب حذف",
   "VerifyEmail": "تحقق من البريد الالكتروني",
+  "acceptOn": "أوافق على",
+  "accept": "أوافق",
+  "TermsAndConditions": "الشروط والاحكام",
 
   "footer": {
     "company": "شركتنا",
@@ -65,7 +68,7 @@
     "home": "الرئيسية",
     "about": "من نحن",
     "exchange_categories": "تصنيفات التبادل",
-    "process_outsource": "تعهيد العمليات",
+    "process_outsource": "المصادر الصناعية",
     "request_consultation": "طلب استشارة",
     "contact": "تواصل معنا"
   },
@@ -338,7 +341,7 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "passwordsMustMatch": "كلمتا المرور يجب أن تتطابقا",
     "confirmPasswordRequired": "من فضلك أكد كلمة المرور",
-    "acceptPrivacyPolicy": "أوافق على سياسة الخصوصية",
+    "acceptPrivacyPolicy": "أوافق على الشروط والاحكام",
     "continue": "استمرار",
     "registrationSuccess": "تم التسجيل بنجاح!",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
@@ -494,11 +497,12 @@
     "descriptionRequired": "يرجى تقديم وصف مختصر للمشكلة",
     "iAgree": "أوافق على",
     "privacyPolicy": "سياسة الخصوصية",
-    "acceptPrivacy": "يجب قبول سياسة الخصوصية",
+    "acceptPrivacy": "يجب قبول الشروط والاحكام",
     "submit": "إرسال الطلب",
     "submitting": "جاري الإرسال...",
     "somethingWrong": "حدث خطأ ما",
-    "responseTime": "سوف نرد عليك خلال 24 ساعة"
+    "responseTime": "سوف نرد عليك خلال 24 ساعة",
+    "successMsg": "تم تقديم الاستشارة بنجاح! سوف نرد عليك خلال 24 ساعة."
   },
 
   "subscriptionDetails": {
@@ -534,21 +538,20 @@
   },
 
   "terms": {
-    "title": "شروط الاستخدام",
-    "content": "1.2. تقدم \"STOKARTI\" \"شروط الاستخدام\" للبوابة \"Portal\"، وتعني أي معلومات موجودة ضمن \"المحتوى\"، و\"المستخدم\"، ويمكن تعديلها في أي وقت دون أي إشعار أو إخطار مسبق. يتم نشر هذه التغييرات بشكل دوري على \"PORTAL\"، وتصبح سارية اعتبارًا من تاريخ النشر. يوفر \"PORTAL\" لأي شخص طبيعي أو اعتباري إمكانية الوصول إلى \"شروط الاستخدام\" عن طريق دفع سعر معين للخدمة أو نقل الفائدة بطريقة ما. ويعتبر أن كل شخص طبيعي أو اعتباري قد قبل جميع التعديلات التي أُجريت على هذه \"الشروط\". تُنشر هذه \"الشروط\" على الموقع الإلكتروني، ويتمكن أي شخص طبيعي أو اعتباري من الوصول إليها من خلال الوسائل المتاحة."
+    "title": "شروط الاستخدام"
   },
 
   "verifyEmailPage": {
-    "title": "Verify Email",
+    "title": "تأكيد البريد الإلكتروني",
     "notLoggedIn": {
-      "title": "You are not logged in",
-      "message": "You need to be logged in to access this page. Would you like to go to the login page now?",
-      "confirm": "Go to Login"
+      "title": "أنت غير مسجّل دخول",
+      "message": "يجب أن تقوم بتسجيل الدخول للوصول إلى هذه الصفحة. هل ترغب بالانتقال إلى صفحة تسجيل الدخول الآن؟",
+      "confirm": "الذهاب لتسجيل الدخول"
     },
     "alreadyVerified": {
-      "title": "You are already verified",
-      "message": "You are already verified. You cannot access this page while verified.",
-      "confirm": "Go to Home"
+      "title": "أنت بالفعل مُفعّل",
+      "message": "لقد تم تفعيل بريدك الإلكتروني مسبقًا. لا يمكنك الوصول لهذه الصفحة أثناء كونك مفعّلًا.",
+      "confirm": "الذهاب للصفحة الرئيسية"
     }
   },
 
@@ -572,5 +575,5 @@
   "OurSolution": "حلولنا",
   "Mission": "المهمة",
   "Vision": "الرؤية",
-  "PROCESSOUTSOURSE": "تعهد العمليات الصناعية"
+  "PROCESSOUTSOURSE": "المصادر الصناعية"
 }

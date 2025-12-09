@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
     <div>
       <button
         onClick={handleToggle}
-        className="cursor-pointer px-1 py-0.5 rounded-md bg-white text-myBlue-2 text-sm border flex items-center gap-1"
+        className="cursor-pointer px-1 py-0.5 rounded-md bg-white text-myBlue-2 text-xs md:text-sm border md:border-2 flex items-center gap-1"
       >
         <img
           src={lang === "en" ? arFlag : enFlag}

@@ -31,7 +31,7 @@ const Process = () => {
   return (
     <section className="sectionPadding bg-myBlue-1">
       <h2 className="text-white text-3xl lg:text-4xl font-bold text-center mb-10">
-        {t("PROCESSOUTSOURSE")}
+        {t("processOutsource")}
       </h2>
 
       <div className="container relative">
@@ -84,7 +84,7 @@ const Process = () => {
           {products?.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full">
-                <div className="w-full h-52 rounded-xl shadow-xl overflow-hidden mb-4">
+                <div className="w-full h-52 xl:h-64 rounded-xl shadow-xl overflow-hidden mb-4">
                   <img
                     src={item.first_image}
                     alt={item.name}
