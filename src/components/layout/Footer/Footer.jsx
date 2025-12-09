@@ -159,6 +159,8 @@ const Footer = () => {
           <a
             href="https://eauthenticate.saudibusiness.gov.sa/inquiry"
             target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
           >
             {t("footer.registration")}
           </a>
@@ -173,6 +175,9 @@ const Footer = () => {
               Techno Masr
             </a>
           </p>
+          <Link to="/terms" className="underline">
+            {t("TermsAndConditions")}
+          </Link>
         </div>
       </div>
 
