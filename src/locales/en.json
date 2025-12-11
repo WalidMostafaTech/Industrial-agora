@@ -526,7 +526,7 @@
   },
 
   "subscriptionPackages": {
-    "success": "Subscription successful!",
+    "success": "Subscription request sent successfully!",
     "confirmTitle": "Confirm Subscription",
     "confirmMessage": "Are you sure you want to subscribe to this plan?",
     "cancel": "Cancel",

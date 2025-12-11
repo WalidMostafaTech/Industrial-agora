@@ -89,13 +89,13 @@ const Product = () => {
               t={t}
             />
 
-            {product?.quantity && (
+            {product?.quantity ? (
               <p className="border-b border-stone-300 flex justify-end">
                 <span className="bg-stone-200 py-1 px-2 text-sm">
                   {product?.quantity} {t("product.inStock")}
                 </span>
               </p>
-            )}
+            ) : null}
           </div>
         </div>
 

@@ -526,7 +526,7 @@
   },
 
   "subscriptionPackages": {
-    "success": "تم الاشتراك بنجاح!",
+    "success": "تم ارسال طلب الاشتراك بنجاح!",
     "confirmTitle": "تأكيد الاشتراك",
     "confirmMessage": "هل أنت متأكد أنك تريد الاشتراك في هذه الباقة؟",
     "cancel": "إلغاء",
