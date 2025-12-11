@@ -49,7 +49,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
           >
             <li>
               <Link
-                to={`/profile/${profile?.id}`}
+                to={`/profile`}
                 className="flex gap-2 lg:gap-4 items-center"
               >
                 <FaRegUserCircle className="text-2xl" />

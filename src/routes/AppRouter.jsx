@@ -74,7 +74,13 @@ const router = createBrowserRouter([
       },
       {
         path: "process-outsource/products",
-        element: <ProcessOutSourceProducts />,
+        element: (
+          <ProtectedRoute>
+            <VerifiedEmailRoute>
+              <ProcessOutSourceProducts />
+            </VerifiedEmailRoute>
+          </ProtectedRoute>
+        ),
       },
       { path: "terms", element: <Terms /> },
       {
@@ -146,7 +152,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "profile/:id",
+        path: "profile",
         element: (
           <ProtectedRoute>
             <VerifiedEmailRoute>

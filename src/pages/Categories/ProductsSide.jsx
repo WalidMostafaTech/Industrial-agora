@@ -27,7 +27,7 @@ const ProductsSide = ({ products = {}, category = {} }) => {
       <div>
         <Link
           to={`/add-product?category=${category?.id}`}
-          className="mainBtn success w-fit ms-auto mb-4"
+          className="mainBtn success w-fit me-auto mb-4"
         >
           {t("addProduct")} <LuPlus className="text-xl!" />
         </Link>

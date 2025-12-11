@@ -21,12 +21,15 @@
   "remove": "remove",
   "OK": "OK",
   "addProduct": "Add Product",
+  "addProcess": "Add Process",
   "select_delete_reason": "Select delete reason",
   "delete_request_sent": "Delete request sent",
   "VerifyEmail": "Verify Email",
   "acceptOn": "Accept",
   "accept": "Accept",
   "TermsAndConditions": "Terms and Conditions",
+  "products": "Products",
+  "outSource": "Out Source",
 
   "footer": {
     "company": "Our Company",

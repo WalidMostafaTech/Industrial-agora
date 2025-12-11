@@ -21,12 +21,15 @@
   "remove": "حذف",
   "OK": "حسنًا",
   "addProduct": "إضافة منتج",
+  "addProcess": "إضافة مصدر",
   "select_delete_reason": "اختر سبب الحذف",
   "delete_request_sent": "تم ارسال طلب حذف",
   "VerifyEmail": "تحقق من البريد الالكتروني",
   "acceptOn": "أوافق على",
   "accept": "أوافق",
   "TermsAndConditions": "الشروط والاحكام",
+  "products": "المنتجات",
+  "outSource": "المصادر الصناعية",
 
   "footer": {
     "company": "شركتنا",

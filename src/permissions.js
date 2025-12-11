@@ -1,5 +1,6 @@
 export const PERMISSIONS = {
   VIEW_SEARCH_LISTINGS: "view_search_listings", //done
+  VIEW_PROCESS_OUTSOURCE_PRODUCTS: "view_process_outsource_products", //done
   SHARE_POST_OFFER: "share_post_offer", //done
   SHARE_OUTSOURCE_REQUEST: "share_outsource_request", //done
   POST_OUTSOURCE_AD: "post_outsource_ad", //done

@@ -6,8 +6,17 @@ import ProductCardList from "../../components/common/ProductCardList";
 import Pagination from "../../components/common/Pagination";
 import LoadingPage from "../../components/Loading/LoadingPage";
 import { useTranslation } from "react-i18next";
+import useHasPermission from "../../hooks/useHasPermission";
+import { PERMISSIONS } from "../../permissions";
+import PermissionSection from "../../components/sections/PermissionSection";
 
 const ProcessOutSourceProducts = () => {
+  const canShowProcessOutSourceProducts = useHasPermission(
+    PERMISSIONS.VIEW_PROCESS_OUTSOURCE_PRODUCTS
+  );
+
+  if (!canShowProcessOutSourceProducts) return <PermissionSection />;
+
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
 
