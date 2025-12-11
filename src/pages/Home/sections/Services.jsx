@@ -29,7 +29,7 @@ const Services = () => {
   return (
     <section className="sectionPadding my-8 container relative">
       <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold text-center mb-10 lg:mb-14">
-        {t("WhyJoinIndustrialAgora")}
+        {services?.main_title}
       </h2>
 
       <div className="relative">

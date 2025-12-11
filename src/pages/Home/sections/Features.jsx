@@ -31,7 +31,7 @@ const Features = () => {
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
         <div className="flex flex-col justify-center items-center xl:items-start gap-8">
           <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold">
-            {t("OurGoals")}
+            {features?.main_title}
           </h2>
           <Link to="/about-us" className="animationBtn w-fit hidden xl:block">
             {t("seeMore")}

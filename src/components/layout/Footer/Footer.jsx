@@ -92,7 +92,7 @@ const Footer = () => {
           <input
             type="email"
             placeholder={t("footer.email_placeholder")}
-            className="p-2 lg:px-4 text-sm border-none outline-none rounded-md shadow-xl bg-gray-200 flex-1"
+            className="p-2 lg:px-4 text-sm border-none outline-none rounded-md shadow-xl focus:shadow-myBlue-2/30 duration-300 bg-gray-200 flex-1"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
