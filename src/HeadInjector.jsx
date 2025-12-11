@@ -8,26 +8,34 @@ function HeadInjector() {
   useEffect(() => {
     if (!header_code) return;
 
-    // إنشاء عنصر مؤقت لتحويل string HTML لعناصر DOM
-    const template = document.createElement("template");
-    template.innerHTML = header_code.trim();
+    const container = document.createElement("div");
+    container.innerHTML = header_code;
 
-    // إضافة كل العناصر داخل head
-    Array.from(template.content.childNodes).forEach((node) => {
-      document.head.appendChild(node);
+    const nodes = Array.from(container.childNodes);
+    const addedNodes = [];
+
+    nodes.forEach((node) => {
+      let newNode;
+      if (node.tagName === "SCRIPT") {
+        newNode = document.createElement("script");
+        // copy attributes
+        Array.from(node.attributes).forEach((attr) =>
+          newNode.setAttribute(attr.name, attr.value)
+        );
+        newNode.text = node.textContent;
+      } else {
+        newNode = node.cloneNode(true);
+      }
+      document.head.appendChild(newNode);
+      addedNodes.push(newNode);
     });
 
-    // تنظيف العناصر عند unmount (اختياري)
     return () => {
-      Array.from(template.content.childNodes).forEach((node) => {
-        if (document.head.contains(node)) {
-          document.head.removeChild(node);
-        }
-      });
+      addedNodes.forEach((node) => document.head.removeChild(node));
     };
   }, [header_code]);
 
-  return null; // لا حاجة لعرض أي شيء
+  return null;
 }
 
 export default HeadInjector;
