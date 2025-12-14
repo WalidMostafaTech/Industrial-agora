@@ -48,6 +48,7 @@ const Register = () => {
       .matches(/^[0-9]+$/, t("register.phoneNumbersOnly"))
       .required(t("register.phoneRequired")),
     tax_number: yup.string().required(t("register.taxRequired")),
+    referral_code: yup.string(),
     password: yup
       .string()
       .min(6, t("register.passwordMin"))
@@ -146,6 +147,14 @@ const Register = () => {
           type="number"
           {...register("tax_number")}
           error={errors.tax_number?.message}
+        />
+
+        <MainInput
+          label={t("register.referralCode")}
+          id="referral_code"
+          type="number"
+          {...register("referral_code")}
+          error={errors.referral_code?.message}
         />
 
         <MainInput

@@ -338,6 +338,7 @@
     "phoneRequired": "رقم الهاتف مطلوب",
     "taxNumber": "الرقم الضريبي",
     "taxRequired": "الرقم الضريبي مطلوب",
+    "referralCode": "كود المصدر (اختياري)",
     "password": "كلمة المرور",
     "passwordMin": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
     "passwordRequired": "كلمة المرور مطلوبة",

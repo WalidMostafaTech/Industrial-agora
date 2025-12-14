@@ -338,6 +338,7 @@
     "phoneRequired": "Phone is required",
     "taxNumber": "Tax Number",
     "taxRequired": "Tax number is required",
+    "referralCode": "Referral Code (Optional)",
     "password": "Password",
     "passwordMin": "Password must be at least 6 characters",
     "passwordRequired": "Password is required",
