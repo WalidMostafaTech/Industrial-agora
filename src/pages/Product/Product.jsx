@@ -15,6 +15,7 @@ const Product = () => {
   const { profile } = useSelector((state) => state.profile);
 
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
+  const canShowPrice = useHasPermission(PERMISSIONS.VIEW_PRICE);
 
   const [openMsg, setOpenMsg] = useState(false);
 
@@ -35,8 +36,6 @@ const Product = () => {
         <h3 className="text-2xl font-bold">{t("product.notFound")}</h3>
       </div>
     );
-
-  const tags = ["Hydraulcs", "Hydraclcs", "PUMP"];
 
   return (
     <article className="container pagePadding space-y-6 lg:space-y-12">
@@ -73,7 +72,7 @@ const Product = () => {
               t={t}
             />
 
-            {product?.price && (
+            {product?.price && canShowPrice && (
               <p className="text-myBlue-2 text-lg font-bold">
                 {product?.price} $
               </p>
@@ -121,7 +120,7 @@ const Product = () => {
           product?.tags?.map((tag, index) => (
             <span key={index} className="text-stone-500 text-lg font-semibold">
               {tag}
-              {tags.length - 1 !== index && ","}
+              {product?.tags?.length - 1 !== index && ","}
             </span>
           ))
         ) : (
