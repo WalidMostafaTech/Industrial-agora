@@ -84,10 +84,10 @@ const Features = () => {
                       className="w-full h-full object-contain"
                     />
                   </span>
-                  <h3 className="text-xl font-semibold line-clamp-1">
+                  <h3 className="text-xl font-semibold">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className="text-gray-600 text-sm">
                     {item.paragraph}
                   </p>
                 </div>
