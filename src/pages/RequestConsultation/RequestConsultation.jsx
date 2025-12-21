@@ -42,7 +42,12 @@ const RequestConsultation = () => {
           <ul className="list-inside mt-4 space-y-2">
             {consultationSettings?.solutions.map((point, index) => (
               <li key={index} className="flex items-start gap-2">
-                <img src={checkIcon} alt="check icon" className="w-8 lg:w-10" />
+                <img
+                  loading="lazy"
+                  src={checkIcon}
+                  alt="check icon"
+                  className="w-8 lg:w-10"
+                />
                 <p className="lg:text-lg font-semibold pt-2">{point}</p>
               </li>
             ))}

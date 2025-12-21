@@ -28,6 +28,7 @@ const LanguageSwitcher = () => {
         className="cursor-pointer px-1 py-0.5 rounded-md bg-white text-myBlue-2 text-xs md:text-sm border md:border-2 flex items-center gap-1"
       >
         <img
+          loading="lazy"
           src={lang === "en" ? arFlag : enFlag}
           alt="flag"
           className="w-5 rounded-sm"

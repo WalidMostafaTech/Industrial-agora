@@ -49,6 +49,7 @@ export default function HeroSection() {
                   srcSet={slide.mobile_image}
                 />
                 <img
+                  loading="lazy"
                   src={slide.desktop_image}
                   alt={slide.title}
                   className="w-full h-full object-cover"

@@ -66,6 +66,7 @@ const ImageUploader = ({
           images.map((img, index) => (
             <div key={index} className="relative group w-full aspect-square">
               <img
+                loading="lazy"
                 src={img.preview}
                 alt={`Preview ${index + 1}`}
                 className="w-full h-full object-cover rounded-xl border border-myBlue-2"

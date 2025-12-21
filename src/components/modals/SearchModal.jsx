@@ -75,7 +75,9 @@ const SearchModal = ({ openSearch, onClose }) => {
         {(shouldShowResults || noResults) && (
           <div className="space-y-2 lg:space-y-4 max-h-[60vh] overflow-y-auto mt-4 lg:mt-6 bg-gray-200/70 backdrop-blur rounded-2xl border-2 border-white p-2 lg:p-4">
             {isLoading && (
-              <p className="text-center text-gray-600">{t("modals.searchModal.loading")}</p>
+              <p className="text-center text-gray-600">
+                {t("modals.searchModal.loading")}
+              </p>
             )}
 
             {noResults && (
@@ -94,6 +96,7 @@ const SearchModal = ({ openSearch, onClose }) => {
               >
                 <div className="w-24 lg:w-40 overflow-hidden rounded-lg shadow-md">
                   <img
+                    loading="lazy"
                     src={product.first_image}
                     alt={product.name}
                     className="w-full h-full object-cover"
@@ -115,6 +118,7 @@ const SearchModal = ({ openSearch, onClose }) => {
               >
                 <div className="w-24 lg:w-40 overflow-hidden rounded-lg shadow-md">
                   <img
+                    loading="lazy"
                     src={category.image}
                     alt={category.title}
                     className="w-full h-full object-cover"

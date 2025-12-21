@@ -1,7 +1,12 @@
 const CategoryBanner = ({ image, title }) => {
   return (
     <div className="relative h-[250px] lg:h-[300px] overflow-hidden group">
-      <img src={image} alt={title} className="w-full h-full object-cover" />
+      <img
+        loading="lazy"
+        src={image}
+        alt={title}
+        className="w-full h-full object-cover"
+      />
 
       {title && (
         <div className="absolute bottom-0 left-0 p-4 pr-20">

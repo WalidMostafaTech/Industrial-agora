@@ -31,6 +31,7 @@ const ChatExternallyModal = ({ openModal, onClose, chatId }) => {
     <dialog className="modal modal-open" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <img
+          loading="lazy"
           src={icon}
           alt="chat externally icon"
           className="w-16 mx-auto mb-8"

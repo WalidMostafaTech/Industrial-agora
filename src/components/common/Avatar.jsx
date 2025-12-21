@@ -19,7 +19,12 @@ export default function Avatar({ name, img, size = "md", active = false }) {
       } overflow-hidden ${sizes[size]}`}
     >
       {img ? (
-        <img src={img} alt={name} className="w-full h-full object-cover" />
+        <img
+          loading="lazy"
+          src={img}
+          alt={name}
+          className="w-full h-full object-cover"
+        />
       ) : (
         <span>{getInitials(name)}</span>
       )}

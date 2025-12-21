@@ -35,6 +35,7 @@ const Partners = () => {
               className="h-24 w-32 lg:w-48 overflow-hidden flex items-center justify-center"
             >
               <img
+                loading="lazy"
                 src={item.logo}
                 alt={`partner-${item.id}`}
                 className="w-full h-full object-contain"
@@ -52,6 +53,7 @@ const Partners = () => {
               className="h-24 w-32 lg:w-48 overflow-hidden flex items-center justify-center mx-4 lg:mx-10"
             >
               <img
+                loading="lazy"
                 src={item.logo}
                 alt={`partner-${item.id}`}
                 className="w-full h-full object-contain"

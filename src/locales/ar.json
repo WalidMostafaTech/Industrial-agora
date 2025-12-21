@@ -15,7 +15,7 @@
   "details": "التفاصيل",
   "aboutUs": "من نحن",
   "categories": "التصنيفات",
-  "processOutsource": "المصادر الصناعية",
+  "processOutsource": "العمليات الخارجية",
   "requestConsultation": "طلب استشارة",
   "close": "إغلاق",
   "remove": "حذف",
@@ -29,7 +29,8 @@
   "accept": "أوافق",
   "TermsAndConditions": "الشروط والاحكام",
   "products": "المنتجات",
-  "outSource": "المصادر الصناعية",
+  "outSource": "العمليات الخارجية",
+  "whatsapp": "واتساب",
 
   "footer": {
     "company": "شركتنا",
@@ -70,8 +71,8 @@
   "navbar": {
     "home": "الرئيسية",
     "about": "من نحن",
-    "exchange_categories": "تصنيفات التبادل",
-    "process_outsource": "المصادر الصناعية",
+    "exchange_categories": "تصنيفات المنتجات",
+    "process_outsource": "العمليات الخارجية",
     "request_consultation": "طلب استشارة",
     "contact": "تواصل معنا"
   },
@@ -527,7 +528,7 @@
   },
 
   "subscriptionPackages": {
-    "success": "تم ارسال طلب الاشتراك بنجاح!",
+    "success": "يسعدنا إعلامكم بأنه تم تسجيل طلبكم بنجاح، وسيتم إرسال الفاتورة إليكم في أقرب وقت ممكن عن طريق البريد الإلكتروني",
     "confirmTitle": "تأكيد الاشتراك",
     "confirmMessage": "هل أنت متأكد أنك تريد الاشتراك في هذه الباقة؟",
     "cancel": "إلغاء",
@@ -570,6 +571,13 @@
     "emailInvalid": "من فضلك أدخل بريد إلكتروني صالح"
   },
 
+  "ErrorPage": {
+    "title": "حدث خطأ غير متوقع",
+    "description": "حدثت مشكلة أثناء تحميل الصفحة، برجاء المحاولة مرة أخرى",
+    "reload": "إعادة تحميل الصفحة",
+    "goHome": "العودة للرئيسية"
+  },
+
   "NoContactsAvailable": "لا توجد جهات اتصال متاحة.",
   "SelectChatToStartMessaging": "اختر محادثة لبدء المراسلة",
   "NoMessagesYet": "لا توجد رسائل بعد. ابدأ المحادثة!",
@@ -579,5 +587,5 @@
   "OurSolution": "حلولنا",
   "Mission": "المهمة",
   "Vision": "الرؤية",
-  "PROCESSOUTSOURSE": "المصادر الصناعية"
+  "PROCESSOUTSOURSE": "العمليات الخارجية"
 }

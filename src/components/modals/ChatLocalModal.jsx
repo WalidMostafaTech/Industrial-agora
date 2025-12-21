@@ -29,7 +29,12 @@ const ChatLocalModal = ({ openModal, onClose, chatId }) => {
   return createPortal(
     <dialog className="modal modal-open" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-        <img src={icon} alt="chat locally icon" className="w-16 mx-auto mb-8" />
+        <img
+          loading="lazy"
+          src={icon}
+          alt="chat locally icon"
+          className="w-16 mx-auto mb-8"
+        />
         <p className="text-center font-semibold">
           {t("modals.ChatLocalModal.warning")}
         </p>

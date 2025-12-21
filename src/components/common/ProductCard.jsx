@@ -14,6 +14,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
     >
       <div className="w-full md:w-[300px] aspect-square md:aspect-auto overflow-hidden bg-white relative">
         <img
+          loading="lazy"
           src={product.first_image}
           alt={product.name}
           className="w-full h-full object-cover"

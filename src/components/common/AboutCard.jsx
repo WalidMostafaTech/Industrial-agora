@@ -4,7 +4,12 @@ const AboutCard = ({ title, paragraph, image }) => {
       className={`flex items-center justify-between flex-col lg:flex-row odd:lg:flex-row-reverse gap-4 lg:gap-12 not-last:border-b border-myBlue-2 pb-4 lg:pb-16`}
     >
       <div className="lg:w-2/5 max-h-72 overflow-hidden rounded">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
+        <img
+          loading="lazy"
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
       </div>
 
       <div className="flex-1 space-y-2 lg:space-y-4">

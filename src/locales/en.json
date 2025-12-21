@@ -30,6 +30,7 @@
   "TermsAndConditions": "Terms and Conditions",
   "products": "Products",
   "outSource": "Out Source",
+  "whatsapp": "WhatsApp",
 
   "footer": {
     "company": "Our Company",
@@ -70,7 +71,7 @@
   "navbar": {
     "home": "Home",
     "about": "About Us",
-    "exchange_categories": "Exchange Categories",
+    "exchange_categories": "Product Categories",
     "process_outsource": "Process OutSource",
     "request_consultation": "Request Consultation",
     "contact": "Contact"
@@ -527,7 +528,7 @@
   },
 
   "subscriptionPackages": {
-    "success": "Subscription request sent successfully!",
+    "success": "We are pleased to inform you that your request has been successfully registered, and the invoice will be sent to you as soon as possible via email.",
     "confirmTitle": "Confirm Subscription",
     "confirmMessage": "Are you sure you want to subscribe to this plan?",
     "cancel": "Cancel",
@@ -568,6 +569,13 @@
     "backToOtp": "Back to OTP",
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email"
+  },
+
+  "ErrorPage": {
+    "title": "An unexpected error occurred",
+    "description": "There was a problem loading the page. Please try again later.",
+    "reload": "Reload page",
+    "goHome": "Go to Home"
   },
 
   "NoContactsAvailable": "No contacts available.",

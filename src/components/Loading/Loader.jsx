@@ -6,7 +6,7 @@ const Loader = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center">
-      {/* <img src={logoImg} alt="Logo" className="w-16 lg:w-22 animate-bounce" /> */}
+      {/* <img loading="lazy" src={logoImg} alt="Logo" className="w-16 lg:w-22 animate-bounce" /> */}
 
       <div className="relative w-36 h-36 flex items-center justify-center">
         <FaCog className="text-[6rem] text-myBlue-2 animate-spin-slow" />

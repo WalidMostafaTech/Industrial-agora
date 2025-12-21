@@ -79,17 +79,14 @@ const Features = () => {
                 <div className="flex flex-col items-center gap-3 text-center group">
                   <span className="h-18 overflow-hidden">
                     <img
+                      loading="lazy"
                       src={item.icon}
                       alt={item.title}
                       className="w-full h-full object-contain"
                     />
                   </span>
-                  <h3 className="text-xl font-semibold">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {item.paragraph}
-                  </p>
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
+                  <p className="text-gray-600 text-sm">{item.paragraph}</p>
                 </div>
               </SwiperSlide>
             ))}

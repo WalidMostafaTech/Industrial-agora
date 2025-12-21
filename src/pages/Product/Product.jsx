@@ -43,6 +43,7 @@ const Product = () => {
         <div className="flex flex-col md:flex-row gap-4 lg:gap-12">
           <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
             <img
+              loading="lazy"
               src={product?.images[0]}
               alt={product?.name}
               className="w-full h-full object-cover"

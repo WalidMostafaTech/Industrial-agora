@@ -53,7 +53,12 @@ const MissionVisionSolution = () => {
             }}
           >
             <div className="flex justify-center items-center gap-2">
-              <img src={item.icon} alt={item.title} className="w-10" />
+              <img
+                loading="lazy"
+                src={item.icon}
+                alt={item.title}
+                className="w-10"
+              />
               <h3 className="text-2xl font-semibold">{item.title}</h3>
             </div>
             <div

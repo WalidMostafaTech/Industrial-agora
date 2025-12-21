@@ -10,7 +10,11 @@ import HeaderAction from "./HeaderAction";
 import { useDispatch } from "react-redux";
 import { getProfileAct } from "../../../store/profile/profileSlice";
 import { getMainCategoriesAct } from "../../../store/categories/categories";
-import { fetchCities, fetchSetting, fetchTerms } from "../../../store/setting/setting";
+import {
+  fetchCities,
+  fetchSetting,
+  fetchTerms,
+} from "../../../store/setting/setting";
 import Cookies from "js-cookie";
 import useHasPermission from "../../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../../permissions";

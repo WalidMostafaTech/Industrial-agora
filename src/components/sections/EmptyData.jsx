@@ -6,6 +6,7 @@ const EmptyData = () => {
   return (
     <div>
       <img
+        loading="lazy"
         src={emptyIcon}
         alt="No Data"
         className="mx-auto mb-4 w-32 lg:w-36"

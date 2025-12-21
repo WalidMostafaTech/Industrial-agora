@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TiArrowRight } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { sendNewsletter } from "../../../services/homeServices";
 import SuccessModal from "../../modals/SuccessModal";
+// import { sendNewsletter } from "../../../services/homeServices";
+// import { useMutation } from "@tanstack/react-query";
 
 import logoImg from "../../../assets/images/logo/logo-blue.png";
 import instagram from "../../../assets/icons/insta.png";
@@ -15,22 +15,23 @@ import whatsapp from "../../../assets/icons/whats.png";
 const Footer = () => {
   const { t } = useTranslation();
   const { setting } = useSelector((state) => state.setting);
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [successModal, setSuccessModal] = useState(false);
+  const { pathname } = useLocation();
 
-  const mutation = useMutation({
-    mutationFn: sendNewsletter,
-    onSuccess: () => {
-      setEmail("");
-      setSuccessModal(true);
-    },
-  });
+  // const mutation = useMutation({
+  //   mutationFn: sendNewsletter,
+  //   onSuccess: () => {
+  //     setEmail("");
+  //     setSuccessModal(true);
+  //   },
+  // });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    mutation.mutate(email);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!email.trim()) return;
+  //   mutation.mutate(email);
+  // };
 
   const footerLinks = [
     {
@@ -86,9 +87,9 @@ const Footer = () => {
   return (
     <footer className="bg-white">
       <div className="container flex justify-between items-center flex-wrap gap-4 pt-8">
-        <img src={logoImg} alt="Logo" className="w-48 lg:w-52" />
+        <img loading="lazy" src={logoImg} alt="Logo" className="w-48 lg:w-52" />
 
-        <form onSubmit={handleSubmit} className="flex gap-2 w-full lg:max-w-lg">
+        {/* <form onSubmit={handleSubmit} className="flex gap-2 w-full lg:max-w-lg">
           <input
             type="email"
             placeholder={t("footer.email_placeholder")}
@@ -104,7 +105,14 @@ const Footer = () => {
             {mutation.isPending ? t("footer.sending") : t("footer.join_us")}
             <TiArrowRight className="rtl:rotate-180" />
           </button>
-        </form>
+        </form> */}
+
+        {pathname !== "/login" && (
+          <Link to="/login" className="mainBtn">
+            {t("header_action.join_us")}{" "}
+            <TiArrowRight className="rtl:rotate-180" />
+          </Link>
+        )}
       </div>
 
       <div className="container sectionPadding grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
@@ -125,21 +133,36 @@ const Footer = () => {
               )}`}
               className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer"
             >
-              <img src={whatsapp} alt="whatsapp" className="w-6 h-6" />
+              <img
+                loading="lazy"
+                src={whatsapp}
+                alt="whatsapp"
+                className="w-6 h-6"
+              />
             </a>
             <a
               href={setting?.linkedin}
               target="_blank"
               className="text-3xl hover:text-myBlue-2 duration-300 cursor-pointer"
             >
-              <img src={linkedin} alt="linkedin" className="w-6 h-6" />
+              <img
+                loading="lazy"
+                src={linkedin}
+                alt="linkedin"
+                className="w-6 h-6"
+              />
             </a>
             <a
               href={setting?.instagram}
               target="_blank"
               className="text-2xl hover:text-myBlue-2 duration-300 cursor-pointer"
             >
-              <img src={instagram} alt="Instagram" className="w-6 h-6" />
+              <img
+                loading="lazy"
+                src={instagram}
+                alt="Instagram"
+                className="w-6 h-6"
+              />
             </a>
           </div>
         </div>

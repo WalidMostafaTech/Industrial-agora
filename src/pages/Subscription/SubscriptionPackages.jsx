@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import sarIcon from "../../assets/icons/sar-icon.svg";
 
 const SubscriptionPackages = () => {
   const { t } = useTranslation();
@@ -138,9 +139,10 @@ const SubscriptionCard = ({ profile, item, onSubscribe, t }) => {
   const featuresToShow = showAll ? item.features : item.features?.slice(0, 3);
 
   return (
-    <div className="whiteContainer flex flex-col items-center gap-2 max-w-md">
+    <div className="whiteContainer flex flex-col items-center gap-2 w-full max-w-lg">
       <span className="w-16 h-16 overflow-hidden">
         <img
+          loading="lazy"
           src={item.icon_url}
           alt={item.name}
           className="w-full h-full object-contain"
@@ -155,7 +157,16 @@ const SubscriptionCard = ({ profile, item, onSubscribe, t }) => {
         <span className="text-myGreen font-bold text-xl">
           {item.price === 0 || item.price === null
             ? t("subscriptionPackages.free")
-            : `${item.price}$`}
+            : `${item.price}`}
+
+          {!item.is_free && (
+            <img
+              loading="lazy"
+              src={sarIcon}
+              alt="SAR"
+              className="inline-block w-4 h-4 ms-1 mb-1"
+            />
+          )}
         </span>
       </p>
 

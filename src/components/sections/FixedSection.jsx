@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next";
 import { FaWhatsapp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const FixedSection = () => {
   const { setting } = useSelector((state) => state.setting);
+  const { t } = useTranslation();
 
   const list = [
     {
       id: 1,
-      title: "whatsapp",
+      title: t("whatsapp"),
       link: `https://wa.me/${(setting?.whatsapp || "").replace(/\s/g, "")}`,
       icon: <FaWhatsapp />,
       color: "#25D366",

@@ -89,6 +89,7 @@ const MainCategories = () => {
               <div className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full">
                 <div className="w-full h-52 xl:h-64 rounded-xl shadow-xl overflow-hidden mb-4">
                   <img
+                    loading="lazy"
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover"

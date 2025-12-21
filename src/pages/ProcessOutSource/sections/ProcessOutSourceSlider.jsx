@@ -69,6 +69,7 @@ const ProcessOutSourceSlider = ({ list }) => {
                 <div className="relative w-full h-64 lg:h-90 rounded-md overflow-hidden shadow-[9px_2px_8px_#01377D7A]">
                   {/* الصورة */}
                   <img
+                    loading="lazy"
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover"

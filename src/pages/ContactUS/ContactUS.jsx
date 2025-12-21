@@ -118,6 +118,7 @@ const ContactUs = () => {
         {/* Contact Info */}
         <div>
           <img
+            loading="lazy"
             src={contactUsImg}
             alt="contact us"
             className="w-full xl:w-4/5 mb-8 mx-auto hidden md:block rounded-md shadow-md"

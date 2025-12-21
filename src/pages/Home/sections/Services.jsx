@@ -73,6 +73,7 @@ const Services = () => {
               <div className="flex flex-col items-center lg:items-start gap-1 group">
                 <span className="h-18 overflow-hidden mb-4">
                   <img
+                    loading="lazy"
                     src={item.icon}
                     alt={item.title}
                     className="w-full h-full object-contain"
