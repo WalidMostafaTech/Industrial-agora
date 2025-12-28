@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProductDeleteModal from "../modals/ProductDeleteModal";
+import { formatLength, formatWeight } from "../../utils/formatFunctions";
 
 const ProductCard = ({ product, dltBtn = false }) => {
   const { t } = useTranslation();
@@ -91,6 +92,18 @@ export default ProductCard;
 const AutoFields = ({ data, t }) => {
   if (!data || typeof data !== "object") return null;
 
+  const formatValue = (key, value) => {
+    if (["length", "width", "height"].includes(key)) {
+      return formatLength(value, t);
+    }
+
+    if (key === "weight") {
+      return formatWeight(value, t);
+    }
+
+    return value;
+  };
+
   return (
     <div className="space-y-1">
       {Object.entries(data).map(([key, value]) => {
@@ -105,7 +118,7 @@ const AutoFields = ({ data, t }) => {
 
         return (
           <p key={key} className="text-gray-700">
-            {t(key.charAt(0).toUpperCase() + key.slice(1))} : {value}
+            {t(`product.fields.${key}`)} : {formatValue(key, value)}
           </p>
         );
       })}

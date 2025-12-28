@@ -9,6 +9,8 @@ import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
 import { useTranslation } from "react-i18next";
 import sarIcon from "../../assets/icons/sar-icon.svg";
+import { formatLength, formatWeight } from "../../utils/formatFunctions";
+
 
 const Product = () => {
   const { t } = useTranslation();
@@ -152,6 +154,18 @@ export default Product;
 const AutoFields = ({ data, t }) => {
   if (!data || typeof data !== "object") return null;
 
+  const formatValue = (key, value) => {
+    if (["length", "width", "height"].includes(key)) {
+      return formatLength(value, t);
+    }
+
+    if (key === "weight") {
+      return formatWeight(value, t);
+    }
+
+    return value;
+  };
+
   return (
     <div className="space-y-1">
       {Object.entries(data).map(([key, value]) => {
@@ -166,7 +180,7 @@ const AutoFields = ({ data, t }) => {
 
         return (
           <p key={key} className="text-gray-700">
-            {t(`product.fields.${key}`)} : {value}
+            {t(`product.fields.${key}`)} : {formatValue(key, value)}
           </p>
         );
       })}

@@ -32,6 +32,14 @@
   "outSource": "Out Source",
   "whatsapp": "WhatsApp",
 
+  "units": {
+    "cm": "cm",
+    "m": "m",
+    "km": "km",
+    "kg": "kg",
+    "ton": "ton"
+  },
+
   "footer": {
     "company": "Our Company",
     "services": "Services",
@@ -166,10 +174,10 @@
       "sku": "SKU",
       "vendor": "Vendor",
       "warehouse": "Warehouse",
-      "length": "Length",
-      "width": "Width",
-      "height": "Height",
-      "weight": "Weight (if required)",
+      "length": "Length (cm)",
+      "width": "Width (cm)",
+      "height": "Height (cm)",
+      "weight": "Weight (kg)",
       "images": "Product Images",
       "tags": "tags",
       "tags_placeholder": "tag1,tag2,tag3...",

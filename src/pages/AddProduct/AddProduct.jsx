@@ -223,39 +223,26 @@ const AddProduct = () => {
         ))}
 
         {/* Dimensions */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          <p className="font-medium text-gray-900 col-span-2 lg:col-span-3">
-            {t("AddProduct.fields.length")} / {t("AddProduct.fields.width")} /{" "}
-            {t("AddProduct.fields.height")}
-          </p>
-          {["length", "width", "height"].map((dim) => (
-            <div key={dim} className="flex flex-col gap-1">
-              <label
-                htmlFor={dim}
-                className="font-medium text-gray-900 text-sm"
-              >
-                {t(`AddProduct.fields.${dim}`)}
-              </label>
-              <input
-                type="number"
-                id={dim}
-                {...register(dim)}
-                className="w-full bg-white outline-none border-none p-2 text-sm rounded-md ring-1 ring-gray-400 focus-within:ring-myBlue-2"
-              />
-              {errors[dim] && (
-                <p className="text-red-700 text-sm">{t(errors[dim].message)}</p>
-              )}
-            </div>
+        <div className="grid grid-cols-2 gap-4">
+          {["length", "width", "height", "weight"].map((dim) => (
+            <MainInput
+              key={dim}
+              label={t(`AddProduct.fields.${dim}`)}
+              id={dim}
+              type="number"
+              {...register(dim)}
+              error={t(errors[dim]?.message)}
+            />
           ))}
         </div>
 
-        <MainInput
+        {/* <MainInput
           label={t("AddProduct.fields.weight")}
           id="weight"
           type="number"
           {...register("weight")}
           error={t(errors.weight?.message)}
-        />
+        /> */}
 
         <ImageUploader
           label={t("AddProduct.fields.images")}
