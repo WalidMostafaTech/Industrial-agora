@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import useHasPermission from "../../hooks/useHasPermission";
 import { PERMISSIONS } from "../../permissions";
 import { useTranslation } from "react-i18next";
+import sarIcon from "../../assets/icons/sar-icon.svg";
 
 const Product = () => {
   const { t } = useTranslation();
@@ -75,7 +76,13 @@ const Product = () => {
 
             {product?.price && canShowPrice && (
               <p className="text-myBlue-2 text-lg font-bold">
-                {product?.price} $
+                {product?.price}
+                <img
+                  loading="lazy"
+                  src={sarIcon}
+                  alt="SAR"
+                  className="inline-block w-4 h-4 ms-1 mb-1"
+                />
               </p>
             )}
 
