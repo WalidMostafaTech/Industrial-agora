@@ -11,7 +11,7 @@ const PermissionSection = () => {
       <h2 className="text-2xl font-bold max-w-sm">
         {t("PermissionSection.title")}
       </h2>
-      <Link to="/subscription-packages" className="animationBtn">
+      <Link to="subscription-packages" className="animationBtn">
         {t("PermissionSection.upgrade")}
       </Link>
     </section>

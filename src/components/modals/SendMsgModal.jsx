@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 const SendMsgModal = ({ openModal, onClose, productId }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   const schema = Yup.object().shape({
     message: Yup.string().required(t("modals.SendMsgModal.messageRequired")),
@@ -31,7 +32,7 @@ const SendMsgModal = ({ openModal, onClose, productId }) => {
     mutationFn: sendMsg,
     onSuccess: (data) => {
       const chatId = data?.chat?.id;
-      if (chatId) navigate(`/chat/${chatId}`);
+      if (chatId) navigate(`/${lang}/chat/${chatId}`);
       reset();
       onClose();
     },

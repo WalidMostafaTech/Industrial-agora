@@ -90,7 +90,7 @@ const SubscriptionDetails = () => {
               <span className="font-semibold text-myBlue-2 flex-1 flex items-center gap-1">
                 {profile?.subscription?.subscription_name}
                 <Link
-                  to="/subscription-packages"
+                  to="subscription-packages"
                   className="px-2 py-1 bg-myGreen text-white text-xs rounded-md cursor-pointer"
                 >
                   {t("subscriptionDetails.change")}

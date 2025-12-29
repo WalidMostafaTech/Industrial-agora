@@ -92,7 +92,7 @@ const Services = () => {
       </div>
 
       <div className="flex justify-center mt-10 lg:mt-14">
-        <Link to="/login" className="animationBtn">
+        <Link to="login" className="animationBtn">
           {t("getStarted")}
         </Link>
       </div>

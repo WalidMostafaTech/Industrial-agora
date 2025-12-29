@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ContactCard from "../components/ContactCard";
 import { useTranslation } from "react-i18next";
 
@@ -7,6 +7,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
   const { t } = useTranslation();
   const [activeChat, setActiveChat] = useState(null);
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   // ✅ لما يتغير id في الـ URL نحدث activeChat
   useEffect(() => {
@@ -20,7 +21,7 @@ const Contacts = ({ setShowChat, chats, chatId }) => {
   const handleClick = (id) => {
     setActiveChat(id);
     setShowChat(true);
-    navigate(`/chat/${id}`); // ✅ يغير الـ URL
+    navigate(`/${lang}/chat/${id}`); // ✅ يغير الـ URL
   };
 
   if (!chats || chats.length === 0)

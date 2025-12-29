@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProtectModal from "../modals/ProtectModal";
 
 const VerifiedEmailRoute = ({ children }) => {
@@ -9,6 +9,7 @@ const VerifiedEmailRoute = ({ children }) => {
   const { profile } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const { lang } = useParams();
 
   useEffect(() => {
     if (profile && !profile.email_verified_at) {
@@ -18,12 +19,12 @@ const VerifiedEmailRoute = ({ children }) => {
 
   const handleConfirm = () => {
     setOpenModal(false);
-    navigate("/verify-email", { replace: true });
+    navigate(`/${lang}/verify-email`, { replace: true });
   };
 
   const handleClose = () => {
     setOpenModal(false);
-    navigate("/", { replace: true });
+    navigate(`/${lang}`, { replace: true });
   };
 
   // ⭐ لو الإيميل verified → رجّع الأطفال

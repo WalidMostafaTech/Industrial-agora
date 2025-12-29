@@ -89,7 +89,7 @@ const SearchModal = ({ openSearch, onClose }) => {
             {/* المنتجات */}
             {products.map((product) => (
               <Link
-                to={`/product/${product.slug}`}
+                to={`product/${product.slug}`}
                 key={product.id}
                 onClick={handleClose}
                 className="flex items-center gap-4 p-3 shadow-md bg-white/80 hover:bg-gray-100 rounded-xl cursor-pointer"
@@ -111,7 +111,7 @@ const SearchModal = ({ openSearch, onClose }) => {
             {/* الفئات */}
             {categories.map((category) => (
               <Link
-                to={`/categories/${category.slug}`}
+                to={`categories/${category.slug}`}
                 key={category.id}
                 onClick={handleClose}
                 className="flex items-center gap-4 p-3 shadow-md bg-white/80 hover:bg-gray-100 rounded-xl cursor-pointer"

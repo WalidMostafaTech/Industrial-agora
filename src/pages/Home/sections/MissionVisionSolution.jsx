@@ -21,21 +21,21 @@ const MissionVisionSolution = () => {
       paragraph: setting?.solution,
       icon: ideaIcon,
       color: "var(--color-myBlue-2)",
-      link: "/about-us",
+      link: "about-us",
     },
     {
       title: t("Mission"),
       paragraph: setting?.mission,
       icon: missionIcon,
       color: "var(--color-myGreen)",
-      link: "/about-us",
+      link: "about-us",
     },
     {
       title: t("Vision"),
       paragraph: setting?.vission,
       icon: eyeIcon,
       color: "white",
-      link: "/about-us",
+      link: "about-us",
     },
   ];
 

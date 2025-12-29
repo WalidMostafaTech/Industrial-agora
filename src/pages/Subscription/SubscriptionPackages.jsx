@@ -10,7 +10,7 @@ import SuccessModal from "../../components/modals/SuccessModal";
 import FormError from "../../components/form/FormError";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import sarIcon from "../../assets/icons/sar-icon.svg";
 
@@ -23,6 +23,7 @@ const SubscriptionPackages = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   const {
     data: subscriptions,
@@ -48,7 +49,7 @@ const SubscriptionPackages = () => {
   const handleSuccess = () => {
     dispatch(getProfileAct());
     setOpenModal(false);
-    navigate("/subscription-details");
+    navigate(`/${lang}/subscription-details`);
   };
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { PiArrowRightLight } from "react-icons/pi";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -11,31 +11,33 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
     setOpenLinks(openLinks === name ? null : name);
   };
 
+  const { lang } = useParams();
+
   const { categories } = useSelector((state) => state.categories);
   const filterCategories = categories?.filter((cat) => cat.nav);
   const categoriesLinks = filterCategories?.map((cat) => ({
     name: cat.title,
-    link: `/categories/${cat.slug}`,
+    link: `categories/${cat.slug}`,
   }));
 
   const exchangeBtnRef = useRef();
   const { pathname } = useLocation();
 
   const linksList = [
-    { name: t("navbar.home"), path: "/", list: [] },
-    { name: t("navbar.about"), path: "/about-us", list: [] },
+    { name: t("navbar.home"), path: `/${lang}`, list: [] },
+    { name: t("navbar.about"), path: "about-us", list: [] },
     {
       name: t("navbar.exchange_categories"),
-      path: "/categories/all",
+      path: "categories/all",
       list: categoriesLinks,
     },
     {
       name: t("navbar.process_outsource"),
-      path: "/process-outsource",
+      path: "process-outsource",
       list: [],
     },
-    { name: t("navbar.request_consultation"), path: "/request", list: [] },
-    { name: t("navbar.contact"), path: "/contact-us", list: [] },
+    { name: t("navbar.request_consultation"), path: "request", list: [] },
+    { name: t("navbar.contact"), path: "contact-us", list: [] },
   ];
 
   return (
@@ -70,6 +72,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                 >
                   {link.list.map((subLink) => (
                     <NavLink
+                      end
                       to={subLink.link}
                       key={subLink.name}
                       className="group text-sm text-black flex items-center justify-between gap-2 font-semibold p-2 not-last:border-b border-gray-300"
@@ -89,6 +92,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
             <NavLink
               to={link.path}
               key={link.name}
+              end
               className="navLink"
               onClick={() => {
                 setActiveNav(false);
@@ -133,6 +137,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
                   <NavLink
                     to={subLink.link}
                     key={subLink.name}
+                    end
                     className="group flex items-center gap-2 font-medium"
                     onClick={() => {
                       setActiveNav(false);
@@ -148,6 +153,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
             <NavLink
               to={link.path}
               key={link.name}
+              end
               className="navLink py-1"
               onClick={() => {
                 setActiveNav(false);

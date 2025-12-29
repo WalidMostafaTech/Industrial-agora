@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logoText from "../../../assets/images/logo/logo-text-blue.png";
 import logoMap from "../../../assets/images/logo/logo-map.png";
 import NavBar from "./NavBar";
@@ -70,6 +70,8 @@ const Header = () => {
 
   const canSearch = useHasPermission(PERMISSIONS.VIEW_SEARCH_LISTINGS);
 
+  const { lang } = useParams();
+
   return (
     <>
       <header
@@ -96,7 +98,7 @@ const Header = () => {
                 {activeNav ? <IoClose /> : <HiMenu />}
               </span>
               <Link
-                to="/"
+                to={`/${lang}`}
                 onClick={() => setActiveNav(false)}
                 className="flex flex-row rtl:flex-row-reverse items-center gap-2 group"
               >

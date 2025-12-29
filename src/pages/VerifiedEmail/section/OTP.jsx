@@ -5,7 +5,7 @@ import FormError from "../../../components/form/FormError";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOtp, verifyEmail } from "../../../services/verifiedEmailServices";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProfileAct } from "../../../store/profile/profileSlice";
 
 const OTP = ({ setStep }) => {
@@ -16,6 +16,7 @@ const OTP = ({ setStep }) => {
   const inputsRef = useRef([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { lang } = useParams();
 
   const { profile } = useSelector((state) => state.profile);
 
@@ -61,7 +62,7 @@ const OTP = ({ setStep }) => {
       dispatch(getProfileAct())
         .unwrap()
         .then(() => {
-          navigate("/subscription-packages", { replace: true });
+          navigate(`/${lang}/subscription-packages`, { replace: true });
         });
     },
   });

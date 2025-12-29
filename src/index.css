@@ -62,7 +62,7 @@ input::-webkit-inner-spin-button {
   }
 
   .pagePadding {
-    @apply pb-8 lg:pb-14 pt-24 lg:pt-28;
+    @apply pb-8 lg:pb-14 pt-26 lg:pt-28;
   }
 
   .sectionPadding {

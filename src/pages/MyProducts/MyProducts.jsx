@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import ProductCardList from "../../components/common/ProductCardList";
@@ -43,6 +43,8 @@ const MyProducts = () => {
     setSearchParams({ page: 1 });
   };
 
+  const { lang } = useParams();
+
   return (
     <section className="pagePadding container space-y-8">
       {/* 🔥 Tabs */}
@@ -70,14 +72,14 @@ const MyProducts = () => {
         <section>
           {active === "1" ? (
             <Link
-              to={`/add-product`}
+              to={`/${lang}/add-product`}
               className="mainBtn success w-fit me-auto mb-4"
             >
               {t("addProduct")} <LuPlus className="text-xl!" />
             </Link>
           ) : (
             <Link
-              to={`/process-outsource/service`}
+              to={`process-outsource/service`}
               className="mainBtn success w-fit me-auto mb-4"
             >
               {t("addProcess")} <LuPlus className="text-xl!" />

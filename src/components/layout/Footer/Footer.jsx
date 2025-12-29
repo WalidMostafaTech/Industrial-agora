@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { TiArrowRight } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -33,35 +33,37 @@ const Footer = () => {
   //   mutation.mutate(email);
   // };
 
+  const { lang } = useParams();
+
   const footerLinks = [
     {
       title: t("footer.company"),
       links: [
-        { name: t("footer.home"), url: "/" },
-        { name: t("footer.categories"), url: "/categories/all" },
-        { name: t("footer.about_us"), url: "/about-us" },
-        { name: t("footer.contact_us"), url: "/contact-us" },
-        { name: t("footer.request_consultation"), url: "/request" },
+        { name: t("footer.home"), url: `/${lang}` },
+        { name: t("footer.categories"), url: "categories/all" },
+        { name: t("footer.about_us"), url: "about-us" },
+        { name: t("footer.contact_us"), url: "contact-us" },
+        { name: t("footer.request_consultation"), url: "request" },
       ],
     },
     {
       title: t("footer.services"),
       links: [
-        { name: t("footer.material_exchange"), url: "/" },
-        { name: t("footer.industrial_outsourcing"), url: "/" },
-        { name: t("footer.waste_reduction"), url: "/" },
-        { name: t("footer.business_opportunities"), url: "/" },
-        { name: t("footer.customized_offers"), url: "/" },
+        { name: t("footer.material_exchange"), url: `/${lang}` },
+        { name: t("footer.industrial_outsourcing"), url: `/${lang}` },
+        { name: t("footer.waste_reduction"), url: `/${lang}` },
+        { name: t("footer.business_opportunities"), url: `/${lang}` },
+        { name: t("footer.customized_offers"), url: `/${lang}` },
       ],
     },
     {
       title: t("footer.features"),
       links: [
-        { name: t("footer.trusted_platform"), url: "/" },
-        { name: t("footer.verified_suppliers"), url: "/" },
-        { name: t("footer.wide_range"), url: "/" },
-        { name: t("footer.sustainable_solutions"), url: "/" },
-        { name: t("footer.reduce_costs"), url: "/" },
+        { name: t("footer.trusted_platform"), url: `/${lang}` },
+        { name: t("footer.verified_suppliers"), url: `/${lang}` },
+        { name: t("footer.wide_range"), url: `/${lang}` },
+        { name: t("footer.sustainable_solutions"), url: `/${lang}` },
+        { name: t("footer.reduce_costs"), url: `/${lang}` },
       ],
     },
   ];
@@ -107,8 +109,8 @@ const Footer = () => {
           </button>
         </form> */}
 
-        {pathname !== "/login" && (
-          <Link to="/login" className="mainBtn">
+        {pathname !== "login" && (
+          <Link to="login" className="mainBtn">
             {t("header_action.join_us")}{" "}
             <TiArrowRight className="rtl:rotate-180" />
           </Link>
@@ -198,7 +200,7 @@ const Footer = () => {
               Techno Masr
             </a>
           </p>
-          <Link to="/terms" className="underline">
+          <Link to="terms" className="underline">
             {t("TermsAndConditions")}
           </Link>
         </div>

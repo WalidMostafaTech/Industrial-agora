@@ -44,7 +44,7 @@ const ProcessOutSourceHero = ({ image }) => {
           {t("processOutsourceHero.paragraph3")}
         </p>
 
-        <Link to="/process-outsource/service" className="mainBtn w-fit mx-auto">
+        <Link to="process-outsource/service" className="mainBtn w-fit mx-auto">
           {t("processOutsourceHero.cta")}
         </Link>
       </div>

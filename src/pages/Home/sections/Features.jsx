@@ -33,7 +33,7 @@ const Features = () => {
           <h2 className="text-myBlue-1 text-3xl lg:text-4xl font-bold">
             {features?.main_title}
           </h2>
-          <Link to="/about-us" className="animationBtn w-fit hidden xl:block">
+          <Link to="about-us" className="animationBtn w-fit hidden xl:block">
             {t("seeMore")}
           </Link>
         </div>
@@ -93,7 +93,7 @@ const Features = () => {
           </Swiper>
         </div>
 
-        <Link to="/about-us" className="animationBtn w-fit mx-auto xl:hidden">
+        <Link to="about-us" className="animationBtn w-fit mx-auto xl:hidden">
           See More
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProtectModal from "../modals/ProtectModal";
 import LoadingPage from "../Loading/LoadingPage";
 import { useTranslation } from "react-i18next";
@@ -13,17 +13,19 @@ const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
 
+  const { lang } = useParams();
+
   useEffect(() => {
     if (!token || !profile) setOpenModal(true);
   }, [token, profile, loading]);
 
   const handleConfirm = () => {
     setOpenModal(false);
-    navigate("/login", { replace: true });
+    navigate(`/${lang}/login`, { replace: true });
   };
   const handleClose = () => {
     setOpenModal(false);
-    navigate("/", { replace: true });
+    navigate(`/${lang}`, { replace: true });
   };
 
   if (!loading && token && profile) return <>{children}</>;

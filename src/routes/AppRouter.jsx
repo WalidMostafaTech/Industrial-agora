@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import LoadingPage from "../components/Loading/LoadingPage";
 import PublicRoute from "../components/ProtectedRoutes/PublicRoute";
@@ -50,7 +50,7 @@ const ErrorPage = React.lazy(() => import("../pages/ErrorPage/ErrorPage"));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/:lang",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
@@ -178,6 +178,11 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
     ],
+  },
+
+  {
+    path: "*",
+    element: <Navigate to="/en" replace />,
   },
 ]);
 

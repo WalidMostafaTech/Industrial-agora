@@ -27,7 +27,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="/subscription-packages" className="mainBtn">
+              <Link to="subscription-packages" className="mainBtn">
                 {t("modals.permissionModal.upgradeButton")}
               </Link>
             </div>
@@ -42,7 +42,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="/verify-email" className="mainBtn">
+              <Link to="verify-email" className="mainBtn">
                 {t("modals.permissionModal.verifiedButton")}
               </Link>
             </div>
@@ -57,7 +57,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="/login" className="mainBtn">
+              <Link to="login" className="mainBtn">
                 {t("modals.permissionModal.loginButton")}
               </Link>
             </div>

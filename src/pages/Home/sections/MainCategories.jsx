@@ -101,7 +101,7 @@ const MainCategories = () => {
                 <p className="text-gray-600 text-sm line-clamp-2 h-11">
                   {item.paragraph}
                 </p>
-                <Link to={`/categories/${item.slug}`} className="animationBtn">
+                <Link to={`categories/${item.slug}`} className="animationBtn">
                   {t("seeMore")}
                 </Link>
               </div>

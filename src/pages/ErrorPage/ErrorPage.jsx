@@ -1,9 +1,10 @@
-import { Link, useRouteError } from "react-router-dom";
+import { Link, useParams, useRouteError } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const ErrorPage = () => {
   const { t } = useTranslation();
   const error = useRouteError();
+  const { lang } = useParams();
 
   return (
     <section className="h-screen flex flex-col items-center justify-center gap-4 text-center px-4">
@@ -20,7 +21,7 @@ const ErrorPage = () => {
           {t("ErrorPage.reload")}
         </button>
 
-        <Link to="/" replace className="mainBtn outline">
+        <Link to={`/${lang}`} replace className="mainBtn outline">
           {t("ErrorPage.goHome")}
         </Link>
       </div>

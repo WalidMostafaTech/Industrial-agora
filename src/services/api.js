@@ -107,7 +107,7 @@ api.interceptors.response.use(
   // (error) => {
   //   if (error.response && error.response.status === 401) {
   //     Cookies.remove("tokenAG");
-  //     window.location.href = "/login";
+  //     window.location.href = "login";
   //   }
 
   //   if (error.response?.data?.error_msg) {

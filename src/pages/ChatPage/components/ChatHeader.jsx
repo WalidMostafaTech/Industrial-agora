@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Avatar from "../../../components/common/Avatar";
 import { ImArrowRight2 } from "react-icons/im";
 import ChatExternallyModal from "../../../components/modals/ChatExternallyModal";
@@ -10,10 +10,11 @@ const ChatHeader = ({ currentChat = {}, setShowChat, chatId }) => {
   const [openLocalModal, setOpenLocalModal] = useState(false);
   const [openExternallyModal, setOpenExternallyModal] = useState(false);
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   const handleClose = () => {
     setShowChat(false);
-    navigate("/chat");
+    navigate(`/${lang}/chat`);
   };
 
   const { profile } = useSelector((state) => state.profile);
@@ -35,7 +36,7 @@ const ChatHeader = ({ currentChat = {}, setShowChat, chatId }) => {
           </h4>
 
           <Link
-            to={`/product/${currentChat?.product?.id}`}
+            to={`product/${currentChat?.product?.id}`}
             className="text-sm font-medium text-myBlue-2 line-clamp-1 break-all w-fit"
           >
             {currentChat?.product?.name}

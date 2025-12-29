@@ -4,7 +4,7 @@ import OTP from "./section/OTP";
 import ChangeEmail from "./section/ChangeEmail";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProtectModal from "../../components/modals/ProtectModal";
 
 const VerifiedEmail = () => {
@@ -13,6 +13,7 @@ const VerifiedEmail = () => {
   const { profile } = useSelector((state) => state.profile);
 
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   const [openModal, setOpenModal] = useState({
     loginModal: false,
@@ -30,7 +31,7 @@ const VerifiedEmail = () => {
   }, [profile]);
 
   const handleConfirm = () => {
-    navigate("/", { replace: true });
+    navigate(`/${lang}`, { replace: true });
     setOpenModal({
       loginModal: false,
       verifyModal: false,
@@ -44,7 +45,7 @@ const VerifiedEmail = () => {
         title={t("verifyEmailPage.notLoggedIn.title")}
         message={t("verifyEmailPage.notLoggedIn.message")}
         confirmText={t("verifyEmailPage.notLoggedIn.confirm")}
-        onConfirm={() => navigate("/login", { replace: true })}
+        onConfirm={() => navigate(`/${lang}/login`, { replace: true })}
         onClose={handleConfirm}
       />
     );

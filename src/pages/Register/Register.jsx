@@ -12,7 +12,7 @@ import FormTitle from "../../components/form/FormTitle";
 import MainInput from "../../components/form/MainInput";
 import FormError from "../../components/form/FormError";
 import SuccessModal from "../../components/modals/SuccessModal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileAct } from "../../store/profile/profileSlice";
 import TermsModal from "../../components/modals/TermsModal";
@@ -23,6 +23,8 @@ const Register = () => {
   const [openTermsModal, setOpenTermsModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { lang } = useParams();
+
   const { cities } = useSelector((state) => state.setting);
 
   const handleAcceptTerms = () => {
@@ -30,7 +32,7 @@ const Register = () => {
   };
 
   const handleCompleteLogin = () => {
-    navigate("/verify-email", { replace: true });
+    navigate(`/${lang}/verify-email`, { replace: true });
     dispatch(getProfileAct());
   };
 
@@ -210,7 +212,7 @@ const Register = () => {
         <div className="text-sm text-center">
           {t("register.alreadyHaveAccount")}{" "}
           <Link
-            to="/login"
+            to="login"
             className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
           >
             {t("register.login")}

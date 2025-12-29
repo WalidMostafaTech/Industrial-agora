@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -42,9 +42,10 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { lang } = useParams();
 
   const handleCompleteLogin = () => {
-    navigate("/", { replace: true });
+    navigate(`/${lang}`, { replace: true });
     dispatch(getProfileAct());
   };
 
@@ -102,7 +103,7 @@ const Login = () => {
 
             <div>
               <Link
-                to="/forgot-password"
+                to="forgot-password"
                 className="font-medium text-red-700 hover:brightness-85"
               >
                 {t("login.forgot")}
@@ -117,7 +118,7 @@ const Login = () => {
           <div className="text-sm text-center">
             {t("login.noAccount")}{" "}
             <Link
-              to="/register"
+              to={`/${lang}/register`}
               className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
             >
               {t("login.signup")}
@@ -132,7 +133,7 @@ const Login = () => {
             subtitle={t("login.newMemberText")}
           />
 
-          <Link to="/register" className="animationBtn">
+          <Link to={`/${lang}/register`} className="animationBtn">
             {t("login.registerBtn")}
           </Link>
         </div>

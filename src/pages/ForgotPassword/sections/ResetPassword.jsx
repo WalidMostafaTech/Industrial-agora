@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import MainInput from "../../../components/form/MainInput";
@@ -105,6 +105,8 @@ const ResetPassword = ({ parentData, setParentData }) => {
     (isError && (apiError?.response?.data?.message || t("reset.apiError"))) ||
     "";
 
+  const { lang } = useParams();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Password */}
@@ -160,7 +162,7 @@ const ResetPassword = ({ parentData, setParentData }) => {
         openModal={openModal}
         msg={t("reset.successMsg")}
         btnText={t("reset.goLogin")}
-        onConfirm={() => navigate("/login")}
+        onConfirm={() => navigate(`/${lang}/login`, { replace: true })}
       />
     </form>
   );

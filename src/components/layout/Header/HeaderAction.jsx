@@ -49,7 +49,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
           >
             <li>
               <Link
-                to={`/profile`}
+                to={`profile`}
                 className="flex gap-2 lg:gap-4 items-center"
               >
                 <FaRegUserCircle className="text-2xl" />
@@ -61,7 +61,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
             <li>
               <Link
-                to={`/my-products`}
+                to={`my-products`}
                 className="flex gap-2 lg:gap-4 items-center"
               >
                 <LuClipboardList className="text-2xl" />
@@ -71,7 +71,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
 
             {canChat && (
               <li>
-                <Link to={`/chat`} className="flex gap-2 lg:gap-4 items-center">
+                <Link to={`chat`} className="flex gap-2 lg:gap-4 items-center">
                   <BsChatSquareText className="text-2xl" />
                   <p>{t("header_action.chat")}</p>
                 </Link>
@@ -82,8 +82,8 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
               <Link
                 to={
                   profile?.subscription
-                    ? `/subscription-details`
-                    : `/subscription-packages`
+                    ? `subscription-details`
+                    : `subscription-packages`
                 }
                 className="flex gap-2 lg:gap-4 items-center"
               >
@@ -106,7 +106,7 @@ const HeaderAction = ({ setOpenSearch, setActiveNav, setOpenLinks }) => {
           </ul>
         </div>
       ) : (
-        <Link to="/login" className="mainBtn !rounded-full">
+        <Link to="login" className="mainBtn !rounded-full">
           {t("header_action.join_us")}
         </Link>
       )}

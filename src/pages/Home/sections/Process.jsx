@@ -104,7 +104,7 @@ const Process = () => {
 
       <div className="flex justify-center mt-10 lg:mt-14">
         <Link
-          to="/process-outsource/products"
+          to="process-outsource/products"
           className="animationBtn light w-fit"
         >
           {t("seeMore")}

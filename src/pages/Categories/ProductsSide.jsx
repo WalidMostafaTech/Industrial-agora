@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import Pagination from "../../components/common/Pagination";
 import ProductCardList from "../../components/common/ProductCardList";
 import CategoryBanner from "../../components/common/CategoryBanner";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 const ProductsSide = ({ products = {}, category = {} }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   const currentPage =
     Number(searchParams.get("page")) || products?.meta?.current_page || 1;
@@ -26,7 +27,7 @@ const ProductsSide = ({ products = {}, category = {} }) => {
 
       <div>
         <Link
-          to={`/add-product?category=${category?.id}`}
+          to={`/${lang}/add-product?category=${category?.id}`}
           className="mainBtn success w-fit me-auto mb-4"
         >
           {t("addProduct")} <LuPlus className="text-xl!" />
