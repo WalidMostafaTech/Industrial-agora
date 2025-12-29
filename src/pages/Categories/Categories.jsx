@@ -19,26 +19,26 @@ const Categories = () => {
   const [openFilter, setOpenFilter] = useState(false);
   let showFilter = false;
 
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const { data: category } = useQuery({
-    queryKey: ["category", id],
-    queryFn: () => getCategoryDetails(id),
-    enabled: !!id && id !== "all",
+    queryKey: ["category", slug],
+    queryFn: () => getCategoryDetails(slug),
+    enabled: !!slug && slug !== "all",
   });
 
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
 
   const { data: products, isLoading: productsLoading } = useQuery({
-    queryKey: ["products-by-category", id, currentPage],
-    queryFn: () => getProductsByCategory(id, currentPage),
-    enabled: !!id,
+    queryKey: ["products-by-category", slug, currentPage],
+    queryFn: () => getProductsByCategory(slug, currentPage),
+    enabled: !!slug,
   });
 
   const { data: seoData } = useQuery({
     queryKey: ["seoData"],
-    queryFn: () => setPageSeo({ page: "category", id }),
+    queryFn: () => setPageSeo({ page: "category", slug }),
   });
 
   return (

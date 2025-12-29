@@ -70,7 +70,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
           </>
         ) : (
           <Link
-            to={`/product/${product.id}`}
+            to={`/product/${product.slug}`}
             className="animationBtn block w-fit ms-auto"
           >
             {t("seeMore")}

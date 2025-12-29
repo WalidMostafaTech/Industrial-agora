@@ -15,7 +15,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
   const filterCategories = categories?.filter((cat) => cat.nav);
   const categoriesLinks = filterCategories?.map((cat) => ({
     name: cat.title,
-    link: `/categories/${cat.id}`,
+    link: `/categories/${cat.slug}`,
   }));
 
   const exchangeBtnRef = useRef();

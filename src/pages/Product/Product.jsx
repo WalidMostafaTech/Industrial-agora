@@ -15,7 +15,7 @@ import SeoManager from "../../utils/SeoManager";
 
 const Product = () => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { slug } = useParams();
   const { profile } = useSelector((state) => state.profile);
 
   const canChat = useHasPermission(PERMISSIONS.CHAT_MEMBERS);
@@ -28,14 +28,14 @@ const Product = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["product", id],
-    queryFn: () => getProductDetails(id),
-    enabled: !!id,
+    queryKey: ["product", slug],
+    queryFn: () => getProductDetails(slug),
+    enabled: !!slug,
   });
 
   const { data: seoData } = useQuery({
     queryKey: ["seoData"],
-    queryFn: () => setPageSeo({ page: "product", id }),
+    queryFn: () => setPageSeo({ page: "product", slug }),
   });
 
   if (isLoading) return <LoadingPage />;

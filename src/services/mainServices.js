@@ -40,9 +40,9 @@ export const getCities = async () => {
   return data?.data || [];
 };
 
-export const setPageSeo = async ({ page, id }) => {
+export const setPageSeo = async ({ page, slug }) => {
   const { data } = await api.get(`/page-seo`, {
-    params: { page, id },
+    params: { page, slug },
   });
   return data?.data || [];
 };

@@ -14,8 +14,8 @@ export const addPromotionProduct = async (formData) => {
   return data;
 };
 
-export const getProductsByCategory = async (categoryID, page = 1) => {
-  const { data } = await api.get(`/products-by-category/${categoryID}`, {
+export const getProductsByCategory = async (categorySlug, page = 1) => {
+  const { data } = await api.get(`/products-by-category/${categorySlug}`, {
     params: { page },
   });
   return data?.data || [];
@@ -27,13 +27,13 @@ export const getProductsByType = async (payload) => {
   return data?.data || [];
 };
 
-export const getProductDetails = async (id) => {
-  const { data } = await api.get(`/product/${id}`);
+export const getProductDetails = async (slug) => {
+  const { data } = await api.get(`/product/${slug}`);
   return data?.data || [];
 };
 
-export const getCategoryDetails = async (id) => {
-  const { data } = await api.get(`/categories/${id}`);
+export const getCategoryDetails = async (slug) => {
+  const { data } = await api.get(`/categories/${slug}`);
   return data?.data || [];
 };
 
