@@ -39,3 +39,10 @@ export const getCities = async () => {
   const { data } = await api.get("/cities");
   return data?.data || [];
 };
+
+export const setPageSeo = async ({ page, id }) => {
+  const { data } = await api.get(`/page-seo`, {
+    params: { page, id },
+  });
+  return data?.data || [];
+};

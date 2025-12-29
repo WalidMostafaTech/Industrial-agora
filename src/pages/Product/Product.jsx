@@ -10,7 +10,8 @@ import { PERMISSIONS } from "../../permissions";
 import { useTranslation } from "react-i18next";
 import sarIcon from "../../assets/icons/sar-icon.svg";
 import { formatLength, formatWeight } from "../../utils/formatFunctions";
-
+import { setPageSeo } from "../../services/mainServices";
+import SeoManager from "../../utils/SeoManager";
 
 const Product = () => {
   const { t } = useTranslation();
@@ -32,6 +33,11 @@ const Product = () => {
     enabled: !!id,
   });
 
+  const { data: seoData } = useQuery({
+    queryKey: ["seoData"],
+    queryFn: () => setPageSeo({ page: "product", id }),
+  });
+
   if (isLoading) return <LoadingPage />;
   if (isError || !product)
     return (
@@ -41,111 +47,124 @@ const Product = () => {
     );
 
   return (
-    <article className="container pagePadding space-y-6 lg:space-y-12">
-      <section className="whiteContainer">
-        <div className="flex flex-col md:flex-row gap-4 lg:gap-12">
-          <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
-            <img
-              loading="lazy"
-              src={product?.images[0]}
-              alt={product?.name}
-              className="w-full h-full object-cover"
-            />
+    <>
+      <SeoManager
+        title={seoData?.meta_title}
+        description={seoData?.meta_description}
+        keywords={seoData?.keywords}
+        canonical={seoData?.canonical_url}
+        ogImage={seoData?.og_image_url}
+      />
+
+      <article className="container pagePadding space-y-6 lg:space-y-12">
+        <section className="whiteContainer">
+          <div className="flex flex-col md:flex-row gap-4 lg:gap-12">
+            <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
+              <img
+                loading="lazy"
+                src={product?.images[0]}
+                alt={product?.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="flex-1 space-y-4">
+              <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
+
+              <AutoFields
+                data={{
+                  manufacturers: product.manufacturers,
+                  sku: product.sku,
+                  vendor: product.vendor,
+                  warehouse: product.warehouse,
+                }}
+                t={t}
+              />
+
+              <AutoFields
+                data={{
+                  length: product.length,
+                  width: product.width,
+                  height: product.height,
+                  weight: product.weight,
+                }}
+                t={t}
+              />
+
+              {product?.price && canShowPrice && (
+                <p className="text-myBlue-2 text-lg font-bold">
+                  {product?.price}
+                  <img
+                    loading="lazy"
+                    src={sarIcon}
+                    alt="SAR"
+                    className="inline-block w-4 h-4 ms-1 mb-1"
+                  />
+                </p>
+              )}
+
+              <AutoFields
+                data={{
+                  status: product.status,
+                  condition: product.condition,
+                  delivery: product.delivery,
+                  payment: product.payment,
+                }}
+                t={t}
+              />
+
+              {product?.quantity ? (
+                <p className="border-b border-stone-300 flex justify-end">
+                  <span className="bg-stone-200 py-1 px-2 text-sm">
+                    {product?.quantity} {t("product.inStock")}
+                  </span>
+                </p>
+              ) : null}
+            </div>
           </div>
 
-          <div className="flex-1 space-y-4">
-            <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
+          {canChat && product?.seller_id !== profile?.id && (
+            <button
+              onClick={() => setOpenMsg(true)}
+              className="animationBtn block mx-auto mt-8"
+            >
+              {t("product.contactSeller")}
+            </button>
+          )}
+        </section>
 
-            <AutoFields
-              data={{
-                manufacturers: product.manufacturers,
-                sku: product.sku,
-                vendor: product.vendor,
-                warehouse: product.warehouse,
-              }}
-              t={t}
-            />
+        <div className="whiteContainer relative max-w-2xl mx-auto mt-16 lg:mt-24 flex flex-wrap justify-center gap-1">
+          <h3
+            className="text-xl lg:text-2xl text-myBlue-2 font-bold border-b-3 border-myBlue-2 
+            absolute bottom-full left-1/2 -translate-x-1/2"
+          >
+            {t("product.tags")}
+          </h3>
 
-            <AutoFields
-              data={{
-                length: product.length,
-                width: product.width,
-                height: product.height,
-                weight: product.weight,
-              }}
-              t={t}
-            />
-
-            {product?.price && canShowPrice && (
-              <p className="text-myBlue-2 text-lg font-bold">
-                {product?.price}
-                <img
-                  loading="lazy"
-                  src={sarIcon}
-                  alt="SAR"
-                  className="inline-block w-4 h-4 ms-1 mb-1"
-                />
-              </p>
-            )}
-
-            <AutoFields
-              data={{
-                status: product.status,
-                condition: product.condition,
-                delivery: product.delivery,
-                payment: product.payment,
-              }}
-              t={t}
-            />
-
-            {product?.quantity ? (
-              <p className="border-b border-stone-300 flex justify-end">
-                <span className="bg-stone-200 py-1 px-2 text-sm">
-                  {product?.quantity} {t("product.inStock")}
-                </span>
-              </p>
-            ) : null}
-          </div>
+          {product?.tags?.length > 0 ? (
+            product?.tags?.map((tag, index) => (
+              <span
+                key={index}
+                className="text-stone-500 text-lg font-semibold"
+              >
+                {tag}
+                {product?.tags?.length - 1 !== index && ","}
+              </span>
+            ))
+          ) : (
+            <span className="text-stone-500 text-lg font-semibold">
+              {t("product.noTags")}
+            </span>
+          )}
         </div>
 
-        {canChat && product?.seller_id !== profile?.id && (
-          <button
-            onClick={() => setOpenMsg(true)}
-            className="animationBtn block mx-auto mt-8"
-          >
-            {t("product.contactSeller")}
-          </button>
-        )}
-      </section>
-
-      <div className="whiteContainer relative max-w-2xl mx-auto mt-16 lg:mt-24 flex flex-wrap justify-center gap-1">
-        <h3
-          className="text-xl lg:text-2xl text-myBlue-2 font-bold border-b-3 border-myBlue-2 
-          absolute bottom-full left-1/2 -translate-x-1/2"
-        >
-          {t("product.tags")}
-        </h3>
-
-        {product?.tags?.length > 0 ? (
-          product?.tags?.map((tag, index) => (
-            <span key={index} className="text-stone-500 text-lg font-semibold">
-              {tag}
-              {product?.tags?.length - 1 !== index && ","}
-            </span>
-          ))
-        ) : (
-          <span className="text-stone-500 text-lg font-semibold">
-            {t("product.noTags")}
-          </span>
-        )}
-      </div>
-
-      <SendMsgModal
-        openModal={openMsg}
-        onClose={() => setOpenMsg(false)}
-        productId={product?.id}
-      />
-    </article>
+        <SendMsgModal
+          openModal={openMsg}
+          onClose={() => setOpenMsg(false)}
+          productId={product?.id}
+        />
+      </article>
+    </>
   );
 };
 

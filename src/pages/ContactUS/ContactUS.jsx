@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,8 @@ import { TbPhoneCall } from "react-icons/tb";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { LiaFaxSolid } from "react-icons/lia";
 
-import { sendContact } from "../../services/mainServices";
+import { sendContact, setPageSeo } from "../../services/mainServices";
+import SeoManager from "../../utils/SeoManager";
 
 const ContactUs = () => {
   const { t } = useTranslation();
@@ -78,77 +79,92 @@ const ContactUs = () => {
     },
   ];
 
+  const { data: seoData } = useQuery({
+    queryKey: ["seoData"],
+    queryFn: () => setPageSeo({ page: "contact-us" }),
+  });
+
   return (
-    <article className="container pagePadding">
-      <PageTitle title={t("contactUs.title")} />
+    <>
+      <SeoManager
+        title={seoData?.meta_title}
+        description={seoData?.meta_description}
+        keywords={seoData?.keywords}
+        canonical={seoData?.canonical_url}
+        ogImage={seoData?.og_image_url}
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 whiteContainer">
-        {/* Contact Form */}
-        <form
-          className="space-y-4 md:space-y-6"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <MainInput
-            label={t("contactUs.fullName")}
-            id="name"
-            {...register("name")}
-            error={errors.name?.message}
-          />
+      <article className="container pagePadding">
+        <PageTitle title={t("contactUs.title")} />
 
-          <MainInput
-            label={t("contactUs.emailAddress")}
-            id="email"
-            type="email"
-            {...register("email")}
-            error={errors.email?.message}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 whiteContainer">
+          {/* Contact Form */}
+          <form
+            className="space-y-4 md:space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <MainInput
+              label={t("contactUs.fullName")}
+              id="name"
+              {...register("name")}
+              error={errors.name?.message}
+            />
 
-          <MainInput
-            label={t("contactUs.enquiry")}
-            id="message"
-            type="textarea"
-            {...register("message")}
-            error={errors.message?.message}
-          />
+            <MainInput
+              label={t("contactUs.emailAddress")}
+              id="email"
+              type="email"
+              {...register("email")}
+              error={errors.email?.message}
+            />
 
-          <FormError errorMsg={error?.response?.data?.message} />
-          <FormBtn title={t("contactUs.submit")} loading={isPending} />
-        </form>
+            <MainInput
+              label={t("contactUs.enquiry")}
+              id="message"
+              type="textarea"
+              {...register("message")}
+              error={errors.message?.message}
+            />
 
-        {/* Contact Info */}
-        <div>
-          <img
-            loading="lazy"
-            src={contactUsImg}
-            alt="contact us"
-            className="w-full xl:w-4/5 mb-8 mx-auto hidden md:block rounded-md shadow-md"
-          />
+            <FormError errorMsg={error?.response?.data?.message} />
+            <FormBtn title={t("contactUs.submit")} loading={isPending} />
+          </form>
 
-          <div className="flex flex-col lg:flex-row justify-evenly gap-4 lg:gap-2">
-            {contactUsList.map(
-              (item, index) =>
-                item.value && (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-myBlue-1 group"
-                  >
-                    <span className="text-3xl group-hover:scale-120 duration-300">
-                      {item.icon}
-                    </span>
-                    <div className="text-sm">
-                      <p className="font-bold">{item.label}</p>
-                      <p className="text-xs">{item.value}</p>
-                    </div>
-                  </a>
-                )
-            )}
+          {/* Contact Info */}
+          <div>
+            <img
+              loading="lazy"
+              src={contactUsImg}
+              alt="contact us"
+              className="w-full xl:w-4/5 mb-8 mx-auto hidden md:block rounded-md shadow-md"
+            />
+
+            <div className="flex flex-col lg:flex-row justify-evenly gap-4 lg:gap-2">
+              {contactUsList.map(
+                (item, index) =>
+                  item.value && (
+                    <a
+                      key={index}
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-myBlue-1 group"
+                    >
+                      <span className="text-3xl group-hover:scale-120 duration-300">
+                        {item.icon}
+                      </span>
+                      <div className="text-sm">
+                        <p className="font-bold">{item.label}</p>
+                        <p className="text-xs">{item.value}</p>
+                      </div>
+                    </a>
+                  )
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 
