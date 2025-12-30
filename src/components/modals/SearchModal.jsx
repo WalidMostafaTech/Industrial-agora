@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { IoSearchOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getSearch } from "../../services/homeServices";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +9,8 @@ const SearchModal = ({ openSearch, onClose }) => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const { lang } = useParams();
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(searchTerm), 500);
@@ -111,7 +113,7 @@ const SearchModal = ({ openSearch, onClose }) => {
             {/* الفئات */}
             {categories.map((category) => (
               <Link
-                to={`categories/${category.slug}`}
+                to={`/${lang}/categories/${category.slug}`}
                 key={category.id}
                 onClick={handleClose}
                 className="flex items-center gap-4 p-3 shadow-md bg-white/80 hover:bg-gray-100 rounded-xl cursor-pointer"

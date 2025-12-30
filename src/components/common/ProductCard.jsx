@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductDeleteModal from "../modals/ProductDeleteModal";
 import { formatLength, formatWeight } from "../../utils/formatFunctions";
 
 const ProductCard = ({ product, dltBtn = false }) => {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
+  const { lang } = useParams();
 
   return (
     <div
@@ -70,7 +71,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
           </>
         ) : (
           <Link
-            to={`product/${product.slug}`}
+            to={`/${lang}/product/${product.slug}`}
             className="animationBtn block w-fit ms-auto"
           >
             {t("seeMore")}

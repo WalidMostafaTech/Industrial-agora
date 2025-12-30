@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import Avatar from "../../components/common/Avatar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const SubscriptionDetails = () => {
   const { t } = useTranslation();
   const { profile } = useSelector((state) => state.profile);
+  const { lang } = useParams();
   // const { setting } = useSelector((state) => state.setting);
 
   return (
@@ -90,7 +91,7 @@ const SubscriptionDetails = () => {
               <span className="font-semibold text-myBlue-2 flex-1 flex items-center gap-1">
                 {profile?.subscription?.subscription_name}
                 <Link
-                  to="subscription-packages"
+                  to={`/${lang}/subscription-packages`}
                   className="px-2 py-1 bg-myGreen text-white text-xs rounded-md cursor-pointer"
                 >
                   {t("subscriptionDetails.change")}

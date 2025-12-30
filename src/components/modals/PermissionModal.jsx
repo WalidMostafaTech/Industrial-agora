@@ -2,11 +2,12 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { IoWarningOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const PermissionModal = ({ openModal, onClose }) => {
   const { profile } = useSelector((state) => state.profile);
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   if (!openModal) return null;
 
@@ -27,7 +28,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="subscription-packages" className="mainBtn">
+              <Link to={`/${lang}/subscription-packages`} className="mainBtn">
                 {t("modals.permissionModal.upgradeButton")}
               </Link>
             </div>
@@ -42,7 +43,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="verify-email" className="mainBtn">
+              <Link to={`/${lang}/verify-email`} className="mainBtn">
                 {t("modals.permissionModal.verifiedButton")}
               </Link>
             </div>
@@ -57,7 +58,7 @@ const PermissionModal = ({ openModal, onClose }) => {
               <button onClick={onClose} className="mainBtn danger">
                 {t("modals.permissionModal.closeButton")}
               </button>
-              <Link to="login" className="mainBtn">
+              <Link to={`/${lang}/login`} className="mainBtn">
                 {t("modals.permissionModal.loginButton")}
               </Link>
             </div>

@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import processBG from "../../../assets/images/Process-bg.jpg";
 import { useTranslation } from "react-i18next";
 
 const ProcessOutSourceHero = ({ image }) => {
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   return (
     <section
@@ -44,7 +45,10 @@ const ProcessOutSourceHero = ({ image }) => {
           {t("processOutsourceHero.paragraph3")}
         </p>
 
-        <Link to="process-outsource/service" className="mainBtn w-fit mx-auto">
+        <Link
+          to={`/${lang}/process-outsource/service`}
+          className="mainBtn w-fit mx-auto"
+        >
           {t("processOutsourceHero.cta")}
         </Link>
       </div>
