@@ -12,6 +12,7 @@ import sarIcon from "../../assets/icons/sar-icon.svg";
 import { formatLength, formatWeight } from "../../utils/formatFunctions";
 import { setPageSeo } from "../../services/mainServices";
 import SeoManager from "../../utils/SeoManager";
+import ImagesSlider from "./sections/ImagesSlider";
 
 const Product = () => {
   const { t } = useTranslation();
@@ -58,17 +59,18 @@ const Product = () => {
 
       <article className="container pagePadding space-y-6 lg:space-y-12">
         <section className="whiteContainer">
-          <div className="flex flex-col md:flex-row gap-4 lg:gap-12">
-            <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-12">
+            {/* <div className="w-full md:w-1/3 h-[300px] md:h-[250px] xl:h-[300px] overflow-hidden">
               <img
                 loading="lazy"
                 src={product?.images[0]}
                 alt={product?.name}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </div> */}
+            <ImagesSlider images={product?.images} />
 
-            <div className="flex-1 space-y-4">
+            <div className="col-span-1 xl:col-span-2 space-y-4">
               <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
 
               <AutoFields

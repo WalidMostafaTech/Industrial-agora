@@ -14,7 +14,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
       key={product.id}
       className="flex flex-col md:flex-row bg-stone-200/60 shadow-lg"
     >
-      <div className="w-full md:w-[300px] aspect-square md:aspect-auto overflow-hidden bg-white relative">
+      <div className="w-full md:w-[300px] max-h-[400px] aspect-square md:aspect-auto overflow-hidden bg-white relative">
         <img
           loading="lazy"
           src={product.first_image}
