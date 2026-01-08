@@ -79,7 +79,7 @@ const MyProducts = () => {
             </Link>
           ) : (
             <Link
-              to={`process-outsource/service`}
+              to={`/${lang}/process-outsource/service`}
               className="mainBtn success w-fit me-auto mb-4"
             >
               {t("addProcess")} <LuPlus className="text-xl!" />
