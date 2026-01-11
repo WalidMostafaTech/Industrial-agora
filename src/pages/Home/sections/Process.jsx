@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingSection from "../../../components/Loading/LoadingSection";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
@@ -20,6 +20,7 @@ const Process = () => {
     queryKey: ["products", "process"],
     queryFn: () => getProductsByType({ type: "outsource" }),
   });
+  const { lang } = useParams();
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -83,7 +84,10 @@ const Process = () => {
         >
           {products?.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full">
+              <Link
+                to={`/${lang}/product/${item.slug}`}
+                className="bg-white p-4 lg:p-6 rounded-2xl flex flex-col items-center gap-2 text-center h-full"
+              >
                 <div className="w-full h-52 xl:h-64 rounded-xl shadow-xl overflow-hidden mb-4">
                   <img
                     loading="lazy"
@@ -96,7 +100,7 @@ const Process = () => {
                 <p className="text-gray-600 text-sm line-clamp-2 h-11">
                   {item.description}
                 </p>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

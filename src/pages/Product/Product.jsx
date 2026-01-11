@@ -73,6 +73,8 @@ const Product = () => {
             <div className="col-span-1 xl:col-span-2 space-y-4">
               <h2 className="text-lg lg:text-2xl font-bold">{product?.name}</h2>
 
+              <p>{product?.description}</p>
+
               <AutoFields
                 data={{
                   manufacturers: product.manufacturers,
@@ -89,6 +91,9 @@ const Product = () => {
                   width: product.width,
                   height: product.height,
                   weight: product.weight,
+                  machine_specification: product.machine_specification,
+                  main_applications_processes:
+                    product.main_applications_processes,
                 }}
                 t={t}
               />
@@ -107,7 +112,7 @@ const Product = () => {
 
               <AutoFields
                 data={{
-                  status: product.status,
+                  // status: product.status,
                   condition: product.condition,
                   delivery: product.delivery,
                   payment: product.payment,

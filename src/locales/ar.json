@@ -102,6 +102,9 @@
       "title": "أدخل مدة الاشتراك بالشهور",
       "durationLabel": "المدة بالشهور",
       "monthsError": "يرجى إدخال عدد الشهور",
+      "pricePerMonth": "سعر الشهر",
+      "months": "عدد الشهور",
+      "total": "الإجمالي",
       "cancel": "إلغاء",
       "confirm": "تأكيد",
       "loading": "جارٍ التحميل..."
@@ -410,7 +413,7 @@
     "description": "ملاحظات",
     "pictures": "صور",
     "submit": "إرسال",
-    "successMsg": "تم تقديم العرض بنجاح!",
+    "successMsg": "تم تقديم العرض بنجاح. سيتم ارسال رابط  الفاتوره الى بريدك الالكتروني لاتمام عمليه الدفع",
     "machineNameRequired": "اسم الماكينة مطلوب",
     "machineSpecificationRequired": "مواصفات الماكينة مطلوبة",
     "materialTypesRequired": "أنواع المواد المتوافقة مطلوبة",
@@ -468,7 +471,9 @@
       "type": "النوع",
       "condition": "الحالة",
       "delivery": "التسليم",
-      "payment": "الدفع"
+      "payment": "الدفع",
+      "machine_specification": "مواصفات الماكينة",
+      "main_applications_processes": "التطبيقات/العمليات الرئيسية"
     }
   },
 

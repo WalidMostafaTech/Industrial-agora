@@ -38,7 +38,7 @@ const ProductCard = ({ product, dltBtn = false }) => {
 
         <AutoFields
           data={{
-            status: product.status,
+            // status: product.status,
             condition: product.condition,
             delivery: product.delivery,
             payment: product.payment,

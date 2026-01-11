@@ -102,6 +102,9 @@
       "title": "Enter the subscription period in months",
       "durationLabel": "Duration in Months",
       "monthsError": "Please enter number of months",
+      "pricePerMonth": "Price per month",
+      "months": "Number of months",
+      "total": "Total",
       "cancel": "Cancel",
       "confirm": "Confirm",
       "loading": "Loading..."
@@ -410,7 +413,7 @@
     "description": "Note",
     "pictures": "Pictures",
     "submit": "Submit",
-    "successMsg": "Offer submitted successfully!",
+    "successMsg": "Offer submitted successfully. The invoice link will be sent to your email address to complete the payment process.",
     "machineNameRequired": "Machine name is required",
     "machineSpecificationRequired": "Machine specification is required",
     "materialTypesRequired": "Material types compatible is required",
@@ -468,7 +471,9 @@
       "type": "Type",
       "condition": "Condition",
       "delivery": "Delivery",
-      "payment": "Payment"
+      "payment": "Payment",
+      "machine_specification": "Machine Specification",
+      "main_applications_processes": "Main Applications/Processes"
     }
   },
 
