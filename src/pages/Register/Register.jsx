@@ -212,7 +212,7 @@ const Register = () => {
         <div className="text-sm text-center">
           {t("register.alreadyHaveAccount")}{" "}
           <Link
-            to="login"
+            to={`/${lang}/login`}
             className="font-medium text-myBlue-2 hover:brightness-85 hover:underline"
           >
             {t("register.login")}

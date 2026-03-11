@@ -103,7 +103,7 @@ const Login = () => {
 
             <div>
               <Link
-                to="forgot-password"
+                to={`/${lang}/forgot-password`}
                 className="font-medium text-red-700 hover:brightness-85"
               >
                 {t("login.forgot")}

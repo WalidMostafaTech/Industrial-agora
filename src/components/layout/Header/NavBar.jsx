@@ -101,7 +101,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
             >
               {link.name}
             </NavLink>
-          )
+          ),
         )}
       </nav>
 
@@ -114,7 +114,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
         {linksList.map((link) =>
           link.list.length > 0 ? (
             <div
-              className={`navLink py-1 ${
+              className={`navLink w-fit py-1 ${
                 pathname === link.path ? "active" : ""
               }`}
               key={link.name}
@@ -154,7 +154,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
               to={link.path}
               key={link.name}
               end
-              className="navLink py-1"
+              className="navLink w-fit py-1"
               onClick={() => {
                 setActiveNav(false);
                 setOpenLinks(null);
@@ -162,7 +162,7 @@ const NavBar = ({ activeNav, setActiveNav, openLinks, setOpenLinks }) => {
             >
               {link.name}
             </NavLink>
-          )
+          ),
         )}
       </nav>
     </>
